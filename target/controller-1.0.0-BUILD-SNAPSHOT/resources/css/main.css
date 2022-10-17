@@ -1,0 +1,108 @@
+/* @import url(http://weloveiconfonts.com/api/?family=entypo); */
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+/* 메인페이지용 */
+
+/* zocial */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
+}
+
+
+h2 {
+  color:rgba(255,255,255,.8);
+  margin-left:12px;
+}
+h5 {
+  color:rgba(255,255,255,.8);
+  margin-left:12px;
+}
+
+
+form {
+  position:relative;
+  margin: 16px auto;
+  width: 355px;
+  height: auto;
+}
+
+input {
+  padding: 16px;
+  border-radius:7px;
+  border:0px;
+  background: rgba(255,255,255,.2);
+  display: block;
+  margin: 8px;
+  width: 288px;  
+  color:white;
+  font-size:18px;
+  height: 40px;
+}
+
+input:focus {
+  outline-color: rgba(0,0,0,0);
+  background: rgba(255,255,255,.95);
+  color: #e74c3c;
+}
+
+.b2 {
+  float:right;
+  height: 90px;
+  width: 53px;
+  border: 0px;
+  background: #e74c3c;
+  border-radius:7px;
+  padding: 0px;
+  color:white;
+  font-size:22px;
+}
+
+.inputUserIcon {
+  position:absolute;
+  top:43px;
+  right: 80px;
+  color:white;
+}
+
+.inputPassIcon {
+  position:absolute;
+  top:92px;
+  right: 80px;
+  color:white;
+}
+
+input::-webkit-input-placeholder {
+  color: white;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: #e74c3c;
+}
+
+.card {
+	background-color:rgba(255,255,255,.2);
+	border:solid gray 1px;
+}
+
+.card-header {
+	color:white;
+}
+
+.list-group {
+	color:white;
+}
+.list-group-item {
+	background-color:#1b1b1b;
+}
+.list-group-item > .badge {
+	background-color:tomato;
+	color:white;
+}
