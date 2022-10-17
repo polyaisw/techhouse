@@ -1,0 +1,6 @@
+.v-line {
+	float : left;
+  border-left : solid 1px tomato;
+  margin-right : 20px;
+	height : 1000px;
+}
