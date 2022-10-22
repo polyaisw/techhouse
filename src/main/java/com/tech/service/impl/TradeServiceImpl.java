@@ -2,19 +2,15 @@
 package com.tech.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tech.repository.mapper.BoardMapper;
 import com.tech.repository.mapper.TradeMapper;
-import com.tech.service.interfaces.BoardService;
 import com.tech.service.interfaces.TradeService;
 import com.tech.vo.BVO;
-import com.tech.vo.BoardVO;
 import com.tech.vo.TradeVO;
 
 @Service("tradeService")
@@ -31,8 +27,14 @@ public class TradeServiceImpl implements TradeService {
 
 	
 	@Override
-	public void createBoard(BVO vo) {
-		tMapper.insertTBoard(vo);
+	public int createBoard(BVO vo) {
+		if (tMapper.insertTBoard(vo) == 1) {
+			logger.info("insertTBoard : "+success_msg);
+			return ((TradeVO)vo).getT_seq();
+		}else {
+			logger.error("insertTBoard : "+failed_msg);
+			return 0;
+		}
 	}
 
 	@Override
@@ -73,6 +75,15 @@ public class TradeServiceImpl implements TradeService {
 		}else {
 			logger.error("upViews : "+failed_msg);
 		}
+	}
+
+	@Override
+	public void upRecommend(int seq) {	
+		/*
+		 * if(tMapper.upTRecommend(seq) == 1) {
+		 * logger.info("upTRecommend : "+success_msg); }else {
+		 * logger.error("upTRecommend : "+failed_msg); }
+		 */
 	}
 	
 

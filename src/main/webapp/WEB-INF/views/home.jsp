@@ -127,10 +127,10 @@
 							<span class="entypo-login"><i class="fa fa-sign-in"></i></span>
 							Login
 						</h5>
-						<button class="submit b2" type="button">
-							<span class="login_button">
+						<button class="b2" type="button">
+							<!-- <span class="login_button"> -->
 								<i class="fa fa-lock"></i>
-							</span>
+							<!-- </span> -->
 						</button>
 						<span class="entypo-user inputUserIcon"> <i
 							class="fa fa-user"></i>
@@ -333,12 +333,11 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="/resources/js/scripts.js"></script>
 	
 	<script>
 	 
 	    /* 로그인 버튼 클릭 메서드 */
-	    $(".login_button").click(function(){
+	    $(".b2").click(function(){
 	        
 	        //alert("로그인 버튼 작동");
 	    	/* 로그인 메서드 서버 요청 */

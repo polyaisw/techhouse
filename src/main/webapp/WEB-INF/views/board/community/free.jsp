@@ -16,10 +16,6 @@
 <link href="/resources/css/nav.css" rel="stylesheet">
 </head>
 <body>
-	<%
-		request.setCharacterEncoding("utf-8");
-	response.setContentType("text/html; charset=/UTF-8");
-	%>
 	<jsp:include page="../../init/header.jsp"></jsp:include>
 	<jsp:include page="../../init/nav.jsp"></jsp:include>
 	<h2>자유게시판</h2>
@@ -55,7 +51,9 @@
 		</div>
 		<div class="row">
 			<div class="col">
-				<a href="/board/insertBoardForm" class="btn btn-primary">글작성</a>
+				<c:if test="${member != null}">
+					<a href="/board/insertBoardForm" class="btn btn-primary">글작성</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

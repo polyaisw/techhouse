@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,44 @@
 	<jsp:include page="../../init/header.jsp"></jsp:include>
 	<jsp:include page="../../init/nav.jsp"></jsp:include>
 
+<div class="container text-white">
+		<div class="row">
+			<div class="col ">
+				<table class="w-100 border">
+					<thead class="border">
+						<tr>
+							<th>번호</th>
+							<th>이미지</th>
+							<th>제목</th>
+							<th>가격</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="tradeList" items='${list}'>
+							
+							<tr>
+								<td>${ tradeList.t_seq }</td>
+								<td><a href="/board/contentTradeForm?t_seq=${ tradeList.t_seq }">
+										${ tradeList.t_uploadImg }</a></td>
+								<td><a href="/board/contentTradeForm?t_seq=${ tradeList.t_seq }">${ tradeList.t_title }</a></td>
+							 	<td>${ tradeList.t_price }</td>
+							 	<td>${ tradeList.t_views }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 
+		</div>
+		<div class="row">
+			<div class="col">
+				<c:if test="${member != null}">
+					<a href="/board/insertTradeBoardForm" class="btn btn-primary">글작성</a>
+				</c:if>
+			</div>
+		</div>
+	</div>
 
 	<jsp:include page="../../init/footer.jsp"></jsp:include>
 	<!-- Bootstrap core JS-->
@@ -28,6 +66,5 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="/resources/js/scripts.js"></script>
 </body>
 </html>

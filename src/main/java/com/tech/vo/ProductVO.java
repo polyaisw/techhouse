@@ -6,7 +6,7 @@ public class ProductVO {
 	private String prod_productName;
 	private String prod_price;
 	private String prod_uploadImg;
-	private String prod_selectedEmail;	//당첨자
+	private String prod_selectedId;	//당첨자
 	private String prod_selectedName;	//당첨자
 	private String prod_selectedTel;	//당첨자
 	private String prod_date;
@@ -21,6 +21,7 @@ public class ProductVO {
 		this.prod_productName = prod_productName;
 		this.prod_price = prod_price;
 		this.prod_uploadImg = prod_uploadImg;
+		this.prod_posting = 0;
 	}
 
 
@@ -78,14 +79,14 @@ public class ProductVO {
 
 
 	
-	public String getProd_selectedEmail() {
-		return prod_selectedEmail;
+	public String getProd_selectedId() {
+		return prod_selectedId;
 	}
 
 
 
-	public void setProd_selectedEmail(String prod_selectedEmail) {
-		this.prod_selectedEmail = prod_selectedEmail;
+	public void setProd_selectedId(String prod_selectedId) {
+		this.prod_selectedId = prod_selectedId;
 	}
 
 
@@ -128,7 +129,7 @@ public class ProductVO {
 	@Override
 	public String toString() {
 		return "ProductVO [prod_seq=" + prod_seq + ", prod_productName=" + prod_productName + ", prod_price="
-				+ prod_price + ", prod_uploadImg=" + prod_uploadImg + ", prod_selectedEmail=" + prod_selectedEmail
+				+ prod_price + ", prod_uploadImg=" + prod_uploadImg + ", prod_selectedId=" + prod_selectedId
 				+ ", prod_selectedName=" + prod_selectedName + ", prod_selectedTel=" + prod_selectedTel + ", prod_date="
 				+ prod_date + "]";
 	}

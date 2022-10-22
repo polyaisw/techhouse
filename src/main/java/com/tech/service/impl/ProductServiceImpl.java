@@ -26,8 +26,6 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-
-
 	@Override
 	public void insertProduct(ProductVO vo) {
 		if (prodMapper.insertProduct(vo) == 1) {
@@ -54,15 +52,13 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductVO getProductById(int prod_seq) {
-		
+
 		return prodMapper.getProductById(prod_seq);
-		
-		
+
 		/*
 		 * for (ProductVO arg : prodMapper.getProductList()) { if (prod_seq ==
-		 * arg.getProd_seq()) return  else {
-		 * logger.error("getProductById : " + notFound_board_msg); return null; // null이
-		 * 리턴되면 모달메시지띄우기 } } return null;
+		 * arg.getProd_seq()) return else { logger.error("getProductById : " +
+		 * notFound_board_msg); return null; // null이 리턴되면 모달메시지띄우기 } } return null;
 		 */
 	}
 
@@ -87,16 +83,7 @@ public class ProductServiceImpl implements ProductService {
 		// 해당상품명, 당첨자 mail, name, tel이 넘어온다
 		// prodname에 맞는 상품에 당첨자 정보를 등록한다.
 
-		for (ProductVO arg : prodMapper.getProductList()) {
-			if (vo.getA_productName().equals(arg.getProd_productName())) { // db속 상품명과 수정상품명이 일치한가
-				if (prodMapper.insertSelectedMember(vo) == 1) {
-				} else {
-					logger.error("insertSelectedMember : " + failed_msg);
-				}
-			} else {
-				logger.error("insertSelectedMember : " + notFound_msg);
-			}
-		}
+		prodMapper.insertSelectedMember(vo);
 	}
 
 	@Override
@@ -104,11 +91,8 @@ public class ProductServiceImpl implements ProductService {
 		return prodMapper.getProductList();
 	}
 
-
-
 	@Override
-	public void updatePosting(ProductVO vo) 
-	{
+	public void updatePosting(ProductVO vo) {
 		for (ProductVO arg : prodMapper.getProductList()) {
 			if (vo.getProd_seq() == arg.getProd_seq()) {
 				if (prodMapper.updatePosting(vo) == 1) {

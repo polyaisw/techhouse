@@ -16,10 +16,6 @@
 <link href="/resources/css/default.css" rel="stylesheet">
 </head>
 <body>
-	<%
-		request.setCharacterEncoding("utf-8");
-	response.setContentType("text/html; charset=UTF-8");
-	%>
 	<jsp:include page="../init/header.jsp"></jsp:include>
 	<jsp:include page="../init/nav.jsp"></jsp:include>
 	<div class="container text-white">
@@ -41,8 +37,8 @@
 						<label for="prod_uploadImg" class="form-label text-white">수정 하실 업로드이미지</label>
 						<input type="file" id="prod_uploadImg" name="prod_uploadImg" class="form-control mb-3" value="${productContent.prod_uploadImg }">
 						
-						<label for="prod_selectedEmail" class="form-label text-white">당첨된 유저 이메일</label>
-						<input type="text" id="prod_selectedEmail" name="prod_selectedEmail" class="form-control mb-3" value="${ productContent.prod_selectedEmail }">
+						<label for="prod_selectedId" class="form-label text-white">당첨된 유저 아이디</label>
+						<input type="text" id="prod_selectedId" name="prod_selectedId" class="form-control mb-3" value="${ productContent.prod_selectedId }">
 						
 						<label for="prod_selectedName" class="form-label text-white">당첨된 유저 닉네임</label>
 						<input type="text" id="prod_selectedName" name="prod_selectedName" class="form-control mb-3" value="${ productContent.prod_selectedName }">
@@ -69,6 +65,5 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="js/scripts.js"></script>
 </body>
 </html>

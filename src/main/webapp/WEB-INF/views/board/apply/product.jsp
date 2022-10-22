@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<div class="row w-100 mx-auto mt-5">
-			<div class="col">
+			<div class="col-md-12">
 				<form name='myForm' method='post'>
 
 					<table class="w-100 text-white">
@@ -70,7 +70,7 @@
 									</td>
 									<td>${productContents.prod_productName}</td>
 									<td>${productContents.prod_price}</td>
-									<td>${productContents.prod_selectedEmail}</td>
+									<td>${productContents.prod_selectedId}</td>
 									<td>${productContents.prod_selectedName}</td>
 									<td>${productContents.prod_selectedTel}</td>
 									<td>${productContents.prod_date}</td>
@@ -79,13 +79,42 @@
 						</tbody>
 					</table>
 
+
+
 					<input type="button" value="수정하기" id="updateProductBtn"
 						class="btn btn-primary" onclick='mySubmit(1)' /> <input
 						type="button" value="삭제하기" class="btn btn-primary"
 						onclick='mySubmit(2)' /> <input type="button" name="countStart"
 						class="btn btn-primary" onclick="mySubmit(3)" value="상품 게시하기">
-					<a href="/board/UnPostProductAction" class="btn btn-primary">상품 게시글 내리기</a>
+					<a href="/board/UnPostProductAction" class="btn btn-primary">상품
+						게시글 내리기</a>
 				</form>
+
+			</div>
+			<div class="col-md-12">
+				<table class="w-100 text-white mt-5">
+					<thead>
+						<tr>
+							<th></th>
+							<th>진행된 상품명</th>
+							<th>지원자 아이디</th>
+							<th>지원자 닉네임</th>
+							<th>지원자 연락처</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<c:forEach var="applyContents" items='${applyList}'>
+							<tr>
+								<td>${applyContents.a_seq}</td>
+								<td>${applyContents.a_productName}</td>
+								<td>${applyContents.a_applyId}</td>
+								<td>${applyContents.a_applyName}</td>
+								<td>${applyContents.a_applyTel}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -114,12 +143,12 @@
 		</div>
 		<div class="row ">
 			<div class="col d-flex my-5 justify-content-center">
-				<span class="h3  text-white ">지원자 수 : 369</span> <i
+				<span class="h3  text-white ">사용된 응모권 : ${count}개</span> <i
 					class="fa-solid fa-bolt text-warning applyIcon"></i><i
 					class="fa-solid fa-bolt text-warning applyIcon"></i>
 			</div>
 			<div class="col my-5 d-flex my-5 justify-content-center">
-				<span class="h3 text-white ">당첨 확률 : 0.00%</span>
+				<span class="h3 text-white ">나의 당첨 확률 : ${percent}%</span>
 			</div>
 		</div>
 	</div>
@@ -128,7 +157,10 @@
 		<div class="row">
 			<div class="col">
 				<h3 class=" text-center pt-2 text-danger my-3">
-					진행중 : <span class="text-white">${ productContent.prod_productName }</span>
+					<c:if test="${productContent.prod_posting != 1 }">현재 진행중인 상품이 없습니다.</c:if>
+					<c:if test="${productContent.prod_posting == 1 }">
+					진행중<span class="text-white"> : ${ productContent.prod_productName }</span>
+					</c:if>
 				</h3>
 			</div>
 		</div>
@@ -144,7 +176,7 @@
 					<div class="count_ticket">
 
 						<i class="fa-solid fa-heart-circle-bolt text-white applyIcon"></i>
-						<span class="h3 text-white">32</span>
+						<span class="h3 text-white">${countMe }</span>
 					</div>
 
 					<div class="timer">
@@ -158,8 +190,25 @@
 	<div class="container ">
 		<div class="row text-center">
 			<div class="col my-5 ">
-				<div class="text-white">보유한 응모권 : 2</div>
-				<button class="btn btn-outline-warning text-white my-5">응모하기</button>
+				<c:if test="${member!=null }">
+					<c:if test="${productContent.prod_posting == 1 }">
+						<c:if test="${member.ticket == 0}">
+							<div class="text-white">보유한 응모권 수 : 0</div>
+							<div class="text-warning">룰렛을 돌려 응모권을 획득해보세요</div>
+						</c:if>
+						<c:if test="${member.ticket != 0}">
+
+							<div class="text-white">보유한 응모권 수 : ${member.ticket }</div>
+							<form action="/board/insertApplyAction" method="post">
+								<input type="text" class="d-none" name="prod_productName"
+									value="${ productContent.prod_productName }"> <input
+									type="submit" class="btn btn-outline-warning text-white my-5"
+									value="응모하기">
+							</form>
+						</c:if>
+					</c:if>
+				</c:if>
+
 			</div>
 		</div>
 	</div>

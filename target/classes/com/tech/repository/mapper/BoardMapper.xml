@@ -25,15 +25,27 @@
 		board(b_writer, b_title,b_text,
 		b_uploadImg, b_category)
 		values(#{b_writer},#{b_title},#{b_text},#{b_uploadImg},#{b_category})
+		<selectKey resultType="Integer" keyProperty="b_seq"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		
 	</insert>
 	<update id="updateBoard" parameterType="Board">
 		update board set
-		b_title= #{b_title},
-		b_text=#{b_text}, b_uploadImg=#{b_uploadImg}, b_category=#{b_category}
+		b_title=
+		#{b_title},
+		b_text=#{b_text}, b_uploadImg=#{b_uploadImg},
+		b_category=#{b_category}
 		where b_seq = #{b_seq}
 	</update>
-	<update id="upViews"  parameterType="int">
-		update board set b_views = b_views+1 where b_seq = #{value}
+	<update id="upViews" parameterType="int">
+		update board set b_views =
+		b_views+1 where b_seq = #{value}
+	</update>
+	<update id="upRecommend" parameterType="int">
+		update board set
+		b_recommed = b_recommed+1 where b_seq = #{value}
 	</update>
 	<delete id="deleteBoard" parameterType="int">
 		delete from board where

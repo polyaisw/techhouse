@@ -11,11 +11,8 @@
 	
 	  	<!-- 아이디 중복검사 -->
   	<select id="idCheck" resultType="int">
-  	
   		select count(*) from user where id = #{id}
-  	
   	</select>
-  	
   	<select id="memberLogin" resultType="com.tech.vo.UserVO">
   		select `id`,`password`,`name`,`point`,`rank`,`tel`,`post`,`addr`,`addr2`,`ticket` from user where id = #{id}
   	</select>

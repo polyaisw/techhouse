@@ -1,6 +1,5 @@
 package com.tech.vo;
 
-import lombok.Data;
 
 	// @Data : lombok연결 게터, 세터 자동생성
 public class BoardVO implements BVO{

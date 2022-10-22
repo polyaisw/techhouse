@@ -30,13 +30,13 @@
 				<div class="col-lg-6">
 					<div class="mb-5">
 						<label for="q_boardSeq" class="form-label">문의할 게시글 번호</label> <input
-							type="text" class="form-control w-75" name="q_boardSeq" id="q_boardSeq"
-							placeholder="번호입력">
+							type="text" class="form-control w-75" name="q_boardSeq"
+							id="q_boardSeq" placeholder="번호입력">
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="mb-5">
-						<label for="q_category" class="form-label">게시글 카테고리</label> <select
+						<label for="q_category" class="form-label">*게시글 카테고리</label> <select
 							class="form-select" aria-label="Default select example"
 							id="q_category" name="q_category">
 							<option selected value="자유게시판">[커뮤니티] 자유게시판</option>
@@ -56,36 +56,38 @@
 			<div class="row text-white w-75 mx-auto">
 				<div class="col-lg-12">
 					<div class="mb-3">
-						<label for="q_title" class="form-label">문의 제목</label> <input
+						<label for="q_title" class="form-label">*문의 제목</label> <input
 							type="text" class="form-control" id="q_title" name="q_title"
 							placeholder="제목을 입력해주세요">
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="mb-3">
-						<label for="q_text" class="form-label">문의 내용</label>
+						<label for="q_text" class="form-label">*문의 내용</label>
 						<textarea class="form-control" id="q_text" name="q_text"
 							placeholder="내용을 상세히 입력해주세요" rows="20"></textarea>
 					</div>
 				</div>
+
 				<div class="col-lg-12">
 					<div class="mb-3">
-						<label for="formFileSm" class="form-label">파일 첨부하기 </label> <input
-							class="form-control form-control-sm" id="formFileSm" name="q_uploadImg" type="file">
-					</div>
-				</div>
-				<div class="col-lg-12">
-					<div class="mb-3">
-						<label for="q_email" class="form-label">이메일 주소</label> <input
+						<label for="q_email" class="form-label">*이메일 주소</label> <input
 							type="email" class="form-control" id="q_email" name="q_email"
 							placeholder="이메일주소를 입력해주세요">
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="mb-3">
-						<label for="q_tel" class="form-label">휴대폰 번호</label> <input
+						<label for="q_tel" class="form-label">*휴대폰 번호</label> <input
 							type="text" class="form-control" id="q_tel" name="q_tel"
 							placeholder="휴대폰번호를 입력해주세요">
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="mb-3">
+						<label for="formFileSm" class="form-label">파일 첨부하기 </label> <input
+							class="form-control form-control-sm" id="formFileSm"
+							name="q_uploadImg" type="file">
 					</div>
 				</div>
 			</div>
@@ -110,6 +112,5 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="/resources/js/scripts.js"></script>
 </body>
 </html>

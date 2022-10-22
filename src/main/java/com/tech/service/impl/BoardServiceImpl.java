@@ -2,7 +2,6 @@
 package com.tech.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,14 +25,14 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void createBoard(BVO vo) {
+	public int createBoard(BVO vo) {
 		if (bMapper.insertBoard(vo) == 1) {
 			logger.info("insertBoard : "+success_msg);
+			return ((BoardVO)vo).getB_seq();
 		}else {
 			logger.error("insertBoard : "+failed_msg);
+			return 0;
 		}
-		
-
 	}
 
 	@Override
@@ -77,6 +76,15 @@ public class BoardServiceImpl implements BoardService {
 			logger.info("upViews : "+success_msg);
 		}else {
 			logger.error("upViews : "+failed_msg);
+		}
+	}
+
+	@Override
+	public void upRecommend(int seq) {
+		if(bMapper.upRecommend(seq) == 1) {
+			logger.info("upRecommend : "+success_msg);
+		}else {
+			logger.error("upRecommend : "+failed_msg);
 		}
 	}
 

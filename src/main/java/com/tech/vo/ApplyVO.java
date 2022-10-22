@@ -4,16 +4,16 @@ public class ApplyVO {
 
 	private int a_seq;
 	private String a_productName;	//상품명
-	private String a_applyEmail;		//지원자메일
+	private String a_applyId;		//지원자메일
 	private String a_applyName;		//지원자이름
 	private String a_applyTel;
 	
 	
 	
-	public ApplyVO(String a_productName, String a_applyEmail, String a_applyName, String a_applyTel) {
+	public ApplyVO(String a_productName, String a_applyId, String a_applyName, String a_applyTel) {
 		super();
 		this.a_productName = a_productName;
-		this.a_applyEmail = a_applyEmail;
+		this.a_applyId = a_applyId;
 		this.a_applyName = a_applyName;
 		this.a_applyTel = a_applyTel;
 	}
@@ -44,14 +44,14 @@ public class ApplyVO {
 
 
 
-	public String getA_applyEmail() {
-		return a_applyEmail;
+	public String getA_applyId() {
+		return a_applyId;
 	}
 
 
 
-	public void setA_applyEmail(String a_applyEmail) {
-		this.a_applyEmail = a_applyEmail;
+	public void setA_applyId(String a_applyId) {
+		this.a_applyId = a_applyId;
 	}
 
 
@@ -82,7 +82,7 @@ public class ApplyVO {
 
 	@Override
 	public String toString() {
-		return "ApplyVO [a_seq=" + a_seq + ", a_productName=" + a_productName + ", a_applyEmail=" + a_applyEmail
+		return "ApplyVO [a_seq=" + a_seq + ", a_productName=" + a_productName + ", a_applyId=" + a_applyId
 				+ ", a_applyName=" + a_applyName + ", a_applyTel=" + a_applyTel + "]";
 	}
 

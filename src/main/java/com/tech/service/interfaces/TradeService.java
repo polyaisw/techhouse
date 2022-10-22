@@ -1,9 +1,6 @@
 package com.tech.service.interfaces;
 
-import java.util.List;
-
 import com.tech.vo.BVO;
-import com.tech.vo.BoardVO;
 
 public interface TradeService extends BoardService {
 

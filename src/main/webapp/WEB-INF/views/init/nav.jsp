@@ -49,10 +49,10 @@
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">뉴스/핫이슈</a>
 									<ul class="dropdown-menu"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item" href="#">IT/트렌드</a></li>
-										<li><a class="dropdown-item" href="#">핫이슈</a></li>
-										<li><a class="dropdown-item" href="#">게임 출시 정보</a></li>
-										<li><a class="dropdown-item" href="#">꿀딜/장터</a></li>
+										<li><a class="dropdown-item" href="/board/news/trend">IT/트렌드</a></li>
+										<li><a class="dropdown-item" href="/board/news/issue">핫이슈</a></li>
+										<li><a class="dropdown-item" href="/board/news/gameInfo">게임 출시 정보</a></li>
+										<li><a class="dropdown-item" href="/board/news/hotDeal">꿀딜/장터</a></li>
 									</ul></li>
 								<li class="nav-item dropdown pe-3"><a
 									class="nav-link dropdown" href="/controller/roulette" id="navbarDropdownMenuLink"

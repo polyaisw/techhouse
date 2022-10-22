@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.tech.repository.mapper.QnaMapper;
 import com.tech.service.interfaces.QnaService;
-import com.tech.vo.BVO;
-import com.tech.vo.ProductVO;
 import com.tech.vo.QnaVO;
 
 @Service("qnaService")

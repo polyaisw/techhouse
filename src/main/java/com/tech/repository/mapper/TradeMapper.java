@@ -17,4 +17,5 @@ public interface TradeMapper {
 	 List<BVO> getTBoardListByCate (String category);
 	int updateState(BVO vo);
 	int upTViews(int seq);
+	/* int upTRecommend(int seq); */	//나중에쓸수도잇음
 }

@@ -4,17 +4,18 @@
 
 	<select id="getCommentListById" parameterType="int"
 		resultType="Comment">
-		select * from comment
-		where 
-		c_boardSeq = #{c_boardSeq} 
+		select * from `comment` where c_boardSeq = #{value}
 	</select>
 
 	<delete id="deleteComment" parameterType="int">
-		delete from `comment` where c_seq = #{value}
+		delete from `comment`
+		where c_seq = #{value}
 	</delete>
 	<insert id="insertComment" parameterType="Comment">
-		insert  into `comment`(c_writer,c_text,c_boardSeq) values(#{c_writer},#{c_text},#{c_boardSeq})
-	
+		insert into
+		`comment`(c_writer,c_text,c_boardSeq)
+		values(#{c_writer},#{c_text},#{c_boardSeq})
+
 	</insert>
-	
+
 </mapper>

@@ -15,7 +15,7 @@
 	<update id="insertSelectedMember" parameterType="Apply">
 		update product
 		set
-		prod_selectedEmail = #{a_applyEmail},
+		prod_selectedId = #{a_applyId},
 		prod_selectedName =
 		#{a_applyName},
 		prod_selectedTel = #{a_applyTel}
@@ -28,7 +28,7 @@
 		prod_productName=#{prod_productName},
 		prod_price=#{prod_price},
 		prod_uploadImg=#{prod_uploadImg},
-		prod_selectedEmail = #{prod_selectedEmail},
+		prod_selectedId = #{prod_selectedId},
 		prod_selectedName = #{prod_selectedName},
 		prod_selectedTel = #{prod_selectedTel}
 		where prod_seq = #{prod_seq}
@@ -58,9 +58,9 @@
 
 	</select>
 
-	<select id="getProduct" resultType="Product">
+<!-- 	<select id="getProduct" resultType="Product">
 		SELECT * FROM product order
 		by prod_seq desc
-	</select>
+	</select> -->
 
 </mapper>

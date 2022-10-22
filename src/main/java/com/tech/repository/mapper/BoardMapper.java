@@ -13,6 +13,7 @@ public interface BoardMapper {
 	 int updateBoard(BVO vo);
 	 int deleteBoard(int seq);
 	 int upViews(int seq);
+	int upRecommend(int seq);
 	 BVO getBoardById(int seq);
 	 List<BVO> getBoardList();
 	 List<BVO> getBoardListByCate (String category);

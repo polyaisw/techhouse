@@ -1,6 +1,5 @@
 package com.tech.vo;
 
-import lombok.Data;
 
 public class QnaVO{
 	private int q_seq;

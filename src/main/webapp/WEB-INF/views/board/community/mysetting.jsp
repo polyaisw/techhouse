@@ -52,7 +52,9 @@
 		</div>
 		<div class="row">
 			<div class="col">
-				<a href="/board/insertBoardForm" class="btn btn-primary">글작성</a>
+				<c:if test="${member != null}">
+					<a href="/board/insertBoardForm" class="btn btn-primary">글작성</a>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -68,6 +70,5 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="/resources/js/scripts.js"></script>
 </body>
 </html>

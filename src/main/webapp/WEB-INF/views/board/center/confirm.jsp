@@ -19,13 +19,6 @@
 	<button class="text-white bg-black">1:1문의 접수 완료</button>
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	<jsp:include page="../../init/footer.jsp"></jsp:include>
 
 	<!-- script -->
@@ -35,6 +28,5 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="/resources/js/scripts.js"></script>
 </body>
 </html>
