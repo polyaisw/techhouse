@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
@@ -25,7 +24,7 @@
 <body>
 	<form id="login_form" method="post">
 		아이디 :<input class="id_input" name="id">
-		비밀번호 :<input class="pw_iput" name="password" type="password">
+		비밀번호 :<input class="pw_input" name="password" type="password">
 		
 		<c:if test = "${result == 0 }">
                 <div class = "login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
@@ -44,6 +43,13 @@
         $("#login_form").attr("action", "/member/login");
         $("#login_form").submit();
         
+    });
+    
+    $(".pw_input, .id_input").on("keyup",function(e){
+        if(e.keyCode == 13) {
+	        $("#login_form").attr("action", "/member/login");
+	        $("#login_form").submit();
+        }
     });
  
 </script>

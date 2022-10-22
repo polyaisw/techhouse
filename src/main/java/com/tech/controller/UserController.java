@@ -137,6 +137,7 @@ public class UserController {
 		String encodePw = "";
 		
 		UserVO vo2 = userService.memberLogin(vo);
+		System.out.println(vo2);
 		
 		if(vo2 != null) {
 			rawPw = vo.getPassword();
@@ -144,21 +145,35 @@ public class UserController {
 			
 			if(true == pwEncoder.matches(rawPw, encodePw)) {
 				
-				vo2.setPassword("");
-				session.setAttribute("member", vo2);
-				return "redirect:/";
+				vo2.setPassword(""); //인코딩된 비밀번호 정보 지움
+				session.setAttribute("member", vo2); //session에 사용자 정보 저장
+				return "redirect:/"; //메인페이지로 이동
 				
-			}else {
+			}else { 
 				rttr.addFlashAttribute("result", 0);
-				return "redirect:/member/login";
+				return "redirect:/member/login"; //로그인 페이지로 이동
 			}
 			
-		}else {
+		}else {	//일치하는 아이디가 존재하지 않을 시 (로그인 실패)
 			rttr.addFlashAttribute("result", 0);
-			return "redirect:/member/login";
+			return "redirect:/member/login"; //로그인 페이지로 이동
 		}
 		
 	}
+	
+	/* 메인페이지 로그아웃 */
+    @RequestMapping(value="logout", method=RequestMethod.GET)
+    public String logoutMainGET(HttpServletRequest request) throws Exception{
+        
+    	logger.info("logoutMainGET메서드 진입");
+    	
+    	HttpSession session = request.getSession();
+    	
+    	session.invalidate();
+    	
+    	return "redirect:/main";
+    	
+    }
 
 	
 	//로그인 이후 마이페이지 이동

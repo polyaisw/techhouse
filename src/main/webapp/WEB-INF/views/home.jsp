@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +12,19 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>TECH HOUSE</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous">
+</script>
+<style>
+	/* 로그인 실패시 경고글 */
+	.login_warn{
+	    margin-top: 30px;
+	    text-align: center;
+	    color : red;
+	}
+</style>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
@@ -29,7 +45,6 @@
 	<jsp:include page="init/nav.jsp"></jsp:include>
 
 
-	<a href="/member/login">로그인</a><br>
 
 
 
@@ -106,25 +121,38 @@
 			</div>
 			<div class="col-xl-4 pe-3 ">
 				<!-- login -->
-				<form action="">
-					<h5>
-						<span class="entypo-login"><i class="fa fa-sign-in"></i></span>
-						Login
-					</h5>
-					<button class="submit b2">
-						<span class="entypo-lock"><i class="fa fa-lock"></i></span>
-					</button>
-					<span class="entypo-user inputUserIcon"> <i
-						class="fa fa-user"></i>
-					</span> <input type="text" class="user" placeholder="email" /> <span
-						class="entypo-key inputPassIcon"> <i class="fa fa-key"></i>
-					</span> <input type="password" class="pass" placeholder="password" />
-					<div class=" d-flex justify-content-end">
-						<a class="text-white" href="/member/join">sign up</a> <a
-							class="text-white  ps-3" href="#">find account</a> <a
-							class="text-white  ps-3" href="/member/mypage">(임시) mypage</a>
-					</div>
-				</form>
+				<c:if test="${ member == null }">
+					<form id="login_form" method="post">
+						<h5>
+							<span class="entypo-login"><i class="fa fa-sign-in"></i></span>
+							Login
+						</h5>
+						<button class="submit b2" type="button">
+							<span class="login_button">
+								<i class="fa fa-lock"></i>
+							</span>
+						</button>
+						<span class="entypo-user inputUserIcon"> <i
+							class="fa fa-user"></i>
+						</span> 
+						<input type="text" name="id" class="id_input" placeholder="ID" /> 
+						<span class="entypo-key inputPassIcon"> <i class="fa fa-key"></i>
+						</span> 
+						<input type="password" name="password" class="pw_input" placeholder="Password" />
+						
+						<div class=" d-flex justify-content-end">
+							<a class="text-white" href="/member/join">sign up</a>
+							<a class="text-white  ps-3" href="#">find account</a>
+						</div>
+					</form>
+				</c:if>
+				<c:if test="${ member != null }">
+					<!-- 로그인 되었을때 내정보 부분은 이곳에 만들면 됩니다. -->
+					<span>회원 : ${ member.name }</span>
+					<span>포인트 : <fmt:formatNumber value="${ member.point }" pattern="#,###"/></span>
+					<a href="/member/mypage">마이페이지</a>
+					<a href="/member/logout">로그아웃</a>
+				</c:if>
 				<!-- best board -->
 				<div class="container mt-5">
 					<div class="card  mx-auto " style="max-width: 22rem;">
@@ -306,5 +334,26 @@
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
 	<script src="/resources/js/scripts.js"></script>
+	
+	<script>
+	 
+	    /* 로그인 버튼 클릭 메서드 */
+	    $(".login_button").click(function(){
+	        
+	        //alert("로그인 버튼 작동");
+	    	/* 로그인 메서드 서버 요청 */
+	        $("#login_form").attr("action", "/member/login");
+	        $("#login_form").submit();
+	        
+	    });
+	    
+	    $(".pw_input, .id_input").on("keyup",function(e){
+	        if(e.keyCode == 13) {
+		        $("#login_form").attr("action", "/member/login");
+		        $("#login_form").submit();
+	        }
+	    });
+	 
+	</script>
 </body>
 </html>
