@@ -87,6 +87,9 @@
 		<span class="final_name_ck">닉네임을 입력해주세요.</span><br>
 		연락처 : <input class="tel_input" name="tel"><br>
 		<span class="final_tel_ck">연락처를 입력해주세요.</span><br>
+		주소 : <input type="text" class = "form-control" id="post" name="post" maxlength="20" placeholder="우편번호" readonly onclick="findAddr()"><br>
+		<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" readonly onclick="findAddr()"><br>
+		<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소"><br>
 		프로필 사진 :<input class="profil_input" name="proimg"><br>
 		<input type="button" class="join_button" value="가입하기">
 	</form>
@@ -256,6 +259,30 @@
 				pwckcorCheck = false;
 			}
 		});
+
+		function findAddr(){
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		        	
+		        	console.log(data);
+		        	
+		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+		            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		            var roadAddr = data.roadAddress; // 도로명 주소 변수
+		            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+		            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		            document.getElementById('post').value = data.zonecode;
+		            if(roadAddr !== ''){
+		                document.getElementById("addr").value = roadAddr;
+		            } 
+		            else if(jibunAddr !== ''){
+		                document.getElementById("addr").value = jibunAddr;
+		            }
+		        }
+		    }).open();
+		}
 	</script>
 </body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

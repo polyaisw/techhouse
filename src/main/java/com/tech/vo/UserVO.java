@@ -10,7 +10,9 @@ public class UserVO {
 	private int black;
 	private String profileimg;
 	private String tel;
-	private String address;	//10/13일 수정
+	private String post;	//10/13일 수정
+	private String addr;
+	private String addr2;
 	private int ticket;		//10/13일 수정
 	
 	
@@ -62,11 +64,23 @@ public class UserVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getAddress() {
-		return address;
+	public String getPost() {
+		return post;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPost(String post) {
+		this.post = post;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
 	public int getTicket() {
 		return ticket;
@@ -77,8 +91,8 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", point=" + point + ", rank=" + rank
-				+ ", black=" + black + ", profileimg=" + profileimg + ", tel=" + tel + ", address=" + address
-				+ ", ticket=" + ticket + "]";
+				+ ", black=" + black + ", profileimg=" + profileimg + ", tel=" + tel + ", post=" + post + ", addr="
+				+ addr + ", addr2=" + addr2 + ", ticket=" + ticket + "]";
 	}
 
 	
