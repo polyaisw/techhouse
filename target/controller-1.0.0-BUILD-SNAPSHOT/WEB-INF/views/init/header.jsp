@@ -14,12 +14,12 @@
 			<div class="col-xl-4"></div>
 			<div class="col-xl-4">
 				<h1 class="sixth text-center text-white">
-					<a href="/controller">TECH HOUSE</a>
+					<a href="/main">TECH HOUSE</a>
 				</h1>
 			</div>
 			<div class="col-xl-4 bg-success">
-				<p>
-				<h1 class="text-white">꿀딜/장터 소식</h1>
+				<a href="#">
+				꿀딜/장터 소식</a>
 			</div>
 		</div>
 	</div>

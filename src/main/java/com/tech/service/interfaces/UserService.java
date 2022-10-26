@@ -10,7 +10,10 @@ public interface UserService {
 	public int idCheck(String memberId) throws Exception;
 	/* 로그인 */
 	public UserVO memberLogin(UserVO vo) throws Exception; 
+	/* 마이페이지 본인확인 */
+	public UserVO mypageCK(UserVO vo) throws Exception; 
+	/* 마이페이지 정보수정 */
+	public void memberEdit(UserVO vo) throws Exception; 
 //	UserVO getUser(UserVO vo);		//유저정보
-//	void updateUser(UserVO vo);	//유저정보 수정
 //	void deleteUser(UserVO vo);	//회원탈퇴
 }

@@ -42,16 +42,25 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	/* 마이페이지 본인확인 */
+	@Override
+	public UserVO mypageCK(UserVO vo) throws Exception{
+		
+		return memberMapper.memberLogin(vo);
+		
+	}
+	
+	/* 마이페이지 정보수정 */
+	public void memberEdit(UserVO vo) throws Exception{
+		
+		memberMapper.memberEdit(vo);
+		
+	}
+	
 //	@Override
 //	public UserVO getUser(UserVO vo) {
 //		// TODO Auto-generated method stub
 //		return null;
-//	}
-//
-//	@Override
-//	public void updateUser(UserVO vo) {
-//		// TODO Auto-generated method stub
-//		
 //	}
 //
 //	@Override

@@ -6,5 +6,9 @@
 	<typeAliases>
 		<typeAlias alias="Board" type="com.tech.vo.BoardVO" />
 		<typeAlias alias="Trade" type="com.tech.vo.TradeVO" />
+		<typeAlias alias="Product" type="com.tech.vo.ProductVO" />
+		<typeAlias alias="Apply" type="com.tech.vo.ApplyVO" />
+		<typeAlias alias="Qna" type="com.tech.vo.QnaVO" />
+		<typeAlias alias="Comment" type="com.tech.vo.CommentVO" />
 	</typeAliases>
 </configuration>

@@ -40,11 +40,15 @@
 		<property name="mapperLocations">
 			<list>
 			<value>classpath:com/tech/repository/mapper/TradeMapper.xml</value>
-				<value>classpath:com/tech/repository/mapper/BoardMapper.xml</value>		<!-- 요게 맵핑파일(쿼리) 연결하는거 섭이는 요거없이 어떻게 MemberMapper.xml을 연결했는지 모르겟네 -->
+				<value>classpath:com/tech/repository/mapper/BoardMapper.xml</value>		
+				<value>classpath:com/tech/repository/mapper/ProductMapper.xml</value>		
+				<value>classpath:com/tech/repository/mapper/ApplyMapper.xml</value>	
+				<value>classpath:com/tech/repository/mapper/QnaMapper.xml</value>
+				<value>classpath:com/tech/repository/mapper/CommentMapper.xml</value>
 				
 			</list>
 		</property>
-		<!-- 요기까지 -->
+		<!-- 여기까지 -->
 
 
 

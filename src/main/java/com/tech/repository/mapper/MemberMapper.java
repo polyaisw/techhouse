@@ -13,4 +13,7 @@ public interface MemberMapper {
 	/* 로그인 */
 	public UserVO memberLogin(UserVO vo);
 	
+	/* 마이페이지 정보수정 */
+	public void memberEdit(UserVO vo);
+	
 }

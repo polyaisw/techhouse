@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +12,22 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>TECH HOUSE</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous">
+</script>
+<style>
+	/* 로그인 실패시 경고글 */
+	.login_warn{
+	    margin-top: 30px;
+	    text-align: center;
+	    color : red;
+	}
+</style>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<!-- <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous"> -->
-<link href="resources/css/nav.css" rel="stylesheet">
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -24,9 +35,9 @@
 	crossorigin="anonymous">
 
 
-<link href="resources/css/default.css" rel="stylesheet">
-<link href="resources/css/main.css" rel="stylesheet">
-<link href="resources/css/nav.css" rel="stylesheet">
+<link href="/resources/css/main.css" rel="stylesheet">
+<link href="/resources/css/nav.css" rel="stylesheet">
+<link href="/resources/css/default.css" rel="stylesheet">
 <!-- Core theme CSS (includes Bootstrap)-->
 </head>
 <body>
@@ -34,14 +45,12 @@
 	<jsp:include page="init/nav.jsp"></jsp:include>
 
 
-	<a href="/controller/login">로그인</a><br>
-
 
 
 
 	<div class="container">
 		<div class="row">
-			<div class="col-xl-8 d-flex flex-column justify-content-start">
+			<div class="col-xl-8 d-flex flex-column">
 				<!-- searchbar -->
 				<form action="#" method="get" class="mx-0 my-3 w-100 ">
 					<div class="mx-auto">
@@ -112,28 +121,44 @@
 			</div>
 			<div class="col-xl-4 pe-3 ">
 				<!-- login -->
-				<form action="">
-					<h5>
-						<span class="entypo-login"><i class="fa fa-sign-in"></i></span>
-						Login
-					</h5>
-					<button class="submit b2">
-						<span class="entypo-lock"><i class="fa fa-lock"></i></span>
-					</button>
-					<span class="entypo-user inputUserIcon"> <i
-						class="fa fa-user"></i>
-					</span> <input type="text" class="user" placeholder="email" /> <span
-						class="entypo-key inputPassIcon"> <i class="fa fa-key"></i>
-					</span> <input type="password" class="pass" placeholder="password" />
-					<div class=" d-flex justify-content-end">
-						<a class="text-white" href="/controller/join">sign up</a> <a
-							class="text-white  ps-3" href="#">find account</a> <a
-							class="text-white  ps-3" href="/controller/mypage">(임시) mypage</a>
-					</div>
-				</form>
+				<c:if test="${ member == null }">
+					<form id="login_form" method="post">
+						<h5>
+							<span class="entypo-login"><i class="fa fa-sign-in"></i></span>
+							Login
+						</h5>
+						<button class="b2" type="button">
+							<!-- <span class="login_button"> -->
+								<i class="fa fa-lock"></i>
+							<!-- </span> -->
+						</button>
+						<span class="entypo-user inputUserIcon"> <i
+							class="fa fa-user"></i>
+						</span> 
+						<input type="text" name="id" class="id_input" placeholder="ID" /> 
+						<span class="entypo-key inputPassIcon"> <i class="fa fa-key"></i>
+						</span> 
+						<input type="password" name="password" class="pw_input" placeholder="Password" />
+						
+						<div class=" d-flex justify-content-end">
+							<a class="text-white" href="/member/join">sign up</a>
+							<a class="text-white  ps-3" href="#">find account</a>
+						</div>
+					</form>
+				</c:if>
+				<c:if test="${ member != null }">
+					<!-- 로그인 되었을때 내정보 부분은 이곳에 만들면 됩니다. -->
+					<span>회원 : ${ member.name }</span>
+					<span>포인트 : <fmt:formatNumber value="${ member.point }" pattern="#,###"/></span>
+					<c:if test="${ member.rank == 관리자 }"> <!-- 관리자 계정일 경우 -->
+						<a href="/admin/main">관리자 페이지</a>
+					</c:if>
+					<a href="/member/mypage">마이페이지</a>
+					<a href="/member/logout">로그아웃</a>
+				</c:if>
 				<!-- best board -->
-				<div class="container">
-					<div class="card  mb-3 mx-auto " style="max-width: 22rem;">
+				<div class="container mt-5">
+					<div class="card  mx-auto " style="max-width: 22rem;">
 						<div class="card-header text-center">
 							<i class="fa-brands fa-hotjar px-2"></i><a href="#">실시간 BEST</a>
 						</div>
@@ -311,6 +336,26 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="resources/js/scripts.js"></script>
+	
+	<script>
+	 
+	    /* 로그인 버튼 클릭 메서드 */
+	    $(".b2").click(function(){
+	        
+	        //alert("로그인 버튼 작동");
+	    	/* 로그인 메서드 서버 요청 */
+	        $("#login_form").attr("action", "/member/login");
+	        $("#login_form").submit();
+	        
+	    });
+	    
+	    $(".pw_input, .id_input").on("keyup",function(e){
+	        if(e.keyCode == 13) {
+		        $("#login_form").attr("action", "/member/login");
+		        $("#login_form").submit();
+	        }
+	    });
+	 
+	</script>
 </body>
 </html>
