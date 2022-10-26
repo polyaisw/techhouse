@@ -1,7 +1,7 @@
 
   package com.tech.service.interfaces;
   
-  import java.util.List;
+import java.util.List;
 
 import com.tech.vo.ApplyVO;
 import com.tech.vo.ProductVO;
@@ -17,6 +17,6 @@ import com.tech.vo.ProductVO;
 	 void insertSelectedMember(ApplyVO vo);		//당첨자 등록
 	 List<ProductVO> getProductList();
 	 void updatePosting (ProductVO vo);	//포스트 게시 / 내리기
-
+	 String inputCloseTime(ProductVO vo);
   }
  

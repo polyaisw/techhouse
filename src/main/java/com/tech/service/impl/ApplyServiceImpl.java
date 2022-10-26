@@ -11,6 +11,7 @@ import com.tech.repository.mapper.ApplyMapper;
 import com.tech.repository.mapper.MemberMapper;
 import com.tech.service.interfaces.ApplyService;
 import com.tech.vo.ApplyVO;
+import com.tech.vo.UserVO;
 
 @Service("applyService")
 public class ApplyServiceImpl implements ApplyService {
@@ -85,6 +86,12 @@ public class ApplyServiceImpl implements ApplyService {
 	public ApplyVO getApplyMemberBySeq(int a_seq) {
 		
 		return aMapper.getApplyMemberBySeq(a_seq);
+	}
+
+	@Override
+	public int updateTicket(UserVO vo) {
+		// TODO Auto-generated method stub
+		return aMapper.updateTicket(vo);
 	}
 
 }

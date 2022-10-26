@@ -39,6 +39,17 @@
 		prod_posting = #{prod_posting}
 		where prod_seq = #{prod_seq}
 	</update>
+	
+	<update id="inputCloseTime" parameterType="Product">
+		update product set
+		prod_closeTime = #{prod_closeTime}
+		where prod_seq = #{prod_seq}
+		<selectKey resultType="String" keyProperty="prod_closeTime"
+			order="AFTER">
+			select date_format(prod_closeTime, "%Y-%m-%d %H:%i:%S") as prod_closeTime from product  where prod_seq =#{prod_seq}
+			
+		</selectKey>
+	</update>
 
 	<delete id="deleteProduct" parameterType="int">
 		delete from product

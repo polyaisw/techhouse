@@ -12,6 +12,26 @@
 	crossorigin="anonymous">
 <link href="/resources/css/nav.css" rel="stylesheet">
 <link href="/resources/css/default.css" rel="stylesheet">
+	<script type="text/javascript">
+	function chkWrite(){
+		frm = document.forms['insertBoardForm'];
+			var b_title = frm['b_title'].value.trim();
+			var b_text = frm['b_text'].value;
+
+			if(b_title == ""){
+				alert("제목을 입력해주세요");
+				frm['b_title'].focus;
+				return false;
+				}
+			if(b_text == ""){
+				alert("내용은 반드시 입력해야 합니다.");
+				frm['b_text'].focus;
+				return false;
+				}
+			return true;
+		}
+	</script>
+
 </head>
 <body>
 	<jsp:include page="../init/header.jsp"></jsp:include>
@@ -19,8 +39,8 @@
 	<h2>글쓰기</h2>
 	<div class="container text-white">
 		<div class="row">
-			<div class="col ">
-				<form action="insertBoardAction" method="post">
+			<div class="col">
+				<form action="insertBoardAction" name="insertBoardForm" onsubmit="return chkWrite()"method="post">
 					<table class="boarder w-100">
 						<tr>
 							<td>이름</td>
@@ -45,11 +65,11 @@
 						</tr>
 						<tr>
 							<td>제목</td>
-							<td><input type="text" name="b_title" value="" size="30"></td>
+							<td><input type="text" name="b_title" value="${boardContent.b_title }" size="30"></td>
 						</tr>
 						<tr>
 							<td>내용</td>
-							<td><textarea name="b_text" rows="5" cols="35"></textarea></td>
+							<td><textarea name="b_text" rows="5" cols="35">${boardContent.b_text }</textarea></td>
 						</tr>
 
 						<tr>
@@ -72,6 +92,7 @@
 	</div>
 	<jsp:include page="../init/footer.jsp"></jsp:include>
 
+	<script src="/resources/js/goToList.js"></script>
 	<script src="https://kit.fontawesome.com/5547fa07a6.js"
 		crossorigin="anonymous"></script>
 	<script

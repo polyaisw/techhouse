@@ -23,7 +23,6 @@ public class ProductServiceImpl implements ProductService {
 	public ProductServiceImpl(ProductMapper prodMapper) {
 		super();
 		this.prodMapper = prodMapper;
-
 	}
 
 	@Override
@@ -32,7 +31,6 @@ public class ProductServiceImpl implements ProductService {
 		} else {
 			logger.error("insertProduct : " + failed_msg);
 		}
-
 	}
 
 	@Override
@@ -100,9 +98,14 @@ public class ProductServiceImpl implements ProductService {
 					logger.error("updatePosting : " + failed_msg);
 				}
 			} else {
-				logger.error("updatePosting : " + notFound_board_msg);
+				
 			}
 		}
 	}
 
+	@Override
+	public String inputCloseTime(ProductVO vo) {
+		prodMapper.inputCloseTime(vo);
+		return vo.getProd_closeTime();
+	}
 }

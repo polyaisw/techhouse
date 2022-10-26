@@ -87,7 +87,7 @@ public class TradeMapperTest {
 	@Test
 	public void 게시판상태변경() throws Exception{
 		TradeVO vo = (TradeVO) tMapper.getTBoardById(1);
-		vo.setT_state(0);
+		vo.setT_state("판매중");
 		
 		tMapper.updateState(vo);
 		TradeVO vo2 = (TradeVO) tMapper.getTBoardById(1);

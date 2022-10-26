@@ -30,6 +30,11 @@ use techhouse;
 -- user테이블 `password` varchar(100) 으로 수정 
 -- qna테이블 수정
 
+-- 10/26~
+-- trade테이블 t_state 타입을 varchar로 변경
+-- product테이블 prod_closeTime 속성 추가
+-- 샘플코드 수정
+
 CREATE TABLE `techhouse`.`user` (
   `id` VARCHAR(100) NOT NULL,	-- ID 겸 이메일 
   `password` VARCHAR(300) NOT NULL,	
@@ -68,7 +73,7 @@ CREATE TABLE `techhouse`.`trade` (						-- 중고거래게시판
   `t_writer` VARCHAR(45) NOT NULL,						-- 게시자
   `t_prodname` VARCHAR(100) NOT NULL,					-- 판매 상품 명
   `t_price` VARCHAR(100) NULL default 0,				-- 상품 가격		
-  `t_state` INT NOT NULL default 0,						-- 상태 	0 : 판매중, 1 : 거래중(안심거래에서 입금 완료 시), 2 : 거래완료
+  `t_state` VARCHAR(10) NOT NULL default "판매중",						-- "판매중", "거래중", "거래완료"
   `t_views` INT NOT NULL default 0,						-- 조회수
   `t_text` TEXT NULL,									-- 내용
   `t_uploadimg` VARCHAR(100),							-- 업로드 이미지
@@ -99,6 +104,7 @@ CREATE TABLE `techhouse`.`apply` (
   `prod_selectedTel` VARCHAR(45)  default "없음",								-- 당첨자 연락처
   `prod_date` date not null default (current_date),				
   `prod_posting` int not null default 0,								-- 0 : 게시X,  1: 게시중
+  `prod_closeTime` datetime null,
   PRIMARY KEY (`prod_seq`));
   
 CREATE TABLE `techhouse`.`qna` (							-- 1:1 qna게시판
@@ -179,36 +185,36 @@ INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`) VALUES ('admin
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 구매자","b_title","b_text","b_uploadimg","취미공유");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 구매자","b_title","b_text","b_uploadimg","취미공유");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 구매자","b_title","b_text","b_uploadimg","벤치마킹인증");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 구매자","b_title","b_text","b_uploadimg","벤치마킹인증");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 구매자","b_title","b_text","b_uploadimg","거래후기");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 구매자","b_title","b_text","b_uploadimg","거래후기");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 구매자","b_title","b_text","b_uploadimg","IT/트렌드");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","IT/트렌드");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","핫이슈");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","핫이슈");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","게임출시정보");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","게임출시정보");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","꿀딜/장터");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","꿀딜/장터");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","사기피해신고");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("나는 판매자","b_title","b_text","b_uploadimg","사기피해신고");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","취미공유");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","취미공유");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","벤치마킹인증");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","벤치마킹인증");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","거래후기");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","거래후기");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","IT/트렌드");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","IT/트렌드");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","핫이슈");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","핫이슈");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","게임출시정보");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","게임출시정보");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","꿀딜/장터");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","꿀딜/장터");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","사기피해신고");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("판매자","b_title","b_text","b_uploadimg","사기피해신고");
 
-insert into trade(t_writer, t_title,t_prodname,t_price, t_text, t_uploadimg, t_category) values("나는 판매자","t_title","감자 두 박스","300000","t_text","t_uploadimg","거래게시판");
-insert into trade(t_writer, t_title,t_prodname,t_price, t_text, t_uploadimg, t_category) values("나는 판매자","t_title","GeForce RTX 4090 24GB GDDR6X Graphics Card","1000000","t_text","t_uploadimg","거래게시판");
-insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text, t_uploadimg, t_category) values("나는 구매자", "t_title", "t_prodname","t_price",0,0,"t_text","t_uploadimg","거래게시판");
-insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text, t_uploadimg, t_category) values("나는 구매자", "t_title", "t_prodname","t_price",1,1,"t_text","t_uploadimg","거래게시판");
-insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text, t_uploadimg, t_category) values("김예성", "t_title", "t_prodname","t_price",2,2,"t_text","t_uploadimg","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text, t_uploadimg, t_category) values("판매자","라면 팝니다","신라면","300000","t_text","t_uploadimg","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text, t_uploadimg, t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","t_uploadimg","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text, t_uploadimg, t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","t_uploadimg","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text, t_uploadimg, t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","t_uploadimg","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text, t_uploadimg, t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","t_uploadimg","거래게시판");
 
 -- insert into apply(a_productName,a_applyId, a_applyName,a_applyTel ) values("GeForce RTX 4090 24GB GDDR6X Graphics Card","kys123","김예성","010000100");
 -- insert into apply(a_productName, a_applyId, a_applyName,a_applyTel) values("감자 두 박스","kys1231","나는 구매자","010000100");
 -- insert into apply(a_productName, a_applyId, a_applyName,a_applyTel) values("GeForce RTX 4090 24GB GDDR6X Graphics Card","kys1232","나는 판매자","010000100");
 
--- insert into product(prod_productName, prod_price, prod_uploadimg, prod_selectedId, prod_selectedname, prod_selectedTel) values("GeForce RTX 4090 24GB GDDR6X Graphics Card","prod_price","prod_uploadimg","kys123","김예성","010000100");
--- insert into product(prod_productName, prod_price, prod_uploadimg) values("감자 두 박스","300000","prod_uploadimg");
+insert into product(prod_productName, prod_price, prod_uploadimg) values("GeForce RTX 4090 24GB GDDR6X Graphics Card","2500000","prod_uploadimg");
+insert into product(prod_productName, prod_price, prod_uploadimg) values("감자 두 박스","300000","prod_uploadimg");
 
 -- insert into qna(q_boardseq,q_category,q_title,q_text,q_email,q_tel, q_uploadimg,q_complete) values(100001,"자유게시판","q_title","q_text","q_email","q_tell","q_uploadimg",0);
 -- insert into qna(q_boardseq,q_category,q_title,q_text,q_email,q_tel, q_uploadimg,q_complete) values(100003,"인증게시판","q_title2","q_text2","q_email2","q_tell2","q_uploadimg",1);

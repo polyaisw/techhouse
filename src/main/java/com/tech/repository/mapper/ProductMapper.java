@@ -19,4 +19,6 @@ public interface ProductMapper {
 	int insertSelectedMember(ApplyVO vo);
 	
 	int updatePosting(ProductVO vo);
+	
+	void inputCloseTime(ProductVO vo);
 	}

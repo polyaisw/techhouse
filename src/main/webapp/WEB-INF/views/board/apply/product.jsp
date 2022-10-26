@@ -15,9 +15,9 @@
 <link href="/resources/css/apply.css" rel="stylesheet">
 <link href="/resources/css/default.css" rel="stylesheet">
 <link href="/resources/css/nav.css" rel="stylesheet">
-
+<script></script>
 </head>
-<body>
+<body onload="inputData('${nowTime }','${closeTime}');">
 	<jsp:include page="../../init/header.jsp"></jsp:include>
 	<jsp:include page="../../init/nav.jsp"></jsp:include>
 
@@ -26,14 +26,16 @@
 			<div class="col">
 				<h2 class="h2 text-white">관리자용</h2>
 
-				<form method="post" action="/board/insertProductAction">
+				<form method="post" action="/board/insertProductAction"
+					class="was-validated">
 					<label for="prod_productName" class="form-label text-white">상품명</label>
 					<input type="text" placeholder="상품명을 입력하세요" class="form-control"
-						id="prod_productName" name="prod_productName"> <label
-						for="prod_price" class="form-label text-white">상품가격</label> <input
-						type="text" class="form-control" placeholder="상품가격을 입력하세요"
-						id="prod_price" name="prod_price"> <label
-						for="prod_uploadImg" class="form-label text-white">업로드이미지</label>
+						id="prod_productName" name="prod_productName" required>
+					<div class="invalid-feedback">상품명을 반드시 입력해주세요</div>
+					<label for="prod_price" class="form-label text-white">상품가격</label>
+					<input type="text" class="form-control" value="0"
+						placeholder="상품가격을 입력하세요" id="prod_price" name="prod_price">
+					<label for="prod_uploadImg" class="form-label text-white">업로드이미지</label>
 					<input type="file" class="form-control" placeholder="상품이미지명 입력하세요"
 						id="prod_uploadImg" name="prod_uploadImg"> <input
 						type="submit" class="btn btn-primary" value="상품등록하기">
@@ -69,7 +71,7 @@
 										</div>
 									</td>
 									<td>${productContents.prod_productName}</td>
-									<td>${productContents.prod_price}</td>
+									<td>${productContents.prod_price}원</td>
 									<td>${productContents.prod_selectedId}</td>
 									<td>${productContents.prod_selectedName}</td>
 									<td>${productContents.prod_selectedTel}</td>
@@ -80,14 +82,44 @@
 					</table>
 
 
+					<c:choose>
+						<c:when test="${productAppContent != null }">
+							<input type="button" value="수정하기" id="updateProductBtn"
+								class="btn btn-primary disabled" onclick='mySubmit(1)' />
+							<input type="button" value="삭제하기"
+								class="btn btn-primary disabled" onclick='mySubmit(2)' />
+							<input type="button" name="countStart"
+								class="btn btn-primary disabled" onclick="mySubmit(3)"
+								value="상품 게시하기">
 
-					<input type="button" value="수정하기" id="updateProductBtn"
-						class="btn btn-primary" onclick='mySubmit(1)' /> <input
-						type="button" value="삭제하기" class="btn btn-primary"
-						onclick='mySubmit(2)' /> <input type="button" name="countStart"
-						class="btn btn-primary" onclick="mySubmit(3)" value="상품 게시하기">
-					<a href="/board/UnPostProductAction" class="btn btn-primary">상품
-						게시글 내리기</a>
+							<a href="/board/UnPostProductAction"
+								class="btn btn-primary disabled">상품 게시글 내리기</a>
+							<p class="text-warning">상품의 게시 카운트다운 종료시 버튼이 활성화 됩니다.
+						</c:when>
+						<c:otherwise>
+							<input type="button" value="수정하기" id="updateProductBtn"
+								class="btn btn-primary" onclick='mySubmit(1)' />
+							<input type="button" value="삭제하기" class="btn btn-primary"
+								onclick='mySubmit(2)' />
+							<c:choose>
+								<c:when test="${productContent.prod_posting == 1 }">
+									<input type="button" name="countStart" class="btn btn-primary"
+										onclick="mySubmit(3)" value="상품 게시하기" disabled>
+									<a href="/board/UnPostProductAction" class="btn btn-primary">상품
+										게시글 내리기</a>
+									<p class="text-warning">게시중인 상품이 있습니다. 상품 게시글 내리기를 눌러주세요</p>
+								</c:when>
+								<c:otherwise>
+									<input type="button" name="countStart" class="btn btn-primary"
+										onclick="mySubmit(3)" value="상품 게시하기">
+									<a href="/board/UnPostProductAction" class="btn btn-primary">상품
+										게시글 내리기</a>
+								</c:otherwise>
+							</c:choose>
+
+						</c:otherwise>
+					</c:choose>
+
 				</form>
 
 			</div>
@@ -181,7 +213,7 @@
 
 					<div class="timer">
 						<i class="fa-regular fa-clock applyIcon text-white"></i> <span
-							id="countdown" class="h3 text-white">00:00:00</span>
+							id="countdown" class="h3 text-white"></span>
 					</div>
 				</div>
 			</div>
@@ -190,25 +222,32 @@
 	<div class="container ">
 		<div class="row text-center">
 			<div class="col my-5 ">
-				<c:if test="${member!=null }">
-					<c:if test="${productContent.prod_posting == 1 }">
-						<c:if test="${member.ticket == 0}">
-							<div class="text-white">보유한 응모권 수 : 0</div>
-							<div class="text-warning">룰렛을 돌려 응모권을 획득해보세요</div>
-						</c:if>
-						<c:if test="${member.ticket != 0}">
+				<c:choose>
+					<c:when test="${productAppContent != null }">
+						<c:if test="${member!=null }">
+							<c:if test="${productContent.prod_posting == 1 }">
+								<c:if test="${member.ticket == 0}">
+									<div class="text-white">보유한 응모권 수 : 0</div>
+									<div class="text-warning">룰렛을 돌려 응모권을 획득해보세요</div>
+								</c:if>
+								<c:if test="${member.ticket != 0}">
 
-							<div class="text-white">보유한 응모권 수 : ${member.ticket }</div>
-							<form action="/board/insertApplyAction" method="post">
-								<input type="text" class="d-none" name="prod_productName"
-									value="${ productContent.prod_productName }"> <input
-									type="submit" class="btn btn-outline-warning text-white my-5"
-									value="응모하기">
-							</form>
+									<div class="text-white">보유한 응모권 수 : ${member.ticket }</div>
+									<form action="/board/insertApplyAction" method="post">
+										<input type="text" class="d-none" name="prod_productName"
+											value="${ productContent.prod_productName }"> <input
+											type="submit" class="btn btn-outline-warning text-white my-5"
+											value="응모하기">
+									</form>
+								</c:if>
+							</c:if>
 						</c:if>
-					</c:if>
-				</c:if>
-
+					</c:when>
+					<c:otherwise>
+						<a href="javascript:alert('시간이 종료되었습니다');" 
+							class="btn btn-outline-warning text-white my-5">응모하기</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>
@@ -240,7 +279,10 @@
 
 		document.myForm.action = '/board/updateProductForm?prod_seq='+prod_seq;
 		document.myForm.submit();
-	} 
+	}
+
+
+
 	
 		function mySubmit(index) {
 
@@ -248,7 +290,7 @@
 				
 				    var selected = Array.from(radios).find(radio => radio.checked);
 					var prod_seq = selected.value;
-			    
+			    	console.log(prod_seq);
 				
 			if (index == 1){
 				
@@ -263,9 +305,24 @@
 				}
 			
 			else if (index == 3)
+				{
+				var closeHour = prompt("게시할 시간(hour)을 입력해주세요");
+				document.myForm.action = "/board/PostProductAction?prod_seq="+prod_seq+"&closeHour="+closeHour;
+				document.myForm.submit();
+				}
 				
-				countStart(prod_seq); 
 		}
+
+		function inputData(nowTime,closeTime){
+			var el = document.querySelector('#countdown');
+			if(el.innerHTML === 'TIME OUT'){
+				location.href="/board/timeoutAction";
+				}
+			else{
+				countStart(nowTime,closeTime);
+				}
+			}
+		
 	</script>
 
 	<script src="https://kit.fontawesome.com/5547fa07a6.js"

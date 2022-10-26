@@ -1,6 +1,7 @@
 
 package com.tech.vo;
 
+
 public class ProductVO {
 	private int prod_seq;
 	private String prod_productName;
@@ -11,8 +12,12 @@ public class ProductVO {
 	private String prod_selectedTel;	//당첨자
 	private String prod_date;
 	private int prod_posting;
-	
-	  public ProductVO() { }
+	private String prod_closeTime;
+
+
+
+
+	public ProductVO() { }
 	 
 	
 	
@@ -122,6 +127,16 @@ public class ProductVO {
 
 	public void setProd_date(String prod_date) {
 		this.prod_date = prod_date;
+	}
+
+	public String getProd_closeTime() {
+		return prod_closeTime;
+	}
+
+
+
+	public void setProd_closeTime(String prod_closeTime) {
+		this.prod_closeTime = prod_closeTime;
 	}
 
 
