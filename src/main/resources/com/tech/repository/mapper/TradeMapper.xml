@@ -34,7 +34,7 @@
 	</insert>
 	<update id="updateTBoard" parameterType="Trade">
 		update trade set
-		t_title= #{t_title}, t_text=#{t_text}, t_uploadImg=#{t_uploadImg}
+		t_title= #{t_title},t_price=#{t_price},t_prodName=#{t_prodName}, t_text=#{t_text}, t_uploadImg=#{t_uploadImg}
 		where t_seq = #{t_seq}
 	</update>
 	<update id="updateState" parameterType="Trade">

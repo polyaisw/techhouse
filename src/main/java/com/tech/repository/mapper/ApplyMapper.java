@@ -3,6 +3,7 @@ package com.tech.repository.mapper;
 import java.util.List;
 
 import com.tech.vo.ApplyVO;
+import com.tech.vo.UserVO;
 
 public interface ApplyMapper {
 
@@ -12,4 +13,5 @@ public interface ApplyMapper {
 	List<ApplyVO> getApplyList();
 	int deleteAllApply();
 	ApplyVO getApplyMemberBySeq(int a_seq);
+	int updateTicket(UserVO vo);
 }

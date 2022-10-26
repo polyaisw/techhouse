@@ -26,7 +26,7 @@ public class BoardMapperTest {
 	public void 게시판수정() throws Exception {
 		// given
 		BoardVO vo = new BoardVO("수정_title", "수정_writer", "수정_text", "수정_uploadImg", "수정_category");
-		vo.setB_seq(100001);
+		vo.setB_seq("100001");
 
 		// when
 		int row = bMapper.updateBoard(vo);
@@ -52,7 +52,7 @@ public class BoardMapperTest {
 	public void 게시판삭제() throws Exception {
 		// given
 		BoardVO vo = new BoardVO();
-		vo.setB_seq(100002);
+		vo.setB_seq("100002");
 
 		// when
 		bMapper.deleteBoard(vo.getB_seq());

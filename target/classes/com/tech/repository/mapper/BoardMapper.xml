@@ -25,7 +25,7 @@
 		board(b_writer, b_title,b_text,
 		b_uploadImg, b_category)
 		values(#{b_writer},#{b_title},#{b_text},#{b_uploadImg},#{b_category})
-		<selectKey resultType="Integer" keyProperty="b_seq"
+		<selectKey resultType="String" keyProperty="b_seq"
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>

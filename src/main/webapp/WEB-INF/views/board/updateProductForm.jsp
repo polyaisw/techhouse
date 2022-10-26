@@ -24,27 +24,29 @@
 				<h2 class="h2 text-white">상품수정페이지 관리자</h2>
 
 				<form method="post" action="/board/updateProductAction">
-						<input type="text" value="${productContent.prod_seq }" name="prod_seq" class="d-none">
+						<input type="text" value="${productContent.prod_seq }" name="prod_seq" class="d-none was-validated" >
 				
 						<label for="prod_productName" class="form-label text-white">수정 하실 상품명</label>
 						<input type="text" placeholder="상품명을 입력하세요" class="form-control mb-3"
-						id="prod_productName" name="prod_productName" value="${productContent.prod_productName }"> 
+						id="prod_productName" name="prod_productName" value="${productContent.prod_productName }" required> 
+						<div class="invalid-feedback">상품명을 반드시 입력해주세요</div>
 						
 						<label for="prod_price" class="form-label text-white">수정 하실 상품가격</label> 
 						<input type="text" class="form-control mb-3" placeholder="상품가격을 입력하세요"
-						id="prod_price" name="prod_price" value="${productContent.prod_price }"> 
+						id="prod_price" name="prod_price" value="${productContent.prod_price }" required> 
+						<div class="invalid-feedback">상품가격을 반드시 입력해주세요</div>
 						
 						<label for="prod_uploadImg" class="form-label text-white">수정 하실 업로드이미지</label>
 						<input type="file" id="prod_uploadImg" name="prod_uploadImg" class="form-control mb-3" value="${productContent.prod_uploadImg }">
 						
 						<label for="prod_selectedId" class="form-label text-white">당첨된 유저 아이디</label>
-						<input type="text" id="prod_selectedId" name="prod_selectedId" class="form-control mb-3" value="${ productContent.prod_selectedId }">
+						<input type="text" id="prod_selectedId" name="prod_selectedId" class="form-control mb-3" value="${ productContent.prod_selectedId }" >
 						
 						<label for="prod_selectedName" class="form-label text-white">당첨된 유저 닉네임</label>
-						<input type="text" id="prod_selectedName" name="prod_selectedName" class="form-control mb-3" value="${ productContent.prod_selectedName }">
+						<input type="text" id="prod_selectedName" name="prod_selectedName" class="form-control mb-3" value="${ productContent.prod_selectedName }" >
 						
 						<label for="prod_selectedTel" class="form-label text-white">당첨된 유저 연락처</label>
-						<input type="text" id="prod_selectedTel" name="prod_selectedTel" class="form-control mb-3" value="${ productContent.prod_selectedTel }">
+						<input type="text" id="prod_selectedTel" name="prod_selectedTel" class="form-control mb-3" value="${ productContent.prod_selectedTel }" >
 						
 						<label for="prod_date" class="form-label text-white">상품 게시 날짜</label>
 						<span id="prod_date"class="mb-3 form-control">${ productContent.prod_date }</span>

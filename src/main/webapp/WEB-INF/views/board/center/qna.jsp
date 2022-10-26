@@ -12,13 +12,45 @@
 	crossorigin="anonymous">
 <link href="/resources/css/default.css" rel="stylesheet">
 <link href="/resources/css/nav.css" rel="stylesheet">
+<script type="text/javascript">
+	function chkWrite() {
+		frm = document.forms['qnaForm'];
+		var q_title = frm['q_title'].value.trim();
+		var q_text = frm['q_text'].value.trim();
+		var q_tel = frm['q_tel'].value.trim();
+		var q_email = frm['q_email'].value.trim();
+
+		if (q_title == "") {
+			alert("제목을 입력해주세요");
+			frm['q_title'].focus;
+			return false;
+		}
+		if (q_text == "") {
+			alert("입력되지 않은 내용이 있습니다.");
+			frm['q_text'].focus;
+			return false;
+		}
+		if (q_email == "") {
+			alert("입력되지 않은 내용이 있습니다.");
+			frm['q_email'].focus;
+			return false;
+		}
+		if (q_tel == "") {
+			alert("입력되지 않은 내용이 있습니다.");
+			frm['q_tel'].focus;
+			return false;
+		}
+		return true;
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../../init/header.jsp"></jsp:include>
 	<jsp:include page="../../init/nav.jsp"></jsp:include>
 
 	<div class="container mt-5">
-		<form action="/board/qnaAction" method="post">
+		<form action="/board/qnaAction" name="qnaForm"
+			onsubmit="return chkWrite()" method="post" class="was-validated">
 			<div class="row">
 				<div class="col">
 					<h2 class="h2 text-white">1:1 문의하기</h2>
@@ -31,7 +63,8 @@
 					<div class="mb-5">
 						<label for="q_boardSeq" class="form-label">문의할 게시글 번호</label> <input
 							type="text" class="form-control w-75" name="q_boardSeq"
-							id="q_boardSeq" placeholder="번호입력">
+							id="q_boardSeq" placeholder="번호를 입력해주세요">
+
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -58,14 +91,16 @@
 					<div class="mb-3">
 						<label for="q_title" class="form-label">*문의 제목</label> <input
 							type="text" class="form-control" id="q_title" name="q_title"
-							placeholder="제목을 입력해주세요">
+							placeholder="제목을 입력해주세요" required>
+						<div class="invalid-feedback">제목을 반드시 입력해주세요</div>
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="mb-3">
 						<label for="q_text" class="form-label">*문의 내용</label>
 						<textarea class="form-control" id="q_text" name="q_text"
-							placeholder="내용을 상세히 입력해주세요" rows="20"></textarea>
+							placeholder="내용을 상세히 입력해주세요" rows="20" required></textarea>
+						<div class="invalid-feedback">내용을 반드시 입력해주세요</div>
 					</div>
 				</div>
 
@@ -73,14 +108,17 @@
 					<div class="mb-3">
 						<label for="q_email" class="form-label">*이메일 주소</label> <input
 							type="email" class="form-control" id="q_email" name="q_email"
-							placeholder="이메일주소를 입력해주세요">
+							placeholder="sample123@sample.com" required>
+						<div class="invalid-feedback">이메일양식에 맞게 입력해주세요</div>
+
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="mb-3">
 						<label for="q_tel" class="form-label">*휴대폰 번호</label> <input
 							type="text" class="form-control" id="q_tel" name="q_tel"
-							placeholder="휴대폰번호를 입력해주세요">
+							placeholder="01012345678" required>
+						<div class="invalid-feedback">휴대폰번호를 반드시 입력해주세요</div>
 					</div>
 				</div>
 				<div class="col-lg-12">
@@ -106,11 +144,13 @@
 	<jsp:include page="../../init/footer.jsp"></jsp:include>
 
 	<!-- script -->
+
 	<script src="https://kit.fontawesome.com/5547fa07a6.js"
 		crossorigin="anonymous"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
+
 </body>
 </html>

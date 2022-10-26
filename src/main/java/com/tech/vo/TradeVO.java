@@ -7,7 +7,7 @@ public class TradeVO implements BVO{
 	private String t_writer;
 	private String t_prodName;
 	private String t_price;
-	private int t_state;
+	private String t_state;
 	private int t_views;
 	private String t_text;
 	private String t_uploadImg;
@@ -22,7 +22,7 @@ public class TradeVO implements BVO{
 		this.t_writer = t_writer;
 		this.t_prodName = t_prodName;
 		this.t_price = t_price;
-		this.t_state = 0;
+		this.t_state = "판매중";
 		this.t_views = 0;
 		this.t_text = t_text;
 		this.t_uploadImg = t_uploadImg;
@@ -73,11 +73,12 @@ public class TradeVO implements BVO{
 		this.t_price = t_price;
 	}
 
-	public int getT_state() {
+
+	public String getT_state() {
 		return t_state;
 	}
 
-	public void setT_state(int t_state) {
+	public void setT_state(String t_state) {
 		this.t_state = t_state;
 	}
 

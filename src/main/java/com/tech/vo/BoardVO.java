@@ -37,8 +37,8 @@ public class BoardVO implements BVO{
 		return b_seq;
 	}
 
-	public void setB_seq(int b_seq) {
-		this.b_seq = b_seq;
+	public void setB_seq(String b_seq) {
+		this.b_seq = Integer.parseInt(b_seq);
 	}
 
 	public String getB_title() {

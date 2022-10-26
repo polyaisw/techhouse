@@ -62,8 +62,9 @@
 									href="/board/deleteBoardAction?b_seq=${ boardContent.b_seq}"
 									class="btn btn-primary">삭제하기</a></td>
 							</c:if>
-							<td><a href="/board/center/report" class="btn btn-primary">목록으로</a></td>
+							
 						</tr>
+						<tr><td><a href="/board/center/report" class="btn btn-primary">목록으로</a></td></tr>
 					</table>
 				</form>
 			</div>

@@ -1,26 +1,34 @@
-function countStart(prod_seq){
-    count('countdown');
-    
-	document.myForm.action = '/board/PostProductAction?prod_seq='+prod_seq;
-	document.myForm.submit();
+function countStart(nowTime,closeTime){
+  
 
+  		//시간계산
+	var nowTime = new Date(nowTime);	//현재시간
+	var closeTime = new Date(closeTime);	//파라미터
+	
+	var elapsedMSec = closeTime.getTime() - nowTime.getTime();
+	
+	
+	count(elapsedMSec);
 }
 
 
-function count(cd){
-
+function count(elapsedMSec){
 	var interval;
-	var hour = prompt('게시하실 시간(hour)을 입력하세요');
-	var sec = 0;
-	var min = 0;
+	
+		var _second = 1000;
+		var _minute = _second * 60;
+		var _hour = _minute * 60;
 
-
+		var hour = Math.floor(elapsedMSec / _hour);
+		var min = Math.floor((elapsedMSec % _hour) / _minute);
+		var sec = Math.floor((elapsedMSec % _minute) / _second);
     interval = setInterval(function(){
-        var el = document.getElementById(cd);
+        var el = document.querySelector('#countdown');
         if ( sec==0){
             if(min ==0){
                 if(hour ==0){
                     el.innerHTML = 'TIME OUT';
+                    location.href='/board/timeoutAction';
                     clearInterval(interval);
                     return;
                 }else{

@@ -17,8 +17,8 @@
 <link href="/resources/css/default.css" rel="stylesheet">
 </head>
 <body>
-	
-	
+
+
 	<jsp:include page="../init/header.jsp"></jsp:include>
 	<jsp:include page="../init/nav.jsp"></jsp:include>
 	<div class="container text-white">
@@ -40,12 +40,12 @@
 							<td>${ tradeContent.t_writer}</td>
 						</tr>
 						<tr>
-							<td>가격</td>
-							<td>${ tradeContent.t_price}</td>
-						</tr>
-						<tr>
 							<td>상태</td>
 							<td>${ tradeContent.t_state}</td>
+						</tr>
+						<tr>
+							<td>가격</td>
+							<td>${ tradeContent.t_price}원</td>
 						</tr>
 						<tr>
 							<td>상품명</td>
@@ -75,10 +75,58 @@
 									href="/board/deleteTradeBoardAction?t_seq=${ tradeContent.t_seq}"
 									class="btn btn-primary">삭제하기</a></td>
 							</c:if>
-
+						</tr>
+						<tr>
 							<td><input type="button" class="btn btn-primary"
 								value="목록으로" onclick="goToList('${tradeContent.t_category}')"></td>
 						</tr>
+						<tr>
+							<c:choose>
+								<c:when test="${member.name != null}">
+									<c:if test="${member.rank != '관리자' }">
+										<c:if test="${member.name != tradeContent.t_writer}">
+											<c:choose>
+												<c:when test="${ tradeContent.t_state != '판매중'}">
+													<td><input type="button"
+														class="btn btn-primary disabled" value="바로구매" onclick="#">
+														<input type="button" class="btn btn-primary disabled"
+														value="안심거래" onclick="#"></td>
+													
+												</c:when>
+												<c:otherwise>
+															<td><a class="btn btn-success" href="#">바로구매</a> <a
+														class="btn btn-success" href="#">안심거래</a></td>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<td><a class="btn btn-primary" href="/member/login">바로구매</a>
+										<a class="btn btn-primary" href="/member/login">안심거래</a></td>
+								</c:otherwise>
+							</c:choose>
+							<!-- if, else의 종료임을 정의-->
+
+
+
+							<%-- 		<c:if test="${member.name != tradeContent.t_writer}">
+								<c:if test="${ tradeContent.t_state != '판매중'}">
+									<td><input type="button" class="btn btn-primary disabled"
+										value="바로구매" onclick="#" > <input type="button"
+										class="btn btn-primary disabled" value="안심거래" onclick="#"></td>
+
+								</c:if>
+								<td><input type="button" class="btn btn-primary"
+									value="바로구매" onclick="#"> <input type="button"
+									class="btn btn-primary" value="안심거래" onclick="#"></td>
+							</c:if>
+							<c:if test="${member.name == null}">
+								<td><a class="btn btn-primary" href="/member/login">바로구매</a>
+									<a class="btn btn-primary" href="/member/login">안심거래</a></td>
+							</c:if> --%>
+						</tr>
+
 					</table>
 				</form>
 			</div>

@@ -62,14 +62,12 @@
 							<td>${ boardContent.b_uploadImg }</td>
 						</tr>
 						<tr>
-
 							<c:if test="${member.name == boardContent.b_writer}">
 								<td><input type="submit" value="글 수정하기"
 									class="btn btn-primary"> <a
 									href="/board/deleteBoardAction?b_seq=${ boardContent.b_seq}"
 									class="btn btn-primary">삭제하기</a></td>
 							</c:if>
-
 						</tr>
 						<tr>
 
@@ -137,6 +135,7 @@
 		</div>
 	</div>
 	<jsp:include page="../init/footer.jsp"></jsp:include>
+
 	<script src="/resources/js/goToList.js"></script>
 
 	<script src="https://kit.fontawesome.com/5547fa07a6.js"
