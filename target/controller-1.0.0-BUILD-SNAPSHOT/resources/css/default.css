@@ -1,6 +1,7 @@
 /* 모든페이지에 적용해야하는 스타일시트 */
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 body {
+	margin: 0px;
   background: #1b1b1b;
   font-family: 'Roboto', sans-serif;
   

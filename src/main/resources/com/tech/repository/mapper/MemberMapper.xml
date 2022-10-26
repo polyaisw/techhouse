@@ -16,5 +16,10 @@
   	<select id="memberLogin" resultType="com.tech.vo.UserVO">
   		select `id`,`password`,`name`,`point`,`rank`,`tel`,`post`,`addr`,`addr2`,`ticket` from user where id = #{id}
   	</select>
+  	
+  	<update id="memberEdit">
+  		UPDATE user SET `password`=#{password}, `name`=#{name}, `profileimg`=#{profileimg}, 
+  		`tel`=#{tel}, `post`=#{post}, `addr`=#{addr}, `addr2`=#{addr2} WHERE `id` = #{id}
+  	</update>
 	
 </mapper>

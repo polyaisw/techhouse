@@ -150,8 +150,14 @@
 					<!-- 로그인 되었을때 내정보 부분은 이곳에 만들면 됩니다. -->
 					<span>회원 : ${ member.name }</span>
 					<span>포인트 : <fmt:formatNumber value="${ member.point }" pattern="#,###"/></span>
-					<a href="/member/mypage">마이페이지</a>
-					<a href="/member/logout">로그아웃</a>
+					
+					<div class=" d-flex justify-content-end">
+						<c:if test="${ member.rank == '관리자' }"> <!-- 관리자 계정일 경우 -->
+							<a href="/admin/main">관리자 페이지</a>
+						</c:if>
+						<a href="/member/mypage">마이페이지</a>
+						<a href="/member/logout.do">로그아웃</a>
+					</div>
 				</c:if>
 				<!-- best board -->
 				<div class="container mt-5">
@@ -341,14 +347,14 @@
 	        
 	        //alert("로그인 버튼 작동");
 	    	/* 로그인 메서드 서버 요청 */
-	        $("#login_form").attr("action", "/member/login");
+	        $("#login_form").attr("action", "/member/login.do");
 	        $("#login_form").submit();
 	        
 	    });
 	    
 	    $(".pw_input, .id_input").on("keyup",function(e){
 	        if(e.keyCode == 13) {
-		        $("#login_form").attr("action", "/member/login");
+		        $("#login_form").attr("action", "/member/login.do");
 		        $("#login_form").submit();
 	        }
 	    });
