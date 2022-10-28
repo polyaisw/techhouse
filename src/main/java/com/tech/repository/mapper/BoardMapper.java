@@ -17,6 +17,8 @@ public interface BoardMapper {
 	 BVO getBoardById(int seq);
 	 List<BVO> getBoardList();
 	 List<BVO> getBoardListByCate (String category);
+	 
+	 //git ignore test
 }
 
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.repository.mapper.ApplyMapper">
+
+<insert id="insertApply" parameterType="Apply">
+		insert into
+		apply(a_productName, a_applyId,a_applyName,
+		a_applyTel)
+		values(#{a_productName},#{a_applyId},#{a_applyName},#{a_applyTel})
+	</insert>
+
+<select id="getApplyCount" resultType="int">
+	select count(*) from apply
+</select>
+<select id="getApplyCountById" resultType="int" parameterType="string">
+	select count(*) from apply where a_applyId = #{a_applyId} 
+</select>
+<select id="getApplyList" resultType="Apply">
+	select * from apply order by a_seq desc
+</select>
+<delete id="deleteAllApply">
+	TRUNCATE apply
+</delete>
+<select id="getApplyMemberBySeq" resultType="Apply" parameterType="int">
+	select * from apply where a_seq = #{a_seq}
+</select>
+<update id="updateTicket" parameterType="com.tech.vo.UserVO">
+	update user set ticket = #{ticket} where id = #{id}
+</update>
+</mapper>
+
+

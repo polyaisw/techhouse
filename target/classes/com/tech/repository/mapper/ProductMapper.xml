@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.repository.mapper.ProductMapper">
+
+
+	<insert id="insertProduct" parameterType="Product">
+		insert into
+		product(prod_productName,
+		prod_price,
+		prod_uploadImg)
+		values(#{prod_productName},#{prod_price},#{prod_uploadImg})
+	</insert>
+	<update id="insertSelectedMember" parameterType="Apply">
+		update product
+		set
+		prod_selectedId = #{a_applyId},
+		prod_selectedName =
+		#{a_applyName},
+		prod_selectedTel = #{a_applyTel}
+		where prod_productName
+		= #{a_productName}
+	</update>
+
+	<update id="updateProduct" parameterType="Product">
+		update product set
+		prod_productName=#{prod_productName},
+		prod_price=#{prod_price},
+		prod_uploadImg=#{prod_uploadImg},
+		prod_selectedId = #{prod_selectedId},
+		prod_selectedName = #{prod_selectedName},
+		prod_selectedTel = #{prod_selectedTel}
+		where prod_seq = #{prod_seq}
+	</update>
+	
+		<update id="updatePosting" parameterType="Product">
+		update product set
+		prod_posting = #{prod_posting}
+		where prod_seq = #{prod_seq}
+	</update>
+	
+	<update id="inputCloseTime" parameterType="Product">
+		update product set
+		prod_closeTime = #{prod_closeTime}
+		where prod_seq = #{prod_seq}
+		<selectKey resultType="String" keyProperty="prod_closeTime"
+			order="AFTER">
+			select date_format(prod_closeTime, "%Y-%m-%d %H:%i:%S") as prod_closeTime from product  where prod_seq =#{prod_seq}
+			
+		</selectKey>
+	</update>
+
+	<delete id="deleteProduct" parameterType="int">
+		delete from product
+		where
+		prod_seq = #{value}
+	</delete>
+
+	<select id="getProductById" parameterType="int"
+		resultType="Product">
+		select * from product
+		where prod_seq = #{value}
+
+	</select>
+	<select id="getProductList" resultType="Product">
+		select * from product
+		order by prod_seq desc
+
+	</select>
+
+<!-- 	<select id="getProduct" resultType="Product">
+		SELECT * FROM product order
+		by prod_seq desc
+	</select> -->
+
+</mapper>
