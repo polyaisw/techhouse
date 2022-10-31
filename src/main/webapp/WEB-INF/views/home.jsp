@@ -148,8 +148,8 @@
 				</c:if>
 				<c:if test="${ member != null }">
 					<!-- 로그인 되었을때 내정보 부분은 이곳에 만들면 됩니다. -->
-					<span>회원 : ${ member.name }</span>
-					<span>포인트 : <fmt:formatNumber value="${ member.point }" pattern="#,###"/></span>
+					<a href="#">회원 : ${ member.name }</a>
+					<a href="#">포인트 : <fmt:formatNumber value="${ member.point }" pattern="#,###"/></a>
 					
 					<div class=" d-flex justify-content-end">
 						<c:if test="${ member.rank == '관리자' }"> <!-- 관리자 계정일 경우 -->

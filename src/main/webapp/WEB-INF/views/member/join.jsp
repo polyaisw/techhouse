@@ -48,21 +48,41 @@
 		color : red;
 		display : none;
 	}
+	/* 중복닉네임 존재하지 않는경우 */
+	.user_input_re_1{
+		color : green;
+		display : none;
+	}
+	/* 중복닉네임 존재하는 경우 */
+	.user_input_re_2{
+		color : red;
+		display : none;
+	}
+	/* 닉네임 유효성검사 실패 경우 */
+	.user_input_re_3{
+		color : red;
+		display : none;
+	}
 	/* 유효성 검사 문구 */
  
 	.final_id_ck{
+		color : red;
 	    display: none;
 	}
 	.final_pw_ck{
+		color : red;
 	    display: none;
 	}
 	.final_pwck_ck{
+		color : red;
 	    display: none;
 	}
 	.final_name_ck{
+		color : red;
 	    display: none;
 	}
 	.final_tel_ck{
+		color : red;
 	    display: none;
 	}
 </style>
@@ -84,6 +104,9 @@
 		<span class="pw_input_re_4">비밀번호가 일치하지 않습니다.</span>
 		<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span><br>
 		닉네임 : <input class="user_input" name="name"><br>
+		<span class="user_input_re_1">사용 가능한 닉네임입니다.</span>
+		<span class="user_input_re_2">해당 닉네임이 이미 존재합니다.</span>
+		<span class="user_input_re_3">닉네임은 3글자 이상 10글자 이하로 가능합니다.</span>
 		<span class="final_name_ck">닉네임을 입력해주세요.</span><br>
 		연락처 : <input class="tel_input" name="tel"><br>
 		<span class="final_tel_ck">연락처를 입력해주세요.</span><br>
@@ -102,6 +125,7 @@
 		var pwckCheck = false;
 		var pwckcorCheck = false;
 		var nameCheck = false;
+		var nameckCheck = false;
 		var telCheck = false;
 	
 		$(document).ready(function(){
@@ -159,7 +183,7 @@
 		            telCheck = true;
 		        }
 
-		        if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&telCheck){
+		        if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&nameckCheck&&telCheck){
 
 					$("#join_form").attr("action", "/member/join");
 					$("#join_form").submit();
@@ -200,6 +224,41 @@
 						$('.id_input_re_1').css("display", "none");		
 						$('.id_input_re_3').css("display", "none");
 						idckCheck = false;			
+					}
+				}// success 종료
+			}); // ajax 종료
+
+		});// function 종료
+		
+		//닉네임 중복검사
+		$('.user_input').on("propertychange change keyup paste input", function(){
+
+			var membername = $('.user_input').val();			// .id_input에 입력되는 값
+			var data = {membername : membername}				// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+			
+			$.ajax({
+				type : "post",
+				url : "/member/memberNameChk",
+				data : data,
+				success : function(result){
+					// 정규식 유효성 검사 체크
+					if(result == 'fail2'){
+						$('.user_input_re_1').css("display", "none");
+						$('.user_input_re_2').css("display", "none");
+						$('.user_input_re_3').css("display","inline-block");
+						nameckCheck = false;
+					}
+					// 중복체크
+					if(result == 'success'){
+						$('.user_input_re_1').css("display","inline-block");
+						$('.user_input_re_2').css("display", "none");		
+						$('.user_input_re_3').css("display", "none");
+						nameckCheck = true;			
+					} else if (result == 'fail') {
+						$('.user_input_re_2').css("display","inline-block");
+						$('.user_input_re_1').css("display", "none");		
+						$('.user_input_re_3').css("display", "none");
+						nameckCheck = false;			
 					}
 				}// success 종료
 			}); // ajax 종료

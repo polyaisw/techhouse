@@ -46,21 +46,41 @@
 		color : red;
 		display : none;
 	}
+	/* 중복닉네임 존재하지 않는경우 */
+	.user_input_re_1{
+		color : green;
+		display : none;
+	}
+	/* 중복닉네임 존재하는 경우 */
+	.user_input_re_2{
+		color : red;
+		display : none;
+	}
+	/* 닉네임 유효성검사 실패 경우 */
+	.user_input_re_3{
+		color : red;
+		display : none;
+	}
 	/* 유효성 검사 문구 */
  
 	.final_id_ck{
+		color : red;
 	    display: none;
 	}
 	.final_pw_ck{
+		color : red;
 	    display: none;
 	}
 	.final_pwck_ck{
+		color : red;
 	    display: none;
 	}
 	.final_name_ck{
+		color : red;
 	    display: none;
 	}
 	.final_tel_ck{
+		color : red;
 	    display: none;
 	}
 </style>
@@ -103,6 +123,9 @@
 								<span class="pw_input_re_4">비밀번호가 일치하지 않습니다.</span>
 								<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span><br>
 								닉네임 : <input class="user_input" name="name" value="${ member.name }"><br>
+								<span class="user_input_re_1">사용 가능한 닉네임입니다.</span>
+								<span class="user_input_re_2">해당 닉네임이 이미 존재합니다.</span>
+								<span class="user_input_re_3">닉네임은 3글자 이상 10글자 이하로 가능합니다.</span>
 								<span class="final_name_ck">닉네임을 입력해주세요.</span><br>
 								연락처 : <input class="tel_input" name="tel" value="${ member.tel }"><br>
 								<span class="final_tel_ck">연락처를 입력해주세요.</span><br>
@@ -116,16 +139,38 @@
 					</div>
 					<div class="tab-pane fade text-white" id="list-board"
 						role="tabpanel" aria-labelledby="list-messages-list">게시글 내역
-						: 거래게시글까지 포함한 게시글별 글 모두 가져오기 (페이징구현)</div>
+						: 거래게시글까지 포함한 게시글별 글 모두 가져오기 (페이징구현)
+					</div>
 					<div class="tab-pane fade text-white" id="list-trade"
 						role="tabpanel" aria-labelledby="list-profile-list">거래 내역 :
-						거래 게시글, 구매글, 판매글, 총 구매액, 판매액 가져오기</div>
+						거래 게시글, 구매글, 판매글, 총 구매액, 판매액 가져오기
+					</div>
 					<div class="tab-pane fade text-white" id="list-commission"
 						role="tabpanel" aria-labelledby="list-messages-list">고객상담 내역
-						: 1:1문의글과 관리자답글가져오기, 신고글가져오기</div>
+						: 1:1문의글과 관리자답글가져오기, 신고글가져오기
+					</div>
 					<div class="tab-pane fade text-white" id="list-delete"
-						role="tabpanel" aria-labelledby="list-settings-list">회원 탈퇴 :
-						경고문구, 탈퇴하기 버튼, 한번 더 묻는 창 띄우고 비밀번호 입력 후 탈퇴</div>
+						role="tabpanel" aria-labelledby="list-settings-list">
+						<c:if test="${ mypageCK == null }">
+							<form id="mypage" method="post">
+								<h2>본인 확인</h2><br>
+								<input class="id_input" name="id" value="${ member.id }" style="display:none" readonly>
+								비밀번호 : <input class="pw_input" name="password" type="password"><br>
+								
+								<c:if test = "${result == 0 }">
+						                <div class = "mypage_warn">비밀번호를 잘못 입력하셨습니다.</div>
+						        </c:if>
+								<input type="button" class="my_button2" value="확인">
+							</form>
+						</c:if>
+						<c:if test="${ mypageCK != null }">
+							<p>본인 재확인에 성공!</p>
+							<form id="user_del" method="post">
+								<input class="id_input" name="id" value="${ member.id }" style="display:none" readonly>
+								<input type="button" class="my_del_button" value="회원탈퇴">
+							</form>
+						</c:if>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4 ">
@@ -161,7 +206,20 @@
 		crossorigin="anonymous"></script>
 	<!-- <script src="/resources/js/scripts.js"></script> -->
 	<script>
-		$(".my_button").click(function(){
+		$(".my_del_button").click(function(){
+			var delresult = confirm("정말로 탈퇴하시겠습니까?");
+
+			if( delresult == true ){
+				$("#user_del").attr("action", "/member/memberDel.do");
+				$("#user_del").submit();
+			}else{
+				$("#user_del").attr("action", "/member/mypage.do");
+				$("#user_del").submit();
+			}
+		});
+
+	
+		$(".my_button , .my_button2").click(function(){
 			$("#mypage").attr("action", "/member/mypage.do");
 			$("#mypage").submit();
 		});
@@ -177,6 +235,7 @@
 		var pwckCheck = false;
 		var pwckcorCheck = false;
 		var nameCheck = false;
+		var nameckCheck = false;
 		var telCheck = false;
 	
 		$(document).ready(function(){
@@ -225,7 +284,7 @@
 		            telCheck = true;
 		        }
 
-		        if(pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&telCheck){
+		        if(pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&nameckCheck&&telCheck){
 
 					$("#user_edit").attr("action", "/member/mypage");
 					$("#user_edit").submit();
@@ -290,6 +349,41 @@
 				pwckcorCheck = false;
 			}
 		});
+		
+		//닉네임 중복검사
+		$('.user_input').on("propertychange change keyup paste input", function(){
+
+			var membername = $('.user_input').val();			// .id_input에 입력되는 값
+			var data = {membername : membername}				// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+			
+			$.ajax({
+				type : "post",
+				url : "/member/memberNameChk",
+				data : data,
+				success : function(result){
+					// 정규식 유효성 검사 체크
+					if(result == 'fail2'){
+						$('.user_input_re_1').css("display", "none");
+						$('.user_input_re_2').css("display", "none");
+						$('.user_input_re_3').css("display","inline-block");
+						nameckCheck = false;
+					}
+					// 중복체크
+					if(result == 'success'){
+						$('.user_input_re_1').css("display","inline-block");
+						$('.user_input_re_2').css("display", "none");		
+						$('.user_input_re_3').css("display", "none");
+						nameckCheck = true;			
+					} else if (result == 'fail') {
+						$('.user_input_re_2').css("display","inline-block");
+						$('.user_input_re_1').css("display", "none");		
+						$('.user_input_re_3').css("display", "none");
+						nameckCheck = false;			
+					}
+				}// success 종료
+			}); // ajax 종료
+
+		});// function 종료
 
 		function findAddr(){
 			new daum.Postcode({

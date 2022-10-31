@@ -33,6 +33,13 @@ public class UserServiceImpl implements UserService {
 		
 		return memberMapper.idCheck(memberId);
 	}
+
+	/* 닉네임 중복 검사 */
+	@Override
+	public int nameCheck(String membername) throws Exception {
+		
+		return memberMapper.nameCheck(membername);
+	}
 	
 	/* 로그인 */
 	@Override
@@ -57,6 +64,11 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	/* 회원 탈퇴 */
+	public void memberDel(UserVO vo) throws Exception{
+		
+		memberMapper.memberDel(vo);
+	}
 //	@Override
 //	public UserVO getUser(UserVO vo) {
 //		// TODO Auto-generated method stub

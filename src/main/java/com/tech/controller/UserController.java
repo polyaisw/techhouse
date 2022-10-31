@@ -61,6 +61,39 @@ public class UserController {
 		
 	}
 	
+	// 닉네임 중복 검사
+	@RequestMapping(value = "/memberNameChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberNameChkPOST(String membername) throws Exception{
+		int result;
+		
+		String chkName = "^[a-z가-힣]{1}(?=.*[a-z가-힣])[a-z0-9가-힣]{2,10}$";
+		logger.info("아이디 정규화 체크 진입");
+		
+		boolean rs = Pattern.matches(chkName, membername);
+		if(rs != true) {
+			return "fail2";
+		}
+
+		
+		logger.info("memberNameChk() 진입");
+		
+		result = userService.nameCheck(membername);
+		
+		logger.info("결과값 = " + result);
+		
+		if(result != 0) {
+			
+			return "fail";	// 중복 아이디가 존재
+			
+		} else {
+			
+			return "success";	// 중복 아이디 x
+			
+		}	
+		
+	} // memberIdChkPOST() 종료
+	
 	// 아이디 중복 검사
 	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
 	@ResponseBody
@@ -147,6 +180,7 @@ public class UserController {
 				
 				vo2.setPassword(""); //인코딩된 비밀번호 정보 지움
 				session.setAttribute("member", vo2); //session에 사용자 정보 저장
+				session.setAttribute("memberPW", rawPw);
 				return "redirect:/"; //메인페이지로 이동
 				
 			}else { 
@@ -215,7 +249,7 @@ public class UserController {
 		}
 	}
 	
-	//회원가입
+	//회원수정
 	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
 	public String mypagePOST(UserVO vo) throws Exception{
 		
@@ -236,6 +270,24 @@ public class UserController {
 		
 	}
 	
+	//회원탈퇴
+	@RequestMapping(value = "/memberDel.do", method = RequestMethod.POST)
+	public String memberDel(UserVO vo, HttpServletRequest request) throws Exception{
+
+    	
+    	HttpSession session = request.getSession();
+    	
+    	session.invalidate();
+		
+		logger.info("회원 탈퇴 진입");
+		
+		userService.memberDel(vo);
+		
+		logger.info("회원 탈퇴 성공");
+		
+		return "redirect:/";
+		
+	}
 }
 
 
