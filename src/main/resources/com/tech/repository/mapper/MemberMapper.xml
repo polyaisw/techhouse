@@ -13,6 +13,12 @@
   	<select id="idCheck" resultType="int">
   		select count(*) from user where id = #{id}
   	</select>
+	
+	  	<!-- 닉네임 중복검사 -->
+  	<select id="nameCheck" resultType="int">
+  		select count(*) from user where name = #{name}
+  	</select>
+  	
   	<select id="memberLogin" resultType="com.tech.vo.UserVO">
   		select `id`,`password`,`name`,`point`,`rank`,`tel`,`post`,`addr`,`addr2`,`ticket` from user where id = #{id}
   	</select>
@@ -21,5 +27,9 @@
   		UPDATE user SET `password`=#{password}, `name`=#{name}, `profileimg`=#{profileimg}, 
   		`tel`=#{tel}, `post`=#{post}, `addr`=#{addr}, `addr2`=#{addr2} WHERE `id` = #{id}
   	</update>
+  	
+  	<delete id="memberDel">
+  		DELETE FROM user WHERE `id`=#{id}
+  	</delete>
 	
 </mapper>
