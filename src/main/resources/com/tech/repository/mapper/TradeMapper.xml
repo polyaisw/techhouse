@@ -3,9 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tech.repository.mapper.TradeMapper">
-<select id="getTBoardListsBySearch" parameterType="Pagination" resultType="Trade">	
+	<select id="getTBoardListsBySearch" parameterType="Pagination"
+		resultType="Trade">
 		select * from trade where t_category = #{category} and `t_title` like
-		concat('%',#{keyword},'%') or `t_text` like concat('%',#{keyword},'%') order
+		concat('%',#{keyword},'%') or `t_text` like concat('%',#{keyword},'%')
+		order
 		by
 		t_seq desc
 		LIMIT #{startList}, #{listSize}
@@ -16,6 +18,14 @@
 		resultType="Trade">
 		select * from trade where t_writer = #{value}
 	</select>
+	
+	<select id="getTBoardByUserName_P" parameterType="Pagination"
+		resultType="Trade">
+		select * from trade where t_writer = #{writer} 
+		order by t_seq desc 
+		LIMIT #{startList}, #{listSize}
+	</select>
+
 	<select id="getTBoardByTitle" parameterType="string"
 		resultType="Trade">
 		select * from trade where `t_title` like
@@ -23,12 +33,16 @@
 	</select>
 	<select id="getTBoardByTitleText" parameterType="Trade"
 		resultType="Trade">
-		select * from trade where `t_category` = #{t_category} and`t_title` like
-		concat('%',#{keyword},'%') or `t_text` like concat('%',#{keyword},'%')
+		select * from trade where `t_category` = #{t_category}
+		and`t_title` like
+		concat('%',#{keyword},'%') or `t_text` like
+		concat('%',#{keyword},'%')
 	</select>
 
-	<select id="getBestTBoardListByCate" parameterType="string" resultType="Trade">
-		SELECT * FROM trade where t_category = #{value} and t_state = '판매중' order by t_views desc LIMIT 0,8
+	<select id="getBestTBoardListByCate" parameterType="string"
+		resultType="Trade">
+		SELECT * FROM trade where t_category = #{value} and t_state
+		= '판매중' order by t_views desc LIMIT 0,8
 	</select>
 	<select id="getTBoardListByCate" parameterType="string"
 		resultType="Trade">
@@ -42,18 +56,20 @@
 		by
 		t_seq desc
 	</select>
-	<select id="getTBoardLists" parameterType="Pagination" resultType="Trade">
+	<select id="getTBoardLists" parameterType="Pagination"
+		resultType="Trade">
 		select * from trade where t_category = #{category} order
 		by
 		t_seq desc
 		LIMIT #{startList}, #{listSize}
 	</select>
-		<select id="getTBoardListCnt" resultType="int"> 
+	<select id="getTBoardListCnt" resultType="int">
 		SELECT count(*) as
 		listCnt FROM trade
 
 	</select>
-	<select id="getTBoardById" parameterType="int" resultType="Trade">
+	<select id="getTBoardById" parameterType="int"
+		resultType="Trade">
 		select
 		* from trade where t_seq=#{value}
 	</select>
@@ -62,31 +78,36 @@
 		trade(t_writer, t_title, t_prodName, t_price,
 		t_text,
 		t_uploadImg, t_category)
-		values(#{t_writer},#{t_title}, #{t_prodName}, #{t_price},#{t_text},#{t_uploadImg},#{t_category})
-				<selectKey resultType="Integer" keyProperty="t_seq"
+		values(#{t_writer},#{t_title}, #{t_prodName},
+		#{t_price},#{t_text},#{t_uploadImg},#{t_category})
+		<selectKey resultType="Integer" keyProperty="t_seq"
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		
+
 	</insert>
 	<update id="updateTBoard" parameterType="Trade">
 		update trade set
-		t_title= #{t_title},t_price=#{t_price},t_prodName=#{t_prodName}, t_text=#{t_text}, t_uploadImg=#{t_uploadImg}
+		t_title= #{t_title},t_price=#{t_price},t_prodName=#{t_prodName},
+		t_text=#{t_text}, t_uploadImg=#{t_uploadImg}
 		where t_seq = #{t_seq}
 	</update>
 	<update id="updateState" parameterType="Trade">
-		update trade set t_state = #{t_state} where t_seq = #{t_seq}
+		update trade set t_state
+		= #{t_state} where t_seq = #{t_seq}
 	</update>
 
 	<delete id="deleteTBoard" parameterType="int">
 		delete from trade where
 		t_seq = #{value}
 	</delete>
-	<update id="upTViews"  parameterType="int">
-		update trade set t_views = t_views+1 where t_seq = ${value}
+	<update id="upTViews" parameterType="int">
+		update trade set t_views =
+		t_views+1 where t_seq = ${value}
 	</update>
-	
-	<update id="downTViews"  parameterType="int">
-		update trade set t_views = t_views-1 where t_seq = ${value}
+
+	<update id="downTViews" parameterType="int">
+		update trade set t_views =
+		t_views-1 where t_seq = ${value}
 	</update>
 </mapper>

@@ -146,4 +146,10 @@ public class BoardServiceImpl implements BoardService {
 		return bMapper.getBoardListsBySearch(vo);
 	}
 
+	@Override
+	public List<BVO> getBoardByUserName_P(BVO vo) {
+		// TODO Auto-generated method stub
+		return bMapper.getBoardByUserName_P(vo);
+	}
+
 }
