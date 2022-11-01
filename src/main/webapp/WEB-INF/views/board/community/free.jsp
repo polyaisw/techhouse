@@ -68,12 +68,15 @@
 </style>
 </head>
 <body>
+<!-- 페이지정보 -->
 	<c:url var="getPageRange" value="/board/community/free">
 		<c:param name="page" value="${pagination.page}" />
 		<c:param name="range" value="${pagination.range}" />
+		
 	</c:url>
 	<c:url var="getPageUrl" value="board/community/free">
 	</c:url>
+	<c:set var="category" value="자유게시판" />
 	
 
 
@@ -83,13 +86,13 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="/main">Home</a></li>
-					<li class="breadcrumb-item active" aria-current="page">자유게시판</li>
+					<li class="breadcrumb-item active" aria-current="page"><c:out value="${category }"/></li>
 				</ol>
 			</nav>
 			<div class="row">
 				<div class="col-md-9">
 					<div class="most-popular title">
-						<h2>자유게시판</h2>
+						<h2><c:out value="${category }"/></h2>
 						<div class="notice text-white mt-5" style="">
 							<ul>
 								<li class="d-flex justify-content-between align-items-center ">
@@ -275,7 +278,7 @@
 									name="searchKeyword" >
 									<i class="fa fa-search"></i>
 									
-								<input type="text" name="b_category"class="d-none" value="자유게시판">	
+								<input type="text" name="b_category"class="d-none" value="<c:out value="${category }"/>">	
 								<input type="text" name="url" class="d-none" value="${getPageUrl }">
 								<input type="submit" class="d-none"> 
 							</form>

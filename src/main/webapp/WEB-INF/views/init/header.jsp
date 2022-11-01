@@ -19,6 +19,10 @@
 	color: white;
 }
 
+.offcanvas {
+	background-color: #222222;
+}
+
 @media ( max-width : 992px) {
 	#myPage-btn {
 		display: none;
@@ -31,18 +35,21 @@
 	}
 }
 
-/* 	
-	.main-nav ul ul {
-	display:none;
-	position:absolute;
-	}
-	.main-nav li:hover > ul{
-	display:block;
-	}
-	
-	.main-nav li:hover > ul li a {
-		color:666;
-	} */
+.off-ul {
+display: block!important;
+    position: static!important;
+    top: 100%!important;
+    left: 0!important;
+}
+
+.off-li{
+width: 126px!important;
+position:static!important;
+    display: inline!important;
+}
+}
+
+
 </style>
 </head>
 <body>
@@ -70,7 +77,6 @@
 								<ul>
 									<li><a href="/board/trade/tradeInfo">중고거래안내</a></li>
 									<li><a href="/board/trade/tradeBoard">거래게시판</a></li>
-									<li><a href="/board/trade/mybench">벤치마킹인증</a></li>
 									<li><a href="/board/trade/aftertrade">거래후기</a></li>
 								</ul></li>
 
@@ -80,8 +86,7 @@
 									<li><a href="/board/news/issue">핫이슈</a></li>
 									<li><a href="/board/news/gameInfo">게임출시정보</a></li>
 									<li><a href="/board/news/hotDeal">꿀딜/장터</a></li>
-								</ul>
-							</li>
+								</ul></li>
 							<li><a href="/board/apply/product">응모상품</a>
 								<ul>
 									<li><a href="/board/apply/roulette">룰렛</a></li>
@@ -103,15 +108,48 @@
 											style="font-size: 24px;"></i>
 									</button>
 
-									<div class="offcanvas offcanvas-end" tabindex="-1"
+									<div class="offcanvas offcanvas-end opacity-75" tabindex="-1"
 										id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-										<div class="offcanvas-header">
-											<h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas
-												right</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="offcanvas" aria-label="Close"></button>
+										<!-- 오프캔바스안쪽 {s} -->
+										<div class="offcanvas-header" style="color: #666;">
+											<a href="/member/logout" class="d-block"><span
+												class="me-2 fw-bold">logout</span><i
+												class="fa-solid fa-right-to-bracket fs-5"></i></a>
+											<button type="button" class="button-3">
+												<span class="fw-bold">쪽지함</span>
+											</button>
+
 										</div>
-										<div class="offcanvas-body">...</div>
+										<hr class="my-0 text-white">
+										<button type="button" class="btn-close"
+											data-bs-dismiss="offcanvas" aria-label="Close"></button>
+										<div class="offcanvas-body mx-2">
+											<div class="user-info-box">
+												<img src="/resources/images/member/user_default.png"
+													class="img-fluid rounded-circle text-center d-block mx-auto mb-3"
+													style="width: 180px; height: 180px;">
+												<div
+													class="info-box-inner d-flex justify-content-between mb-3 ">
+													<p class="text-white fw-bold text-start">${member.name }님!</p>
+													<p class="text-warning fw-bold text-start"><span class="text-white">rank : </span>
+														${member.rank }</p>
+												</div>
+
+											</div>
+											
+												<ul class="off-ul">
+													<li class="off-li"><a href="/member/mypage" class="text-white">마이페이지</a></li>
+													<li class="off-li"><a href="#" class="text-white">리스트1</a></li>
+													<li class="off-li"><a href="#" class="text-white">리스트2</a></li>
+													<li class="off-li"><a href="#" class="text-white">리스트3</a></li>
+												</ul>
+										</div>
+										<hr class="text-white">
+										<div class="offcanvas-footer mx-2">
+											<a href="#" class="text-danger fs-bold text-start">회원탈퇴</a>
+										</div>
+										<!-- 오프캔바스안쪽 {e}-->
+
 									</div>
 
 

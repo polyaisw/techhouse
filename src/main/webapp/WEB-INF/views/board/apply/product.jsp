@@ -46,7 +46,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 
 	<c:if test="${member.rank eq '관리자'}">
 		<div class="container" style="margin-top: 150px;">
-			<div class="page-content">
+			<div class="page-content border" >
 				<div class="most-popular m-0">
 					<div class="row w-75 mx-auto">
 						<div class="col">
@@ -207,18 +207,18 @@ https://templatemo.com/tm-579-cyborg-gaming
 		</div>
 		<div class="row mt-5">
 			<div class="col text-center">
-				<a href="/board/apply/roulette" class="button-2">룰렛 돌리기</a>
+				<a href="/board/apply/roulette" class="button-0">룰렛 돌리기</a>
 			</div>
 
 		</div>
 
 	</div>
 	<div class="container mt-5">
-		<div class="page-content">
+		<div class="page-content border"style="border-color:#e75e8d!important;">
 			<div class="row ">
 				<div class="col d-flex my-5 justify-content-center">
 					<h4 class="">
-						<em>사용된 응모권 : ${count}개</em>
+						<em>총 사용된 응모권 : ${count}개</em>
 					</h4>
 				</div>
 				<div class="col my-5 d-flex my-5 justify-content-center">
@@ -232,7 +232,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 				<c:if test="${productContent.prod_posting != 1  }">
 					<div class="row">
 						<div class="col">
-							<h3 class=" text-center text-danger pt-2 my-3">현재 진행중인 상품이 없습니다.</h3>
+							<h3 class=" text-center pt-2 my-3" style="color:#e75e8d;">현재 진행중인 상품이 없습니다.</h3>
 						</div>
 					</div>
 					<div class="row justify-content-center">

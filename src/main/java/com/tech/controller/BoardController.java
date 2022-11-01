@@ -57,28 +57,23 @@ public class BoardController {
 			@RequestParam(required = false, defaultValue = "1") int range) 
 					throws Exception {
 		logger.info("자유게시판 진입");
+		 String category = "자유게시판";
 		
-		
-		  int listCnt = boardService.getBoardListCnt(); Pagination pagination = new
-		  Pagination(); pagination.pageInfo(page, range, listCnt);
-		  pagination.setCategory("자유게시판"); model.addAttribute("pagination",
-		  pagination); model.addAttribute("list",
-		  boardService.getBoardLists(pagination));
+		 /*게시글 출력*/
+		  int listCnt = boardService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", boardService.getBoardLists(pagination));
 		 
-		
-		
 		/* 추천수5개 */
-		BoardVO boardVO = new BoardVO();
-		boardVO.setKeyword("b_recommed");
-		boardVO.setB_category("자유게시판");
-		boardVO.setListSize(5);
+		BoardVO boardVO = new BoardVO(category,"b_recommed",5);
 		model.addAttribute("recommedList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
 		
 		/* 조회수5개 */
-		boardVO.setKeyword("b_views");
-		boardVO.setB_category("자유게시판");
-		boardVO.setListSize(5);
-		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
+		BoardVO boardVO2 = new BoardVO(category,"b_views",5);
+		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO2));
 		
 		return "/board/community/free";
 	}
@@ -92,27 +87,80 @@ public class BoardController {
 	}
 
 	@GetMapping("/community/hobby")
-	public String hobby(Model model) {
+	public String hobby(Model model,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) 
+					throws Exception {
+		
 		logger.info("취미 공유 진입");
-		List<BVO> list = boardService.getBoardListByCate("취미공유");
-		model.addAttribute("list", list);
+		String category = "취미공유";
+		
+		 /*게시글 출력*/
+		  int listCnt = boardService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", boardService.getBoardLists(pagination));
+		 
+		/* 추천수5개 */
+		BoardVO boardVO = new BoardVO(category,"b_recommed",5);
+		model.addAttribute("recommedList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
+		
+		/* 조회수5개 */
+		BoardVO boardVO2 = new BoardVO(category,"b_views",5);
+		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO2));
 		return "/board/community/hobby";
 	}
 
 	/* news */
 	@GetMapping("/news/trend")
-	public String trend(Model model) {
+	public String trend(Model model,@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) 
+					throws Exception {
 		logger.info("IT/트렌드  진입");
-		List<BVO> list = boardService.getBoardListByCate("IT/트렌드");
-		model.addAttribute("list", list);
+		String category = "IT/트렌드";
+		
+		 /*게시글 출력*/
+		  int listCnt = boardService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", boardService.getBoardLists(pagination));
+		 
+		/* 추천수5개 */
+		BoardVO boardVO = new BoardVO(category,"b_recommed",5);
+		model.addAttribute("recommedList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
+		
+		/* 조회수5개 */
+		BoardVO boardVO2 = new BoardVO(category,"b_views",5);
+		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO2));
 		return "/board/news/trend";
 	}
 
 	@GetMapping("/news/issue")
-	public String issue(Model model) {
+	public String issue(Model model,@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) 
+					throws Exception {
 		logger.info("핫이슈 진입");
-		List<BVO> list = boardService.getBoardListByCate("핫이슈");
-		model.addAttribute("list", list);
+		String category = "핫이슈";
+		
+		 /*게시글 출력*/
+		  int listCnt = boardService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", boardService.getBoardLists(pagination));
+		 
+		/* 추천수5개 */
+		BoardVO boardVO = new BoardVO(category,"b_recommed",5);
+		model.addAttribute("recommedList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
+		
+		/* 조회수5개 */
+		BoardVO boardVO2 = new BoardVO(category,"b_views",5);
+		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO2));
 		return "/board/news/issue";
 	}
 
@@ -125,10 +173,27 @@ public class BoardController {
 	}
 
 	@GetMapping("/news/hotDeal")
-	public String hotDeal(Model model) {
+	public String hotDeal(Model model,@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) 
+					throws Exception {
 		logger.info("꿀딜/장터 진입");
-		List<BVO> list = boardService.getBoardListByCate("꿀딜/장터");
-		model.addAttribute("list", list);
+		String category = "꿀딜/장터";
+		
+		 /*게시글 출력*/
+		  int listCnt = boardService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", boardService.getBoardLists(pagination));
+		 
+		/* 추천수5개 */
+		BoardVO boardVO = new BoardVO(category,"b_recommed",5);
+		model.addAttribute("recommedList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
+		
+		/* 조회수5개 */
+		BoardVO boardVO2 = new BoardVO(category,"b_views",5);
+		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO2));
 		return "/board/news/hotDeal";
 	}
 
@@ -142,10 +207,28 @@ public class BoardController {
 	}
 
 	@GetMapping("/trade/aftertrade")
-	public String aftertrade(Model model) {
+	public String aftertrade(Model model,@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) 
+					throws Exception  {
 		logger.info("거래 후기 진입");
-		List<BVO> list = boardService.getBoardListByCate("거래후기");
-		model.addAttribute("list", list);
+		String category = "거래후기";
+		
+		 /*게시글 출력*/
+		  int listCnt = boardService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", boardService.getBoardLists(pagination));
+		 
+		/* 추천수5개 */
+		BoardVO boardVO = new BoardVO(category,"b_recommed",5);
+		model.addAttribute("recommedList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
+		
+		/* 조회수5개 */
+		BoardVO boardVO2 = new BoardVO(category,"b_views",5);
+		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO2));
+		
 		return "/board/trade/aftertrade";
 	}
 

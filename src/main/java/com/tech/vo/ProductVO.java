@@ -25,8 +25,11 @@ public class ProductVO {
 		super();
 		this.prod_productName = prod_productName;
 		this.prod_price = prod_price;
-		if(prod_uploadImg.equals("")) {prod_uploadImg = null;}
-		this.prod_uploadImg = prod_uploadImg;
+		if(prod_uploadImg.equals("") || prod_uploadImg == null) 
+		{prod_uploadImg = null;}
+		else {
+			this.prod_uploadImg = prod_uploadImg;
+		}
 		this.prod_posting = 0;
 	}
 

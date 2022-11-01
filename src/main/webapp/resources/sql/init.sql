@@ -347,6 +347,10 @@ insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("�
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","팔아요","검정고무신","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","팔아요","검정고무신","b_uploadimg","취미공유");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","삽니다","감자","b_uploadimg","자유게시판");
+
 
 
 
