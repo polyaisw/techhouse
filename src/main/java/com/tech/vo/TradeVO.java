@@ -13,6 +13,8 @@ public class TradeVO implements BVO{
 	private String t_uploadImg;
 	private String t_category;
 	private String t_date;
+	private String keyword;		//getBoardListKeywordNumber용	ex)"b_recommed"많은순
+	private int listSize;		//getBoardListKeywordNumber용	"5"개 가져오기
 	
 	//등록용
 	public TradeVO(String t_title, String t_writer, String t_prodName, String t_price,
@@ -30,6 +32,7 @@ public class TradeVO implements BVO{
 	}
 
 	public TradeVO() {
+		this.t_category = "거래게시판";
 		// TODO Auto-generated constructor stub
 	}
 
@@ -121,6 +124,23 @@ public class TradeVO implements BVO{
 	public void setT_date(String t_date) {
 		this.t_date = t_date;
 	}
+	
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public int getListSize() {
+		return listSize;
+	}
+
+	public void setListSize(int listSize) {
+		this.listSize = listSize;
+	}
 
 	@Override
 	public String toString() {
@@ -128,6 +148,7 @@ public class TradeVO implements BVO{
 				+ t_prodName + ", t_price=" + t_price + ", t_state=" + t_state + ", t_views=" + t_views + ", t_text="
 				+ t_text + ", t_uploadImg=" + t_uploadImg + ", t_category=" + t_category + ", t_date=" + t_date + "]";
 	}
+
 	
 	
 	

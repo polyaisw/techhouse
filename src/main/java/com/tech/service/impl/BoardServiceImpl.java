@@ -27,10 +27,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int createBoard(BVO vo) {
 		if (bMapper.insertBoard(vo) == 1) {
-			logger.info("insertBoard : "+success_msg);
-			return ((BoardVO)vo).getB_seq();
-		}else {
-			logger.error("insertBoard : "+failed_msg);
+			logger.info("insertBoard : " + success_msg);
+			return ((BoardVO) vo).getB_seq();
+		} else {
+			logger.error("insertBoard : " + failed_msg);
 			return 0;
 		}
 	}
@@ -43,9 +43,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void deleteBoard(int b_seq) {
 		if (bMapper.deleteBoard(b_seq) == 1) {
-			logger.info("deleteBoard : "+success_msg);
-		}else {
-			logger.error("deleteBoard : "+failed_msg);
+			logger.info("deleteBoard : " + success_msg);
+		} else {
+			logger.error("deleteBoard : " + failed_msg);
 		}
 
 	}
@@ -63,29 +63,87 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void updateBoard(BVO vo) {
-		if(bMapper.updateBoard(vo) == 1) {
-			logger.info("updateBoard : "+success_msg);
-		}else {
-			logger.error("updateBoard : "+failed_msg);
+		if (bMapper.updateBoard(vo) == 1) {
+			logger.info("updateBoard : " + success_msg);
+		} else {
+			logger.error("updateBoard : " + failed_msg);
 		}
 	}
 
 	@Override
 	public void upViews(int seq) {
-		if(bMapper.upViews(seq) == 1) {
-			logger.info("upViews : "+success_msg);
-		}else {
-			logger.error("upViews : "+failed_msg);
+		if (bMapper.upViews(seq) == 1) {
+			logger.info("upViews : " + success_msg);
+		} else {
+			logger.error("upViews : " + failed_msg);
 		}
 	}
 
 	@Override
 	public void upRecommend(int seq) {
-		if(bMapper.upRecommend(seq) == 1) {
-			logger.info("upRecommend : "+success_msg);
-		}else {
-			logger.error("upRecommend : "+failed_msg);
+		if (bMapper.upRecommend(seq) == 1) {
+			logger.info("upRecommend : " + success_msg);
+		} else {
+			logger.error("upRecommend : " + failed_msg);
 		}
+	}
+
+	@Override
+	public List<BVO> getBestBoardListByCate(String category) {
+		// TODO Auto-generated method stub
+		return bMapper.getBestBoardListByCate(category);
+	}
+
+	@Override
+	public List<BVO> getBoardByUserName(String name) {
+		// TODO Auto-generated method stub
+		return bMapper.getBoardByUserName(name);
+	}
+
+	@Override
+	public List<BVO> getBoardByTitle(String title) {
+		// TODO Auto-generated method stub
+		return bMapper.getBoardByTitle(title);
+	}
+
+	@Override
+	public List<BVO> getBoardByTitleText(BVO vo) {
+		// TODO Auto-generated method stub
+		return bMapper.getBoardByTitleText(vo);
+	}
+
+	@Override
+	public List<BVO> getHotDealBoardList() {
+		return bMapper.getHotDealBoardList();
+	}
+	
+	@Override
+	public int getBoardListCnt() {
+		// TODO Auto-generated method stub
+		return bMapper.getBoardListCnt();
+	}
+	@Override
+	public List<BVO> getBoardLists(BVO vo) {
+		// TODO Auto-generated method stub
+		return bMapper.getBoardLists(vo);
+	}
+
+	@Override
+	public List<BVO> getBoardListByCategoryKeywordNumber(BVO vo) {
+		// TODO Auto-generated method stub
+		return bMapper.getBoardListByCategoryKeywordNumber(vo);
+	}
+
+	@Override
+	public void downViews(int seq) {
+		bMapper.downViews(seq);
+		
+	}
+
+	@Override
+	public List<BVO> getBoardListsBySearch(BVO vo) {
+		// TODO Auto-generated method stub
+		return bMapper.getBoardListsBySearch(vo);
 	}
 
 }

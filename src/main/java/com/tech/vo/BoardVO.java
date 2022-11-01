@@ -7,12 +7,14 @@ public class BoardVO implements BVO{
 	private String b_title;
 	private String b_writer;
 	private int b_views;
-	private int b_recommed;
+	private int b_recommed;		//추천수
 	private int b_commentcount;
 	private String b_text;
 	private String b_uploadImg;
 	private String b_category;
 	private String b_date;
+	private String keyword;		//getBoardListKeywordNumber용	ex)"b_recommed"많은순
+	private int listSize;		//getBoardListKeywordNumber용	"5"개 가져오기
 	
 	 public BoardVO() {} 
 	
@@ -111,6 +113,23 @@ public class BoardVO implements BVO{
 
 	public void setB_date(String b_date) {
 		this.b_date = b_date;
+	}
+
+	
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public int getListSize() {
+		return listSize;
+	}
+
+	public void setListSize(int listSize) {
+		this.listSize = listSize;
 	}
 
 	@Override
