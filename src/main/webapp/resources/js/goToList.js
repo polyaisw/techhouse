@@ -32,5 +32,40 @@ function goToList(value) {
 				location.href="/board/news/hotDeal";
 				break;
 			}
+		}
+		
+function setUrl(value) {
 
+			switch (value) {
+			case '자유게시판':
+				url ="/board/community/free";
+				return url;
+			case '인증게시판':
+				url ="/board/community/mysetting";
+				return url;
+			case '취미공유':
+				url ="/board/community/hobby";
+				return url;
+			case '거래게시판':
+				url ="/board/trade/tradeBoard";
+				return url;
+			case '벤치마킹인증':
+				url ="/board/trade/mybench";
+				return url;
+			case '거래후기':
+				url ="/board/trade/aftertrade";
+				return url;
+			case 'IT/트렌드':
+				url ="/board/news/trend";
+				return url;
+			case '핫이슈':
+				url ="/board/news/issue";
+				return url;
+			case '게임출시정보':
+				url ="/board/news/gameInfo";
+				return url;
+			case '꿀딜/장터':
+				url ="/board/news/hotDeal";
+				return url;
+			}
 		}

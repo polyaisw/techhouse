@@ -85,6 +85,76 @@ public class TradeServiceImpl implements TradeService {
 		 * logger.error("upTRecommend : "+failed_msg); }
 		 */
 	}
+
+
+	@Override
+	public List<BVO> getBestBoardListByCate(String category) {
+		// TODO Auto-generated method stub
+		return tMapper.getBestTBoardListByCate(category);
+	}
+
+
+	@Override
+	public List<BVO> getBoardByUserName(String name) {
+		// TODO Auto-generated method stub
+		return tMapper.getTBoardByUserName(name);
+	}
+
+
+	@Override
+	public List<BVO> getBoardByTitle(String title) {
+		// TODO Auto-generated method stub
+		return tMapper.getTBoardByTitle(title);
+	}
+
+
+	@Override
+	public List<BVO> getBoardByTitleText(BVO vo) {
+		// TODO Auto-generated method stub
+		return tMapper.getTBoardByTitleText(vo);
+	}
+
+
+	@Override
+	public List<BVO> getHotDealBoardList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int getBoardListCnt() {
+		// TODO Auto-generated method stub
+		return tMapper.getTBoardListCnt();
+	}
+
+
+	@Override
+	public List<BVO> getBoardLists(BVO vo) {
+		// TODO Auto-generated method stub
+		return tMapper.getTBoardLists(vo);
+	}
+
+
+	@Override
+	public List<BVO> getBoardListByCategoryKeywordNumber(BVO vo) {
+		// TODO Auto-generated method stub
+		return tMapper.getBoardListByCategoryKeywordNumber(vo);
+	}
+	@Override
+	public void downViews(int seq) {
+		tMapper.downTViews(seq);
+		
+	}
+
+
+	@Override
+	public List<BVO> getBoardListsBySearch(BVO vo) {
+		// TODO Auto-generated method stub
+		return tMapper.getTBoardListsBySearch(vo);
+	}
+
+
 	
 
 }

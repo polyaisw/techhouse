@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tech.common.Pagination;
 import com.tech.service.interfaces.BoardService;
 import com.tech.service.interfaces.CommentService;
 import com.tech.service.interfaces.QnaService;
@@ -51,11 +52,34 @@ public class BoardController {
 
 	/* community */
 	@GetMapping("/community/free")
-	public String free(Model model) {
+	public String free(Model model, 
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) 
+					throws Exception {
 		logger.info("자유게시판 진입");
-		List<BVO> list = boardService.getBoardListByCate("자유게시판");
-
-		model.addAttribute("list", list);
+		
+		
+		  int listCnt = boardService.getBoardListCnt(); Pagination pagination = new
+		  Pagination(); pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory("자유게시판"); model.addAttribute("pagination",
+		  pagination); model.addAttribute("list",
+		  boardService.getBoardLists(pagination));
+		 
+		
+		
+		/* 추천수5개 */
+		BoardVO boardVO = new BoardVO();
+		boardVO.setKeyword("b_recommed");
+		boardVO.setB_category("자유게시판");
+		boardVO.setListSize(5);
+		model.addAttribute("recommedList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
+		
+		/* 조회수5개 */
+		boardVO.setKeyword("b_views");
+		boardVO.setB_category("자유게시판");
+		boardVO.setListSize(5);
+		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO));
+		
 		return "/board/community/free";
 	}
 
@@ -273,6 +297,7 @@ public class BoardController {
 		logger.info("추천하기 액션");
 		int seq = Integer.parseInt(b_seq);
 		boardService.upRecommend(seq);
+		boardService.downViews(seq);
 
 		return "<script>location.href='/board/contentForm?b_seq=" + b_seq + "'</script>";
 	}
@@ -340,8 +365,8 @@ public class BoardController {
 	// 지정한다.
 	// @InitBinder는 하나의 컨트롤러 클래스당 하나의 메서드를 사용할 수 있다.
 	// ex)나는 boardVO의 입력폼을 할꺼니깐 BoardValidator클래스를 정의하고 setValidator메서드로 세팅을 하였다.
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new BoardValidator());
-	}
+	/*
+	 * @InitBinder public void initBinder(WebDataBinder binder) {
+	 * binder.setValidator(new BoardValidator()); }
+	 */
 }

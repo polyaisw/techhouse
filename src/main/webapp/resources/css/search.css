@@ -1,0 +1,47 @@
+#search {
+	position: relative;
+}
+
+#search input {
+	background-color: #27292a;
+	height: 46px;
+	border-radius: 23px;
+	border: none;
+	color: #666;
+	font-size: 14px;
+	padding: 0px 15px 0px 45px;
+}
+
+#search i {
+	position: absolute;
+	color: #666;
+	left: 20px;
+	top: 16px;
+	width: 18px;
+	height: 18px;
+	font-size: 16px;
+}
+
+#boardSearch {
+	position: relative;
+}
+
+#boardSearch input {
+	background-color: #27292a;
+	height: 46px;
+	border-radius: 23px;
+	border: none;
+	color: #666;
+	font-size: 14px;
+	padding: 0px 15px 0px 45px;
+}
+
+#boardSearch i {
+	position: absolute;
+	color: #666;
+	left: 20px;
+	top: 16px;
+	width: 18px;
+	height: 18px;
+	font-size: 16px;
+}

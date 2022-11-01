@@ -3,7 +3,33 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tech.repository.mapper.TradeMapper">
+<select id="getTBoardListsBySearch" parameterType="Pagination" resultType="Trade">	
+		select * from trade where t_category = #{category} and `t_title` like
+		concat('%',#{keyword},'%') or `t_text` like concat('%',#{keyword},'%') order
+		by
+		t_seq desc
+		LIMIT #{startList}, #{listSize}
+	</select>
 
+
+	<select id="getTBoardByUserName" parameterType="string"
+		resultType="Trade">
+		select * from trade where t_writer = #{value}
+	</select>
+	<select id="getTBoardByTitle" parameterType="string"
+		resultType="Trade">
+		select * from trade where `t_title` like
+		concat('%',#{value},'%')
+	</select>
+	<select id="getTBoardByTitleText" parameterType="Trade"
+		resultType="Trade">
+		select * from trade where `t_category` = #{t_category} and`t_title` like
+		concat('%',#{keyword},'%') or `t_text` like concat('%',#{keyword},'%')
+	</select>
+
+	<select id="getBestTBoardListByCate" parameterType="string" resultType="Trade">
+		SELECT * FROM trade where t_category = #{value} and t_state = '판매중' order by t_views desc LIMIT 0,8
+	</select>
 	<select id="getTBoardListByCate" parameterType="string"
 		resultType="Trade">
 		select * from trade
@@ -15,6 +41,17 @@
 		select * from trade order
 		by
 		t_seq desc
+	</select>
+	<select id="getTBoardLists" parameterType="Pagination" resultType="Trade">
+		select * from trade where t_category = #{category} order
+		by
+		t_seq desc
+		LIMIT #{startList}, #{listSize}
+	</select>
+		<select id="getTBoardListCnt" resultType="int"> 
+		SELECT count(*) as
+		listCnt FROM trade
+
 	</select>
 	<select id="getTBoardById" parameterType="int" resultType="Trade">
 		select
@@ -47,5 +84,9 @@
 	</delete>
 	<update id="upTViews"  parameterType="int">
 		update trade set t_views = t_views+1 where t_seq = ${value}
+	</update>
+	
+	<update id="downTViews"  parameterType="int">
+		update trade set t_views = t_views-1 where t_seq = ${value}
 	</update>
 </mapper>
