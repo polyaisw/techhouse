@@ -71,8 +71,8 @@
 	</select>
 	
 <select id="getBoardListsBySearch" parameterType="Pagination" resultType="Board">	
-		select * from board where b_category = #{category} and `b_title` like
-		concat('%',#{keyword},'%') or `b_text` like concat('%',#{keyword},'%') order
+		select * from board where b_category = #{category} and (`b_title` like
+		concat('%',#{keyword},'%') or `b_text` like concat('%',#{keyword},'%')) order
 		by
 		b_seq desc
 		LIMIT #{startList}, #{listSize}

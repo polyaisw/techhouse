@@ -122,6 +122,9 @@ public class ApplyController {
 	public String insertProductAction(@RequestParam("prod_productName") String prod_productName,
 			@RequestParam("prod_price") String prod_price, @RequestParam("prod_uploadImg") String prod_uploadImg) {
 		logger.info("상품 등록 액션");
+		if(prod_uploadImg==null || prod_uploadImg.equals("")) {
+			prod_uploadImg = "product_default.png";
+		}
 		productService.insertProduct(new ProductVO(prod_productName, prod_price, prod_uploadImg));
 
 		return "<script>alert('product_comlete'); location.href='/board/apply/product'</script>";

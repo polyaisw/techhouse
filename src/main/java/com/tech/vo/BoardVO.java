@@ -32,8 +32,16 @@ public class BoardVO implements BVO{
 		this.b_views = 0;
 	}
 	
+
 	
 	
+	//getBoardListByCategoryKeywordNumber용
+	public BoardVO(String b_category, String keyword, int listSize) {
+		super();
+		this.b_category = b_category;
+		this.keyword = keyword;
+		this.listSize = listSize;
+	}
 
 	public int getB_seq() {
 		return b_seq;

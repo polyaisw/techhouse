@@ -63,7 +63,7 @@ public class SearchController {
 			@RequestParam(required = false, defaultValue = "1") int range) throws Exception {
 
 		keyword = keyword.trim();
-
+		System.out.println(b_category + " : 카테고리 이름");
 		BoardVO boardVO = new BoardVO();
 
 		/* 검색어 */
@@ -98,6 +98,7 @@ public class SearchController {
 		boardVO.setListSize(5);
 		model.addAttribute("viewsList", boardService.getBoardListByCategoryKeywordNumber(boardVO));
 
+		System.out.println(url+" : url");
 		if (url.equals("/main")) {
 			logger.error("board_search error");
 			return "redirect:" + url; // 에러인경우 메인으로
