@@ -22,6 +22,14 @@
 		resultType="Board">
 		select * from board where b_writer = #{value}
 	</select>
+	<select id="getBoardByUserName_P" parameterType="Pagination"
+		resultType="Board">
+		select * from board where b_writer = #{writer} order
+		by
+		b_seq desc
+		LIMIT #{startList}, #{listSize}
+	</select>
+	
 	<select id="getBoardByTitle" parameterType="string"
 		resultType="Board">
 		select * from board where `b_title` like concat('%',#{value},'%');

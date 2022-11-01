@@ -155,6 +155,13 @@ public class TradeServiceImpl implements TradeService {
 	}
 
 
+	@Override
+	public List<BVO> getBoardByUserName_P(BVO vo) {
+		// TODO Auto-generated method stub
+		return tMapper.getTBoardByUserName_P(vo);
+	}
+
+
 	
 
 }

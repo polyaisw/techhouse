@@ -16,6 +16,7 @@ public class Pagination implements BVO{
 	private boolean next;
 	private String category;
 	private String keyword;
+	private String writer;
 	
 	
 
@@ -105,6 +106,16 @@ public class Pagination implements BVO{
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	
+	
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public void pageInfo(int page, int range, int listCnt) {
