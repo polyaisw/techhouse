@@ -20,4 +20,11 @@ public interface UserService {
 	public void memberDel(UserVO vo) throws Exception; 
 //	UserVO getUser(UserVO vo);		//유저정보
 //	void deleteUser(UserVO vo);	//회원탈퇴
+	
+	/* 핸드폰번호 인증 */
+	public Boolean phoneAuth(String tel) throws Exception;
+	
+	/* 핸드폰번호 인증 확인*/
+	public Boolean phoneAuthOk() throws Exception;
+
 }

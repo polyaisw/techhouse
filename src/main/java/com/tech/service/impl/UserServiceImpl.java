@@ -81,6 +81,16 @@ public class UserServiceImpl implements UserService {
 //		
 //	}
 
+	@Override
+	public Boolean phoneAuth(String tel) throws Exception {
+		return memberMapper.phoneAuth(tel);
+	}
+
+	@Override
+	public Boolean phoneAuthOk() throws Exception {
+		return memberMapper.phoneAuthOk();
+	}
+
 
 
 }

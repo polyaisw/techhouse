@@ -10,12 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tech.service.MemberService;
 import com.tech.service.interfaces.UserService;
 import com.tech.vo.UserVO;
 
@@ -288,6 +289,44 @@ public class UserController {
 		return "redirect:/";
 		
 	}
+	//랜덤인증번호발송
+	
+	@PostMapping("/phoneAuth")
+	@ResponseBody
+	public Boolean phoneAuth(String tel, HttpServletRequest request) {
+
+	    try { // 이미 가입된 전화번호가 있으면
+	        if(MemberService.memberTelCount(tel) > 0) 
+	            return true; 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    HttpSession session = request.getSession();
+
+	    String code = MemberService.sendRandomMessage(tel);
+	    session.setAttribute("rand", code);
+	    
+	    return false;
+	}
+
+	@PostMapping("/phoneAuthOk")
+	@ResponseBody
+	public Boolean phoneAuthOk(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+	    String rand = (String) session.getAttribute("rand");
+	    String code = (String) request.getParameter("code");
+
+	    System.out.println(rand + " : " + code);
+
+	    if (rand.equals(code)) {
+	        session.removeAttribute("rand");
+	        return false;
+	    } 
+
+	    return true;
+	}	
+
 }
 
 

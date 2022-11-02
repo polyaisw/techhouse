@@ -22,4 +22,10 @@ public interface MemberMapper {
 	/* 회원 탈퇴 */
 	public void memberDel(UserVO vo);
 	
+	/* 핸드폰번호 인증 */
+	public Boolean phoneAuth(String tel);
+	
+	/* 핸드폰번호 인증 확인*/
+	public Boolean phoneAuthOk();
+	
 }
