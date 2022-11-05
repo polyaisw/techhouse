@@ -31,6 +31,9 @@ function goToList(value) {
 			case '꿀딜/장터':
 				location.href="/board/news/hotDeal";
 				break;
+			case '사기피해신고':
+				location.href="/board/center/report";
+				break;
 			}
 		}
 		

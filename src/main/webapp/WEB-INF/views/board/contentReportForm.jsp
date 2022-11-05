@@ -6,79 +6,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>글 내용</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<link href="/resources/css/nav.css" rel="stylesheet">
-<link href="/resources/css/default.css" rel="stylesheet">
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet">
+
+<title>TECH HOUSE - 글 내용</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="/resources/assets/css/fontawesome.css">
+<link rel="stylesheet"
+	href="/resources/assets/css/templatemo-cyborg-gaming.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet"
+	href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/resources/css/paging.css">
+<link rel="stylesheet" href="/resources/css/search.css">
+
+<style>
+p {
+	color: white;
+}
+</style>
+
 </head>
 <body>
 	<jsp:include page="../init/header.jsp"></jsp:include>
-	<jsp:include page="../init/nav.jsp"></jsp:include>
-	<div class="container text-white">
-		<div class="row">
-			<div class="col ">
-				<form action="/board/updateForm" method="post">
+
+	<div class="container">
+		<div class="page-content text-white">
+			<div class="content-title-section d-flex flex-column">
+				<div
+					class="category-box d-flex flex-row justify-content-between mb-1">
+					<span class="badge bg-danger" style="line-height: 1.5;">${ boardContent.b_category }</span>
+					<span class="page-number" style="color: #666666;">No. ${ boardContent.b_seq }</span>
+				</div>
+				<h3>${ boardContent.b_title }</h3>
+				<div
+					class="title-content-box d-flex flex-row justify-content-between">
+					<div class="user-content d-flex align-items-center mt-2">
+						<img src="/resources/images/member/user_default.png"
+							class="img-fluid rounded-circle text-center d-inline me-1"
+							style="width: 17px; height: 17px;"> <span class="user-name"
+							style="color: #a7a7a7;">${boardContent.b_writer }</span>
+					</div>
+					<div class="icon-content" style="color: #666666;">
+						<span class="m-1"><i class="fa-regular fa-comment"
+							style="color: #666666;"></i> ${ boardContent.b_commentcount }</span> <span
+							class="m-1"><i class="fa-solid fa-eye text-white"
+							style="color: #666666 !important;"></i> ${ boardContent.b_views }</span>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="goTolist-button text-end">
+				<input type="button" class="button-1-border" value="목록"
+					onclick="goToList('${boardContent.b_category}')">
+			</div>
+			<div class="content-main-section text-white">
+				<p>${boardContent.b_text}</p>
+			</div>
+			<div class="content-main button-box">
+				<form action="/board/updateForm" method="post"
+					class="d-flex justify-content-end">
 					<input type="text" class="d-none" name="b_seq"
 						value="${ boardContent.b_seq }">
-					<table class="boarder w-100">
-						<tr>
-							<td>글번호</td>
-							<td>${ boardContent.b_seq }</td>
-						<tr>
-						<tr>
-							<td>조회수</td>
-							<td>${ boardContent.b_views }</td>
-						<tr>
-							<td>이 름</td>
-							<td>${ boardContent.b_writer}</td>
-						</tr>
 
-						<tr>
-							<td>제목</td>
-							<td>${ boardContent.b_title}</td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td>${fn:replace(boardContent.b_text, replaceChar,"<br>")}</td>
-						</tr>
-						<tr>
-							<td>카테고리</td>
-							<td>${ boardContent.b_category }</td>
-						</tr>
-						<tr>
-							<td>업로드이미지(임시)</td>
-							<td>${ boardContent.b_uploadImg }</td>
-						</tr>
-						<tr>
-
-							<c:if test="${member.name == boardContent.b_writer}">
-								<td><input type="submit" value="글 수정하기"
-									class="btn btn-primary"> <a
-									href="/board/deleteBoardAction?b_seq=${ boardContent.b_seq}"
-									class="btn btn-primary">삭제하기</a></td>
-							</c:if>
-							
-						</tr>
-						<tr><td><a href="/board/center/report" class="btn btn-primary">목록으로</a></td></tr>
-					</table>
+					<c:if test="${member.name == boardContent.b_writer}">
+						<td><input type="submit" value="글 수정하기" class="button-1">
+							<a href="/board/deleteBoardAction?b_seq=${ boardContent.b_seq}"
+							class="button-1-border">삭제하기</a></td>
+					</c:if>
+					
 				</form>
 			</div>
-		</div>
-		<hr>
 
+		</div>
 	</div>
+
 	<jsp:include page="../init/footer.jsp"></jsp:include>
+	<script src="/resources/js/goToList.js"></script>
 
 	<script src="https://kit.fontawesome.com/5547fa07a6.js"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/assets/js/isotope.min.js"></script>
+	<script src="/resources/assets/js/owl-carousel.js"></script>
+	<script src="/resources/assets/js/tabs.js"></script>
+	<script src="/resources/assets/js/popup.js"></script>
+	<script src="/resources/assets/js/custom.js"></script>
 </body>
 </html>

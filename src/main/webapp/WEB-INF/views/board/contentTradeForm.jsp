@@ -6,192 +6,217 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>글 내용</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<link href="/resources/css/nav.css" rel="stylesheet">
-<link href="/resources/css/default.css" rel="stylesheet">
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet">
+
+<title>TECH HOUSE - 글 내용</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="/resources/assets/css/fontawesome.css">
+<link rel="stylesheet"
+	href="/resources/assets/css/templatemo-cyborg-gaming.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet"
+	href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/resources/css/paging.css">
+<link rel="stylesheet" href="/resources/css/search.css">
 </head>
 <body>
-
-
 	<jsp:include page="../init/header.jsp"></jsp:include>
-	<jsp:include page="../init/nav.jsp"></jsp:include>
 	<div class="container text-white">
-		<div class="row">
-			<div class="col ">
-				<form action="/board/updateTradeForm" method="post">
-					<input type="text" class="d-none" name="t_seq"
-						value="${ tradeContent.t_seq }">
-					<table class="boarder w-100">
-						<tr>
-							<td>글번호</td>
-							<td>${ tradeContent.t_seq }</td>
-						<tr>
-						<tr>
-							<td>조회수</td>
-							<td>${ tradeContent.t_views }</td>
-						<tr>
-							<td>이 름</td>
-							<td>${ tradeContent.t_writer}</td>
-						</tr>
-						<tr>
-							<td>상태</td>
-							<td>${ tradeContent.t_state}</td>
-						</tr>
-						<tr>
-							<td>가격</td>
-							<td>${ tradeContent.t_price}원</td>
-						</tr>
-						<tr>
-							<td>상품명</td>
-							<td>${ tradeContent.t_prodName}</td>
-						</tr>
-						<tr>
-							<td>카테고리</td>
-							<td>${ tradeContent.t_category }</td>
-						</tr>
-						<tr>
-							<td>제목</td>
-							<td>${ tradeContent.t_title}</td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td>${tradeContent.t_text}</td>
-						</tr>
-
-						<tr>
-							<td>업로드이미지(임시)</td>
-							<td>${ tradeContent.t_uploadImg }</td>
-						</tr>
-						<tr>
-							<c:if test="${member.name == tradeContent.t_writer}">
-								<td><input type="submit" value="글 수정하기"
-									class="btn btn-primary"> <a
-									href="/board/deleteTradeBoardAction?t_seq=${ tradeContent.t_seq}"
-									class="btn btn-primary">삭제하기</a></td>
-							</c:if>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary"
-								value="목록으로" onclick="goToList('${tradeContent.t_category}')"></td>
-						</tr>
-						<tr>
-							<c:choose>
-								<c:when test="${member.name != null}">
-									<c:if test="${member.rank != '관리자' }">
-										<c:if test="${member.name != tradeContent.t_writer}">
-											<c:choose>
-												<c:when test="${ tradeContent.t_state != '판매중'}">
-													<td><input type="button"
-														class="btn btn-primary disabled" value="바로구매" onclick="#">
-														<input type="button" class="btn btn-primary disabled"
-														value="안심거래" onclick="#"></td>
-													
-												</c:when>
-												<c:otherwise>
-															<td><a class="btn btn-success" href="#">바로구매</a> <a
-														class="btn btn-success" href="#">안심거래</a></td>
-												</c:otherwise>
-											</c:choose>
-										</c:if>
-									</c:if>
-								</c:when>
-								<c:otherwise>
-									<td><a class="btn btn-primary" href="/member/login">바로구매</a>
-										<a class="btn btn-primary" href="/member/login">안심거래</a></td>
-								</c:otherwise>
-							</c:choose>
-							<!-- if, else의 종료임을 정의-->
-
-
-
-							<%-- 		<c:if test="${member.name != tradeContent.t_writer}">
-								<c:if test="${ tradeContent.t_state != '판매중'}">
-									<td><input type="button" class="btn btn-primary disabled"
-										value="바로구매" onclick="#" > <input type="button"
-										class="btn btn-primary disabled" value="안심거래" onclick="#"></td>
-
-								</c:if>
-								<td><input type="button" class="btn btn-primary"
-									value="바로구매" onclick="#"> <input type="button"
-									class="btn btn-primary" value="안심거래" onclick="#"></td>
-							</c:if>
-							<c:if test="${member.name == null}">
-								<td><a class="btn btn-primary" href="/member/login">바로구매</a>
-									<a class="btn btn-primary" href="/member/login">안심거래</a></td>
-							</c:if> --%>
-						</tr>
-
-					</table>
-				</form>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-md-12">
-				<table class="border w-100">
-					<tr>
-						<th>닉네임</th>
-						<th>내용</th>
-						<th>날짜</th>
-						<th>삭제</th>
-					</tr>
-					<c:forEach var="commentContent" items="${commentList}">
-						<tr>
-							<td>${commentContent.c_writer}</td>
-							<td>${commentContent.c_text}</td>
-							<td>${ commentContent.c_date }</td>
-							<c:if test="${member.name == commentContent.c_writer }">
-								<td><a class="btn btn-primary"
-									href="/board/deleteCommentAction?t_seq=${tradeContent.t_seq }&c_boardSeq=${commentContent.c_boardSeq }&c_seq=${commentContent.c_seq}">
-										삭제</a></td>
-							</c:if>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
-			<c:if test="${member==null}">
-				<div class="col-md-12 mt-5">
-					<span class="text-white">로그인을 해주세요</span>
+		<div class="page-content">
+			<div class="row">
+				<div class="col-lg-5 image-box">
+					<img src="/resources/images/trade/${ tradeContent.t_uploadImg }"
+						width="500px" height="400px" class="rounded">
 				</div>
-			</c:if>
-			<c:if test="${member!=null}">
-				<div class="col-md-12 mt-5">
-					<form
-						action="/board/insertCommentAction?t_seq=${ tradeContent.t_seq}"
-						method="post">
-						<table class="w-100">
-							<tr>
-								<td><label class="form-label" for="c_writer">닉네임</label>
-									<p class="text-white">${member.name }</p> <label
-									class="form-label" for="c_text">내용</label> <textarea
-										class="form-control" rows="3" cols="50" name="c_text"
-										id="c_text"></textarea></td>
-							</tr>
-						</table>
-						<input type="text" class="d-none" name="c_boardSeq"
-							value="${tradeContent.t_seq }"> <input type="text"
-							class="d-none" name="c_writer" value="${member.name }"><input
-							type="submit" value="댓글작성" class="btn btn-primary">
+				<div class="col-lg-7 d-flex flex-column">
+					<div class="trade-title d-flex flex-row justify-content-between">
+						<h4 class="my-3">${tradeContent.t_title }</h4>
+						<p>No.${tradeContent.t_seq }</p>
+					</div>
+					<div class="d-flex flex-row justify-content-between">
+						<span class="fs-2 fw-bold">${tradeContent.t_price }원</span>
+						<div class="">
+							<c:if test="${tradeContent.t_state eq '판매중'}">
+								<span class="badge rounded-pill text-bg-light d-inline">${tradeContent.t_state }</span>
+							</c:if>
+							<c:if test="${tradeContent.t_state eq '거래중'}">
+								<span class="badge rounded-pill text-bg-warning d-inline">${tradeContent.t_state }</span>
+							</c:if>
+							<c:if test="${tradeContent.t_state eq '거래완료'}">
+								<span class="badge rounded-pill text-bg-primary d-inline">${tradeContent.t_state }</span>
+							</c:if>
+							<span class="badge " style="color: var(--bs-teal)">인증</span>
+						</div>
+					</div>
+					<hr>
+					<div class="d-flex flex-row justify-content-between">
+						<div class="d-flex flex-row ">
+							<p class="pe-2">
+								<i class="fa-solid fa-eye me-1" style="color: #666666;"></i>${ tradeContent.t_views }</p>
+							<p class="pe-2">
+								<i class="fa-regular fa-comment me-1" style="color: #666666;"></i>11
+							</p>
+							<!-- 댓글수 -->
+							<p class="pe-2">${ tradeContent.t_date }</p>
+						</div>
+						<div class="user-info">
+							<i class="fa-solid fa-medal text-danger me-2"></i> <span>${tradeContent.t_writer }</span>
 
+						</div>
+					</div>
+					<div class="info-box my-4">
+						<div class="d-inline-block" style="width: 90px">상품상태</div>
+						<span>새상품</span><br>
+						<div class="d-inline-block mt-2" style="width: 90px">사용기간</div>
+						<span>1개월 미만</span><br>
+						<div class="d-inline-block mt-2" style="width: 90px">교환여부</div>
+						<span>교환불가능</span><br>
+						<div class="d-inline-block mt-2" style="width: 90px">배송비</div>
+						<span>배송비포함</span>
+					</div>
+					<form action="/board/updateTradeForm" method="post"
+						class="d-flex align-items-end justify-content-end mt-2"
+						style="vertical-align: bottom">
+						<input type="text" class="d-none" name="t_seq"
+							value="${ tradeContent.t_seq }">
+
+
+						<c:if test="${member.name == tradeContent.t_writer}">
+							<input type="submit" value="글 수정하기" class="button-4 ms-1">
+							<a
+								href="/board/deleteTradeBoardAction?t_seq=${ tradeContent.t_seq}"
+								class="button-4-border ms-1">삭제하기</a>
+						</c:if>
+
+
+
+						<c:choose>
+							<c:when test="${member.name != null}">
+								<c:if test="${member.rank != '관리자' }">
+									<c:if test="${member.name != tradeContent.t_writer}">
+										<c:choose>
+											<c:when test="${ tradeContent.t_state != '판매중'}">
+												<input type="button" class="button-4 ms-1 disabled"
+													value="바로구매" onclick="#">
+												<input type="button" class="button-0 ms-1 disabled"
+													value="안심거래" onclick="#">
+
+											</c:when>
+											<c:otherwise>
+												<a class="button-4 ms-1" href="#">바로구매</a>
+												<a class="button-0 ms-1" href="javascript:alert('준비중입니다.')">안심거래</a>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</c:if>
+							</c:when>
+							<c:otherwise>
+								<a class="button-4 ms-1" href="/member/login">바로구매</a>
+								<a class="button-0 ms-1" href="javascript:alert('준비중입니다.')">안심거래</a>
+							</c:otherwise>
+						</c:choose>
+
+						<input type="button" class="button-4-border ms-1" value="목록으로"
+							onclick="goToList('${tradeContent.t_category}')">
 					</form>
 				</div>
-			</c:if>
+
+
+
+				<hr class="mt-5">
+				<div class="col-md-12 mt-4">${tradeContent.t_text}</div>
+				<hr class="mt-5">
+			</div>
+
+
+
+
+
+
+			<div class="content-comment-section my-3">
+				<div class="comment-title">
+					<i class="fa-regular fa-comment" style="color: #666666;"></i> <span
+						class="fw-bold px-1">댓글</span><span class="fw-bold"
+						style="color: #00b3b3;"></span>
+				</div>
+				<c:forEach var="commentContent" items="${commentList}">
+					<div
+						class="comment-main d-flex flex-row mt-4 justify-content-between">
+						<div class="comment-in d-flex flex-row">
+							<div class="comment-user-icon">
+								<img src="/resources/images/member/user_default.png"
+									class="img-fluid rounded-circle text-center d-inline me-2"
+									style="width: 22px; height: 22px;">
+							</div>
+							<div class="comment-box d-flex flex-column">
+								<span class="user-info">${commentContent.c_writer}</span>
+								<p class="text-content">${commentContent.c_text}</p>
+								<span class="write-date">${ commentContent.c_date }</span>
+							</div>
+						</div>
+						<c:if test="${member.name == commentContent.c_writer }">
+							<a class=""
+									href="/board/deleteCommentAction?t_seq=${tradeContent.t_seq }&c_boardSeq=${commentContent.c_boardSeq }&c_seq=${commentContent.c_seq}">
+										<input
+								type="button" class="button-4-border" value="삭제"></a>
+						</c:if>
+					</div>
+				</c:forEach>
+				<c:if test="${member==null}">
+					<div class="col-md-12 mt-5">
+						<span class="text-white">로그인을 해주세요</span>
+					</div>
+				</c:if>
+				<c:if test="${member!=null}">
+					<div class="col-md-12 mt-5">
+						<form
+						action="/board/insertCommentAction?t_seq=${ tradeContent.t_seq}"
+						method="post">
+							<table class="w-100">
+								<tr>
+									<td>
+										<p class="text-white">${member.name }</p> <textarea
+											class="form-control" style="" rows="3" cols="50"
+											name="c_text" id="c_text"></textarea>
+									</td>
+								</tr>
+							</table>
+							<input type="text" class="d-none" name="c_boardSeq"
+								value="${tradeContent.t_seq }"> <input type="text"
+								class="d-none" name="c_writer" value="${member.name }">
+							<input type="submit" value="작성 완료" class="button-4">
+						</form>
+					</div>
+				</c:if>
+			</div>
 		</div>
-	</div>
+		</div>
+		
 	<jsp:include page="../init/footer.jsp"></jsp:include>
 	<script src="/resources/js/goToList.js"></script>
 
 	<script src="https://kit.fontawesome.com/5547fa07a6.js"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/assets/js/isotope.min.js"></script>
+	<script src="/resources/assets/js/owl-carousel.js"></script>
+	<script src="/resources/assets/js/tabs.js"></script>
+	<script src="/resources/assets/js/popup.js"></script>
+	<script src="/resources/assets/js/custom.js"></script>
 </body>
 </html>

@@ -55,6 +55,10 @@ background-image: linear-gradient(132deg, #fbc900 0%, #038d72 100%);
 
 
 }
+
+.shadow {
+box-shadow: rgb(38, 57, 77) 0px 40px 50px -30px!important;
+}
 </style>
 <!-- Custom styles for this template -->
 <link href="/resources/css/tradeinfo.css" rel="stylesheet">
@@ -140,7 +144,7 @@ background-image: linear-gradient(132deg, #fbc900 0%, #038d72 100%);
 					</div>
 					</div>
 					<div class="col-xl-5">
-						<img class="img-fluid rounded rounded-circle"
+						<img class="img-fluid rounded rounded-circle shadow"
 							src="/resources/images/trade/bench.png"
 							style="height: 350px; width: 350px; float: right;">
 					</div>
@@ -160,7 +164,7 @@ background-image: linear-gradient(132deg, #fbc900 0%, #038d72 100%);
 </div>
 					</div>
 					<div class="col-xl-5 col-md-6 order-md-1">
-						<img class="img-fluid rounded rounded-circle"
+						<img class="img-fluid rounded rounded-circle shadow"
 							src="https://mblogthumb-phinf.pstatic.net/MjAyMDA2MDVfMTQz/MDAxNTkxMzMzMTUyNTg1.d3vYCEOMDLMu95vdkwv4W-0N3d4t-BD8Jx4AuubN55cg.vR-fHi992anGeXtQiopAkSVksHV5WoeInC62hzLh-8gg.JPEG.wltns8318/gtgt.jpg?type=w800"
 							style="height: 350px; width: 350px;">
 					</div>
@@ -179,8 +183,8 @@ background-image: linear-gradient(132deg, #fbc900 0%, #038d72 100%);
 							신고이력, 후기 등을 꼼꼼히 확인해보세요.</p></div>
 					</div>
 					<div class="col-xl-5">
-						<img class="img-fluid rounded rounded-circle"
-							src="https://png.pngtree.com/element_our/20200609/ourlarge/pngtree-member-rank-medal-icon-image_2228879.jpg"
+						<img class="img-fluid rounded rounded-circle shadow"
+							src="/resources/images/trade/medal.png"
 							style="height: 350px; width: 350px; float: right;">
 					</div>
 				</div>

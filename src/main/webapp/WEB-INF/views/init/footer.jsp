@@ -10,11 +10,8 @@
 </head>
 <body>
 	<!-- footer -->
-	<div class="container-fluid">
-		<div class="row mt-5">
-			<p class="text-center mt-5">
-				<a><span class="h2">TECH HOUSE</span></a>
-			</p>
+	<div class="container-fluid px-0">
+		<div class="row" style="margin-top:150px;">
 
 			<div class="page-content p-0 round rounded-0 mt-3">
 				<div class="content">

@@ -32,11 +32,14 @@ public class SearchController {
 
 	/* 중고거래게시판용 얘는 카테고리가 하나라 검색어만 받으면 결과가 나옴 */
 	@RequestMapping(value = "/searchAction", method = RequestMethod.GET)
-	public String searchAction(@RequestParam("searchKeyword") String keyword, Model model,
+	public String searchAction(
+			@RequestParam(value = "searchKeyword", required=false, defaultValue ="팔아요") String keyword, 
+			Model model,
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range) {
 
 		keyword = keyword.trim();
+		System.out.println("키워드 : "+keyword);
 		TradeVO tradeVO = new TradeVO();
 		/* 검색어 세팅 */
 		tradeVO.setKeyword(keyword);
@@ -120,11 +123,12 @@ public class SearchController {
 		
 		/* 유저 이름으로 '거래게시판' 카테고리 제외 모든 카페고리 게시글 전부 가져와 갯수 저장 */
 		int listCnt = boardService.getBoardByUserName(writer).size();	
+		System.out.println("게시판"+listCnt+"개");
 		
 		/* 페이지네이션 세팅 */
 		Pagination pagination = new Pagination();
-		pagination.setWriter(writer);
 		pagination.pageInfo(page, range, listCnt);
+		pagination.setWriter(writer);
 		
 		/* 페이지 인디케이터 표시 */
 		model.addAttribute("pagination", pagination);
@@ -135,7 +139,7 @@ public class SearchController {
 		//----------------------------------------------------------------------------------------------
 		/* 거래게시판 부분*/
 		int listCnt2 = tradeService.getBoardByUserName(writer).size();
-		System.out.println(listCnt2+"개");
+		System.out.println("거래게시판"+listCnt2+"개");
 		
 		Pagination pagination2 = new Pagination();
 		pagination2.setWriter(writer);
@@ -144,8 +148,6 @@ public class SearchController {
 		model.addAttribute("pagination2", pagination2);
 		
 		model.addAttribute("tradeList", tradeService.getBoardByUserName_P((pagination2)));
-		
-			
 			return "getUserBoardList_";
 		}
 	 
