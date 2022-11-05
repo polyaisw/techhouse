@@ -3,32 +3,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>TECH HOUSE - 룰렛 돌리기</title>
-</head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link href="/resources/css/default.css" rel="stylesheet">
-<link href="/resources/css/nav.css" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet">
+
+<title>TECH HOUSE - 룰렛돌리기</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="/resources/assets/css/fontawesome.css">
+<link rel="stylesheet"
+	href="/resources/assets/css/templatemo-cyborg-gaming.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet"
+	href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/resources/css/paging.css">
+<link rel="stylesheet" href="/resources/css/search.css">
 
 <body>
 	<jsp:include page="../../init/header.jsp"></jsp:include>
 	<jsp:include page="../../init/nav.jsp"></jsp:include>
-
+	<div class="container">
+		<div class="page-content">
+		
 	<h1 class="text-white">룰렛</h1>
+		</div>
+	</div>
 
 
 	<jsp:include page="../../init/footer.jsp"></jsp:include>
 
 	<script src="https://kit.fontawesome.com/5547fa07a6.js"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/assets/js/isotope.min.js"></script>
+	<script src="/resources/assets/js/owl-carousel.js"></script>
+	<script src="/resources/assets/js/tabs.js"></script>
+	<script src="/resources/assets/js/popup.js"></script>
+	<script src="/resources/assets/js/custom.js"></script>
 </body>
 </html>

@@ -191,13 +191,11 @@ https://templatemo.com/tm-579-cyborg-gaming
 					<div class="col">
 						<div class="blockquote-wrapper">
 							<div class="blockquote">
-								<h1>
-									Increase your odds of winning with an entry <span
-										class="text-danger">"ticket"</span>. That is the same as the <span
-										class="text-danger">${productContent.prod_productName}</span>
-								</h1>
-								<h4>
-									&mdash;Tech house<br> <em>development team support...</em>
+								<h3 class="fw-bold">
+									<i class="fa-solid fa-bolt text-warning pe-1"></i>응모를 통해 상품을 획득하세요!<i class="fa-solid fa-bolt text-warning ps-1"></i>
+								</h3>
+								<h4 class="fw-bold">
+									&mdash;Tech house<br> <em>"룰렛을 통해 응모권을 얻을 수 있어요"</em>
 								</h4>
 							</div>
 						</div>
@@ -218,12 +216,12 @@ https://templatemo.com/tm-579-cyborg-gaming
 			<div class="row ">
 				<div class="col d-flex my-5 justify-content-center">
 					<h4 class="">
-						<em>총 사용된 응모권 : ${count}개</em>
+						<em style="color:#d4d4d4;">총 사용된 응모권 : ${count}개</em>
 					</h4>
 				</div>
 				<div class="col my-5 d-flex my-5 justify-content-center">
 					<h4 class="">
-						<em>나의 당첨 확률 : ${percent}%</em>
+						<em style="color:#d4d4d4;">나의 당첨 확률 : ${percent}%</em>
 					</h4>
 				</div>
 			</div>
@@ -242,7 +240,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 								style="max-width: 500px; max-height: 500px;"
 								style="object-fit: fill;">
 						</div>
-						<div class="row border-top border-1 ">
+						<div class="row   ">
 							<div class="col d-flex flex-row justify-content-around py-3">
 								<div class="count_ticket">
 									<h4 class="h4 ">
@@ -278,7 +276,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 								style="max-width: '500px'; max-height: '500px';"
 								style="object-fit: fill;">
 						</div>
-						<div class="row border-top border-1 ">
+						<div class="row   ">
 							<div class="col d-flex flex-row justify-content-around py-3">
 								<div class="count_ticket">
 
@@ -319,7 +317,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 								</c:if>
 							</c:when>
 							<c:otherwise>
-								<a href="javascript:alert('시간이 종료되었습니다');"
+								<a href="javascript:alert('시간이 다 되었거나 지금은 진행중이지 않네요.');"
 									class="button-0  my-5">응모하기</a>
 							</c:otherwise>
 						</c:choose>

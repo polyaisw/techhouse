@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tech.common.Pagination;
 import com.tech.service.interfaces.CommentService;
 import com.tech.service.interfaces.TradeService;
 import com.tech.valid.TradeValidator;
@@ -37,10 +38,10 @@ public class TradeController {
 	@Autowired
 	private CommentService commentService;
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new TradeValidator());
-	}
+	/*
+	 * @InitBinder public void initBinder(WebDataBinder binder) {
+	 * binder.setValidator(new TradeValidator()); }
+	 */
 
 	/* trade */
 	@GetMapping("/trade/tradeInfo")
@@ -50,10 +51,20 @@ public class TradeController {
 	}
 
 	@GetMapping("/trade/tradeBoard")
-	public String tradeBoard(Model model) {
+	public String tradeBoard(Model model, 
+	@RequestParam(required = false, defaultValue = "1") int page,
+	@RequestParam(required = false, defaultValue = "1") int range) 
+			throws Exception {
 		logger.info("거래 게시판 진입");
-		List<BVO> list = tradeService.getBoardListByCate("거래게시판");
-		model.addAttribute("list", list);
+		 String category = "거래게시판";
+			
+		 /*게시글 출력*/
+		  int listCnt = tradeService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", tradeService.getBoardLists(pagination));
 		return "/board/trade/tradeBoard";
 	}
 

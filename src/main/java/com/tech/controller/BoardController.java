@@ -79,10 +79,22 @@ public class BoardController {
 	}
 
 	@GetMapping("/community/mysetting")
-	public String mysetting(Model model) {
+	public String mysetting(Model model,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) 
+					throws Exception {
 		logger.info("인증게시판 진입");
-		List<BVO> list = boardService.getBoardListByCate("인증게시판");
-		model.addAttribute("list", list);
+		String category = "인증게시판";
+
+		  int listCnt = boardService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  pagination.setListSize(10);
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", boardService.getBoardLists(pagination));
+		  
+		  
 		return "/board/community/mysetting";
 	}
 
@@ -240,10 +252,19 @@ public class BoardController {
 	}
 
 	@GetMapping("/center/report")
-	public String report(Model model) {
+	public String report(Model model,@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) 
+					throws Exception {
 		logger.info("사기피해 신고 진입");
-		List<BVO> list = boardService.getBoardListByCate("사기피해신고");
-		model.addAttribute("list", list);
+		String category = "사기피해신고";
+		
+		 /*게시글 출력*/
+		  int listCnt = boardService.getBoardListCnt(); 
+		  Pagination pagination = new Pagination(); 
+		  pagination.pageInfo(page, range, listCnt);
+		  pagination.setCategory(category); 
+		  model.addAttribute("pagination", pagination); 
+		  model.addAttribute("list", boardService.getBoardLists(pagination));
 		return "/board/center/report";
 	}
 

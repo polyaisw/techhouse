@@ -4,8 +4,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet">
+
+<title>TECH HOUSE - 리스트</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="/resources/assets/css/fontawesome.css">
+<link rel="stylesheet"
+	href="/resources/assets/css/templatemo-cyborg-gaming.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet"
+	href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/resources/css/paging.css">
+<link rel="stylesheet" href="/resources/css/search.css">
 
 <script type="text/javascript">
 	function fn_prev(page, range, rangeSize) {
@@ -34,12 +57,16 @@
 </head>
 <body>
 
+	<jsp:include page="init/header.jsp"></jsp:include>
+<div class="container">
+	<div class="page-content">
+
 <form id="userSearchForm" method="get" action="/userSearchAction" >		<!-- userSearhAction은 SearchController에 있음 -->
 <input type="search" name="userName" id="userSearch" placeholder="유저이름 검색">
 
 </form>
 
-	<c:url var="getPageRange" value="/getUserBoardList_">
+	<c:url var="getPageRange" value="getUserBoardList_">
 		<c:param name="page" value="${pagination.page}" />
 		<c:param name="range" value="${pagination.range}" />
 	</c:url>
@@ -103,61 +130,7 @@
 						</div>
 						<!-- pagination{e} -->
 		</div>
-		<div class="com-md-6">
-		<!-- 거래게시글{s}-->
-		<table class="w-100 border">
-					<thead class="border">
-						<tr>
-							<th>번호</th>
-							<th>이미지</th>
-							<th>제목</th>
-							<th>가격</th>
-							<th>조회수</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="tradeList" items='${tradeList}'>
-							
-							<tr>
-								<td>${ tradeList.t_seq }</td>
-								<td><a href="/board/contentTradeForm?t_seq=${ tradeList.t_seq }">
-										${ tradeList.t_uploadImg }</a></td>
-								<td><a href="/board/contentTradeForm?t_seq=${ tradeList.t_seq }">${ tradeList.t_title }</a></td>
-							 	<td>${ tradeList.t_price }</td>
-							 	<td>${ tradeList.t_views }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-		<!-- 거래게시글{e} -->
 		
-		
-		
-		
-		<!-- pagination{s} -->
-							<div id="paginationBox ">
-							<ul class="pagination d-flex justify-content-center">
-								<c:if test="${pagination2.prev}">
-									<li class="page-item"><a class="page-link" href="#"
-										onClick="fn_prev('${pagination2.page}', '${pagination2.range}', '${pagination2.rangeSize}')">Previous</a></li>
-								</c:if>
-								<c:forEach begin="${pagination2.startPage}"
-									end="${pagination2.endPage}" var="idx">
-									<li
-										class="page-item <c:out value="${pagination2.page == idx ? 'active' : ''}"/> "><a
-										class="page-link" href="#"
-										onClick="fn_pagination('${idx}', '${pagination2.range}', '${pagination2.rangeSize}')">
-											${idx} </a></li>
-								</c:forEach>
-								<c:if test="${pagination2.next}">
-									<li class="page-item"><a class="page-link" href="#"onClick="fn_next('${pagination2.range}', '${pagination2.range}', '${pagination2.rangeSize}')">Next</a></li>
-								</c:if>
-							</ul>
-						</div>
-						
-						<!-- pagination{e} -->
-		
-		</div>
 	</div>
 </div>
 
@@ -175,7 +148,9 @@
 
 
 
+</div></div>
 
+		<jsp:include page="init/footer.jsp"></jsp:include>
 </body>
 
 	<script type="text/javascript">
@@ -187,4 +162,15 @@
 			}
 		}
 	</script>
+
+	<script src="https://kit.fontawesome.com/5547fa07a6.js"
+		crossorigin="anonymous"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/assets/js/isotope.min.js"></script>
+	<script src="/resources/assets/js/owl-carousel.js"></script>
+	<script src="/resources/assets/js/tabs.js"></script>
+	<script src="/resources/assets/js/popup.js"></script>
+	<script src="/resources/assets/js/custom.js"></script>
 </html>

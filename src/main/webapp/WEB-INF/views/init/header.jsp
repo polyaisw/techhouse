@@ -47,7 +47,12 @@ width: 126px!important;
 position:static!important;
     display: inline!important;
 }
+.header-area {
+	position:fixed;
+	background-color:#1f2122;
+	top:0px;
 }
+
 
 
 </style>

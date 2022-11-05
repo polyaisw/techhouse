@@ -6,25 +6,170 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>글 내용</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<link href="/resources/css/nav.css" rel="stylesheet">
-<link href="/resources/css/default.css" rel="stylesheet">
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet">
+
+<title>TECH HOUSE - 글 내용</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="/resources/assets/css/fontawesome.css">
+<link rel="stylesheet"
+	href="/resources/assets/css/templatemo-cyborg-gaming.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet"
+	href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/resources/css/paging.css">
+<link rel="stylesheet" href="/resources/css/search.css">
+
+<style>
+p {
+	color: white;
+}
+
+.recommed-button {
+	background-color :#00b3b3;
+	padding : 6px 12px;
+}
+
+.recommed-button:hover {
+	
+	background-color:#006e6e;
+}
+</style>
+
 </head>
 <body>
 	<jsp:include page="../init/header.jsp"></jsp:include>
-	<jsp:include page="../init/nav.jsp"></jsp:include>
-	<div class="container text-white">
-		<div class="row">
-			<div class="col ">
-				<form action="/board/updateForm" method="post">
+
+	<div class="container">
+		<div class="page-content text-white">
+			<div class="content-title-section d-flex flex-column">
+				<div
+					class="category-box d-flex flex-row justify-content-between mb-1">
+					<span class="badge"
+						style="line-height: 1.5; background-color: #00b3b3;">${ boardContent.b_category }</span>
+					<span class="page-number" style="color: #666666;">No. ${ boardContent.b_seq }</span>
+				</div>
+				<h3>${ boardContent.b_title }</h3>
+				<div
+					class="title-content-box d-flex flex-row justify-content-between">
+					<div class="user-content d-flex align-items-center mt-2">
+						<img src="/resources/images/member/user_default.png" class="img-fluid rounded-circle text-center d-inline me-1" style="width: 17px; height: 17px;"> <span class="user-name"
+							style="color: #a7a7a7;">${boardContent.b_writer }</span>
+					</div>
+					<div class="icon-content" style="color: #666666;">
+						<span class="m-1"><i class="fa-solid fa-thumbs-up"
+							style="color: #666666;"></i> ${ boardContent.b_recommed }</span> <span
+							class="m-1"><i class="fa-regular fa-comment"
+							style="color: #666666;"></i> ${ boardContent.b_commentcount }</span> <span
+							class="m-1"><i class="fa-solid fa-eye text-white"
+							style="color: #666666 !important;"></i> ${ boardContent.b_views }</span>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="goTolist-button text-end">
+			<input type="button"
+								class="button-3-border" value="목록"
+								onclick="goToList('${boardContent.b_category}')"></div>
+			<div class="content-main-section text-white">
+				<p>${boardContent.b_text}</p>
+			</div>
+			<div class="content-main-up-button text-center my-5">
+				<a href="/board/recommendAction?b_seq=${boardContent.b_seq }"
+					class="text-white recommed-button rounded" ><i class="fa-solid fa-thumbs-up text-white fw-bold"></i>
+					<span class="text-white fw-bold"> ${boardContent.b_recommed }</span>
+				</a>
+			</div>
+			<div class="content-main button-box">
+				<form action="/board/updateForm" method="post" class="d-flex justify-content-end">
 					<input type="text" class="d-none" name="b_seq"
 						value="${ boardContent.b_seq }">
+						
+						<c:if test="${member.name == boardContent.b_writer}">
+								<td><input type="submit" value="글 수정하기"
+									class="button-3"> <a
+									href="/board/deleteBoardAction?b_seq=${ boardContent.b_seq}"
+									class="button-3-border">삭제하기</a></td>
+							</c:if>
+							
+							<input type="button"
+								class="button-3-border" value="목록"
+								onclick="goToList('${boardContent.b_category}')">
+						</form>
+			</div>
+			<hr>
+			<div class="content-comment-section my-3">
+				<div class="comment-title">
+					<i class="fa-regular fa-comment"
+							style="color: #666666;"></i> <span class="fw-bold px-1">댓글</span><span class="fw-bold" style="color:#00b3b3;">${ boardContent.b_commentcount }</span>
+				</div>
+				<c:forEach var="commentContent" items="${commentList}">
+				<div class="comment-main d-flex flex-row mt-4 justify-content-between">
+				<div class="comment-in d-flex flex-row">
+					<div class="comment-user-icon"><img src="/resources/images/member/user_default.png" class="img-fluid rounded-circle text-center d-inline me-2" style="width: 22px; height: 22px;"></div>
+					<div class="comment-box d-flex flex-column">
+						<span class="user-info">${commentContent.c_writer}</span>
+						<p class="text-content">${commentContent.c_text}</p>
+						<span class="write-date">${ commentContent.c_date }</span>
+					</div>
+					</div>
+					<c:if test="${member.name == commentContent.c_writer }">
+									<a
+										href="/board/deleteCommentAction?c_seq=${commentContent.c_seq}&c_boardSeq=${commentContent.c_boardSeq}"><input
+											type="button" class="button-3-border" value="삭제"></a>
+								</c:if>
+				</div>
+				</c:forEach>
+							<c:if test="${member==null}">
+				<div class="col-md-12 mt-5">
+					<span class="text-white">로그인을 해주세요</span>
+				</div>
+			</c:if>
+			<c:if test="${member!=null}">
+				<div class="col-md-12 mt-5">
+					<form action="/board/insertCommentAction" method="post">
+						<table class="w-100">
+							<tr>
+								<td>
+									<p class="text-white">${member.name }</p>  <textarea
+										class="form-control" style="" rows="3" cols="50" name="c_text"
+										id="c_text"></textarea></td>
+							</tr>
+						</table>
+						<input type="text" class="d-none" name="c_boardSeq"
+							value="${boardContent.b_seq }"> <input type="text"
+							class="d-none" name="c_writer" value="${member.name }"> <input
+							type="submit" value="작성 완료" class="button-3">
+					</form>
+				</div>
+			</c:if>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+<%-- 	<div class="container text-white">
+		<div class="row">
+			<div class="col ">
+				
 					<table class="boarder w-100">
 						<tr>
 							<td>글번호</td>
@@ -62,21 +207,11 @@
 							<td>${ boardContent.b_uploadImg }</td>
 						</tr>
 						<tr>
-							<c:if test="${member.name == boardContent.b_writer}">
-								<td><input type="submit" value="글 수정하기"
-									class="btn btn-primary"> <a
-									href="/board/deleteBoardAction?b_seq=${ boardContent.b_seq}"
-									class="btn btn-primary">삭제하기</a></td>
-							</c:if>
+							
 						</tr>
 						<tr>
 
-							<td><a
-								href="/board/recommendAction?b_seq=${boardContent.b_seq }"
-								class="btn btn-primary">추천하기</a>
-							<input type="button" class="btn btn-primary"
-								value="목록으로" onclick="goToList('${boardContent.b_category}')">
-							</td>
+							<td></td>
 						</tr>
 					</table>
 				</form>
@@ -100,9 +235,11 @@
 								<td>${ commentContent.c_writer }</td>
 								<td>${commentContent.c_text}</td>
 								<td>${ commentContent.c_date }</td>
-								<c:if test="${member.name == commentContent.c_writer }"><td><a
-									href="/board/deleteCommentAction?c_seq=${commentContent.c_seq}&c_boardSeq=${commentContent.c_boardSeq}"><input
-										type="button" class="btn btn-primary"value="삭제"></a></td></c:if>
+								<c:if test="${member.name == commentContent.c_writer }">
+									<td><a
+										href="/board/deleteCommentAction?c_seq=${commentContent.c_seq}&c_boardSeq=${commentContent.c_boardSeq}"><input
+											type="button" class="btn btn-primary" value="삭제"></a></td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -133,16 +270,20 @@
 				</div>
 			</c:if>
 		</div>
-	</div>
+	</div> --%>
 	<jsp:include page="../init/footer.jsp"></jsp:include>
 
 	<script src="/resources/js/goToList.js"></script>
 
 	<script src="https://kit.fontawesome.com/5547fa07a6.js"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/assets/js/isotope.min.js"></script>
+	<script src="/resources/assets/js/owl-carousel.js"></script>
+	<script src="/resources/assets/js/tabs.js"></script>
+	<script src="/resources/assets/js/popup.js"></script>
+	<script src="/resources/assets/js/custom.js"></script>
 </body>
 </html>

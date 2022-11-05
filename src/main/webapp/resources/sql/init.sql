@@ -335,18 +335,6 @@ insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("�
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","팔아요","검정고무신","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","팔아요","검정고무신","b_uploadimg","취미공유");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","삽니다","감자","b_uploadimg","자유게시판");
@@ -384,11 +372,6 @@ insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("�
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
 
 
@@ -415,6 +398,8 @@ insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("�
 
 
 
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
 insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
 insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
 

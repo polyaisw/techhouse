@@ -165,7 +165,7 @@
 							<i
 								class="fa-solid fa-star-and-crescent"
 								style="color: var(--bs-cyan)"></i>
-							<div class="info-box border rounded my-2 d-block" style="border-color: var(--bs-cyan);">
+							<div class="info-box  rounded my-2 d-block" style="border-color: var(--bs-cyan);">
 								<h6 class="mt-4"><em>${member.name }</em> 님 환영합니다.</h6>
 								<div class="info-box-main mt-4" style="color:#666666;">
 									<div class="d-flex justify-content-between mx-2">

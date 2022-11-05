@@ -46,6 +46,26 @@ https://templatemo.com/tm-579-cyborg-gaming
 	color: #666;
 	font-size: 14px;
 }
+
+body {
+	background: rgb(31, 33, 34);
+	background: linear-gradient(180deg, rgba(31, 33, 34, 1) 4%,
+		rgba(90, 30, 93, 0.8155637254901961) 93%);
+}
+
+.color-edit {
+	color: #e75e8d
+}
+
+.gaming-library {
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px
+		10px 10px;
+}
+
+.item {
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px
+		10px 10px
+}
 </style>
 </head>
 <jsp:include page="init/header.jsp"></jsp:include>
@@ -79,13 +99,13 @@ https://templatemo.com/tm-579-cyborg-gaming
 
 
 	<!-- ***** Header Area Start ***** -->
-				
+
 	<div class="container">
 		<div class="row">
 
-		
+
 			<div class="col-lg-12">
-				<div class="page-content" style="margin-top:110px;">
+				<div class="page-content" style="margin-top: 110px;">
 
 					<!-- ***** Banner Start ***** -->
 					<div class="main-banner">
@@ -118,7 +138,8 @@ https://templatemo.com/tm-579-cyborg-gaming
 									<div class="col-lg-6">
 										<div class="middle-section ">
 											<h5 class="d-flex justify-content-between">
-												<span>인기 핫이슈</span> <a href="/board/news/issue"><i
+												<span>인기 <span class="color-edit">핫이슈</span></span> <a
+													href="/board/news/issue"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
 										</div>
@@ -139,7 +160,8 @@ https://templatemo.com/tm-579-cyborg-gaming
 									<div class="col-lg-6">
 										<div class="middle-section ">
 											<h5 class="d-flex justify-content-between">
-												<span>현재 트렌드</span> <a href="/board/news/trend"><i
+												<span>IT <span class="color-edit">트렌드</span></span> <a
+													href="/board/news/trend"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
 										</div>
@@ -167,7 +189,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 					<!-- ***** Trade Start ***** -->
 					<div class="most-popular">
 						<div class="row">
-						
+
 							<div class="col-lg-12">
 								<div class="heading-section d-flex justify-content-between">
 									<h4>
@@ -187,7 +209,9 @@ https://templatemo.com/tm-579-cyborg-gaming
 									<c:forEach var="tradeList" items="${tradeList }">
 										<div class="col-lg-3 col-sm-6">
 											<div class="item pt-1">
-												<span class="badge rounded-pill text-bg-info d-inline mt-3" >${tradeList.t_state }</span>
+												<span
+													class="badge rounded-pill text-bg-success d-inline mt-3">인증</span>
+												<span class="badge rounded-pill text-bg-info d-inline mt-3">${tradeList.t_state }</span>
 												<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
 													<img
 													src="/resources/images/trade/${tradeList.t_uploadImg }"
@@ -283,28 +307,31 @@ https://templatemo.com/tm-579-cyborg-gaming
 												data-bs-slide-to="2" aria-label="Slide 3"></button>
 										</div>
 										<div class="carousel-inner">
-											
-										
-											<c:forEach var="hotDealList" items="${hotDealList}" varStatus="status">
+
+
+											<c:forEach var="hotDealList" items="${hotDealList}"
+												varStatus="status">
 												<c:if test="${status.index == 0 }">
-												<div class="carousel-item active">
-													<a href="/board/contentForm?b_seq=${hotDealList.b_seq }">
-														<img src="/resources/images/board/${hotDealList.b_uploadImg }"
-														style="max-width: 400px; max-height: 400px"
-														class="d-block w-100 rounded mx-auto" alt="...">
-													</a>
-												</div>
+													<div class="carousel-item active">
+														<a href="/board/contentForm?b_seq=${hotDealList.b_seq }">
+															<img
+															src="/resources/images/board/${hotDealList.b_uploadImg }"
+															style="max-width: 400px; max-height: 400px"
+															class="d-block w-100 rounded mx-auto" alt="...">
+														</a>
+													</div>
 												</c:if>
 												<c:if test="${status.index > 0 }">
-												<div class="carousel-item ">
-													<a href="/board/contentForm?b_seq=${hotDealList.b_seq }">
-														<img src="/resources/images/board/${hotDealList.b_uploadImg }"
-														style="max-width: 400px; max-height: 400px"
-														class="d-block w-100 rounded mx-auto" alt="...">
-													</a>
-												</div>
+													<div class="carousel-item ">
+														<a href="/board/contentForm?b_seq=${hotDealList.b_seq }">
+															<img
+															src="/resources/images/board/${hotDealList.b_uploadImg }"
+															style="max-width: 400px; max-height: 400px"
+															class="d-block w-100 rounded mx-auto" alt="...">
+														</a>
+													</div>
 												</c:if>
-												
+
 											</c:forEach>
 										</div>
 										<button class="carousel-control-prev" type="button"
@@ -327,60 +354,77 @@ https://templatemo.com/tm-579-cyborg-gaming
 					</div>
 
 					<div class="carousel-inner">
-					              <div class="most-popular header-text">
-                <div class="heading-section mb-3">
-                  <h4 class="mb-1"><em>인증 게시판</em></h4>
-                  <span class="text-white ">직접 촬영한 사진을 올려보세요</span>
-                </div>
-                <div class="owl-features owl-carousel">
-                
-                
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="/resources/assets/images/${mySettingList.b_uploadImg }featured-01.jpg" alt="" style="max-width:300px; max-height:300px;">
-                      <div class="hover-effect">
-                        <h5>${mySettingList.b_title }b_title</h5>
-                      </div>
-                    </div>
-                    <h4>${mySettingList.b_writer }b_writer<br><span>${mySettingList.b_date }b_date</span></h4>
-                    <ul>
-                      <li><i class="fa-regular fa-thumbs-up"></i> ${mySettingList.b_recommed }55</li>
-                      <li><i class="fa-solid fa-eye text-white"></i> ${mySettingList.b_views }219</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="/resources/assets/images/${mySettingList.b_uploadImg }featured-02.jpg" alt="" style="max-width:300px; max-height:300px;">
-                      <div class="hover-effect">
-                        <h5>${mySettingList.b_title }b_title</h5>
-                      </div>
-                    </div>
-                    <h4>${mySettingList.b_writer }b_writer<br><span>${mySettingList.b_date }b_date</span></h4>
-                    <ul>
-                      <li><i class="fa-regular fa-thumbs-up"></i> ${mySettingList.b_recommed }55</li>
-                      <li><i class="fa-solid fa-eye text-white"></i> ${mySettingList.b_views }219</li>
-                    </ul>
-                  </div>                  
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="/resources/assets/images/${mySettingList.b_uploadImg }featured-03.jpg" alt="" style="max-width:300px; max-height:300px;">
-                      <div class="hover-effect">
-                        <h5>${mySettingList.b_title }b_title</h5>
-                      </div>
-                    </div>
-                    <h4>${mySettingList.b_writer }b_writer<br><span>${mySettingList.b_date }b_date</span></h4>
-                    <ul>
-                      <li><i class="fa-regular fa-thumbs-up"></i> ${mySettingList.b_recommed }55</li>
-                      <li><i class="fa-solid fa-eye text-white"></i> ${mySettingList.b_views }219</li>
-                    </ul>
-                  </div>                  
+						<div class="most-popular header-text">
+							<div class="heading-section mb-3">
+								<h4 class="mb-1">
+									<em>인증 게시판</em>
+								</h4>
+								<span class="text-white ">직접 촬영한 사진을 올려보세요</span>
+							</div>
+							<div class="owl-features owl-carousel">
 
-                </div>
-              </div>
-					
+
+								<div class="item">
+									<div class="thumb">
+										<img
+											src="/resources/assets/images/${mySettingList.b_uploadImg }featured-01.jpg"
+											alt="" style="max-width: 300px; max-height: 300px;">
+										<div class="hover-effect">
+											<h5>${mySettingList.b_title }b_title</h5>
+										</div>
+									</div>
+									<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
+									</h4>
+									<ul>
+										<li><i class="fa-regular fa-thumbs-up"></i>
+											${mySettingList.b_recommed }55</li>
+										<li><i class="fa-solid fa-eye text-white"></i>
+											${mySettingList.b_views }219</li>
+									</ul>
+								</div>
+								<div class="item">
+									<div class="thumb">
+										<img
+											src="/resources/assets/images/${mySettingList.b_uploadImg }featured-02.jpg"
+											alt="" style="max-width: 300px; max-height: 300px;">
+										<div class="hover-effect">
+											<h5>${mySettingList.b_title }b_title</h5>
+										</div>
+									</div>
+									<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
+									</h4>
+									<ul>
+										<li><i class="fa-regular fa-thumbs-up"></i>
+											${mySettingList.b_recommed }55</li>
+										<li><i class="fa-solid fa-eye text-white"></i>
+											${mySettingList.b_views }219</li>
+									</ul>
+								</div>
+								<div class="item">
+									<div class="thumb">
+										<img
+											src="/resources/assets/images/${mySettingList.b_uploadImg }featured-03.jpg"
+											alt="" style="max-width: 300px; max-height: 300px;">
+										<div class="hover-effect">
+											<h5>${mySettingList.b_title }b_title</h5>
+										</div>
+									</div>
+									<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
+									</h4>
+									<ul>
+										<li><i class="fa-regular fa-thumbs-up"></i>
+											${mySettingList.b_recommed }55</li>
+										<li><i class="fa-solid fa-eye text-white"></i>
+											${mySettingList.b_views }219</li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+
 					</div>
 				</div>
-					<!-- ***** Apply/HotDeal End ***** -->
+				<!-- ***** Apply/HotDeal End ***** -->
 
 				<!-- ***** Gaming Library Start ***** -->
 				<div class="gaming-library">
@@ -394,7 +438,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 							<ul>
 								<li><img src="/resources/assets/images/game-01.jpg" alt=""
 									class="templatemo-item"></li>
-								<li><h4>${userList.name } mr.kim</h4> <span>name</span></li>
+								<li><h4>${userList.name }mr.kim</h4> <span>name</span></li>
 								<li><h4>${userList.rank }master</h4> <span>rank</span></li>
 								<li><h4>${userList.ticket }99장</h4> <span>ticket</span></li>
 								<li><h4>${userList.point }9999점</h4> <span>point</span></li>
@@ -405,8 +449,8 @@ https://templatemo.com/tm-579-cyborg-gaming
 						</div>
 						<div class="item">
 							<ul>
-								<li><img src="/resources/assets/images/avatar-01.jpg" alt=""
-									class="templatemo-item"></li>
+								<li><img src="/resources/assets/images/avatar-01.jpg"
+									alt="" class="templatemo-item"></li>
 								<li><h4>${userList.name }polypoly</h4> <span>name</span></li>
 								<li><h4>${userList.rank }master</h4> <span>rank</span></li>
 								<li><h4>${userList.ticket }150장</h4> <span>ticket</span></li>
@@ -441,7 +485,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 										<a href="#">sellList</a>
 									</div></li>
 							</ul>
-						</div>						
+						</div>
 					</div>
 					<div class="col-lg-12">
 						<div class="main-button">
@@ -455,7 +499,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 		</div>
 	</div>
 
-<jsp:include page="init/footer.jsp"></jsp:include>
+	<jsp:include page="init/footer.jsp"></jsp:include>
 
 
 	<!-- Scripts -->
