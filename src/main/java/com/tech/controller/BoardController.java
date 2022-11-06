@@ -331,6 +331,11 @@ public class BoardController {
 			BindingResult bindingResult) {
 		logger.info("게시글 글쓰기 액션");
 
+		if(boardVO.getB_uploadImg() == null || boardVO.getB_uploadImg().equals("")) {
+			boardVO.setB_uploadImg("thumb_default.png");
+		}
+		
+		
 		if (bindingResult.hasErrors()) {
 			return "<script> location.href='/board/insertBoardForm'</script>";
 		} else {

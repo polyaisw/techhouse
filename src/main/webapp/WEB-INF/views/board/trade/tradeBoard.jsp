@@ -220,7 +220,7 @@
 							<c:when test="${tradeList.t_state eq '거래완료'}">
 							<div class="position-relative">
 								<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }" >
-									<img src="/resources/images/trade/${tradeList.t_uploadImg }" class="rounded mt-1" alt="">
+									<img src="/resources/images/trade/${tradeList.t_uploadImg }" width="250px" height="200px"class="rounded mt-1" alt="">
 								</a>
 								<div class="bg-dark position-absolute w-100 h-100 top-0 opacity-50"></div>
 								</div>
@@ -228,7 +228,7 @@
 							<c:otherwise>
 							<div class="position-relative">
 								<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }" >
-									<img src="/resources/images/trade/${tradeList.t_uploadImg }"class="rounded mt-1"
+									<img src="/resources/images/trade/${tradeList.t_uploadImg }" width="250px" height="200px"class="rounded mt-1"
 									alt="">
 								</a></div>
 							</c:otherwise>

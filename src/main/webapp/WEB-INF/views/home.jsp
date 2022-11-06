@@ -50,11 +50,11 @@ https://templatemo.com/tm-579-cyborg-gaming
 body {
 	background: rgb(31, 33, 34);
 	background: linear-gradient(180deg, rgba(31, 33, 34, 1) 4%,
-		rgba(90, 30, 93, 0.8155637254901961) 93%);
+		#1a4230 93%);
 }
 
 .color-edit {
-	color: #e75e8d
+	color: var(--bs-success)
 }
 
 .gaming-library {
@@ -65,6 +65,13 @@ body {
 .item {
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px
 		10px 10px
+}
+.gaming-library .item {
+	border-bottom: 1px solid #198754;
+	border-radius:10px;
+}
+.main-banner {
+	background-image : url(/resources/images/banner.jpg);
 }
 </style>
 </head>
@@ -110,14 +117,14 @@ body {
 					<!-- ***** Banner Start ***** -->
 					<div class="main-banner">
 						<div class="row">
-							<div class="col-lg-6">
+							<div class="col-lg-12 text-center">
 								<div class="header-text">
 									<h6>테크하우스에 오신것을 환영합니다.</h6>
 									<h4>
-										<em>&quot;신작 발표&quot;</em><br> 최신 게임 정보를 확인해보세요
+										최신 <em class="" style="color:var(--bs-teal)">&quot;IT/트렌드&quot;</em> 정보를 확인해보세요
 									</h4>
-									<div class="main-button">
-										<a href="/board/news/gameInfo">소식 보러가기 &gt;</a>
+									<div class="button-4">
+										<a href="/board/news/trend" class="">소식 보러가기 &gt;</a>
 									</div>
 								</div>
 							</div>
@@ -129,7 +136,7 @@ body {
 							<div class="col-lg-12">
 								<div class="heading-section">
 									<h4>
-										<span class="text-white">뉴스 </span>
+										<span class="text-white">뉴스 최신 정보 </span>
 									</h4>
 								</div>
 
@@ -160,8 +167,8 @@ body {
 									<div class="col-lg-6">
 										<div class="middle-section ">
 											<h5 class="d-flex justify-content-between">
-												<span>IT <span class="color-edit">트렌드</span></span> <a
-													href="/board/news/trend"><i
+												<span>게임 <span class="color-edit">출시 정보</span></span> <a
+													href="/board/news/gameInfo"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
 										</div>
@@ -232,7 +239,7 @@ body {
 									</c:forEach>
 									<div class="col-lg-12">
 										<div class="main-button">
-											<a href="/board/trade/tradeBoard.html">중고 거래 보러가기 &gt;</a>
+											<a href="/board/trade/tradeBoard.html" class="">중고 거래 보러가기 &gt;</a>
 										</div>
 									</div>
 								</div>
@@ -485,11 +492,6 @@ body {
 										<a href="#">sellList</a>
 									</div></li>
 							</ul>
-						</div>
-					</div>
-					<div class="col-lg-12">
-						<div class="main-button">
-							<a href="/member/mypage">내 정보 보러가기 &gt;</a>
 						</div>
 					</div>
 				</div>

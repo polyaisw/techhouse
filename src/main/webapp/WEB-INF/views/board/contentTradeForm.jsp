@@ -38,12 +38,14 @@
 		<div class="page-content">
 			<div class="row">
 				<div class="col-lg-5 image-box">
+				<span class="badge mb-1" style="line-height: 1.5; background-color: #3cb398;">거래게시판</span>
+				
 					<img src="/resources/images/trade/${ tradeContent.t_uploadImg }"
 						width="500px" height="400px" class="rounded">
 				</div>
 				<div class="col-lg-7 d-flex flex-column">
 					<div class="trade-title d-flex flex-row justify-content-between">
-						<h4 class="my-3">${tradeContent.t_title }</h4>
+						<h4 class="my-5">${tradeContent.t_title }</h4>
 						<p>No.${tradeContent.t_seq }</p>
 					</div>
 					<div class="d-flex flex-row justify-content-between">
@@ -109,10 +111,9 @@
 									<c:if test="${member.name != tradeContent.t_writer}">
 										<c:choose>
 											<c:when test="${ tradeContent.t_state != '판매중'}">
-												<input type="button" class="button-4 ms-1 disabled"
-													value="바로구매" onclick="#">
-												<input type="button" class="button-0 ms-1 disabled"
-													value="안심거래" onclick="#">
+											<a class="button-4 ms-1" href="javascript:alert('거래중이거나 거래 완료된 상품입니다.')">바로구매</a>
+											<a class="button-0 ms-1" href="javascript:alert('준비중입니다.')">안심거래</a>
+												
 
 											</c:when>
 											<c:otherwise>
@@ -163,8 +164,8 @@
 							</div>
 							<div class="comment-box d-flex flex-column">
 								<span class="user-info">${commentContent.c_writer}</span>
-								<p class="text-content">${commentContent.c_text}</p>
-								<span class="write-date">${ commentContent.c_date }</span>
+								<p class="text-content text-white">${commentContent.c_text}</p>
+								<span class="write-date" style="color:#666666;">${ commentContent.c_date }</span>
 							</div>
 						</div>
 						<c:if test="${member.name == commentContent.c_writer }">

@@ -59,7 +59,7 @@ CREATE TABLE `techhouse`.`board` (						-- 게시판
   `b_recommed` INT NOT NULL default 0,					-- 추천수
   `b_commentcount` int(45) NOT NULL default 0,			-- 리뷰수
   `b_text` TEXT NULL,									-- 내용
-  `b_uploadimg` VARCHAR(100),							-- 업로드 이미지
+  `b_uploadimg` VARCHAR(100) default 'thumb_default.png',							-- 업로드 이미지
   `b_category` VARCHAR(45) NOT NULL,					-- 게시판 카테고리
   `b_date` DATE NOT NULL default (current_date),		-- 게시날짜
 	PRIMARY KEY (`b_seq`));
@@ -182,7 +182,7 @@ INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`, `tel`, `post`,
 INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`, `tel`, `post`, `addr`, `addr2`, `ticket`) VALUES ('kys1232', '$2a$10$CQ3h83jHzSHtQK/XOmbgOeUs05uhFWLkDXDJr8LweiBjsmsvU1gDa', '판매자', '하우스 키퍼', '010000100', '11355', '경기 동두천시 강변로 18', '3ㄷㅈㅂㄷ', '50');
 INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`) VALUES ('admin', '$2a$10$CQ3h83jHzSHtQK/XOmbgOeUs05uhFWLkDXDJr8LweiBjsmsvU1gDa', '어드민이름', '관리자');
 
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text,  b_category) values("김예성","11b_title","b_text","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
@@ -342,37 +342,48 @@ insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("�
 
 
 
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
-insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
 
 
 

@@ -166,7 +166,7 @@ p {
 .main-button a {
   font-size: 14px;
   color: #fff;
-  background-color: #e75e8d;
+  background-color: #3cb398;
   padding: 12px 30px;
   display: inline-block;
   border-radius: 25px;
@@ -262,14 +262,22 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px
 }
 .main-button a:hover {
   background-color: #fff;
-  color: #e75e8d;
+  color: #3cb398;
 }
 
 .button-0:hover, .button-1:hover, .button-2:hover, .button-3:hover, .button-4:hover{
   background-color: #fff;
-  color: #e75e8d;
+  color: black;
 }
-
+.button-4 > a {
+	color : white;
+}
+.button-4:hover > a {
+	color : #3cb398;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+}
 .main-border-button a {
   font-size: 14px;
   color: #ec6090;
@@ -374,7 +382,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px
 .button-1-border:hover ,.button-2-border:hover ,.button-3-border:hover ,.button-0-border:hover, .button-4-border:hover{
   border-color: #fff;
   background-color: #fff;
-  color: #e75e8d;
+  color: black;
 }
 
 .border-no-active a {
