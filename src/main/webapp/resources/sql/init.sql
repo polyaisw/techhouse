@@ -38,7 +38,7 @@ use techhouse;
 CREATE TABLE `techhouse`.`user` (
   `id` VARCHAR(100) NOT NULL,	-- ID 겸 이메일 
   `password` VARCHAR(300) NOT NULL,	
-  `name` VARCHAR(45) NOT NULL,		-- 닉네임
+  `name` VARCHAR(45) NOT NULL Unique,		-- 닉네임
   `point` INT NULL,					-- 포인트 > 응모권구매가능
   `rank` VARCHAR(45) NOT NULL default '하우스 키퍼',		-- 회원등급, 기준은 미정, 관리자도 여기에
   `blacklist` INT NOT NULL default 0,			-- 0 : 일반유저 1 : 밴당한 유저 (동일 휴대폰 번호로 가입 불가 / 아이디 로그인 불가 / 게시글 전부 삭제)
@@ -59,10 +59,11 @@ CREATE TABLE `techhouse`.`board` (						-- 게시판
   `b_recommed` INT NOT NULL default 0,					-- 추천수
   `b_commentcount` int(45) NOT NULL default 0,			-- 리뷰수
   `b_text` TEXT NULL,									-- 내용
-  `b_uploadimg` VARCHAR(100) default 'thumb_default.png',							-- 업로드 이미지
+  `b_uploadimg` VARCHAR(100),							-- 업로드 이미지
   `b_category` VARCHAR(45) NOT NULL,					-- 게시판 카테고리
   `b_date` DATE NOT NULL default (current_date),		-- 게시날짜
-	PRIMARY KEY (`b_seq`));
+	PRIMARY KEY (`b_seq`),
+    foreign key(`b_writer`) references `user`(`name`) on update cascade);
 
 
 ALTER TABLE board AUTO_INCREMENT=100001;
@@ -79,7 +80,8 @@ CREATE TABLE `techhouse`.`trade` (						-- 중고거래게시판
   `t_uploadimg` VARCHAR(100) default "trade_default.png",							-- 업로드 이미지
   `t_category` VARCHAR(45) NOT NULL,					-- 게시판 카테고리
   `t_date` DATE NOT NULL default (current_date),		-- 게시날짜
-  PRIMARY KEY (`t_seq`));
+  PRIMARY KEY (`t_seq`),
+  foreign key(`t_writer`) references `user`(`name`) on update cascade);
 
 ALTER TABLE trade AUTO_INCREMENT=1000001;
 
@@ -91,7 +93,8 @@ CREATE TABLE `techhouse`.`apply` (
   `a_applyname` VARCHAR(45)  NULL,									-- 응모자 닉네임
   `a_applyTel` varchar(45) null,
   PRIMARY KEY (`a_seq`),
-  foreign key (`a_applyId`) references `user` (`id`) on delete cascade);		-- 지원자가 탈퇴를 하면 같이 지워짐
+  foreign key (`a_applyId`) references `user` (`id`) on delete cascade,
+  foreign key(`a_applyname`) references `user`(`name`) on update cascade);		-- 지원자가 탈퇴를 하면 같이 지워짐
   
   
   CREATE TABLE `techhouse`.`product` (
@@ -108,7 +111,8 @@ CREATE TABLE `techhouse`.`apply` (
   PRIMARY KEY (`prod_seq`));
   
 CREATE TABLE `techhouse`.`qna` (							-- 1:1 qna게시판
-  `q_seq` INT NOT NULL auto_increment,		
+  `q_seq` INT NOT NULL auto_increment,
+  `q_writer` VARCHAR(45) NOT NULL,
   `q_boardseq` int null default 0,
   `q_category` varchar(45) not null,
   `q_title` varchar(100) not null,
@@ -118,7 +122,8 @@ CREATE TABLE `techhouse`.`qna` (							-- 1:1 qna게시판
 	`q_uploadimg` VARCHAR(100) NULL,							-- 업로드 이미지 
   `q_complete` INT NOT NULL default 0,						-- 0 : 답변 미완료, 1 : 답변 완료
   `q_date` DATE NOT NULL default (current_date),			-- 게시 날짜
-  PRIMARY KEY (`q_seq`));
+  PRIMARY KEY (`q_seq`),
+  foreign key(`q_writer`) references `user`(`name`) on update cascade);
 
 
 
@@ -128,7 +133,8 @@ CREATE TABLE `techhouse`.`comment` (					-- 댓글
   `c_text` text NOT NULL,									
   `c_boardseq` INT NOT NULL,							-- 댓글 작성판 게시판 id
   `c_date` DATE NOT NULL default (current_date),		
-  PRIMARY KEY (`c_seq`));
+  PRIMARY KEY (`c_seq`),
+  foreign key(`c_writer`) references `user`(`name`) on update cascade);
   
   
 CREATE TABLE `techhouse`.`sellList` (					-- 판매한 중고거래 기록 
@@ -142,7 +148,8 @@ CREATE TABLE `techhouse`.`sellList` (					-- 판매한 중고거래 기록
     `sl_date`	date not null default (current_date),
 	PRIMARY KEY (`sl_seq`),
     foreign key (`sl_buyerId`) references `user`(`id`) on delete cascade,
-    foreign key (`sl_sellBoardSeq`) references `trade`(`t_seq`) on delete cascade);
+    foreign key (`sl_sellBoardSeq`) references `trade`(`t_seq`) on delete cascade,
+    foreign key(`sl_buyerName`) references `user`(`name`) on update cascade);
     
 CREATE TABLE `techhouse`.`buylist` (					-- 구마한 중고거래 기록 
 	`bl_seq` INT NOT NULL auto_increment,
@@ -160,7 +167,8 @@ CREATE TABLE `techhouse`.`buylist` (					-- 구마한 중고거래 기록
     `bl_date`	date not null default (current_date),
 	PRIMARY KEY (`bl_seq`),
     foreign key (`bl_sellerId`) references `user`(`id`) on delete cascade,
-    foreign key (`bl_buyBoardSeq`) references `trade`(`t_seq`) on delete cascade);
+    foreign key (`bl_buyBoardSeq`) references `trade`(`t_seq`) on delete cascade,
+    foreign key(`bl_sellerName`) references `user`(`name`) on update cascade);
     
 
 -- CREATE TABLE `techhouse`.`ansim` (
@@ -182,7 +190,6 @@ INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`, `tel`, `post`,
 INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`, `tel`, `post`, `addr`, `addr2`, `ticket`) VALUES ('kys1232', '$2a$10$CQ3h83jHzSHtQK/XOmbgOeUs05uhFWLkDXDJr8LweiBjsmsvU1gDa', '판매자', '하우스 키퍼', '010000100', '11355', '경기 동두천시 강변로 18', '3ㄷㅈㅂㄷ', '50');
 INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`) VALUES ('admin', '$2a$10$CQ3h83jHzSHtQK/XOmbgOeUs05uhFWLkDXDJr8LweiBjsmsvU1gDa', '어드민이름', '관리자');
 
-insert into board(b_writer, b_title, b_text,  b_category) values("김예성","11b_title","b_text","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
@@ -218,6 +225,19 @@ insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("�
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","11b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
 insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","자유게시판");
@@ -342,48 +362,42 @@ insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("�
 
 
 
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("김예성","b_title","b_text","인증게시판");
-insert into board(b_writer, b_title, b_text, b_category) values("구매자","b_title","b_text","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("김예성","b_title","b_text","b_uploadimg","인증게시판");
+insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("구매자","b_title","b_text","b_uploadimg","인증게시판");
 
 
 
@@ -409,8 +423,6 @@ insert into board(b_writer, b_title, b_text, b_uploadimg, b_category) values("�
 
 
 
-insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
-insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
 insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
 insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
 
@@ -451,6 +463,46 @@ insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_te
 insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
 insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
 insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
 insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
 
 
