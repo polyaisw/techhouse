@@ -1,7 +1,10 @@
 package com.tech.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.BootstrapWith;
 
 import com.tech.repository.mapper.MemberMapper;
 import com.tech.service.interfaces.UserService;
@@ -49,6 +52,13 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	@Override
+	public int memberBlack(String memberId) throws Exception{
+		
+		return memberMapper.memberBlack(memberId);
+		
+	}
+	
 	/* 마이페이지 본인확인 */
 	@Override
 	public UserVO mypageCK(UserVO vo) throws Exception{
@@ -90,7 +100,34 @@ public class UserServiceImpl implements UserService {
 	public Boolean phoneAuthOk() throws Exception {
 		return memberMapper.phoneAuthOk();
 	}
-
-
+	
+	/* 모든 유저 조회 */
+	@Override
+	public List<UserVO> loadmember() throws Exception{
+		return memberMapper.loadmember();
+	}
+	
+	/* 유저 블랙 해지 */
+	@Override
+	public void successId(String memberId) throws Exception{
+		
+		memberMapper.successId(memberId);
+		
+	}
+	
+	/* 유저 블랙 */
+	@Override
+	public void failed(String memberId) throws Exception{
+		
+		memberMapper.failed(memberId);
+		
+	}
+	
+	@Override
+	public UserVO getInfo(String memberId) throws Exception{
+		
+		return memberMapper.getInfo(memberId);
+		
+	}
 
 }

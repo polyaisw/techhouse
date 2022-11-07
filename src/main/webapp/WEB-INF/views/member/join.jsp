@@ -248,30 +248,30 @@ label {
 					<div class="col-lg-12 login-form">
 						<form id="join_form" method="post">
 		<div class="form-group mx-5">
-		<input class="id_input inline-block w-100" type="text" name="id" placeholder="아이디"><br>
-		<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
-		<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
-		<span class="id_input_re_3">아이디는 영문 소문자, 숫자만 입력 가능합니다.</span>
-		<span class="final_id_ck">아이디를 입력해주세요.</span><br>
-		<input class="pw_input inline-block w-100" name="password" type="password" placeholder="비밀번호"><br>
-		<span class="pw_input_re_1">사용 가능한 비밀번호 입니다.</span>
-		<span class="pw_input_re_2">비밀번호는 영문 소문자, 숫자, 특수문자를 모두 사용하여 주세요.</span>
-		<span class="final_pw_ck">비밀번호를 입력해주세요.</span><br>
-		<input class="pwck_input inline-block w-100" placeholder="비밀번호 확인" type="password" ><br>
-		<span class="pw_input_re_3">비밀번호가 일치합니다.</span>
-		<span class="pw_input_re_4">비밀번호가 일치하지 않습니다.</span>
-		<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span><br>
-		<input class="user_input inline-block w-100" type="text" placeholder="닉네임" name="name"><br>
-		<span class="user_input_re_1">사용 가능한 닉네임입니다.</span>
-		<span class="user_input_re_2">해당 닉네임이 이미 존재합니다.</span>
-		<span class="user_input_re_3">닉네임은 3글자 이상 10글자 이하로 가능합니다.</span>
-		<span class="final_name_ck">닉네임을 입력해주세요.</span><br>
-		<input class="tel_input inline-block w-100" type="text" placeholder="연락처" name="tel"><br>
-		<span class="final_tel_ck">연락처를 입력해주세요.</span><br>
-		<input type="text" class = "form-control w-25" id="post" name="post" maxlength="20" placeholder="우편번호" readonly onclick="findAddr()"><br>
-		<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" readonly onclick="findAddr()"><br>
-		<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소"><br>
-		<span class="text-white">프로필 사진 : </span><input class="profil_input" name="proimg"><br>
+			<input class="id_input inline-block w-100" type="text" name="id" placeholder="아이디"><br>
+			<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
+			<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+			<span class="id_input_re_3">아이디는 영문 소문자, 숫자만 입력 가능합니다.</span>
+			<span class="final_id_ck">아이디를 입력해주세요.</span><br>
+			<input class="pw_input inline-block w-100" name="password" type="password" placeholder="비밀번호"><br>
+			<span class="pw_input_re_1">사용 가능한 비밀번호 입니다.</span>
+			<span class="pw_input_re_2">비밀번호는 영문 소문자, 숫자, 특수문자를 모두 사용하여 주세요.</span>
+			<span class="final_pw_ck">비밀번호를 입력해주세요.</span><br>
+			<input class="pwck_input inline-block w-100" placeholder="비밀번호 확인" type="password" ><br>
+			<span class="pw_input_re_3">비밀번호가 일치합니다.</span>
+			<span class="pw_input_re_4">비밀번호가 일치하지 않습니다.</span>
+			<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span><br>
+			<input class="user_input inline-block w-100" type="text" placeholder="닉네임" name="name"><br>
+			<span class="user_input_re_1">사용 가능한 닉네임입니다.</span>
+			<span class="user_input_re_2">해당 닉네임이 이미 존재합니다.</span>
+			<span class="user_input_re_3">닉네임은 3글자 이상 10글자 이하로 가능합니다.</span>
+			<span class="final_name_ck">닉네임을 입력해주세요.</span><br>
+			<input class="tel_input inline-block w-100" type="text" placeholder="연락처" name="tel"><br>
+			<span class="final_tel_ck">연락처를 입력해주세요.</span><br>
+			<input type="text" class = "form-control w-25" id="post" name="post" maxlength="20" placeholder="우편번호" readonly onclick="findAddr()"><br>
+			<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" readonly onclick="findAddr()"><br>
+			<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소"><br>
+			<span class="text-white">프로필 사진 : </span><input class="profil_input" name="proimg"><br>
 		</div>
 		
 		

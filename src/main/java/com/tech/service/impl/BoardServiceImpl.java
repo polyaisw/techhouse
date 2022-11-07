@@ -151,5 +151,10 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return bMapper.getBoardByUserName_P(vo);
 	}
+	
+	@Override
+	public List<BVO> getUserBoardList(String name) {
+		return bMapper.getUserBoardList(name);
+	}
 
 }

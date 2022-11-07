@@ -1,5 +1,7 @@
 package com.tech.repository.mapper;
 
+import java.util.List;
+
 import com.tech.vo.UserVO;
 
 public interface MemberMapper {
@@ -16,6 +18,9 @@ public interface MemberMapper {
 	/* 로그인 */
 	public UserVO memberLogin(UserVO vo);
 	
+	/* 블랙조회 */
+	public int memberBlack(String memberId);
+	
 	/* 마이페이지 정보수정 */
 	public void memberEdit(UserVO vo);
 	
@@ -27,5 +32,14 @@ public interface MemberMapper {
 	
 	/* 핸드폰번호 인증 확인*/
 	public Boolean phoneAuthOk();
+	
+	/* 모든 유저 조회 */
+	public List<UserVO> loadmember();
+	/* 유저 블랙 해지 */
+	public void successId(String memberId); 
+	/* 유저 블랙 */
+	public void failed(String memberId); 
+	
+	public UserVO getInfo(String memberId);
 	
 }

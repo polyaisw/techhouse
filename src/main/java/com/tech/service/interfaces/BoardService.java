@@ -4,6 +4,7 @@ package com.tech.service.interfaces;
 import java.util.List;
 
 import com.tech.vo.BVO;
+import com.tech.vo.BoardVO;
 
 public interface BoardService {
 
@@ -45,5 +46,6 @@ public interface BoardService {
 	List<BVO> getHotDealBoardList(); // 3개 가져오기 최신순 핫딜 슬라이드용
 	List<BVO> getBoardByTitle(String title); // 게시글 제목으로 검색
 
-
+	public List<BVO> getUserBoardList(String name);
+	
 }

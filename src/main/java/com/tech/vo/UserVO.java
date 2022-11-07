@@ -7,15 +7,36 @@ public class UserVO {
 	private String name;
 	private int point;
 	private String rank;
-	private int black;
+	private int blacklist;
 	private String profileimg;
 	private String tel;
 	private String post;	//10/13일 수정
 	private String addr;
 	private String addr2;
 	private int ticket;		//10/13일 수정
+	private int boardCnt;
+	private int tradeCnt;
+	private int commentCnt; //11/05일 수정
 	
 	
+	public int getTradeCnt() {
+		return tradeCnt;
+	}
+	public void setTradeCnt(int tradeCnt) {
+		this.tradeCnt = tradeCnt;
+	}
+	public int getBoardCnt() {
+		return boardCnt;
+	}
+	public void setBoardCnt(int boardCnt) {
+		this.boardCnt = boardCnt;
+	}
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
+	}
 	public String getId() {
 		return id;
 	}
@@ -46,11 +67,11 @@ public class UserVO {
 	public void setRank(String rank) {
 		this.rank = rank;
 	}
-	public int getBlack() {
-		return black;
+	public int getBlacklist() {
+		return blacklist;
 	}
-	public void setBlack(int black) {
-		this.black = black;
+	public void setBlacklist(int blacklist) {
+		this.blacklist = blacklist;
 	}
 	public String getProfileimg() {
 		return profileimg;
@@ -91,8 +112,9 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", point=" + point + ", rank=" + rank
-				+ ", black=" + black + ", profileimg=" + profileimg + ", tel=" + tel + ", post=" + post + ", addr="
-				+ addr + ", addr2=" + addr2 + ", ticket=" + ticket + "]";
+				+ ", blacklist=" + blacklist + ", profileimg=" + profileimg + ", tel=" + tel + ", post=" + post + ", addr="
+				+ addr + ", addr2=" + addr2 + ", ticket=" + ticket + ", boardCnt=" + boardCnt + ", commentCnt="
+				+ commentCnt + ", tradeCnt=" + tradeCnt + "]";
 	}
 
 	
