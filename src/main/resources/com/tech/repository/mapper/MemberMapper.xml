@@ -60,9 +60,9 @@
   	
   	<select id="loadmember" resultMap="UserInfo">
   		select u.*,
-		(select count(*) from `comment` where c_writer = u.name) as comment_cnt,
-		(select count(*) from `board` where b_writer = u.name) as board_cnt,
-		(select count(*) from `trade` where t_writer = u.name) as trade_cnt
+		(select count(*) from `comment` where c_writer = u.name) as commentCnt,
+		(select count(*) from `board` where b_writer = u.name) as boardCnt,
+		(select count(*) from `trade` where t_writer = u.name) as tradeCnt
 		from `user` u order by u.id desc
   	</select>
   	
