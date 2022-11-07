@@ -8,13 +8,13 @@
 .page-link {
 	position: relative;
 	display: block;
-	padding: var(- -bs-pagination-padding-y) var(- -bs-pagination-padding-x);
-	font-size: var(- -bs-pagination-font-size);
+	padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+	font-size: var(--bs-pagination-font-size);
 	color: white;
 	text-decoration: none;
 	background-color: inherit;
-	border: var(- -bs-pagination-border-width) solid
-		var(- -bs-pagination-border-color);
+	border: var(--bs-pagination-border-width) solid
+		var(--bs-pagination-border-color);
 	transition: color .15s ease-in-out, background-color .15s ease-in-out,
 		border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
@@ -22,6 +22,6 @@
 .page-link:hover {
 	z-index: 2;
 	color: inherit;
-	background-color: var(- -bs-pagination-hover-bg);
-	border-color: var(- -bs-pagination-hover-border-color);
+	background-color: var(--bs-pagination-hover-bg);
+	border-color: var(--bs-pagination-hover-border-color);
 }

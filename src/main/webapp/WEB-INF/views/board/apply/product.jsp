@@ -45,8 +45,8 @@ https://templatemo.com/tm-579-cyborg-gaming
 	<jsp:include page="../../init/header.jsp"></jsp:include>
 
 	<c:if test="${member.rank eq '관리자'}">
-		<div class="container" style="margin-top: 150px;">
-			<div class="page-content border" >
+		<div class="container" style="margin-top: 150px; width:1280px">
+			<div class="page-content " >
 				<div class="most-popular m-0">
 					<div class="row w-75 mx-auto">
 						<div class="col">

@@ -43,6 +43,7 @@ figure, header, nav, section, article, aside, footer, figcaption {
 
 .container {
 	margin-top:30px;
+	width: 1024px;
 }
 
 .clearfix:after {

@@ -52,6 +52,9 @@ body {
 	background: linear-gradient(180deg, rgba(31, 33, 34, 1) 4%,
 		#1a4230 93%);
 }
+.badge-pill { 
+	color : #666666;
+}
 
 .color-edit {
 	color: var(--bs-success)
@@ -72,6 +75,32 @@ body {
 }
 .main-banner {
 	background-image : url(/resources/images/banner.jpg);
+}
+.h4-shadow {
+	color: transparent;
+background: #666666;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+background-clip: text;
+text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
+}
+.most-popular .item {
+padding: 10px 10px;
+    border-radius: 10px;
+}
+.most-popular .item img {
+    border-radius: 10px;
+}
+
+.modal {
+--bs-modal-header-border-color: var(--bs-border-color);
+--bs-modal-footer-border-color: var(--bs-border-color);
+}
+
+.modal-content {
+background-color:rgb(31,33,34);
+-webkit-box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0px 9px 0px 6px rgba(0,0,0,0.1), 0px 12px 0px 8px rgba(0,0,0,0.1), 0px 15px 0px 10px rgba(0,0,0,0.1), 0px 18px 0px 12px rgba(0,0,0,0.1), 0px 21px 0px 14px rgba(0,0,0,0.1), 0px 24px 0px 16px rgba(0,0,0,0.1), 0px 27px 0px 18px rgba(0,0,0,0.1), 0px 30px 0px 20px rgba(0,0,0,0.1), 5px 5px 15px 5px rgba(255,255,255,0); 
+box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0px 9px 0px 6px rgba(0,0,0,0.1), 0px 12px 0px 8px rgba(0,0,0,0.1), 0px 15px 0px 10px rgba(0,0,0,0.1), 0px 18px 0px 12px rgba(0,0,0,0.1), 0px 21px 0px 14px rgba(0,0,0,0.1), 0px 24px 0px 16px rgba(0,0,0,0.1), 0px 27px 0px 18px rgba(0,0,0,0.1), 0px 30px 0px 20px rgba(0,0,0,0.1), 5px 5px 15px 5px rgba(255,255,255,0);
 }
 </style>
 </head>
@@ -124,7 +153,7 @@ body {
 										최신 <em class="" style="color:var(--bs-teal)">&quot;IT/트렌드&quot;</em> 정보를 확인해보세요
 									</h4>
 									<div class="button-4">
-										<a href="/board/news/trend" class="">소식 보러가기 &gt;</a>
+										<a href="/board/news/trend" class="fw-bold">소식 보러가기 &gt;</a>
 									</div>
 								</div>
 							</div>
@@ -135,17 +164,15 @@ body {
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="heading-section">
-									<h4>
-										<span class="text-white">뉴스 최신 정보 </span>
-									</h4>
 								</div>
 
 								<!-- ***** NewsBoard Start ***** -->
 								<div class="row">
-									<div class="col-lg-6">
+									<h4 class="text-white h4-shadow mb-5">뉴스 최신글</h4>
+									<div class="col-lg-6 mb-4">
 										<div class="middle-section ">
 											<h5 class="d-flex justify-content-between">
-												<span>인기 <span class="color-edit">핫이슈</span></span> <a
+												<span><span class="color-edit">핫이슈</span></span> <a
 													href="/board/news/issue"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
@@ -164,11 +191,11 @@ body {
 										</ul>
 									</div>
 
-									<div class="col-lg-6">
+									<div class="col-lg-6 mb-4">
 										<div class="middle-section ">
 											<h5 class="d-flex justify-content-between">
-												<span>게임 <span class="color-edit">출시 정보</span></span> <a
-													href="/board/news/gameInfo"><i
+												<span> <span class="color-edit">IT/트렌드</span></span> <a
+													href="/board/news/trend"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
 										</div>
@@ -185,211 +212,174 @@ body {
 											</c:forEach>
 										</ul>
 									</div>
+																		<div class="col-lg-6 mb-4">
+										<div class="middle-section ">
+											<h5 class="d-flex justify-content-between">
+												<span> <span class="color-edit">게임 출시 정보</span></span> <a
+													href="/board/news/gameInfo"><i
+													class="fa-solid fa-caret-right"></i></a>
+											</h5>
+										</div>
+										<hr class="hr text-white">
+										<ul class="">
+											<c:forEach var="gameInfoList" items="${gameInfoList }">
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center mb-0">
+													<a href="/board/contentForm?b_seq=${gameInfoList.b_seq }"
+													class="h5 d-inline-block text-truncate"
+													style="max-width: 580px;"> ${gameInfoList.b_title }</a> <span
+													class="badge badge-pill">${gameInfoList.b_recommed }</span>
+												</li>
+											</c:forEach>
+										</ul>
+									</div>
+																		<div class="col-lg-6 mb-4">
+										<div class="middle-section ">
+											<h5 class="d-flex justify-content-between">
+												<span> <span class="color-edit">꿀딜/장터</span></span> <a
+													href="/board/news/gameInfo"><i
+													class="fa-solid fa-caret-right"></i></a>
+											</h5>
+										</div>
+										<hr class="hr text-white">
+										<ul class="">
+											<c:forEach var="hotDealList" items="${hotDealList }">
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center mb-0">
+													<a href="/board/contentForm?b_seq=${hotDealList.b_seq }"
+													class="h5 d-inline-block text-truncate"
+													style="max-width: 580px;"> ${hotDealList.b_title }</a> <span
+													class="badge badge-pill">${hotDealList.b_recommed }</span>
+												</li>
+											</c:forEach>
+										</ul>
+									</div>
 
 									<!-- ***** NewsBoard END ***** -->
 								</div>
 							</div>
 						</div>
-
-
 					</div>
-					<!-- ***** Trade Start ***** -->
 					<div class="most-popular">
 						<div class="row">
-
-							<div class="col-lg-12">
-								<div class="heading-section d-flex justify-content-between">
-									<h4>
-										<span class="text-white">중고 상품 </span> <i
-											class="fa-brands fa-hotjar text-warning"></i>
-									</h4>
-									<div class="search-input">
-										<form id="search" action="/searchAction" method="get"
-											name="input-form">
-											<input type="text" placeholder="거래글 검색" id='searchText'
-												name="searchKeyword" /> <i class="fa fa-search"></i>
-										</form>
-									</div>
-
-								</div>
-								<div class="row">
-									<c:forEach var="tradeList" items="${tradeList }">
-										<div class="col-lg-3 col-sm-6">
-											<div class="item pt-1">
-												<span
-													class="badge rounded-pill text-bg-success d-inline mt-3">인증</span>
-												<span class="badge rounded-pill text-bg-info d-inline mt-3">${tradeList.t_state }</span>
-												<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
-													<img
-													src="/resources/images/trade/${tradeList.t_uploadImg }"
-													alt="">
-												</a>
-
-												<h4 class="inline">
-													<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
-														${tradeList.t_title}<br> <span>${tradeList.t_price }원</span>
-													</a>
-												</h4>
-												<ul>
-													<li><i class="fa fa-star"></i> 4.8</li>
-													<li><i class="fa fa-download"></i> 2.3M</li>
-												</ul>
-											</div>
+								<h4 class="text-white h4-shadow mb-5">커뮤니티 최신글</h4>
+									<div class="col-lg-6 mb-4">
+										<div class="middle-section ">
+											<h5 class="d-flex justify-content-between">
+												<span><span class="color-edit">자유게시판</span></span> <a
+													href="/board/news/issue"><i
+													class="fa-solid fa-caret-right"></i></a>
+											</h5>
 										</div>
-									</c:forEach>
-									<div class="col-lg-12">
-										<div class="main-button">
-											<a href="/board/trade/tradeBoard.html" class="">중고 거래 보러가기 &gt;</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- ***** Trade End ***** -->
-					<!-- ***** Apply/HotDeal Start ***** -->
-					<div class="row ">
-						<div class="col-lg-6">
-							<div class="most-popular">
-								<div class="heading-section d-flex justify-content-between">
-									<h4>
-										<span class="text-white">놓치지마세요 </span> <i
-											class="fa-solid fa-bolt text-warning"></i>
-									</h4>
-									<div class="apply-btn">
-										<a href="/board/apply/product" class="btn btn-success">응모페이지로
-											이동 &gt;</a>
-									</div>
-
-								</div>
-								<c:choose>
-									<c:when test="${productAppContent != null }">
-										<div class="apply-section text-center">
-											<a href="/board/apply/product"><img
-												style="max-width: 400px; max-height: 400px"
-												src="/resources/images/product/${productAppContent.prod_uploadImg }"
-												class="mb-3 rounded" alt=""><br> 상품명 :
-												${productAppContent.prod_productName }</a>
-											<p class="intro">마감 시간 :
-												${productAppContent.prod_closeTime }</p>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<div class="apply-section text-center">
-											<img style="max-width: 400px; max-height: 400px"
-												src="/resources/images/product/noproduct_default.png"
-												class="mb-3 rounded " alt=""><br> <span
-												class="text-white">현재 진행중인 응모 상품이 없어요..</span>
-
-										</div>
-									</c:otherwise>
-								</c:choose>
-
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="most-popular">
-								<div class="heading-section d-flex justify-content-between">
-									<h4>
-										<span class="text-white">핫딜 </span>
-									</h4>
-									<div class="hotDeal-btn">
-										<a href="/board/news/hotDeal" class="btn btn-success">핫딜페이지로
-											이동 &gt;</a>
-									</div>
-								</div>
-								<div class="slide-section">
-									<div id="carouselExampleIndicators" class="carousel slide"
-										data-bs-ride="true">
-										<div class="carousel-indicators">
-											<button type="button"
-												data-bs-target="#carouselExampleIndicators"
-												data-bs-slide-to="0" class="active" aria-current="true"
-												aria-label="Slide 1"></button>
-											<button type="button"
-												data-bs-target="#carouselExampleIndicators"
-												data-bs-slide-to="1" aria-label="Slide 2"></button>
-											<button type="button"
-												data-bs-target="#carouselExampleIndicators"
-												data-bs-slide-to="2" aria-label="Slide 3"></button>
-										</div>
-										<div class="carousel-inner">
-
-
-											<c:forEach var="hotDealList" items="${hotDealList}"
-												varStatus="status">
-												<c:if test="${status.index == 0 }">
-													<div class="carousel-item active">
-														<a href="/board/contentForm?b_seq=${hotDealList.b_seq }">
-															<img
-															src="/resources/images/board/${hotDealList.b_uploadImg }"
-															style="max-width: 400px; max-height: 400px"
-															class="d-block w-100 rounded mx-auto" alt="...">
-														</a>
-													</div>
-												</c:if>
-												<c:if test="${status.index > 0 }">
-													<div class="carousel-item ">
-														<a href="/board/contentForm?b_seq=${hotDealList.b_seq }">
-															<img
-															src="/resources/images/board/${hotDealList.b_uploadImg }"
-															style="max-width: 400px; max-height: 400px"
-															class="d-block w-100 rounded mx-auto" alt="...">
-														</a>
-													</div>
-												</c:if>
-
+										<hr class="hr text-white">
+										<ul class="">
+											<c:forEach var="freeList" items="${freeList }">
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center mb-0">
+													<a href="/board/contentForm?b_seq=${freeList.b_seq }"
+													class="h5 d-inline-block text-truncate"
+													style="max-width: 580px;"> ${freeList.b_title }</a> <span
+													class="badge badge-pill">${freeList.b_recommed }</span>
+												</li>
 											</c:forEach>
-										</div>
-										<button class="carousel-control-prev" type="button"
-											data-bs-target="#carouselExampleIndicators"
-											data-bs-slide="prev">
-											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Previous</span>
-										</button>
-										<button class="carousel-control-next" type="button"
-											data-bs-target="#carouselExampleIndicators"
-											data-bs-slide="next">
-											<span class="carousel-control-next-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Next</span>
-										</button>
+										</ul>
 									</div>
-
-								</div>
-							</div>
+									<div class="col-lg-6 mb-4">
+										<div class="middle-section ">
+											<h5 class="d-flex justify-content-between">
+												<span><span class="color-edit">인증게시판</span></span> <a
+													href="/board/news/issue"><i
+													class="fa-solid fa-caret-right"></i></a>
+											</h5>
+										</div>
+										<hr class="hr text-white">
+										<ul class="">
+											<c:forEach var="mySettingList" items="${mySettingList }">
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center mb-0">
+													<a href="/board/contentForm?b_seq=${mySettingList.b_seq }"
+													class="h5 d-inline-block text-truncate"
+													style="max-width: 580px;"> ${mySettingList.b_title }</a> <span
+													class="badge badge-pill">${mySettingList.b_recommed }</span>
+												</li>
+											</c:forEach>
+										</ul>
+										<div class="middle-section ">
+											<h5 class="d-flex justify-content-between">
+												<span><span class="color-edit">취미공유</span></span> <a
+													href="/board/news/issue"><i
+													class="fa-solid fa-caret-right"></i></a>
+											</h5>
+										</div>
+										<hr class="hr text-white">
+										<ul class="">
+											<c:forEach var="hobbyList" items="${hobbyList }">
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center mb-0">
+													<a href="/board/contentForm?b_seq=${hobbyList.b_seq }"
+													class="h5 d-inline-block text-truncate"
+													style="max-width: 580px;"> ${hobbyList.b_title }</a> <span
+													class="badge badge-pill">${hobbyList.b_recommed }</span>
+												</li>
+											</c:forEach>
+										</ul>
+									</div>
+									<%-- <div class="col-lg-4 mb-4">
+										<div class="middle-section ">
+											<h5 class="d-flex justify-content-between">
+												<span><span class="color-edit">취미공유</span></span> <a
+													href="/board/news/issue"><i
+													class="fa-solid fa-caret-right"></i></a>
+											</h5>
+										</div>
+										<hr class="hr text-white">
+										<ul class="">
+											<c:forEach var="hobbyList" items="${hobbyList }">
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center mb-0">
+													<a href="/board/contentForm?b_seq=${hobbyList.b_seq }"
+													class="h5 d-inline-block text-truncate"
+													style="max-width: 580px;"> ${hobbyList.b_title }</a> <span
+													class="badge badge-pill">${hobbyList.b_recommed }</span>
+												</li>
+											</c:forEach>
+										</ul>
+									</div> --%>
 						</div>
+					
 					</div>
-
-					<div class="carousel-inner">
+					
+					<div class="carousel-inner mb-5">
 						<div class="most-popular header-text">
 							<div class="heading-section mb-3">
-								<h4 class="mb-1">
-									<em>인증 게시판</em>
+								<h4 class="mb-1 h4-shadow text-white" style="font-size:24px;">
+									인증 베스트
 								</h4>
 								<span class="text-white ">직접 촬영한 사진을 올려보세요</span>
 							</div>
 							<div class="owl-features owl-carousel">
 
-
+								<c:forEach var="mySettingListBest" items="${mySettingListBest }">
 								<div class="item">
 									<div class="thumb">
 										<img
-											src="/resources/assets/images/${mySettingList.b_uploadImg }featured-01.jpg"
+											src="/resources/assets/images/${mySettingListBest.b_uploadImg }featured-01.jpg"
 											alt="" style="max-width: 300px; max-height: 300px;">
 										<div class="hover-effect">
-											<h5>${mySettingList.b_title }b_title</h5>
+											<h5>${mySettingListBest.b_title }b_title</h5>
 										</div>
 									</div>
-									<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
+									<h4>${mySettingListBest.b_writer }b_writer<br> <span>${mySettingListBest.b_date }b_date</span>
 									</h4>
 									<ul>
 										<li><i class="fa-regular fa-thumbs-up"></i>
-											${mySettingList.b_recommed }55</li>
+											${mySettingListBest.b_recommed }55</li>
 										<li><i class="fa-solid fa-eye text-white"></i>
-											${mySettingList.b_views }219</li>
+											${mySettingListBest.b_views }219</li>
 									</ul>
 								</div>
-								<div class="item">
+								</c:forEach>
+								<%-- <div class="item">
 									<div class="thumb">
 										<img
 											src="/resources/assets/images/${mySettingList.b_uploadImg }featured-02.jpg"
@@ -424,17 +414,123 @@ body {
 										<li><i class="fa-solid fa-eye text-white"></i>
 											${mySettingList.b_views }219</li>
 									</ul>
-								</div>
+								</div> --%>
 
 							</div>
 						</div>
 
 					</div>
+					
+					
+					
+					<!-- ***** Trade Start ***** -->
+					<div class="most-popular">
+						<div class="row">
+
+							<div class="col-lg-12">
+							
+							
+							
+							
+							
+							
+								<div class="heading-section d-flex justify-content-between">
+									<h4 class="text-white h4-shadow" style="font-size:24px;">중고거래 최신글 
+										<i
+											class="fa-brands fa-hotjar text-warning"></i>
+									</h4>
+<!-- 									<div class="search-input">
+										<form id="search" action="/searchAction" method="get"
+											name="input-form">
+											<input type="text" placeholder="거래글 검색" id='searchText'
+												name="searchKeyword" /> <i class="fa fa-search"></i>
+										</form>
+									</div> -->
+
+								</div>
+								<div class="row">
+									<c:forEach var="tradeList" items="${tradeList }">
+										<div class="col-lg-3 col-sm-6">
+											<div class="item">
+												<%-- <span
+													class="badge rounded-pill text-bg-success d-inline mt-3">인증</span>
+												<span class="badge rounded-pill text-bg-info d-inline mt-3">${tradeList.t_state }</span> --%>
+												<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
+													<img
+													src="/resources/images/trade/${tradeList.t_uploadImg }"
+													alt="">
+												</a>
+
+												<h4 class="inline">
+													<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
+														${tradeList.t_title}<br> <span>${tradeList.t_price }원</span>
+													</a>
+												</h4>
+												<ul>
+													<li><i class="fa fa-star"></i> 4.8</li>
+													<li><i class="fa fa-download"></i> 2.3M</li>
+												</ul>
+											</div>
+										</div>
+									</c:forEach>
+									<div class="col-lg-12">
+										<div class="main-button">
+											<a href="/board/trade/tradeBoard.html" class="fw-bold">중고 거래 보러가기 &gt;</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- ***** Trade End ***** -->
+					<!-- ***** Apply/HotDeal Start ***** -->
+					<%-- <div class="row ">
+						<div class="col-lg-6">
+							<div class="most-popular">
+								<div class="heading-section d-flex justify-content-between">
+									<h4>
+										<span class="text-white">놓치지마세요 </span> <i
+											class="fa-solid fa-bolt text-warning"></i>
+									</h4>
+									<div class="apply-btn">
+										<a href="/board/apply/product" class="btn btn-success">응모페이지로
+											이동 &gt;</a>
+									</div>
+
+								</div>
+								<c:choose>
+									<c:when test="${productAppContent != null }">
+										<div class="apply-section text-center">
+											<a href="/board/apply/product"><img
+												style="max-width: 400px; max-height: 400px"
+												src="/resources/images/product/${productAppContent.prod_uploadImg }"
+												class="mb-3 rounded" alt=""><br> 상품명 :
+												${productAppContent.prod_productName }</a>
+											<p class="intro" ">마감 시간 :
+												${productAppContent.prod_closeTime }</p>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="apply-section text-center">
+											<img style="max-width: 400px; max-height: 400px"
+												src="/resources/images/product/noproduct_default.png"
+												class="mb-3 rounded " alt=""><br> <span
+												class="text-white">현재 진행중인 응모 상품이 없어요..</span>
+
+										</div>
+									</c:otherwise>
+								</c:choose>
+
+							</div>
+						</div>
+					</div> --%>
+
+					
 				</div>
 				<!-- ***** Apply/HotDeal End ***** -->
 
 				<!-- ***** Gaming Library Start ***** -->
-				<div class="gaming-library">
+			<%-- 	<div class="gaming-library">
 					<div class="col-lg-12">
 						<div class="heading-section">
 							<h4>
@@ -494,13 +590,68 @@ body {
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div> --%>
 				<!-- ***** Gaming Library End ***** -->
 
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" class="" style="color:var(--bs-success)">현재 응모가 진행중<span class="text-white">입니다!</span></h1>
+        <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="apply-section text-center">
+											<a href="/board/apply/product"><img
+												style="max-width: 300px; max-height: 300px"
+												src="/resources/images/product/${productAppContent.prod_uploadImg }"
+												class="mb-3 rounded" alt=""><br> 상품명 :
+												${productAppContent.prod_productName }</a>
+											<p class="intro" style="color:var(--bs-warning);">마감 시간 :
+												${productAppContent.prod_closeTime }</p>
+										</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button-4" id = "modal-today-close">하루동안 알리지 않기</button>
+        <button type="button" class="button-4-border" id="modal-close" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>	
+	
+	
+<!-- <div class="modal" id="" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">공지</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>블라블라</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" >today</button>
+                <button type="button" class="btn btn-secondary"  onclick='close()' data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div> -->
 	<jsp:include page="init/footer.jsp"></jsp:include>
 
 
@@ -512,6 +663,49 @@ body {
 			if (f.keyCode == 13) { //javascript에서는 13이 enter키를 의미함
 				inputForm.submit(); //formname에 사용자가 지정한 form의 name입력
 			}
+		}
+
+		if(${productAppContent != null } == true){
+		window.onload=function(e){
+			e.preventDefault();
+
+			
+			
+			$("#modal-today-close").click(function() {
+			    $("#myModal").modal("hide");
+			    setCookie("mycookie", 'popupEnd', 1);
+			});
+			
+			
+
+			var checkCookie = getCookie("mycookie");
+
+			if(checkCookie == 'popupEnd') {
+			    $("#myModal").modal("hide");
+			} else {
+			    $('#myModal').modal("show");
+			}
+			
+		}}
+
+		function setCookie(name, value, expiredays){
+		    var today = new Date();
+		    today.setDate(today.getDate() + expiredays);
+		    document.cookie = name + '=' + escape(value) + '; expires=' + today.toGMTString();
+		}
+
+		function getCookie(name) {
+		    var cookie = document.cookie;
+		    if (document.cookie != "") {
+		        var cookie_array = cookie.split("; ");
+		        for ( var index in cookie_array) {
+		            var cookie_name = cookie_array[index].split("=");
+		            if (cookie_name[0] == "mycookie") {
+		                return cookie_name[1];
+		            }
+		        }
+		    }
+		    return;
 		}
 	</script>
 
