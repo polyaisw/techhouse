@@ -104,6 +104,14 @@ public class TradeController {
 			BindingResult bindingResult) {
 		logger.info("게시글 글쓰기 액션");
 
+		if(tradeVO.getT_uploadImg().equals("") || tradeVO.getT_uploadImg() == null) {
+			tradeVO.setT_uploadImg("trade_default.png");
+		}
+		if(tradeVO.getT_prodName().equals("") || tradeVO.getT_prodName() == null) {
+			tradeVO.setT_prodName("");
+		}
+		
+		
 		if (bindingResult.hasErrors()) {
 			return "<script> location.href='/board/insertTradeBoardForm'</script>";
 		} else {
@@ -134,6 +142,13 @@ public class TradeController {
 	public String updateTradeBoardAction(@ModelAttribute("updateTradeContent") @Valid TradeVO tradeVO,
 			BindingResult bindingResult) {
 
+		if(tradeVO.getT_uploadImg() == null|| tradeVO.getT_uploadImg().equals("")){
+			tradeVO.setT_uploadImg("trade_default.png");
+		}
+			
+		
+		
+		
 		logger.info("거래 게시글 수정 액션");
 		if (bindingResult.hasErrors()) {
 			return "<script> location.href='/board/updateTradeForm?t_seq=" + tradeVO.getT_seq() + "'</script>";

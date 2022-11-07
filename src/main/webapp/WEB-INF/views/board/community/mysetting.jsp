@@ -316,7 +316,7 @@
 										<td>${ boardList.b_recommed }</td>
 										<td>
 											<div class="title-box d-flex ">
-												<img src="/resources/images/board/thumb_default.png"
+												<img src="/resources/images/board/${boardList.b_uploadImg }"
 													class="rounded thumbnail-img me-2">
 												<div class="title-content-box d-flex align-items-center">
 													<a href="/board/contentForm?b_seq=${ boardList.b_seq }"

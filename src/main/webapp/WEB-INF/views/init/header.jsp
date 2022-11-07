@@ -51,9 +51,26 @@ position:static!important;
 	position:fixed;
 	background-color:#1f2122;
 	top:0px;
+	border-bottom : 1px solid var(--bs-success);
 }
-
-
+.header-area .main-nav .nav li a {
+	font-weight:bold;
+	color:#bbbbbb;
+}
+.header-area .main-nav .nav li:hover >a, .header-area .main-nav .nav li >a.active {
+    color: #ffffff !important;
+    background-color: #198754;
+    }
+a:hover {
+	color: var(--bs-teal);
+}
+#myPage-btn:hover {
+	background-color: #198754; 
+}
+.most-popular {
+	
+	border-bottom : 1px solid var(--bs-success);
+}
 
 </style>
 </head>
@@ -94,7 +111,7 @@ position:static!important;
 								</ul></li>
 							<li><a href="/board/apply/product">응모상품</a>
 								<ul>
-									<li><a href="/board/apply/roulette">룰렛</a></li>
+									<li><a href="javascript:alert('준비중입니다.')">룰렛</a></li>
 									<li><a href="/board/apply/product">응모추첨</a></li>
 								</ul></li>
 

@@ -121,8 +121,8 @@ p {
 					<div class="comment-user-icon"><img src="/resources/images/member/user_default.png" class="img-fluid rounded-circle text-center d-inline me-2" style="width: 22px; height: 22px;"></div>
 					<div class="comment-box d-flex flex-column">
 						<span class="user-info">${commentContent.c_writer}</span>
-						<p class="text-content">${commentContent.c_text}</p>
-						<span class="write-date">${ commentContent.c_date }</span>
+						<p class="text-content text-white">${commentContent.c_text}</p>
+						<span class="write-date" style="color:#666666;">${ commentContent.c_date }</span>
 					</div>
 					</div>
 					<c:if test="${member.name == commentContent.c_writer }">

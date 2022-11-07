@@ -66,7 +66,6 @@ textarea, input {
 </head>
 <body>
 	<jsp:include page="../init/header.jsp"></jsp:include>
-	<jsp:include page="../init/nav.jsp"></jsp:include>
 	<div class="container text-white">
 		<div class="page-content">
 			<div class="row">
