@@ -7,7 +7,7 @@ public class UserVO {
 	private String name;
 	private int point;
 	private String rank;
-	private int black;
+	private int blacklist;
 	private String profileimg;
 	private String tel;
 	private String post;	//10/13일 수정
@@ -67,11 +67,11 @@ public class UserVO {
 	public void setRank(String rank) {
 		this.rank = rank;
 	}
-	public int getBlack() {
-		return black;
+	public int getBlacklist() {
+		return blacklist;
 	}
-	public void setBlack(int black) {
-		this.black = black;
+	public void setBlacklist(int blacklist) {
+		this.blacklist = blacklist;
 	}
 	public String getProfileimg() {
 		return profileimg;
@@ -112,7 +112,7 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", point=" + point + ", rank=" + rank
-				+ ", black=" + black + ", profileimg=" + profileimg + ", tel=" + tel + ", post=" + post + ", addr="
+				+ ", blacklist=" + blacklist + ", profileimg=" + profileimg + ", tel=" + tel + ", post=" + post + ", addr="
 				+ addr + ", addr2=" + addr2 + ", ticket=" + ticket + ", boardCnt=" + boardCnt + ", commentCnt="
 				+ commentCnt + ", tradeCnt=" + tradeCnt + "]";
 	}
