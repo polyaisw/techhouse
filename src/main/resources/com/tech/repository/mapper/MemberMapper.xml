@@ -3,6 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tech.repository.mapper.MemberMapper">
+	<resultMap type="com.tech.vo.UserVO" id="UserInfo">
+		<id property="id" column="id"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="point" column="point"/>
+		<result property="rank" column="rank"/>
+		<result property="black" column="black"/>
+		<result property="tel" column="tel"/>
+		<result property="post" column="post"/>
+		<result property="addr" column="addr"/>
+		<result property="addr2" column="addr2"/>
+		<result property="ticket" column="ticket"/>
+		<result property="profileimg" column="profileimg"/>
+		<result property="boardCnt" column="boardCnt"/>
+		<result property="tradeCnt" column="tradeCnt"/>
+		<result property="commentCnt" column="commentCnt"/>
+	</resultMap>
+
 		<!-- 회원 가입 -->
 	<insert id="memberJoin">
  		INSERT INTO user(`id`, `password`, `name`, `profileimg`, `tel`, `post`, `addr`, `addr2`)
@@ -20,7 +38,11 @@
   	</select>
   		<!-- 로그인 -->
   	<select id="memberLogin" resultType="com.tech.vo.UserVO">
-  		select `id`,`password`,`name`,`point`,`rank`,`tel`,`post`,`addr`,`addr2`,`ticket` from user where id = #{id}
+  		select * from user where id = #{id}
+  	</select>
+  	
+  	<select id="memberBlack" resultType="int">
+  		select blacklist from user where id = #{id}
   	</select>
   		<!-- 회원 수정 -->
   	<update id="memberEdit">
@@ -31,5 +53,25 @@
   	<delete id="memberDel">
   		DELETE FROM user WHERE `id`=#{id}
   	</delete>
+  	
+  	<select id="getInfo" resultMap="UserInfo">
+  		SELECT * FROM user WHERE id = #{id} 
+  	</select>
+  	
+  	<select id="loadmember" resultMap="UserInfo">
+  		select u.*,
+		(select count(*) from `comment` where c_writer = u.name) as comment_cnt,
+		(select count(*) from `board` where b_writer = u.name) as board_cnt,
+		(select count(*) from `trade` where t_writer = u.name) as trade_cnt
+		from `user` u order by u.id desc
+  	</select>
+  	
+  	<update id="successId">
+  		UPDATE user SET blacklist = 0 WHERE id = #{id}
+  	</update>
+  	
+  	<update id="failed">
+  		UPDATE user SET blacklist = 1 WHERE id = #{id}
+  	</update>
 	
 </mapper>

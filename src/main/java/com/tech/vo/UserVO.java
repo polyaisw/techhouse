@@ -14,8 +14,29 @@ public class UserVO {
 	private String addr;
 	private String addr2;
 	private int ticket;		//10/13일 수정
+	private int boardCnt;
+	private int tradeCnt;
+	private int commentCnt; //11/05일 수정
 	
 	
+	public int getTradeCnt() {
+		return tradeCnt;
+	}
+	public void setTradeCnt(int tradeCnt) {
+		this.tradeCnt = tradeCnt;
+	}
+	public int getBoardCnt() {
+		return boardCnt;
+	}
+	public void setBoardCnt(int boardCnt) {
+		this.boardCnt = boardCnt;
+	}
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
+	}
 	public String getId() {
 		return id;
 	}
@@ -92,7 +113,8 @@ public class UserVO {
 	public String toString() {
 		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", point=" + point + ", rank=" + rank
 				+ ", black=" + black + ", profileimg=" + profileimg + ", tel=" + tel + ", post=" + post + ", addr="
-				+ addr + ", addr2=" + addr2 + ", ticket=" + ticket + "]";
+				+ addr + ", addr2=" + addr2 + ", ticket=" + ticket + ", boardCnt=" + boardCnt + ", commentCnt="
+				+ commentCnt + ", tradeCnt=" + tradeCnt + "]";
 	}
 
 	

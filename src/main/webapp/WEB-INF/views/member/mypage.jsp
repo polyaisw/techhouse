@@ -1,30 +1,131 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>TECH HOUSE - 마이 페이지</title>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous">
-</script>
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<link href="/resources/css/default.css" rel="stylesheet">
-<link href="/resources/css/nav.css" rel="stylesheet">
-<link href="/resources/css/mypage.css" rel="stylesheet">
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet">
+<meta charset="UTF-8" />
+<!-- Bootstrap core CSS -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="/resources/assets/css/fontawesome.css">
+<link rel="stylesheet"
+	href="/resources/assets/css/templatemo-cyborg-gaming.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet"
+	href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 <style>
-	/* 로그인 실패시 경고글 */
-	.mypage_warn{
-	    margin-top: 30px;
-	    text-align: center;
-	    color : red;
+
+.my-title {
+	margin-top: 15px;
+	text-align: center;
+	font-size: 30px;
+	letter-spacing: 2px;
+	margin-top: 15px;
+	font-weight: bold;
+	color: #ECF0F5;
+}
+
+.my-form {
+	margin-top: 25px;
+	text-align: left;
+}
+
+input[type=text] {
+	background-color: #1A2226;
+	border: none;
+	border-bottom: 2px solid #e75e8d;
+	border-top: 0px;
+	border-radius: 0px;
+	font-weight: bold;
+	outline: 0;
+	margin-bottom: 20px;
+	padding-left: 0px;
+	color: #ECF0F5;
+}
+
+input[type=password] {
+	background-color: #1A2226;
+	border: none;
+	border-bottom: 2px solid #e75e8d;
+	border-top: 0px;
+	border-radius: 0px;
+	font-weight: bold;
+	outline: 0;
+	padding-left: 0px;
+	margin-bottom: 20px;
+	color: #ECF0F5;
+}
+
+.form-group {
+	margin-bottom: 40px;
+	outline: 0px;
+}
+
+.form-control:focus {
+	border-color: inherit;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-bottom: 2px solid #0DB8DE;
+	outline: 0;
+	background-color: #1A2226;
+	color: #ECF0F5;
+}
+
+input:focus {
+	outline: none;
+	box-shadow: 0 0 0;
+}
+
+label {
+	margin-bottom: 0px;
+}
+
+.form-control-label {
+	font-size: 10px;
+	color: #6C6C6C;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.btn-outline-primary {
+	border-color: #0DB8DE;
+	color: #0DB8DE;
+	border-radius: 0px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.btn-outline-primary:hover {
+	background-color: #0DB8DE;
+	right: 0px;
+}
+/* 여기까지 */
+
+	/* 중복아이디 존재하지 않는경우 */
+	.id_input_re_1{
+		color : green;
+		display : none;
+	}
+	/* 중복아이디 존재하는 경우 */
+	.id_input_re_2{
+		color : red;
+		display : none;
+	}
+	/* 중복아이디 존재하는 경우 */
+	.id_input_re_3{
+		color : red;
+		display : none;
 	}
 	/* 비밀번호 유효성 검사된경우 */
 	.pw_input_re_1{
@@ -61,175 +162,102 @@
 		color : red;
 		display : none;
 	}
+	/* 기존 닉네임인 경우 */
+	.user_input_re_4{
+		color : green;
+		display : none;
+	}
 	/* 유효성 검사 문구 */
  
 	.final_id_ck{
-		color : red;
+	color : red;
 	    display: none;
 	}
 	.final_pw_ck{
-		color : red;
+	color : red;
 	    display: none;
 	}
 	.final_pwck_ck{
-		color : red;
+	color : red;
 	    display: none;
 	}
 	.final_name_ck{
-		color : red;
+	color : red;
 	    display: none;
 	}
 	.final_tel_ck{
-		color : red;
+	color : red;
 	    display: none;
 	}
+	.text_in{
+		color : lightgreen;
+		display: block;
+		font-weight: bold;
+	}
 </style>
+
 </head>
+<jsp:include page="../init/header.jsp"></jsp:include>
 <body>
-	<jsp:include page="../init/header.jsp"></jsp:include>
-	<jsp:include page="../init/nav.jsp"></jsp:include>
-	<!-- infomation -->
-	<div class="container">
-		<div class="row mt-5">
-			<div class="col-md-8 ">
-				<div class="tab-content" id="nav-tabContent">
-					<div class="tab-pane fade show active text-white" id="list-home"
-						role="tabpanel" aria-labelledby="list-home-list">
-						<c:if test="${ mypageCK == null }">
-							<form id="mypage" method="post">
-								<h2>본인 확인</h2><br>
-								<input class="id_input" name="id" value="${ member.id }" style="display:none" readonly>
-								비밀번호 : <input class="pw_input" name="password" type="password"><br>
-								
-								<c:if test = "${result == 0 }">
-						                <div class = "mypage_warn">비밀번호를 잘못 입력하셨습니다.</div>
-						        </c:if>
-								<input type="button" class="my_button" value="확인">
-							</form>
-						</c:if>
-						<c:if test="${ mypageCK != null }">
-							<p>본인 재확인에 성공!</p>
+	<div class="container text-white">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-content">
+					<div class="col-lg-12 text_in my-title">정보 수정</div>
+					<div class="col-lg-12 my-form">
+						<div class="col-lg-12 my-form">
+						
 							<form id="user_edit" method="post">
+								<div class="form-group mx-5">
+									<span class = "text_in">아이디</span>
+									<input class="id_input inline-block w-100" type="text" name="id" value="${ member.id }" readonly>
+									<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
+									<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+									<span class="id_input_re_3">아이디는 영문 소문자, 숫자만 입력 가능합니다.</span>
+									<span class="final_id_ck">아이디를 입력해주세요.</span><br>
+									<span class = "text_in">비밀번호</span>
+									<input class="pw_input inline-block w-100" name="password" type="password" placeholder="비밀번호">
+									<span class="pw_input_re_1">사용 가능한 비밀번호 입니다.</span>
+									<span class="pw_input_re_2">비밀번호는 영문 소문자, 숫자, 특수문자를 모두 사용하여 주세요.</span>
+									<span class="final_pw_ck">비밀번호를 입력해주세요.</span><br>
+									<span class = "text_in">비밀번호 확인</span>
+									<input class="pwck_input inline-block w-100" placeholder="비밀번호 확인" type="password" >
+									<span class="pw_input_re_3">비밀번호가 일치합니다.</span>
+									<span class="pw_input_re_4">비밀번호가 일치하지 않습니다.</span>
+									<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span><br>
+									<span class = "text_in">닉네임</span>
+									<input class="user_input inline-block w-100" type="text" placeholder="닉네임" name="name" value="${ member.name }">
+									<span class="user_input_re_1">사용 가능한 닉네임입니다.</span>
+									<span class="user_input_re_2">해당 닉네임이 이미 존재합니다.</span>
+									<span class="user_input_re_3">닉네임은 3글자 이상 10글자 이하로 가능합니다.</span>
+									<span class="user_input_re_4">기존 닉네임을 사용중입니다.</span>
+									<span class="final_name_ck">닉네임을 입력해주세요.</span><br>
+									<span class = "text_in">연락처</span>
+									<input class="tel_input inline-block w-100" type="text" placeholder="연락처" name="tel" value="${ member.tel }">
+									<span class="final_tel_ck">연락처를 입력해주세요.</span><br>
+									<span class = "text_in">우편번호</span>
+									<input type="text" class = "form-control w-25" id="post" name="post" maxlength="20" placeholder="우편번호" readonly onclick="findAddr()" value="${ member.post }">
+									<span class = "text_in">주소</span>
+									<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" readonly onclick="findAddr()" value="${ member.addr }">
+									<span class = "text_in">상세 주소</span>
+									<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소" value="${ member.addr2 }">
+									<span class="text-white">프로필 사진 : </span><input class="profil_input" name="proimg">
+								</div>
 								
-								<h2>회원 정보 수정</h2><br>
-								아이디 : <input class="id_input" name="id" value="${ member.id }" readonly>
-								<span class="final_id_ck">아이디를 입력해주세요.</span><br>
-								비밀번호 : <input class="pw_input" name="password" type="password" ><br>
-								<span class="pw_input_re_1">사용 가능한 비밀번호 입니다.</span>
-								<span class="pw_input_re_2">비밀번호는 영문 소문자, 숫자, 특수문자를 모두 사용하여 주세요.</span>
-								<span class="final_pw_ck">비밀번호를 입력해주세요.</span><br>
-								비밀번호 확인 : <input class="pwck_input" type="password" ><br>
-								<span class="pw_input_re_3">비밀번호가 일치합니다.</span>
-								<span class="pw_input_re_4">비밀번호가 일치하지 않습니다.</span>
-								<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span><br>
-								닉네임 : <input class="user_input" name="name" value="${ member.name }"><br>
-								<span class="user_input_re_1">사용 가능한 닉네임입니다.</span>
-								<span class="user_input_re_2">해당 닉네임이 이미 존재합니다.</span>
-								<span class="user_input_re_3">닉네임은 3글자 이상 10글자 이하로 가능합니다.</span>
-								<span class="final_name_ck">닉네임을 입력해주세요.</span><br>
-								연락처 : <input class="tel_input" name="tel" value="${ member.tel }"><br>
-								<span class="final_tel_ck">연락처를 입력해주세요.</span><br>
-								주소 : <input type="text" class = "form-control" id="post" name="post" maxlength="20" placeholder="우편번호" value="${ member.post }" readonly onclick="findAddr()"><br>
-								<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" value="${ member.addr }" readonly onclick="findAddr()"><br>
-								<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소" value="${ member.addr2 }"><br>
-								프로필 사진 :<input class="profil_input" name="proimg"><br>
-								<input type="button" class="edit_button" value="수정완료">
-							</form>
-						</c:if>
-					</div>
-					<div class="tab-pane fade text-white" id="list-board"
-						role="tabpanel" aria-labelledby="list-messages-list">게시글 내역
-						: 거래게시글까지 포함한 게시글별 글 모두 가져오기 (페이징구현)
-					</div>
-					<div class="tab-pane fade text-white" id="list-trade"
-						role="tabpanel" aria-labelledby="list-profile-list">거래 내역 :
-						거래 게시글, 구매글, 판매글, 총 구매액, 판매액 가져오기
-					</div>
-					<div class="tab-pane fade text-white" id="list-commission"
-						role="tabpanel" aria-labelledby="list-messages-list">고객상담 내역
-						: 1:1문의글과 관리자답글가져오기, 신고글가져오기
-					</div>
-					<div class="tab-pane fade text-white" id="list-delete"
-						role="tabpanel" aria-labelledby="list-settings-list">
-						<c:if test="${ mypageCK == null }">
-							<form id="mypage" method="post">
-								<h2>본인 확인</h2><br>
-								<input class="id_input" name="id" value="${ member.id }" style="display:none" readonly>
-								비밀번호 : <input class="pw_input" name="password" type="password"><br>
 								
-								<c:if test = "${result == 0 }">
-						                <div class = "mypage_warn">비밀번호를 잘못 입력하셨습니다.</div>
-						        </c:if>
-								<input type="button" class="my_button2" value="확인">
+								<div class="d-flex align-items-center justify-content-center">
+								<input type="button" class="edit_button button-3 my-5" value="수정 완료">
+								<a href="/main"class="button-3-border">취소</a>
+								</div>
 							</form>
-						</c:if>
-						<c:if test="${ mypageCK != null }">
-							<p>본인 재확인에 성공!</p>
-							<form id="user_del" method="post">
-								<input class="id_input" name="id" value="${ member.id }" style="display:none" readonly>
-								<input type="button" class="my_del_button" value="회원탈퇴">
-							</form>
-						</c:if>
+							
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-4 ">
-				<div class='v-line'></div>
-				<div class="list-group" id="list-tab" role="tablist">
-					<a class="list-group-item list-group-item-action active"
-						id="list-home-list" data-bs-toggle="list" href="#list-home"
-						role="tab" aria-controls="list-home">개인정보</a>
-						<a class="list-group-item list-group-item-action"
-						id="list-profile-list" data-bs-toggle="list" href="#list-board"
-						role="tab" aria-controls="list-profile">게시글 보기</a> 
-						<a class="list-group-item list-group-item-action"
-						id="list-messages-list" data-bs-toggle="list" href="#list-trade"
-						role="tab" aria-controls="list-messages">거래 내역</a> 
-						<a class="list-group-item list-group-item-action"
-						id="list-settings-list" data-bs-toggle="list"
-						href="#list-commission" role="tab" 
-						aria-controls="list-settings">고객상담 내역</a> 
-						<a class="list-group-item list-group-item-action"
-						id="list-settings-list" data-bs-toggle="list" href="#list-delete"
-						role="tab" aria-controls="list-settings">회원 탈퇴</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../init/footer.jsp"></jsp:include>
-	<!-- Bootstrap core JS-->
-	<script src="https://kit.fontawesome.com/5547fa07a6.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-	<!-- <script src="/resources/js/scripts.js"></script> -->
 	<script>
-		$(".my_del_button").click(function(){
-			var delresult = confirm("정말로 탈퇴하시겠습니까?");
-
-			if( delresult == true ){
-				$("#user_del").attr("action", "/member/memberDel.do");
-				$("#user_del").submit();
-			}else{
-				$("#user_del").attr("action", "/member/mypage.do");
-				$("#user_del").submit();
-			}
-		});
-
-	
-		$(".my_button , .my_button2").click(function(){
-			$("#mypage").attr("action", "/member/mypage.do");
-			$("#mypage").submit();
-		});
-	    
-	    $(".pw_input").on("keyup",function(e){
-	        if(e.keyCode == 13) {
-		        $("#mypage").attr("action", "/member/mypage.do");
-		        $("#mypage").submit();
-	        }
-	    });
 
 	    var pwCheck = false;
 		var pwckCheck = false;
@@ -239,7 +267,7 @@
 		var telCheck = false;
 	
 		$(document).ready(function(){
-			//회원가입 버튼(회원가입 기능 작동)
+			//회원 정보 수정 버튼
 			$(".edit_button").click(function(){
 
 				var pw = $('.pw_input').val();
@@ -285,7 +313,7 @@
 		        }
 
 		        if(pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&nameckCheck&&telCheck){
-
+					alert("정보가 변경되어 다시 로그인 바랍니다.");
 					$("#user_edit").attr("action", "/member/mypage");
 					$("#user_edit").submit();
 					
@@ -358,14 +386,21 @@
 			
 			$.ajax({
 				type : "post",
-				url : "/member/memberNameChk",
+				url : "/member/myNameChk",
 				data : data,
 				success : function(result){
+					if(result == 'successed'){
+						$('.user_input_re_1').css("display", "none");
+						$('.user_input_re_2').css("display", "none");
+						$('.user_input_re_3').css("display", "none");
+						$('.user_input_re_4').css("display", "inline-block");
+					}
 					// 정규식 유효성 검사 체크
 					if(result == 'fail2'){
 						$('.user_input_re_1').css("display", "none");
 						$('.user_input_re_2').css("display", "none");
 						$('.user_input_re_3').css("display","inline-block");
+						$('.user_input_re_4').css("display", "none");
 						nameckCheck = false;
 					}
 					// 중복체크
@@ -373,11 +408,13 @@
 						$('.user_input_re_1').css("display","inline-block");
 						$('.user_input_re_2').css("display", "none");		
 						$('.user_input_re_3').css("display", "none");
+						$('.user_input_re_4').css("display", "none");
 						nameckCheck = true;			
 					} else if (result == 'fail') {
 						$('.user_input_re_2').css("display","inline-block");
 						$('.user_input_re_1').css("display", "none");		
 						$('.user_input_re_3').css("display", "none");
+						$('.user_input_re_4').css("display", "none");
 						nameckCheck = false;			
 					}
 				}// success 종료
@@ -408,6 +445,16 @@
 		    }).open();
 		}
 	</script>
+	<jsp:include page="../init/footer.jsp"></jsp:include>
+	<!-- Bootstrap core JavaScript -->
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="/resources/assets/js/isotope.min.js"></script>
+	<script src="/resources/assets/js/owl-carousel.js"></script>
+	<script src="/resources/assets/js/tabs.js"></script>
+	<script src="/resources/assets/js/popup.js"></script>
+	<script src="/resources/assets/js/custom.js"></script>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

@@ -10,13 +10,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tech.common.Pagination;
 import com.tech.service.MemberService;
+import com.tech.service.interfaces.BoardService;
+import com.tech.service.interfaces.TradeService;
 import com.tech.service.interfaces.UserService;
 import com.tech.vo.UserVO;
 
@@ -29,6 +34,10 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private TradeService tradeService;
+	@Autowired
+	private BoardService boardService;
 	
 	@Autowired
     private BCryptPasswordEncoder pwEncoder;
@@ -63,10 +72,57 @@ public class UserController {
 	}
 	
 	// 닉네임 중복 검사
+	@RequestMapping(value = "/myNameChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String myNameChkPOST(String membername, HttpServletRequest request) throws Exception{
+		int result;
+
+		HttpSession session = request.getSession();
+		
+		UserVO vo2 = (UserVO) session.getAttribute("member");
+		
+		String rename = vo2.getName();
+		
+		System.out.println("리네임 : "+ rename);
+		System.out.println("작성 이름 : "+membername);
+		
+		if(!rename.equals(membername)) {
+		
+			String chkName = "^[a-z가-힣]{1}(?=.*[a-z가-힣])[a-z0-9가-힣]{2,10}$";
+			logger.info("아이디 정규화 체크 진입");
+			
+			boolean rs = Pattern.matches(chkName, membername);
+			if(rs != true) {
+				return "fail2";
+			}
+			
+			
+			logger.info("memberNameChk() 진입");
+			
+			result = userService.nameCheck(membername);
+			
+			logger.info("결과값 = " + result);
+			
+			if(result != 0) {
+				
+				return "fail";	// 중복 아이디가 존재
+				
+			} else {
+				
+				return "success";	// 중복 아이디 x
+				
+			}	
+		}
+		return "successed";
+		
+	} // memberIdChkPOST() 종료
+	
+	// 닉네임 중복 검사
 	@RequestMapping(value = "/memberNameChk", method = RequestMethod.POST)
 	@ResponseBody
-	public String memberNameChkPOST(String membername) throws Exception{
+	public String memberNameChkPOST(String membername, HttpServletRequest request) throws Exception{
 		int result;
+
 		
 		String chkName = "^[a-z가-힣]{1}(?=.*[a-z가-힣])[a-z0-9가-힣]{2,10}$";
 		logger.info("아이디 정규화 체크 진입");
@@ -75,7 +131,7 @@ public class UserController {
 		if(rs != true) {
 			return "fail2";
 		}
-
+		
 		
 		logger.info("memberNameChk() 진입");
 		
@@ -170,13 +226,16 @@ public class UserController {
 		HttpSession session = request.getSession();
 		String rawPw = "";
 		String encodePw = "";
-		
 		UserVO vo2 = userService.memberLogin(vo);
-		
+		int black = userService.memberBlack(vo.getId());
+		System.out.println(black);
 		if(vo2 != null) {
 			rawPw = vo.getPassword();
 			encodePw = vo2.getPassword();
-			
+			if(black >= 1) {
+				rttr.addFlashAttribute("result", 1);
+				return "redirect:/member/login"; //로그인 페이지로 이동
+			}
 			if(true == pwEncoder.matches(rawPw, encodePw)) {
 				
 				vo2.setPassword(""); //인코딩된 비밀번호 정보 지움
@@ -211,11 +270,27 @@ public class UserController {
     }
 
 	
-	//로그인 이후 마이페이지 이동
+	//마이페이지-정보변경 이동
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage() {
 		logger.info("로그인됨 : 마이 페이지진입");
 		return "/member/mypage";
+	}
+
+	
+	//마이페이지-작성 판매글 목록 이동
+	@RequestMapping(value = "/mypage_trade", method = RequestMethod.GET)
+	public String mypage_trade() {
+		logger.info("마이페이지-작성 판매글 목록 이동");
+		return "/member/mypage_trade";
+	}
+
+	
+	//회원탈퇴 이동
+	@RequestMapping(value = "/my_del", method = RequestMethod.GET)
+	public String mypageDelGET() {
+		logger.info("회원 탈퇴 이동");
+		return "/member/my_del";
 	}
 	
 	/* 마이페이지 본인확인 */
@@ -252,7 +327,9 @@ public class UserController {
 	
 	//회원수정
 	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
-	public String mypagePOST(UserVO vo) throws Exception{
+	public String mypagePOST(UserVO vo, HttpServletRequest request) throws Exception{
+		
+		HttpSession session = request.getSession();
 		
 		String rawPw = "";
 		String encodePw = "";
@@ -267,26 +344,44 @@ public class UserController {
 		
 		logger.info("edit Service 성공");
 		
-		return "redirect:/";
+		session.invalidate();
+		
+		return "member/login";
 		
 	}
 	
 	//회원탈퇴
-	@RequestMapping(value = "/memberDel.do", method = RequestMethod.POST)
-	public String memberDel(UserVO vo, HttpServletRequest request) throws Exception{
-
+	@RequestMapping(value = "/my_del.do", method = RequestMethod.POST)
+	public String memberDel(UserVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
+		
+		String rawPw = "";
+		String encodePw = "";
     	
     	HttpSession session = request.getSession();
     	
-    	session.invalidate();
 		
-		logger.info("회원 탈퇴 진입");
+    	UserVO vo2 = userService.memberLogin(vo);
 		
-		userService.memberDel(vo);
-		
-		logger.info("회원 탈퇴 성공");
-		
-		return "redirect:/";
+		if(vo2 != null) {
+			rawPw = vo.getPassword();
+			encodePw = vo2.getPassword();
+			
+			if(true == pwEncoder.matches(rawPw, encodePw)) {
+				
+				vo2.setPassword(""); //인코딩된 비밀번호 정보 지움
+		    	session.invalidate(); //세션 삭제
+		    	userService.memberDel(vo);
+				return "redirect:/"; //메인페이지로 이동
+				
+			}else { 
+				rttr.addFlashAttribute("result", 0);
+				return "redirect:/member/my_del"; //마이 페이지로 이동
+			}
+			
+		}else {	//일치하는 아이디가 존재하지 않을 시 (로그인 실패)
+			rttr.addFlashAttribute("result", 0);
+			return "redirect:/member/my_del"; //로그인 페이지로 이동
+		}
 		
 	}
 	//랜덤인증번호발송
@@ -326,6 +421,54 @@ public class UserController {
 
 	    return true;
 	}	
+
+	/* 회원이 작성한 게시글 목록 */
+	@RequestMapping(value = { "/board" }, method = RequestMethod.GET)	
+		public String b_userSearchAction(Model model, 
+				@RequestParam(value ="userName", required=false, defaultValue="") String writer, 
+				  @RequestParam(required = false, defaultValue = "1") int page,
+				  @RequestParam(required = false, defaultValue = "1") int range) throws
+				  Exception 
+				{
+			
+		/* 유저 이름으로 '거래게시판' 카테고리 제외 모든 카페고리 게시글 전부 가져와 갯수 저장 */
+		int listCnt = boardService.getBoardByUserName(writer).size();	
+		/* 페이지네이션 세팅 */
+		Pagination pagination = new Pagination();
+		pagination.setWriter(writer);
+		pagination.pageInfo(page, range, listCnt);
+		/* 페이지 인디케이터 표시 */
+		model.addAttribute("pagination", pagination);
+		/* 출력 */
+		model.addAttribute("boardList", boardService.getBoardByUserName_P((pagination)));
+			
+		return "/member/mypage_board";
+	}
+
+	/* 회원이 작성한 게시글 목록 */
+	@RequestMapping(value = { "/trade" }, method = RequestMethod.GET)	
+		public String t_userSearchAction(Model model, 
+				@RequestParam(value ="userName", required=false, defaultValue="") String writer, 
+				  @RequestParam(required = false, defaultValue = "1") int page,
+				  @RequestParam(required = false, defaultValue = "1") int range) throws
+				  Exception 
+				{
+			
+		/* 유저 이름으로 '거래게시판' 카테고리 제외 모든 카페고리 게시글 전부 가져와 갯수 저장 */
+		int listCnt2 = tradeService.getBoardByUserName(writer).size();
+		System.out.println(listCnt2+"개");
+		/* 페이지네이션 세팅 */
+		Pagination pagination2 = new Pagination();
+		pagination2.setWriter(writer);
+		pagination2.pageInfo(page, range, listCnt2);
+		/* 페이지 인디케이터 표시 */
+		model.addAttribute("pagination2", pagination2);
+		/* 출력 */
+		model.addAttribute("tradeList", tradeService.getBoardByUserName_P((pagination2)));
+		
+			
+		return "/member/mypage_trade";
+	}
 
 }
 

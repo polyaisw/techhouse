@@ -162,6 +162,13 @@ public class TradeServiceImpl implements TradeService {
 	}
 
 
+	@Override
+	public List<BVO> getUserBoardList(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 
 }

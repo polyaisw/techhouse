@@ -45,4 +45,7 @@ public interface BoardMapper {
 	List<BVO> getBestBoardListByCate(String category); // 10개 가져오기 추천수순
 	List<BVO> getHotDealBoardList(); // 3개 가져오기 최신순 핫딜 슬라이드용
 	List<BVO> getBoardByTitle(String title); // 게시글 제목으로 검색
+	
+	
+	public List<BVO> getUserBoardList(String name);
 }

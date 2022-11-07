@@ -193,6 +193,9 @@ label {
 							<c:if test="${result == 0 }">
 								<div class="login_warn mb-4">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
 							</c:if>
+							<c:if test="${ result == 1 }">
+								<div class="login_warn mb-4">제제된 아이디입니다 관리자에게 문의 하세요.</div>
+							</c:if>
 							<div class="col-lg-12 loginbttm ">
 								<div class="col-lg-6 login-btm login-text">
 									<!-- Error Message -->
@@ -213,48 +216,6 @@ label {
 			<a href="#">find account</a>
 		</div>
 	</div>
-
-	<%-- 	<form id="login_form" method="post" class="d-flex flex-column w-75 ">
-		<input class="id_input" name="id" placeholder="Userid"> <input
-			class="pw_input " name="password" type="password"
-			placeholder="Password">
-
-		<c:if test="${result == 0 }">
-			<div class="login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
-		</c:if>
-
-		<input type="button" class="login_button" value="로그인"> <a
-			type="button" class="login_button">취소</a>
-	</form> --%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	<script>
 		/* 로그인 버튼 클릭 메서드 */

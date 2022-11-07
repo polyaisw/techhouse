@@ -47,16 +47,19 @@ width: 126px!important;
 position:static!important;
     display: inline!important;
 }
+
 .header-area {
 	position:fixed;
 	background-color:#1f2122;
 	top:0px;
 	border-bottom : 1px solid var(--bs-success);
 }
+
 .header-area .main-nav .nav li a {
 	font-weight:bold;
 	color:#bbbbbb;
 }
+
 .header-area .main-nav .nav li:hover >a, .header-area .main-nav .nav li >a.active {
     color: #ffffff !important;
     background-color: #198754;
@@ -64,13 +67,16 @@ position:static!important;
 a:hover {
 	color: var(--bs-teal);
 }
+
 #myPage-btn:hover {
 	background-color: #198754; 
 }
+
 .most-popular {
 	
 	border-bottom : 1px solid var(--bs-success);
 }
+
 
 </style>
 </head>
@@ -158,17 +164,30 @@ a:hover {
 												</div>
 
 											</div>
-											
-												<ul class="off-ul">
-													<li class="off-li"><a href="/member/mypage" class="text-white">마이페이지</a></li>
-													<li class="off-li"><a href="#" class="text-white">리스트1</a></li>
-													<li class="off-li"><a href="#" class="text-white">리스트2</a></li>
-													<li class="off-li"><a href="#" class="text-white">리스트3</a></li>
-												</ul>
+												<c:if test="${ member.rank != '관리자' }">
+													<ul class="off-ul">
+														<li class="off-li"><a href="/member/mypage" class="text-white">정보변경</a></li>
+														<li class="off-li">
+															<a type="submit" href="/member/board?userName=${ member.name }" class="text-white">작성 게시글 목록</a>
+														</li>
+														<li class="off-li"><a href="/member/trade?userName=${ member.name }" class="text-white">작성 판매글 목록</a></li>
+														<li class="off-li"><a href="#" class="text-white">문의 내역</a></li>
+													</ul>
+												</c:if>
+												<c:if test="${ member.rank == '관리자' }">
+													<ul class="off-ul">
+														<li class="off-li"><a href="/admin/admin_users" class="text-white">회원조회</a></li>
+														<li class="off-li">
+															<a type="submit" href="/admin/board?userName=${ member.name }" class="text-white">회원 게시글 목록</a>
+														</li>
+														<li class="off-li"><a href="/admin/trade?userName=${ member.name }" class="text-white">회원 판매글 목록</a></li>
+														<li class="off-li"><a href="#" class="text-white">문의 내역</a></li>
+													</ul>
+												</c:if>
 										</div>
 										<hr class="text-white">
 										<div class="offcanvas-footer mx-2">
-											<a href="#" class="text-danger fs-bold text-start">회원탈퇴</a>
+											<a href="/member/my_del" class="text-danger fs-bold text-start">회원탈퇴</a>
 										</div>
 										<!-- 오프캔바스안쪽 {e}-->
 
@@ -189,5 +208,6 @@ a:hover {
 			</div>
 		</div>
 	</header>
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
 </body>
 </html>
