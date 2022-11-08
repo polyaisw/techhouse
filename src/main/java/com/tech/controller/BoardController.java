@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.tech.common.Pagination;
 import com.tech.service.interfaces.BoardService;
 import com.tech.service.interfaces.CommentService;
+import com.tech.service.interfaces.ImageService;
 import com.tech.service.interfaces.QnaService;
 import com.tech.valid.BoardValidator;
 import com.tech.vo.BVO;
@@ -55,6 +56,8 @@ public class BoardController {
 	private QnaService qnaService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private ImageService imageService;	//다중 파일업로드용
 
 	BoardVO boardVO;
 	ProductVO productVO;
@@ -332,21 +335,35 @@ public class BoardController {
 	public String contentForm(@RequestParam("b_seq") String b_seq, Model model) {
 		logger.info("게시글 진입");
 		int seq = Integer.parseInt(b_seq);
+		
+		/* 조회수 증가 */
 		boardService.upViews(seq);
+		
+		/* 게시글가져오기 */
 		boardVO = (BoardVO) boardService.getBoardById(seq);
+		
+		/* 공백처리 */
 		boardVO.setB_text(boardVO.getB_text().replace("\r\n", "<br>"));
+		
+		/* 댓글리스트 */
 		List<CommentVO> commentList = commentService.getCommentListById(seq);
 
 		for (CommentVO comment : commentList) {
 			comment.setC_text(comment.getC_text().replace("\r\n", "<br>"));
 		}
-
 		int commentCnt = commentList.size();
-		logger.info(String.valueOf(commentCnt));
+		
+		/* 댓글 갯수 */
 		boardVO.setB_commentcount(commentCnt);
+		
+		/* 이미지리스트 */
+		List<ImageVO> imageList = imageService.getImageListById(seq);
+		
+		
 		model.addAttribute("boardContent", boardVO);
 		model.addAttribute("commentList", commentList);
-
+		model.addAttribute("imageList", imageList);
+		
 		return "/board/contentForm";
 	}
 
@@ -354,9 +371,20 @@ public class BoardController {
 	public String contentReportForm(@RequestParam("b_seq") String b_seq, Model model) {
 		logger.info("신고 게시글 진입");
 		int seq = Integer.parseInt(b_seq);
+		/* 조회수 증가 */
 		boardService.upViews(seq);
+		
+		/* 게시글 가져오기 */
 		boardVO = (BoardVO) boardService.getBoardById(seq);
+		
+		/* 공백처리 */
 		boardVO.setB_text(boardVO.getB_text().replace("\r\n", "<br>"));
+		
+		/* 이미지리스트 */
+		List<ImageVO> imageList = imageService.getImageListById(seq);
+		
+
+		model.addAttribute("imageList", imageList);
 		model.addAttribute("boardContent", boardVO);
 
 		return "/board/contentReportForm";
@@ -386,7 +414,6 @@ public class BoardController {
 
 		ServletContext application = request.getServletContext();
 		
-		
 				//서버에서 저장 할 경로
 				String uploadFolder = (String) application.getAttribute("path");
 				System.out.println("저장 경로 : "+uploadFolder);
@@ -414,17 +441,23 @@ public class BoardController {
 					}
 				}
 
-				ImageVO imageVO = new ImageVO();
-				imageVO.setI_img(i_list);
-				imageVO.setI_boardSeq(boardVO.getB_seq());
+				boardVO.setB_uploadImg(i_list.get(0));	//썸네일용	저장
+				int result = boardService.createBoard(boardVO);	//result는 새로생성된 boardSeq값임..
 				
-			boardVO.setB_uploadImg(imageVO.getI_img().get(0));	//썸네일용 저장
+				
+				
+				ImageVO imageVO = new ImageVO();	//다중 파일 db로 저장
+				for(int i=0; i<i_list.size(); i++) {
+				imageVO.setI_img(i_list.get(i));
+				imageVO.setI_boardSeq(result);
+				imageService.insertImage(imageVO);
+				}
+				
 		
 		
 		if (bindingResult.hasErrors()) {
 			return "<script> location.href='/board/insertBoardForm'</script>";
 		} else {
-			int result = boardService.createBoard(boardVO);
 			if (result == 0) {
 				logger.info("등록 실패");
 				return "<script>alert('insert_board_failed'); location.href='/board/insertBoardForm';</script>";
@@ -442,7 +475,11 @@ public class BoardController {
 
 	@RequestMapping("/updateBoardAction")
 	@ResponseBody
-	public String updateBoardAction(@ModelAttribute("updateContent") @Valid BoardVO boardVO, BindingResult bindingResult
+	public String updateBoardAction(
+			@ModelAttribute("updateContent") @Valid BoardVO boardVO, 
+			HttpServletRequest request,
+			MultipartHttpServletRequest files,
+			BindingResult bindingResult
 
 	/*
 	 * , @RequestParam("b_title") String b_title,
@@ -459,7 +496,49 @@ public class BoardController {
 		 * boardVO.setB_category(b_category); boardVO.setB_uploadImg(b_uploadImg);
 		 * boardVO.setB_text(b_text);
 		 */
+	
+		/* 기존 게시글의 이미지전부 삭제 */
+		imageService.deleteImage(boardVO.getB_seq());
+		
+		/* 재업로드한 이미지들을 등록 */
+		ServletContext application = request.getServletContext();
+		
+			//서버에서 저장 할 경로
+			String uploadFolder = (String) application.getAttribute("path");
+			
+			  
+			List<MultipartFile> list = files.getFiles("files");
+			List<String> i_list = new ArrayList<String>();
+			for(int i = 0; i<list.size(); i++) {
+				String fileRealName = list.get(i).getOriginalFilename();
+				long size = list.get(i).getSize();
+				
+				System.out.println("파일명 :" + fileRealName);
+				System.out.println("사이즈 : " + size);
+				
+				File saveFile = new File(uploadFolder + "\\" + fileRealName);
+				i_list.add(fileRealName);
+				try {
+					list.get(i).transferTo(saveFile);
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			ImageVO imageVO = new ImageVO();	//다중 파일 db로 저장
+			for(int i=0; i<i_list.size(); i++) {
+			imageVO.setI_img(i_list.get(i));
+			imageVO.setI_boardSeq(boardVO.getB_seq());
+			imageService.insertImage(imageVO);
+			}
+			boardVO.setB_uploadImg(i_list.get(0));	//썸네일용	저장
 
+		
+		
+		
 		if (bindingResult.hasErrors()) {
 			return "<script> location.href='/board/updateForm?b_seq=" + boardVO.getB_seq() + "'</script>";
 		} else {

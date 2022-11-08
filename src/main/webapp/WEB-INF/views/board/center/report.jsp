@@ -88,6 +88,9 @@ a:hover {
     color: var(--bs-warning)!important;
     
 }
+.header-area .main-nav .nav li:hover>a {
+	color : white!important;
+}
 </style>
 </head>
 <body>
@@ -122,7 +125,7 @@ a:hover {
 								<li class="d-flex justify-content-between align-items-center ">
 									<div class="title-unit">
 										<span class="badge" style="font-size: 15px;">공지 <a
-											href="/board/contentForm?b_seq=${noticeList.b_seq }" class="d-inline-block text-truncate px-2"
+											href="/board/contentReportForm?b_seq=${noticeList.b_seq }" class="d-inline-block text-truncate px-2"
 											style="max-width: 600px;">${noticeList.b_title } </a></span>
 									</div>
 									<div class="normal-unit">
@@ -245,11 +248,11 @@ a:hover {
 					<div class="col ">
 						<c:if test="${member != null}">
 							<c:if test="${member.rank eq '관리자' }">
-								<a href="/board/insertNoticeBoardForm" class="button-4 mt-5">공지사항
+								<a href="/board/insertNoticeBoardForm" class="button-1 mt-5">공지사항
 									작성하기</a>
 							</c:if>
 							<c:if test="${member.rank ne '관리자'}">
-								<a href="/board/insertBoardForm" class="button-4  mt-5">글작성하기</a>
+								<a href="/board/insertBoardForm" class="button-1  mt-5">글작성하기</a>
 							</c:if>
 						</c:if>
 					</div>

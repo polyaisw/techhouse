@@ -17,7 +17,7 @@
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver"></property>
 		<property name="jdbcUrl"
-			value="jdbc:mysql://localhost:3306/techhouse?serverTimezone=Asia/Seoul"></property>
+			value="jdbc:mysql://localhost:3306/techhouse?allowMultiQueries=true&amp;serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="root"></property>
 	</bean>
@@ -45,6 +45,7 @@
 				<value>classpath:com/tech/repository/mapper/ApplyMapper.xml</value>	
 				<value>classpath:com/tech/repository/mapper/QnaMapper.xml</value>
 				<value>classpath:com/tech/repository/mapper/CommentMapper.xml</value>
+				<value>classpath:com/tech/repository/mapper/ImageMapper.xml</value>
 				
 			</list>
 		</property>

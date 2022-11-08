@@ -65,7 +65,7 @@
 	<jsp:include page="../../init/nav.jsp"></jsp:include>
 
 	<div class="container mt-5">
-	<div class="page-content border-info border">
+	<div class="page-content border-bottom border-success">
 		<form action="/board/qnaAction" name="qnaForm"
 			onsubmit="return chkWrite()" method="post" class="was-validated">
 			<div class="row">
@@ -149,7 +149,7 @@
 			<div class="row text-center">
 				<div class="col m-3">
 					<input type="submit"
-						class="btn button-3-border d-inline text-white" value="문의 접수">
+						class="btn button-4 d-inline" value="문의 접수">
 				</div>
 			</div>
 		</form>

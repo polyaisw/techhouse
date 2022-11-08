@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.repository.mapper.ImageMapper">
+
+	<insert id="insertImage" parameterType="Image">
+	insert into image(i_boardSeq, i_img) values(#{i_boardSeq},#{i_img})
+	</insert>
+
+	<select id="getImageListById" resultType="Image">
+	select * from image where i_boardSeq = #{value}
+	</select>
+	
+	<delete id="deleteImage">
+	set sql_safe_updates=0;
+	delete from image where i_boardSeq = #{value};
+	set sql_safe_updates=1;
+	</delete>
+</mapper>

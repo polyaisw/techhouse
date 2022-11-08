@@ -206,7 +206,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${trendList.b_seq }"
 													class="h5 d-inline-block text-truncate"
-													style="max-width: 580px;"> ${trendList.b_title }</a> <span
+													style="max-width: 350px;"> ${trendList.b_title }</a> <span
 													class="badge badge-pill">${trendList.b_recommed }</span>
 												</li>
 											</c:forEach>
@@ -227,7 +227,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${gameInfoList.b_seq }"
 													class="h5 d-inline-block text-truncate"
-													style="max-width: 580px;"> ${gameInfoList.b_title }</a> <span
+													style="max-width: 350px;"> ${gameInfoList.b_title }</a> <span
 													class="badge badge-pill">${gameInfoList.b_recommed }</span>
 												</li>
 											</c:forEach>
@@ -248,7 +248,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${hotDealList.b_seq }"
 													class="h5 d-inline-block text-truncate"
-													style="max-width: 580px;"> ${hotDealList.b_title }</a> <span
+													style="max-width: 350px;"> ${hotDealList.b_title }</a> <span
 													class="badge badge-pill">${hotDealList.b_recommed }</span>
 												</li>
 											</c:forEach>
@@ -278,7 +278,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${freeList.b_seq }"
 													class="h5 d-inline-block text-truncate"
-													style="max-width: 580px;"> ${freeList.b_title }</a> <span
+													style="max-width: 350px;"> ${freeList.b_title }</a> <span
 													class="badge badge-pill">${freeList.b_recommed }</span>
 												</li>
 											</c:forEach>
@@ -299,7 +299,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${mySettingList.b_seq }"
 													class="h5 d-inline-block text-truncate"
-													style="max-width: 580px;"> ${mySettingList.b_title }</a> <span
+													style="max-width: 350px;"> ${mySettingList.b_title }</a> <span
 													class="badge badge-pill">${mySettingList.b_recommed }</span>
 												</li>
 											</c:forEach>
@@ -318,7 +318,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${hobbyList.b_seq }"
 													class="h5 d-inline-block text-truncate"
-													style="max-width: 580px;"> ${hobbyList.b_title }</a> <span
+													style="max-width: 350px;"> ${hobbyList.b_title }</a> <span
 													class="badge badge-pill">${hobbyList.b_recommed }</span>
 												</li>
 											</c:forEach>
@@ -363,7 +363,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 									<div class="thumb">
 										<a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }"><img
 											src="/resources/images/user_upload/${mySettingListBest.b_uploadImg }"
-											alt="" style="max-width: 300px; max-height: 300px;"></a>
+											alt="" style="width: 250px; height: 250px;"></a>
 										<div class="hover-effect mt-1">
 											<h5><a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }">${mySettingListBest.b_title }</a></h5>
 										</div>

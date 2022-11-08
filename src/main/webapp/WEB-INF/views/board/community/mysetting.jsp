@@ -159,15 +159,13 @@ function fn_next(page, range, rangeSize, searchKeyword, b_category, getUrl) {
 										<span class="">${member.ticket}</span>
 									</div>
 								</div>
-								
-
 							</div>
 						</div>
 					</c:if>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-xl-12">
 					<div class="carousel-inner mb-5">
 						<div class="most-popular header-text">
 							<div class="heading-section mb-3">
@@ -176,13 +174,13 @@ function fn_next(page, range, rangeSize, searchKeyword, b_category, getUrl) {
 								</h4>
 								<span class="text-white ">직접 촬영한 사진을 올려보세요</span>
 							</div>
-							<div class="owl-features owl-carousel">
+							<div class="owl-features owl-carousel col-xl-6">
 								<c:forEach var="mySettingListBest" items="${mySettingListBest }">
 								<div class="item">
 									<div class="thumb">
 										<a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }"><img
 											src="/resources/images/user_upload/${mySettingListBest.b_uploadImg }"
-											alt="" style="max-width: 300px; max-height: 300px;"></a>
+											alt="" style="min-width:200px; min-height:200px;max-width: 300px; max-height: 300px;"></a>
 										<div class="hover-effect mt-1">
 											<h5><a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }">${mySettingListBest.b_title }</a></h5>
 										</div>
@@ -207,34 +205,6 @@ function fn_next(page, range, rangeSize, searchKeyword, b_category, getUrl) {
 			<hr class="hr">
 
 			<div class="most-popular">
-				<div class="row"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				<div class="row">
 					<div class="col ">
 					<div class="table-responsive">

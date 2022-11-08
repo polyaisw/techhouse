@@ -212,7 +212,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 
 	</div>
 	<div class="container mt-5">
-		<div class="page-content border"style="border-color:#e75e8d!important;">
+		<div class="page-content border-bottom border-success">
 			<div class="row ">
 				<div class="col d-flex my-5 justify-content-center">
 					<h4 class="">
@@ -226,7 +226,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 				</div>
 			</div>
 
-			<div class="container   d-flex flex-column ">
+			<div class="  d-flex flex-column ">
 				<c:if test="${productContent.prod_posting != 1  }">
 					<div class="row">
 						<div class="col">
@@ -293,7 +293,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 					</div>
 				</c:if>
 			</div>
-			<div class="container ">
+			<div class=" ">
 				<div class="row text-center">
 					<div class="col my-5 ">
 						<c:choose>

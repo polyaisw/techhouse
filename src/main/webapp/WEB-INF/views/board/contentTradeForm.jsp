@@ -40,8 +40,39 @@
 				<div class="col-lg-5 image-box">
 				<span class="badge mb-1" style="line-height: 1.5; background-color: #3cb398;">거래게시판</span>
 				
-					<img src="/resources/images/trade/${ tradeContent.t_uploadImg }"
-						width="500px" height="400px" class="rounded">
+				
+				
+				<c:if test="${tradeContent.t_uploadImg eq 'trade_default.png' }">
+					<img src="/resources/images/user_upload/${tradeContent.t_uploadImg }" class="d-block w-100 rounded" style="width:350px; height:350px" alt="...">
+				</c:if>
+				
+				<c:if test="${tradeContent.t_uploadImg ne 'trade_default.png' }">
+					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+					  <div class="carousel-inner">
+					  	<c:forEach var="imageList" items="${imageList }" varStatus="status">
+					  		<c:if test="${status.count eq 1 }">
+							    <div class="carousel-item active" data-bs-interval="3000">
+							      <img src="/resources/images/user_upload/${imageList.i_img }" class="d-block rounded w-100" style="width:350px; height:350px;" alt="...">
+							    </div>
+					  		</c:if>
+					  		<c:if test="${status.count ne 1 }">
+							    <div class="carousel-item" data-bs-interval="3000">
+							      <img src="/resources/images/user_upload/${imageList.i_img }" class="d-block rounded w-100" style="width:350px; height:350px;" alt="...">
+							    </div>
+					  		</c:if>
+					    </c:forEach>
+					  </div>
+					  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Previous</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Next</span>
+					  </button>
+					</div>
+				
+				</c:if>
 				</div>
 				<div class="col-lg-7 d-flex flex-column">
 					<div class="trade-title d-flex flex-row justify-content-between">
@@ -68,9 +99,7 @@
 						<div class="d-flex flex-row ">
 							<p class="pe-2">
 								<i class="fa-solid fa-eye me-1" style="color: #666666;"></i>${ tradeContent.t_views }</p>
-							<p class="pe-2">
-								<i class="fa-regular fa-comment me-1" style="color: #666666;"></i>11
-							</p>
+							
 							<!-- 댓글수 -->
 							<p class="pe-2">${ tradeContent.t_date }</p>
 						</div>
@@ -113,8 +142,6 @@
 											<c:when test="${ tradeContent.t_state != '판매중'}">
 											<a class="button-4 ms-1" href="javascript:alert('거래중이거나 거래 완료된 상품입니다.')">바로구매</a>
 											<a class="button-0 ms-1" href="javascript:alert('준비중입니다.')">안심거래</a>
-												
-
 											</c:when>
 											<c:otherwise>
 												<a class="button-4 ms-1" href="#">바로구매</a>
@@ -141,11 +168,6 @@
 				<div class="col-md-12 mt-4">${tradeContent.t_text}</div>
 				<hr class="mt-5">
 			</div>
-
-
-
-
-
 
 			<div class="content-comment-section my-3">
 				<div class="comment-title">

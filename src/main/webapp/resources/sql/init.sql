@@ -90,9 +90,7 @@ CREATE TABLE `techhouse`.`image` (
 	`i_seq` INT NOT NULL auto_increment,
 	`i_boardseq` INT NOT NULL,
     `i_img` varchar(100),
-		primary key(`i_seq`),
-        foreign key(`i_boardseq`) references `board`(`b_seq`) on update cascade on delete cascade,
-        foreign key(`i_boardseq`) references `trade`(`t_seq`) on update cascade on delete cascade
+		primary key(`i_seq`)
 );
 
 CREATE TABLE `techhouse`.`apply` (
@@ -527,6 +525,66 @@ insert into board(b_writer, b_title, b_text,  b_category) values("판매자","b_
 
 
 
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
+insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "마우스팔아요", "로지텍 마우스","220000","판매중",22,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("판매자", "컵팔아요 컵", "좋은 컵","31000","거래중",199,"t_text","거래게시판");
+
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
+insert into trade(t_writer, t_title, t_prodname, t_price, t_state, t_views, t_text,  t_category) values("김예성", "스피커팝니다", "집스피커","25000","거래완료",0,"t_text","거래게시판");
 insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","라면 팝니다","신라면","300000","t_text","거래게시판");
 insert into trade(t_writer, t_title,t_prodname,t_price, t_text,  t_category) values("판매자","만두2개 팝니다","만두2개","1000000","t_text","거래게시판");
 

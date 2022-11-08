@@ -70,7 +70,7 @@ textarea, input {
 		<div class="page-content">
 			<div class="row">
 				<div class="col ">
-					<form action="updateBoardAction" name="updateBoardForm"
+					<form action="updateBoardAction" enctype="multipart/form-data" name="updateBoardForm"
 						onsubmit="return chkWrite()" method="post">
 						<input type="text" name="b_seq" class="d-none"
 							value="${ updateContent.b_seq }"> <input type="text"
@@ -122,8 +122,8 @@ textarea, input {
 							</div>
 						</div>
 						<hr>
-						
 						<c:if test="${ updateContent.b_category  eq '사기피해신고'}"><div class="content-main-section text-white">
+							
 							<p>
 								<textarea name="b_text" class="d-block w-100 mt-4 border-bottom border-warning"
 									style="height: 800px;" placeholder="수정하실 내용을 입력해주세요">${ updateContent.b_text }</textarea>
@@ -139,23 +139,18 @@ textarea, input {
 						
 						<c:if test="${ updateContent.b_category  eq '사기피해신고'}">
 							<input class="form-control form-control-sm my-3" id="formFileSm"
-								type="file" name="b_uploadImg">
+								type="file" name="files" multiple="multiple">
 							<input id="mysubmit" type="submit" class="button-1 border-0" value="수정완료">
 							<a href="javascript:window.history.back();"> <input
 								type="button" class="button-1-border" value="뒤로가기"></a>
-
-
 						</c:if>
-
 						<c:if test="${ updateContent.b_category  ne '사기피해신고'}">
 							<input class="form-control form-control-sm my-3" id="formFileSm"
-								type="file" name="b_uploadImg">
+								type="file" name="files" multiple="multiple">
 							<input id="mysubmit" type="submit" class="button-3" value="수정완료">
 							<a href="javascript:window.history.back();"> <input
 								type="button" class="button-3-border" value="뒤로가기"></a>
 						</c:if>
-
-
 					</form>
 				</div>
 			</div>

@@ -105,9 +105,9 @@
 
 							
 								<div class="mb-3">
-										<label for="formFileSm" class="form-label"></label> <input
+										<!-- <label for="formFileSm" class="form-label"></label> <input
 											class="form-control form-control-sm" id="formFileSm"
-											type="file" name="b_uploadImg">
+											type="file" name="b_uploadImg"> -->
 									</div>
 							
 							

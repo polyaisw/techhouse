@@ -11,5 +11,6 @@
 		<typeAlias alias="Qna" type="com.tech.vo.QnaVO" />
 		<typeAlias alias="Comment" type="com.tech.vo.CommentVO" />
 		<typeAlias alias="Pagination" type="com.tech.common.Pagination" />
+		<typeAlias alias="Image" type="com.tech.vo.ImageVO" />
 	</typeAliases>
 </configuration>

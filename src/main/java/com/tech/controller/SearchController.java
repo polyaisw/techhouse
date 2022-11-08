@@ -33,12 +33,22 @@ public class SearchController {
 
 	/* 중고거래게시판용 얘는 카테고리가 하나라 검색어만 받으면 결과가 나옴 */
 	@RequestMapping(value = "/searchAction", method = RequestMethod.GET)
-	public String searchAction(
-			@RequestParam(value = "searchKeyword", required=false, defaultValue ="팔아요") String keyword, 
-			Model model,
+	public String searchAction(Model model,HttpServletRequest request,
+			@RequestParam(value = "searchKeyword", required=false, defaultValue ="") String keyword, 
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range) {
 
+		
+		if(keyword.equals("")) {	//요청이 안왔으면(다음페이지시)
+			model.addAttribute("keyword",request.getAttribute("keyword"));
+		}else {
+
+			keyword = keyword.trim();
+			request.setAttribute("keyword", keyword);	//검색한 결과값이 들어왔으면.. 저장(처음검색)
+			model.addAttribute("keyword",keyword);
+		}
+		
+		
 		keyword = keyword.trim();
 		TradeVO tradeVO = new TradeVO();
 		/* 검색어 세팅 */
@@ -46,15 +56,24 @@ public class SearchController {
 
 		/* 제목+내용 검색결과의 개수 */
 		int listCnt = tradeService.getBoardByTitleText(tradeVO).size();
-
+		System.out.println("거래게시판 검색결과 개수 : "+listCnt);
+		
 		/* 페이지 인디케이터 설정 */
 		Pagination pagination = new Pagination();
 		pagination.pageInfo(page, range, listCnt);
 		pagination.setCategory("거래게시판");
 		pagination.setKeyword(keyword);
 
+		/* 페이지 인디케이터 표시 */
+		model.addAttribute("pagination", pagination);
+		
 		/* 검색결과 게시글 표시 */
 		model.addAttribute("list", tradeService.getBoardListsBySearch((pagination)));
+		
+		/* 공지사항표시 */
+		model.addAttribute("noticeList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("공지사항","b_seq",999)));
+		
+		
 		return "/board/trade/tradeBoard";
 	}
 
@@ -66,7 +85,7 @@ public class SearchController {
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range) throws Exception {
 
-		if(keyword.equals("")) {	//요청이 안왔으면(다음페이지시)
+		if(keyword.equals("")) {	//다음페이지시
 			model.addAttribute("keyword",request.getAttribute("keyword"));
 			model.addAttribute("b_category",request.getAttribute("b_category"));
 			model.addAttribute("url",request.getAttribute("url"));
