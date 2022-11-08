@@ -34,7 +34,7 @@
 	<select id="getTBoardByTitleText" parameterType="Trade"
 		resultType="Trade">
 		select * from trade where `t_category` = #{t_category}
-		and`t_title` like
+		and `t_title` like
 		concat('%',#{keyword},'%') or `t_text` like
 		concat('%',#{keyword},'%')
 	</select>

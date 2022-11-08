@@ -2,6 +2,7 @@ package com.tech.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,6 +46,9 @@ public class HomeController {
 	@RequestMapping(value = { "/main", "/" }, method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 
+		ServletContext application = request.getServletContext();
+		application.setAttribute("path", request.getServletContext().getRealPath("resources/images/user_upload"));
+		
 		
 		/* 최신글 */
 		model.addAttribute("issueList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("핫이슈","b_seq",5)));
@@ -56,29 +60,10 @@ public class HomeController {
 		model.addAttribute("mySettingListBest",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("인증게시판","b_recommed",3)));
 		model.addAttribute("hobbyList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("취미공유","b_seq",5)));
 		model.addAttribute("tradeList",tradeService.getBestBoardListByCate("거래게시판"));
-
 		
-
-
-		
-		
-		
-		/*	//게시글 많은 순으로 유저정보 4개 
-		 * List<UserVO> userList = userService.~
-		 * model.addAttribute("userList",userList);
-		 */
-
-
-
-		/*
-		 * ServletContext application = request.getServletContext();
-		 * application.getAttribute("productAppContent");
-		 */
-
 		return "home";
 
 	}
-	
 	
 
 

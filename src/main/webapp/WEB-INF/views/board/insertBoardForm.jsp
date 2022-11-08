@@ -83,7 +83,7 @@
 			<div class="row">
 				<div class="col">
 					<form action="insertBoardAction" name="insertBoardForm"
-						onsubmit="return chkWrite()" method="post" class="text-white">
+						onsubmit="return chkWrite()" enctype="multipart/form-data" method="post" class="text-white">
 						<input type="text" name="b_writer"
 									value="${member.name }" size="30" class="d-none">
 									
@@ -117,22 +117,15 @@
 							
 								<div class="mb-3">
 										<label for="formFileSm" class="form-label"></label> <input
-											class="form-control form-control-sm" id="formFileSm"
-											type="file" name="b_uploadImg">
+											class="form-control form-control-sm" multiple="multiple" id="formFileSm"
+											type="file" name="files">
 									</div>
 							
 							
 								<input type="submit" value="글쓰기" class="button-3"> <a
 									href="javascript:window.history.back();"><input
 										type="button" value="뒤로가기" class="button-3-border"></a>
-						
-						
-						
-						
-						
 						</div>
-								
-							
 					</form>
 				</div>
 			</div>

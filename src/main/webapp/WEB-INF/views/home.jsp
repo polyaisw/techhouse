@@ -358,12 +358,11 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 								<span class="text-white ">직접 촬영한 사진을 올려보세요</span>
 							</div>
 							<div class="owl-features owl-carousel">
-
 								<c:forEach var="mySettingListBest" items="${mySettingListBest }">
 								<div class="item">
 									<div class="thumb">
 										<a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }"><img
-											src="/resources/images/board/${mySettingListBest.b_uploadImg }"
+											src="/resources/images/user_upload/${mySettingListBest.b_uploadImg }"
 											alt="" style="max-width: 300px; max-height: 300px;"></a>
 										<div class="hover-effect mt-1">
 											<h5><a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }">${mySettingListBest.b_title }</a></h5>
@@ -379,46 +378,8 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 									</ul>
 								</div>
 								</c:forEach>
-								<%-- <div class="item">
-									<div class="thumb">
-										<img
-											src="/resources/assets/images/${mySettingList.b_uploadImg }featured-02.jpg"
-											alt="" style="max-width: 300px; max-height: 300px;">
-										<div class="hover-effect">
-											<h5>${mySettingList.b_title }b_title</h5>
-										</div>
-									</div>
-									<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
-									</h4>
-									<ul>
-										<li><i class="fa-regular fa-thumbs-up"></i>
-											${mySettingList.b_recommed }55</li>
-										<li><i class="fa-solid fa-eye text-white"></i>
-											${mySettingList.b_views }219</li>
-									</ul>
-								</div>
-								<div class="item">
-									<div class="thumb">
-										<img
-											src="/resources/assets/images/${mySettingList.b_uploadImg }featured-03.jpg"
-											alt="" style="max-width: 300px; max-height: 300px;">
-										<div class="hover-effect">
-											<h5>${mySettingList.b_title }b_title</h5>
-										</div>
-									</div>
-									<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
-									</h4>
-									<ul>
-										<li><i class="fa-regular fa-thumbs-up"></i>
-											${mySettingList.b_recommed }55</li>
-										<li><i class="fa-solid fa-eye text-white"></i>
-											${mySettingList.b_views }219</li>
-									</ul>
-								</div> --%>
-
 							</div>
 						</div>
-
 					</div>
 					
 					

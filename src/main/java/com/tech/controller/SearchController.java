@@ -40,7 +40,6 @@ public class SearchController {
 			@RequestParam(required = false, defaultValue = "1") int range) {
 
 		keyword = keyword.trim();
-		System.out.println("키워드 : "+keyword);
 		TradeVO tradeVO = new TradeVO();
 		/* 검색어 세팅 */
 		tradeVO.setKeyword(keyword);
@@ -85,7 +84,6 @@ public class SearchController {
 		
 		
 		
-		System.out.println(b_category + " : 카테고리 이름");
 		BoardVO boardVO = new BoardVO();
 
 		/* 검색어 */
@@ -94,7 +92,7 @@ public class SearchController {
 		/* 게시판종류 */
 		boardVO.setB_category(b_category);
 
-		/* 제목+내용 검색결과의 개수 */
+		/* 카테고리의 제목+내용 검색결과의 개수 */
 		int listCnt = boardService.getBoardByTitleText(boardVO).size();
 
 		Pagination pagination = new Pagination();
@@ -120,6 +118,14 @@ public class SearchController {
 		boardVO.setListSize(5);
 		model.addAttribute("viewsList", boardService.getBoardListByCategoryKeywordNumber(boardVO));
 
+		/* 공지사항표시 */
+		model.addAttribute("noticeList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("공지사항","b_seq",999)));
+		
+		/* 게임정보, 인증 베스트 표시 */
+		model.addAttribute("gameInfoListBest",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("게임출시정보","b_seq",5)));
+		model.addAttribute("mySettingListBest",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("인증게시판","b_recommed",5)));
+		
+		
 		System.out.println(url+" : url");
 		if (url.equals("/main")) {
 			logger.error("board_search error");

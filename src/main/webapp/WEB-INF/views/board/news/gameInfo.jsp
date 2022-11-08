@@ -33,28 +33,37 @@
 
 <!-- pagination -->
 <script type="text/javascript">
-	function fn_prev(page, range, rangeSize) {
-		var page = ((range - 2) * rangeSize) + 1;
-		var range = range - 1;
-		var url = "${getPageRange}";
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		location.href = url;
-	}
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
-		var url = "${getPageRange}";
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		location.href = url;
-	}
-	function fn_next(page, range, rangeSize) {
-		var page = parseInt((range * rangeSize)) + 1;
-		var range = parseInt(range) + 1;
-		var url = "${getPageRange}";
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		location.href = url;
-	}
+function fn_prev(page, range, rangeSize, searchKeyword, b_category, getUrl) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	var url = "${getPageRange}";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	url = url + "&searchKeyword=" + searchKeyword;
+	url = url + "&b_category=" + b_category;
+	url = url + "&url=" + getUrl;
+	location.href = url;
+}
+function fn_pagination(page, range, rangeSize, searchKeyword, b_category, getUrl) {
+	var url = "${getPageRange}";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	url = url + "&searchKeyword=" + searchKeyword;
+	url = url + "&b_category=" + b_category;
+	url = url + "&url=" + getUrl;
+	location.href = url;
+}
+function fn_next(page, range, rangeSize, searchKeyword, b_category, getUrl) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	var url = "${getPageRange}";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	url = url + "&searchKeyword=" + searchKeyword;
+	url = url + "&b_category=" + b_category;
+	url = url + "&url=" + getUrl;
+	location.href = url;
+}
 </script>
 <style>
 .signup>span:hover {
@@ -98,169 +107,97 @@
 			<div class="row">
 				<div class="col-md-9">
 					<div class="most-popular title">
-						<h2>
-							<c:out value="${category }" />
-						</h2>
+						<h2><c:out value="${category }"/></h2>
 						<div class="notice text-white mt-5" style="">
 							<ul>
+								<c:forEach var="noticeList" items="${noticeList }">
 								<li class="d-flex justify-content-between align-items-center ">
 									<div class="title-unit">
 										<span class="badge" style="font-size: 15px;">공지 <a
-											href="#" class="d-inline-block text-truncate px-2"
-											style="max-width: 600px;">공지사항 제목 </a></span>
+											href="/board/contentForm?b_seq=${noticeList.b_seq }" class="d-inline-block text-truncate px-2"
+											style="max-width: 600px;">${noticeList.b_title } </a></span>
 									</div>
 									<div class="normal-unit">
-										<span class="pe-3"> 관리자 </span> <span><i
-											class="fa-solid fa-eye text-white"></i> 202 </span>
+										<span class="pe-3"> ${noticeList.b_writer } </span> <span><i
+											class="fa-solid fa-eye text-white"></i> ${noticeList.b_views } </span>
 									</div>
 								</li>
 								<hr class="hr inline-block my-1">
-								<li class="d-flex justify-content-between align-items-center  ">
-									<div class="title-unit">
-										<span class="badge" style="font-size: 15px;">공지 <a
-											href="#" class="d-inline-block text-truncate px-2"
-											style="max-width: 600px;">공지사항 제목 </a></span>
-									</div>
-									<div class="normal-unit">
-										<span class="pe-3"> 관리자 </span> <span><i
-											class="fa-solid fa-eye text-white"></i> 202 </span>
-									</div>
-								</li>
-								<hr class="hr inline-block my-1">
-								<li class="d-flex justify-content-between align-items-center  ">
-									<div class="title-unit">
-										<span class="badge" style="font-size: 15px;">공지 <a
-											href="#" class="d-inline-block text-truncate px-2"
-											style="max-width: 600px;">공지사항 제목 </a></span>
-									</div>
-									<div class="normal-unit">
-										<span class="pe-3"> 관리자 </span> <span><i
-											class="fa-solid fa-eye text-white"></i> 202 </span>
-									</div>
-								</li>
-								<hr class="hr inline-block my-1">
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
 					<div class="menu-list mt-5">
 						<ul class="d-flex flex-row justify-content-around">
-							<li><a href="/board/news/trend" class="button-3">IT/트렌드</a></li>
-							<li><a href="/board/news/issue" class="button-3">핫이슈</a></li>
-							<li><a href="/board/news/gameInfo" class="button-3">게임출시정보</a></li>
-							<li><a href="/board/news/hotDeal" class="button-3">꿀딜/장터</a></li>
+							<li><a href="/board/news/trend" class="button-4">IT/트렌드</a></li>
+							<li><a href="/board/news/issue" class="button-4">핫이슈</a></li>
+							<li><a href="/board/news/gameInfo" class="button-4">게임출시정보</a></li>
+							<li><a href="/board/news/hotDeal" class="button-4">꿀딜/장터</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="col md-3 text-center">
+				<div class="col-md-3 ps-2 text-center" style="margin-top:60px;">
 					<c:if test="${member eq null }">
-						<div class="most-popular user text-white">
 							<a href="/member/login"
-								class="loginBtn p-2 border rounded border-info d-block mb-2"><i
-								class="fa-solid fa-star-and-crescent"
-								style="color: var(--bs-cyan)"></i><span class=""> Log In
-							</span></a> <a href="/member/join" class="me-3 signup"> <span
-								style="color: var(--bs-cyan)">sign up</span>
-							</a> <a href="#"> <span>find account</span>
-							</a>
-						</div>
+								class="loginBtn p-2   btn btn-success  d-block mb-2">
+								<span class=""> 로그인 하기
+							</span></a>
+							
 					</c:if>
 					<c:if test="${member ne null }">
-						<div class="most-popular user text-white">
+						<div class="most-popular user text-white pb-2 mt-0">
 							<h4>infomation</h4>
-							<i class="fa-solid fa-star-and-crescent"
-								style="color: var(--bs-cyan)"></i>
-							<div class="info-box  rounded my-2 d-block"
-								style="border-color: var(--bs-cyan);">
-								<h6 class="mt-4">
-									<em>${member.name }</em> 님 환영합니다.
-								</h6>
-								<div class="info-box-main mt-4" style="color: #666666;">
+							<div class="info-box  rounded my-2 d-block" style="border-color: var(--bs-cyan);">
+								<h6 class="text-warning">${member.rank}</h6>
+								<h6 class="mt-4"><em>${member.name }</em>님 <br>환영합니다.</h6>
+								<div class="info-box-main mt-4" style="color:#666666;">
 									<div class="d-flex justify-content-between mx-2">
-										<h6 class="">point :</h6>
+										<h6 class="" >point : </h6>
 										<span class="">${member.point}</span>
 									</div>
-									<div class="d-flex justify-content-between mx-2">
-										<h6 class="">rank :</h6>
-										<span class="">${member.rank}</span>
-									</div>
-									<div class="d-flex justify-content-between mx-2 mb-4">
-										<h6 class="">ticket :</h6>
+									<div class="d-flex justify-content-between mx-2 mb-0">
+										<h6 class="" >ticket : </h6>
 										<span class="">${member.ticket}</span>
 									</div>
 								</div>
-
+								
 
 							</div>
-						</div>
-						<div
-							class="btn-box d-flex align-items-center justify-content-center mt-2">
-
-							<button class="button-0-border me-2">출석체크</button>
-							<a href="/member/logout" class="button-0">로그아웃</a>
 						</div>
 					</c:if>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="most-popular header-text">
-					<h5 class="mb-3">인증게시판 최신 베스트</h5>
-						<div class="owl-features owl-carousel">
-							<div class="item">
-								<div class="thumb">
-									<img
-										src="/resources/assets/images/${mySettingList.b_uploadImg }featured-01.jpg"
-										alt="" style="max-width: 300px; max-height: 300px;">
-									<div class="hover-effect">
-										<h5>${mySettingList.b_title }b_title</h5>
-									</div>
-								</div>
-								<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
+					<div class="carousel-inner mb-5">
+						<div class="most-popular header-text">
+							<div class="heading-section mb-3">
+								<h4 class="mb-1 h4-shadow text-white" style="font-size:24px;">
+									최신 게임정보 소식
 								</h4>
-								<ul>
-									<li><i class="fa-regular fa-thumbs-up"></i>
-										${mySettingList.b_recommed }55</li>
-									<li><i class="fa-solid fa-eye text-white"></i>
-										${mySettingList.b_views }219</li>
-								</ul>
 							</div>
-							<div class="item">
-								<div class="thumb">
-									<img
-										src="/resources/assets/images/${mySettingList.b_uploadImg }featured-02.jpg"
-										alt="" style="max-width: 300px; max-height: 300px;">
-									<div class="hover-effect">
-										<h5>${mySettingList.b_title }b_title</h5>
+							<div class="owl-features owl-carousel">
+								<c:forEach var="gameInfoListBest" items="${gameInfoListBest }">
+								<div class="item">
+									<div class="thumb">
+										<a href="/board/contentForm?b_seq=${gameInfoListBest.b_seq }"><img
+											src="/resources/images/user_upload/${gameInfoListBest.b_uploadImg }"
+											alt="" style="max-width: 300px; max-height: 300px;"></a>
+										<div class="hover-effect mt-1">
+											<h5><a href="/board/contentForm?b_seq=${gameInfoListBest.b_seq }">${gameInfoListBest.b_title }</a></h5>
+										</div>
 									</div>
+									<h4>${gameInfoListBest.b_writer }<br> <span>${gameInfoListBest.b_date }</span>
+									</h4>
+									<ul>
+										<li><i class="fa-regular fa-thumbs-up"></i>
+											${gameInfoListBest.b_recommed }</li>
+										<li><i class="fa-solid fa-eye text-white"></i>
+											${gameInfoListBest.b_views }</li>
+									</ul>
 								</div>
-								<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
-								</h4>
-								<ul>
-									<li><i class="fa-regular fa-thumbs-up"></i>
-										${mySettingList.b_recommed }55</li>
-									<li><i class="fa-solid fa-eye text-white"></i>
-										${mySettingList.b_views }219</li>
-								</ul>
+								</c:forEach>
 							</div>
-							<div class="item">
-								<div class="thumb">
-									<img
-										src="/resources/assets/images/${mySettingList.b_uploadImg }featured-03.jpg"
-										alt="" style="max-width: 300px; max-height: 300px;">
-									<div class="hover-effect">
-										<h5>${mySettingList.b_title }b_title</h5>
-									</div>
-								</div>
-								<h4>${mySettingList.b_writer }b_writer<br> <span>${mySettingList.b_date }b_date</span>
-								</h4>
-								<ul>
-									<li><i class="fa-regular fa-thumbs-up"></i>
-										${mySettingList.b_recommed }55</li>
-									<li><i class="fa-solid fa-eye text-white"></i>
-										${mySettingList.b_views }219</li>
-								</ul>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -269,7 +206,7 @@
 			</div>
 			<hr class="hr">
 
-			<div class="most-popular border-info border">
+			<div class="most-popular">
 				<div class="row"></div>
 
 
@@ -300,11 +237,12 @@
 
 				<div class="row">
 					<div class="col ">
-						<table class="table table-dark table-hover rounded">
+					<div class="table-responsive">
+						<table class="table table-dark table-hover-bottom rounded">
 							<thead class="">
 								<tr>
 									<th>추천</th>
-									<th width="700px;">제목</th>
+									<th>제목</th>
 									<th>작성자</th>
 									<th>조회수</th>
 									<th>게시날짜</th>
@@ -314,15 +252,15 @@
 								<c:forEach var="boardList" items='${list}'>
 
 									<tr>
-										<td>${ boardList.b_recommed }</td>
+										<td><span class="d-inline-block" style="min-width:50px">${ boardList.b_recommed }</span></td>
 										<td>
 											<div class="title-box d-flex ">
-												<img src="/resources/images/board/thumb_default.png"
+												<img src="/resources/images/user_upload/${boardList.b_uploadImg }"
 													class="rounded thumbnail-img me-2">
 												<div class="title-content-box d-flex align-items-center">
 													<a href="/board/contentForm?b_seq=${ boardList.b_seq }"
 														class="d-inline-block text-truncate title"
-														style="max-width: 650px;"> ${ boardList.b_title }</a>
+														style="min-width: 200px;"> ${ boardList.b_title }</a>
 
 												</div>
 											</div>
@@ -333,13 +271,14 @@
 
 
 
-										<td>${ boardList.b_writer }</td>
-										<td>${ boardList.b_views }</td>
-										<td>${ boardList.b_date }</td>
+										<td><span class="d-inline-block" style="min-width:67px">${ boardList.b_writer }</span></td>
+										<td><span class="d-inline-block" style="min-width:67px">${ boardList.b_views }</span></td>
+										<td><span class="d-inline-block" style="min-width:100px">${ boardList.b_date }</span></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						</div>
 					</div>
 
 				</div>
@@ -363,19 +302,18 @@
 							<ul class="pagination d-flex justify-content-center">
 								<c:if test="${pagination.prev}">
 									<li class="page-item"><a class="page-link" href="#"
-										onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+										onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}','${keyword }','${b_category }','${url }')">Previous</a></li>
 								</c:if>
 								<c:forEach begin="${pagination.startPage}"
 									end="${pagination.endPage}" var="idx">
 									<li
 										class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> "><a
 										class="page-link" href="#"
-										onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+										onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}','${keyword }','${b_category }','${url }')">
 											${idx} </a></li>
 								</c:forEach>
 								<c:if test="${pagination.next}">
-									<li class="page-item"><a class="page-link" href="#"
-										onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
+									<li class="page-item"><a class="page-link" href="#"onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}','${keyword }','${b_category }','${url }')">Next</a></li>
 								</c:if>
 							</ul>
 						</div>

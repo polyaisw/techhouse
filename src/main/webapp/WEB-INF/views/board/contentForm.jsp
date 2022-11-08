@@ -84,11 +84,13 @@ p {
 								class="button-3-border" value="목록"
 								onclick="goToList('${boardContent.b_category}')"></div>
 			<div class="content-main-section text-white">
-				<p>${boardContent.b_text}</p>
 			</div>
 			<c:choose>
-				<c:when test="${boardContent.b_writer eq '관리자' }"></c:when>
+				<c:when test="${boardContent.b_writer eq '관리자' }"><p class="mt-5">${boardContent.b_text}</p></c:when>
 				<c:otherwise>
+				<p><img src="/resources/images/user_upload/${boardContent.b_uploadImg }"
+											alt="" class="rounded" style="max-width: 500px; max-height: 1500px;"></p>
+				<p class="mt-5">${boardContent.b_text}</p>
 				<div class="content-main-up-button text-center my-5">
 					<a href="/board/recommendAction?b_seq=${boardContent.b_seq }"
 						class="text-white recommed-button rounded" ><i class="fa-solid fa-thumbs-up text-white fw-bold"></i>

@@ -49,11 +49,13 @@
 			</list>
 		</property>
 		<!-- 여기까지 -->
-
-
-
-
 	</bean>
+	<!-- 파일업로드 api -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="50000000" />	<!-- 제한용량 50mb -->
+		<property name="defaultEncoding" value="utf-8" />	
+	</bean>
+	<!-- 여기까지 -->
 	<mybatis-spring:scan
 		base-package="com.tech.repository.mapper" />
 	<context:component-scan

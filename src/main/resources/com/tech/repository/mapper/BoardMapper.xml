@@ -36,8 +36,8 @@
 	</select>
 	<select id="getBoardByTitleText" parameterType="Board"
 		resultType="Board">
-		select * from board where `b_category` = #{b_category} and `b_title` like
-		concat('%',#{keyword},'%') or `b_text` like concat('%',#{keyword},'%') order by b_seq desc
+		select * from board where `b_category` = #{b_category} and (`b_title` like
+		concat('%',#{keyword},'%') or `b_text` like concat('%',#{keyword},'%')) order by b_seq desc
 	</select>
 
 

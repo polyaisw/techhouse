@@ -42,7 +42,7 @@ CREATE TABLE `techhouse`.`user` (
   `point` INT NULL,					-- 포인트 > 응모권구매가능
   `rank` VARCHAR(45) NOT NULL default '하우스 키퍼',		-- 회원등급, 기준은 미정, 관리자도 여기에
   `blacklist` INT NOT NULL default 0,			-- 0 : 일반유저 1 : 밴당한 유저 (동일 휴대폰 번호로 가입 불가 / 아이디 로그인 불가 / 게시글 전부 삭제)
-  `profileimg` VARCHAR(100) NULL,		
+  `profileimg` VARCHAR(100) NULL default 'user_default.png',		
   `tel` VARCHAR(45) NOT NULL default 01000000000,		-- 연락처
   `post` varchar(100) null,
   `addr` varchar(100) null,
@@ -54,7 +54,7 @@ CREATE TABLE `techhouse`.`user` (
 CREATE TABLE `techhouse`.`board` (						-- 게시판	
   `b_seq` INT NOT NULL auto_increment,					-- 게시판id
   `b_title` varchar(100) not null,
-  `b_writer` VARCHAR(45) NOT NULL,						-- 게시자
+  `b_writer` VARCHAR(45) NOT NULL ,						-- 게시자
   `b_views` INT NOT NULL default 0,						-- 조회수
   `b_recommed` INT NOT NULL default 0,					-- 추천수
   `b_commentcount` int(45) NOT NULL default 0,			-- 리뷰수
@@ -65,8 +65,9 @@ CREATE TABLE `techhouse`.`board` (						-- 게시판
 	PRIMARY KEY (`b_seq`),
     foreign key(`b_writer`) references `user`(`name`) on update cascade);
 
-
 ALTER TABLE board AUTO_INCREMENT=100001;
+
+
 
 CREATE TABLE `techhouse`.`trade` (						-- 중고거래게시판	
   `t_seq` INT NOT NULL auto_increment,					-- id
@@ -77,7 +78,7 @@ CREATE TABLE `techhouse`.`trade` (						-- 중고거래게시판
   `t_state` VARCHAR(10) NOT NULL default "판매중",						-- "판매중", "거래중", "거래완료"
   `t_views` INT NOT NULL default 0,						-- 조회수
   `t_text` TEXT NULL,									-- 내용
-  `t_uploadimg` VARCHAR(100) default "trade_default.png",							-- 업로드 이미지
+  `t_uploadimg` VARCHAR(100) default "trade_default.png",	-- 업로드 이미지
   `t_category` VARCHAR(45) NOT NULL,					-- 게시판 카테고리
   `t_date` DATE NOT NULL default (current_date),		-- 게시날짜
   PRIMARY KEY (`t_seq`),
@@ -85,6 +86,14 @@ CREATE TABLE `techhouse`.`trade` (						-- 중고거래게시판
 
 ALTER TABLE trade AUTO_INCREMENT=1000001;
 
+CREATE TABLE `techhouse`.`image` (
+	`i_seq` INT NOT NULL auto_increment,
+	`i_boardseq` INT NOT NULL,
+    `i_img` varchar(100),
+		primary key(`i_seq`),
+        foreign key(`i_boardseq`) references `board`(`b_seq`) on update cascade on delete cascade,
+        foreign key(`i_boardseq`) references `trade`(`t_seq`) on update cascade on delete cascade
+);
 
 CREATE TABLE `techhouse`.`apply` (
   `a_seq` INT NOT NULL auto_increment,
@@ -191,6 +200,9 @@ INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`, `tel`, `post`,
 INSERT INTO `techhouse`.`user` (`id`, `password`, `name`, `rank`) VALUES ('admin', '$2a$10$CQ3h83jHzSHtQK/XOmbgOeUs05uhFWLkDXDJr8LweiBjsmsvU1gDa', '관리자', '관리자');
 
 
+insert into board(b_writer, b_title, b_text, b_category) values("관리자","11b_title","b_text","공지사항");
+insert into board(b_writer, b_title, b_text,  b_category) values("관리자","b_title","b_text","공지사항");
+insert into board(b_writer, b_title, b_text,  b_category) values("관리자","하하","검정고무신","공지사항");
 insert into board(b_writer, b_title, b_text, b_category) values("김예성","11b_title","b_text","자유게시판");
 insert into board(b_writer, b_title, b_text,  b_category) values("김예성","b_title","b_text","자유게시판");
 insert into board(b_writer, b_title, b_text,  b_category) values("김예성","하하","검정고무신","자유게시판");
