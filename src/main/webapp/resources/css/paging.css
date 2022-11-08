@@ -1,7 +1,7 @@
 .active>.page-link, .page-link.active {
 	z-index: 3;
 	color: white;
-	background-color: var(--bs-cyan);
+	background-color: var(--bs-teal);
 	border-color: inherit;
 }
 

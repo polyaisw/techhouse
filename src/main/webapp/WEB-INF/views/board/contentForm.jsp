@@ -86,12 +86,17 @@ p {
 			<div class="content-main-section text-white">
 				<p>${boardContent.b_text}</p>
 			</div>
-			<div class="content-main-up-button text-center my-5">
-				<a href="/board/recommendAction?b_seq=${boardContent.b_seq }"
-					class="text-white recommed-button rounded" ><i class="fa-solid fa-thumbs-up text-white fw-bold"></i>
-					<span class="text-white fw-bold"> ${boardContent.b_recommed }</span>
-				</a>
-			</div>
+			<c:choose>
+				<c:when test="${boardContent.b_writer eq '관리자' }"></c:when>
+				<c:otherwise>
+				<div class="content-main-up-button text-center my-5">
+					<a href="/board/recommendAction?b_seq=${boardContent.b_seq }"
+						class="text-white recommed-button rounded" ><i class="fa-solid fa-thumbs-up text-white fw-bold"></i>
+						<span class="text-white fw-bold"> ${boardContent.b_recommed }</span>
+					</a>
+				</div>
+				</c:otherwise>
+			</c:choose>
 			<div class="content-main button-box">
 				<form action="/board/updateForm" method="post" class="d-flex justify-content-end">
 					<input type="text" class="d-none" name="b_seq"

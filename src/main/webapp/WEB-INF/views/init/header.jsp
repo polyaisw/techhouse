@@ -61,11 +61,12 @@ position:static!important;
 }
 
 .header-area .main-nav .nav li:hover >a, .header-area .main-nav .nav li >a.active {
-    color: #ffffff !important;
+    color: #ffffff ;
     background-color: #198754;
     }
 a:hover {
 	color: var(--bs-teal);
+	transition: all .5s;
 }
 
 #myPage-btn:hover {
@@ -81,7 +82,10 @@ color: #FFFFFF;
 background: inherit;
 text-shadow: 0 0 10px #FFFFFF;
 }
-
+.logo:hover {
+	-webkit-animation: pulsate-bck 1.5s ease-in-out infinite both;
+	        animation: pulsate-bck 1.5s ease-in-out infinite both;
+}
 #back2Top {
     width: 40px;
     line-height: 40px;
@@ -103,6 +107,36 @@ text-shadow: 0 0 10px #FFFFFF;
 	color: var(--bs-success);
 	transition: all .5s;
 }
+
+@-webkit-keyframes pulsate-bck {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes pulsate-bck {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
 
 </style>
 </head>

@@ -60,7 +60,8 @@ public class BoardController {
 		 String category = "자유게시판";
 		
 		 /*게시글 출력*/
-		  int listCnt = boardService.getBoardListCnt(); 
+		  int listCnt = boardService.getBoardListByCate(category).size(); 
+		  System.out.println(listCnt +"개  자유게시판");
 		  Pagination pagination = new Pagination(); 
 		  pagination.pageInfo(page, range, listCnt);
 		  pagination.setCategory(category); 
@@ -74,6 +75,9 @@ public class BoardController {
 		/* 조회수5개 */
 		BoardVO boardVO2 = new BoardVO(category,"b_views",5);
 		model.addAttribute("viewsList",boardService.getBoardListByCategoryKeywordNumber(boardVO2));
+
+		/* 공지사항 전부 */
+		model.addAttribute("noticeList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("공지사항","b_seq",999)));
 		
 		return "/board/community/free";
 	}
@@ -275,7 +279,13 @@ public class BoardController {
 		logger.info("게시글 글쓰기 진입");
 		return "/board/insertBoardForm";
 	}
-
+	
+	@RequestMapping("/insertNoticeBoardForm")
+	public String insertNoticeBoardForm() {
+		logger.info("공지사항 글쓰기 진입");
+		return "/board/insertNoticeBoardForm";
+	}
+	
 	@RequestMapping("/contentForm")
 	public String contentForm(@RequestParam("b_seq") String b_seq, Model model) {
 		logger.info("게시글 진입");

@@ -698,7 +698,7 @@ Header Style
 
 .header-area .main-nav .nav li:hover >a,
 .header-area .main-nav .nav li >a.active {
-  color: #e75e8d !important;
+  color: #e75e8d ;
   background-color:#27292a;
 }
 
@@ -749,7 +749,7 @@ Header Style
   -o-transition: all 0.4s;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  background-color: #e75e8d;
+  background-color: white;
   display: block;
   position: absolute;
   width: 30px;
@@ -769,7 +769,7 @@ Header Style
   -o-transition: all 0.4s;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  background-color: #e75e8d;
+  background-color: white;
   display: block;
   position: absolute;
   width: 30px;
@@ -821,7 +821,7 @@ Header Style
   -ms-transform: translateY(6px) translateX(1px) rotate(45deg);
   -webkit-transform: translateY(6px) translateX(1px) rotate(45deg);
   transform: translateY(6px) translateX(1px) rotate(45deg);
-  background-color: #e75e8d;
+  background-color: var(--bs-success);;
 }
 
 .background-header .main-nav .menu-trigger.active span:before {
@@ -833,7 +833,7 @@ Header Style
   -ms-transform: translateY(-6px) translateX(1px) rotate(-45deg);
   -webkit-transform: translateY(-6px) translateX(1px) rotate(-45deg);
   transform: translateY(-6px) translateX(1px) rotate(-45deg);
-  background-color: #e75e8d;
+  background-color: var(--bs-success);
 }
 
 .background-header .main-nav .menu-trigger.active span:after {
@@ -944,12 +944,12 @@ Header Style
     line-height: 50px !important;
     padding: 0px !important;
     border: none !important;
-    background: #f4b7cc!important;
-    color: #1f2122 !important;
+    background: var(--bs-teal)!important;
+    color: white!important;
   }
   .header-area .main-nav .nav li a:hover {
     background: transparent !important;
-    color: #e75e8d!important;
+    color: var(--bs-teal)!important;
   }
   .header-area .main-nav .nav li:last-child a img {
     display: none;

@@ -237,7 +237,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 										<div class="middle-section ">
 											<h5 class="d-flex justify-content-between">
 												<span> <span class="color-edit">꿀딜/장터</span></span> <a
-													href="/board/news/gameInfo"><i
+													href="/board/news/hotDeal"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
 										</div>
@@ -267,7 +267,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 										<div class="middle-section ">
 											<h5 class="d-flex justify-content-between">
 												<span><span class="color-edit">자유게시판</span></span> <a
-													href="/board/news/issue"><i
+													href="/board/community/free"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
 										</div>
@@ -288,7 +288,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 										<div class="middle-section ">
 											<h5 class="d-flex justify-content-between">
 												<span><span class="color-edit">인증게시판</span></span> <a
-													href="/board/news/issue"><i
+													href="/board/community/mysetting"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
 										</div>
@@ -304,10 +304,10 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												</li>
 											</c:forEach>
 										</ul>
-										<div class="middle-section ">
+										<div class="middle-section mt-4">
 											<h5 class="d-flex justify-content-between">
 												<span><span class="color-edit">취미공유</span></span> <a
-													href="/board/news/issue"><i
+													href="/board/community/hobby"><i
 													class="fa-solid fa-caret-right"></i></a>
 											</h5>
 										</div>
@@ -362,20 +362,20 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 								<c:forEach var="mySettingListBest" items="${mySettingListBest }">
 								<div class="item">
 									<div class="thumb">
-										<img
-											src="/resources/assets/images/${mySettingListBest.b_uploadImg }featured-01.jpg"
-											alt="" style="max-width: 300px; max-height: 300px;">
-										<div class="hover-effect">
-											<h5>${mySettingListBest.b_title }b_title</h5>
+										<a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }"><img
+											src="/resources/images/board/${mySettingListBest.b_uploadImg }"
+											alt="" style="max-width: 300px; max-height: 300px;"></a>
+										<div class="hover-effect mt-1">
+											<h5><a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }">${mySettingListBest.b_title }</a></h5>
 										</div>
 									</div>
-									<h4>${mySettingListBest.b_writer }b_writer<br> <span>${mySettingListBest.b_date }b_date</span>
+									<h4>${mySettingListBest.b_writer }<br> <span>${mySettingListBest.b_date }</span>
 									</h4>
 									<ul>
 										<li><i class="fa-regular fa-thumbs-up"></i>
-											${mySettingListBest.b_recommed }55</li>
+											${mySettingListBest.b_recommed }</li>
 										<li><i class="fa-solid fa-eye text-white"></i>
-											${mySettingListBest.b_views }219</li>
+											${mySettingListBest.b_views }</li>
 									</ul>
 								</div>
 								</c:forEach>
@@ -467,8 +467,8 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 													</a>
 												</h4>
 												<ul>
-													<li><i class="fa fa-star"></i> 4.8</li>
-													<li><i class="fa fa-download"></i> 2.3M</li>
+													<li><i class="fa-solid fa-eye me-1 text-white"></i>${tradeList.t_views }</li>
+													<li><span class="badge rounded-pill text-bg-light d-inline fw-bold">${tradeList.t_state }</span></li>
 												</ul>
 											</div>
 										</div>

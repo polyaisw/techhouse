@@ -2,6 +2,7 @@ package com.tech.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -59,13 +60,31 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/searchBoardAction", method = RequestMethod.GET)
-	public String searchBoardAction(Model model, @RequestParam("searchKeyword") String keyword,
-			@RequestParam("b_category") String b_category,
+	public String searchBoardAction(Model model, HttpServletRequest request,
+			@RequestParam(value = "searchKeyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(value = "b_category", required = false) String b_category,
 			@RequestParam(value = "url", required = false, defaultValue = "/main") String url,
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range) throws Exception {
 
-		keyword = keyword.trim();
+		if(keyword.equals("")) {	//요청이 안왔으면(다음페이지시)
+			model.addAttribute("keyword",request.getAttribute("keyword"));
+			model.addAttribute("b_category",request.getAttribute("b_category"));
+			model.addAttribute("url",request.getAttribute("url"));
+		}else {
+
+			keyword = keyword.trim();
+			request.setAttribute("keyword", keyword);	//검색한 결과값이 들어왔으면.. 저장(처음검색)
+			request.setAttribute("url", url);
+			request.setAttribute("b_category", b_category);
+			
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("url",url);
+			model.addAttribute("b_category",b_category);
+		}
+		
+		
+		
 		System.out.println(b_category + " : 카테고리 이름");
 		BoardVO boardVO = new BoardVO();
 
