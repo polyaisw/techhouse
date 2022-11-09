@@ -196,6 +196,9 @@ label {
 							<c:if test="${ result == 1 }">
 								<div class="login_warn mb-4">제제된 아이디입니다 관리자에게 문의 하세요.</div>
 							</c:if>
+							<c:if test="${ result == 2 }">
+								<div class="login_warn mb-4">존재하지 않은 계정입니다.</div>
+							</c:if>
 							<div class="col-lg-12 loginbttm ">
 								<div class="col-lg-6 login-btm login-text">
 									<!-- Error Message -->

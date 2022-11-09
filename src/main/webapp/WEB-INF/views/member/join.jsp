@@ -271,7 +271,7 @@ label {
 			<input type="text" class = "form-control w-25" id="post" name="post" maxlength="20" placeholder="우편번호" readonly onclick="findAddr()"><br>
 			<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" readonly onclick="findAddr()"><br>
 			<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소"><br>
-			<span class="text-white">프로필 사진 : </span><input class="profil_input" type="file" name="file"><br>
+			<span class="text-white">프로필 사진 : </span><input class="profil_input" style="color : green;" type="file" name="file"><br>
 		</div>
 		
 		

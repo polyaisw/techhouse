@@ -283,11 +283,11 @@ public class UserController {
 		String rawPw = "";
 		String encodePw = "";
 		UserVO vo2 = userService.memberLogin(vo);
-		int black = userService.memberBlack(vo.getId());
-		System.out.println(black);
 		if(vo2 != null) {
 			rawPw = vo.getPassword();
 			encodePw = vo2.getPassword();
+			int black = userService.memberBlack(vo.getId());
+			System.out.println(black);
 			if(black >= 1) {
 				rttr.addFlashAttribute("result", 1);
 				return "redirect:/member/login"; //로그인 페이지로 이동
@@ -305,7 +305,7 @@ public class UserController {
 			}
 			
 		}else {	//일치하는 아이디가 존재하지 않을 시 (로그인 실패)
-			rttr.addFlashAttribute("result", 0);
+			rttr.addFlashAttribute("result", 2);
 			return "redirect:/member/login"; //로그인 페이지로 이동
 		}
 		

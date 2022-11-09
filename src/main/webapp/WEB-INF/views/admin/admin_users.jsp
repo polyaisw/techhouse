@@ -34,6 +34,9 @@ input:focus {
 	outline: none;
 	box-shadow: 0 0 0;
 }
+.black_f .black_t{
+	align:center;
+}
 </style>
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -65,12 +68,15 @@ input:focus {
 					<div class="member_List">
 						<table class="table table-dark table-hover rounded" id="user_admin">
 							<thead class="">
-								<th class="text_in">아이디</th>
-								<th class="text_in">닉네임</th>
-								<th class="text_in">게시글 수</th>
-								<th class="text_in">판매 게시글 수</th>
-								<th class="text_in">댓글 수</th>
-								<th class="text_in">블랙 상황(0 정상, 1 블랙)</th>
+								<tr>
+									<th class="text_in">아이디</th>
+									<th class="text_in">닉네임</th>
+									<th class="text_in">게시글 수</th>
+									<th class="text_in">판매 게시글 수</th>
+									<th class="text_in">댓글 수</th>
+									<th class="text_in">블랙 상황(0 정상, 1 블랙)</th>
+									<th class="text_in">권한</th>
+								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="vo" items="${ userInfo }">
@@ -86,6 +92,22 @@ input:focus {
 											class="modal_reply_admin" data-user-id="${vo.id}">${vo.commentCnt}</a></td>
 										<td class="td_in"><a href="#"
 											class="modal_reply_admin" data-user-id="${vo.id}">${vo.blacklist}</a></td>
+										<c:if test="${ vo.blacklist == 1 }">
+											<td class="td_in">
+												<form id="black_f" method="post">
+													<input type="text" name="id" value="${ vo.id }" style="display:none">
+													<input type="button" class="black_f" value="해지">
+												</form>
+											</td>
+										</c:if>
+										<c:if test="${ vo.blacklist != 1 }">
+											<td class="td_in">
+												<form id="black_t" method="post">
+													<input type="text" name="id" value="${ vo.id }" style="display:none">
+													<input type="button" class="black_t" value="블랙">
+												</form>
+											</td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -95,6 +117,24 @@ input:focus {
 			</div>
 		</div>
 	</div>
+	<script>
+		/* 블랙 해지 버튼 클릭 메서드 */
+		$(".black_f").click(function() {
+
+			alert("해당 계정을 블랙 해지하였습니다.");
+			$("#black_f").attr("action", "/admin/successId");
+			$("#black_f").submit();
+
+		});
+		/* 블랙 버튼 클릭 메서드 */
+		$(".black_t").click(function() {
+
+			alert("해당 계정을 블랙하였습니다");
+			$("#black_t").attr("action", "/admin/failId");
+			$("#black_t").submit();
+
+		});
+	</script>
 	<jsp:include page="../init/footer.jsp"></jsp:include>
 	<!-- Bootstrap core JavaScript -->
 	<script src="/resources/vendor/jquery/jquery.min.js"></script>

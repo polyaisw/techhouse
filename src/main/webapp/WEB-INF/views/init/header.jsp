@@ -52,7 +52,7 @@
 	position: fixed;
 	background-color: #1f2122;
 	top: 0px;
-	border-bottom: 1px solid var(--bs-success);
+	border-bottom: 1px solid var(- -bs-success);
 }
 
 .header-area .main-nav .nav li a {
@@ -67,7 +67,7 @@
 }
 
 a:hover {
-	color: var(--bs-teal);
+	color: var(- -bs-teal);
 	transition: all .5s;
 }
 
@@ -76,7 +76,7 @@ a:hover {
 }
 
 .most-popular {
-	border-bottom: 1px solid var(--bs-success);
+	border-bottom: 1px solid var(- -bs-success);
 }
 
 .header-title {
@@ -108,7 +108,7 @@ a:hover {
 }
 
 #back2Top:hover>i {
-	color: var(--bs-success);
+	color: var(- -bs-success);
 	transition: all .5s;
 }
 
@@ -118,7 +118,8 @@ a:hover {
 	transform: scale(1);
 }
 
-50%
+50
+%
 {
 -webkit-transform
 :
@@ -131,7 +132,8 @@ scale(
 0.95
 );
 }
-100%
+100
+%
 {
 -webkit-transform
 :
@@ -145,11 +147,13 @@ scale(
 );
 }
 }
-@keyframes pulsate-bck { 0% {
+@
+keyframes pulsate-bck { 0% {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 }
-50%
+50
+%
 {
 -webkit-transform
 :
@@ -160,9 +164,13 @@ transform
 :
 scale(
 0.95
-);}
-100%
-{-webkit-transform:
+);
+}
+100
+%
+{
+-webkit-transform
+:
 scale(
 1
 );

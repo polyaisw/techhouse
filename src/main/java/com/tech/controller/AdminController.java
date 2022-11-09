@@ -153,20 +153,18 @@ public class AdminController {
 		return list;
 	}
 	
-	@ResponseBody
 	@PostMapping("/successId")
-	public void successId(String id) throws Exception {
-		System.out.println(id);
-		System.out.println("open! user sign success Id ajax!");
+	public String successId(String id) throws Exception {
+		System.out.println(id+" 계정을 블랙 해지하였습니다.");
 		userService.successId(id);
+		return"redirect:/admin/admin_users";
 	}
 	
-	@ResponseBody
 	@PostMapping("/failId")
-	public void failId(String id) throws Exception {
-		System.out.println(id);
-		System.out.println("open! user sign failId Id ajax!");
+	public String failId(String id) throws Exception {
+		System.out.println(id+" 계정을 블랙 하였습니다.");
 		userService.failed(id);
+		return"redirect:/admin/admin_users";
 	}
 	
 }
