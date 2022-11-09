@@ -131,7 +131,7 @@ input:focus {
 									<th class="text_in">판매 게시글 수</th>
 									<th class="text_in">댓글 수</th>
 									<th class="text_in">블랙 상황(0 정상, 1 블랙)</th>
-									<th class="text_in">권한</th>
+									<th class="text_in text-center">권한</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -153,7 +153,7 @@ input:focus {
 											<td class="td_in">
 												<form id="black_f" method="post">
 													<input type="text" name="id" value="${ vo.id }" style="display:none">
-													<input type="button" class="black_f" value="해지">
+													<input type="button" class="black_f btn btn-light" value="해지">
 												</form>
 											</td>
 										</c:if>
@@ -161,7 +161,7 @@ input:focus {
 											<td class="td_in">
 												<form id="black_t" method="post">
 													<input type="text" name="id" value="${ vo.id }" style="display:none">
-													<input type="button" class="black_t" value="블랙">
+													<input type="button" class="black_t btn btn-danger" value="블랙">
 												</form>
 											</td>
 										</c:if>
