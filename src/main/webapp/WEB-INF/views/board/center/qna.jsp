@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,6 +77,18 @@
 			</div>
 			<div
 				class="row  text-white justify-content-between w-75 mx-auto mt-5">
+				<div class="col-lg-6">
+					<div class="mb-5">
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="mb-5">
+						<label for="q_boardSeq" class="form-label">닉네임</label> <input
+							type="text" class="form-control w-75" name="q_writer"
+							id="q_writer" value="${ member.name }">
+
+					</div>
+				</div>
 				<div class="col-lg-6">
 					<div class="mb-5">
 						<label for="q_boardSeq" class="form-label">문의할 게시글 번호</label> <input

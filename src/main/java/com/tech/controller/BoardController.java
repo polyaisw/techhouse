@@ -2,12 +2,16 @@ package com.tech.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +43,7 @@ import com.tech.vo.CommentVO;
 import com.tech.vo.ImageVO;
 import com.tech.vo.ProductVO;
 import com.tech.vo.QnaVO;
+import com.tech.vo.UserVO;
 
 import jakarta.validation.Valid;
 
@@ -292,8 +297,17 @@ public class BoardController {
 
 	/* center */
 	@GetMapping("/center/qna")
-	public String qna(Model model) {
+	public String qna(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		logger.info("1:1 문의 진입");
+
+		HttpSession session = request.getSession();
+		UserVO vo = (UserVO)session.getAttribute("member");
+		PrintWriter script = response.getWriter();
+		response.setContentType("text/html; charset=euc-kr");
+		if(vo == null) {
+            script.println("<script>alert('로그인 에러''로그인을 해주세요.'); location.href='/'</script>");
+		}
+        script.flush();
 		return "/board/center/qna";
 	}
 
@@ -613,7 +627,7 @@ public class BoardController {
 	/* center */
 	@RequestMapping("/qnaAction")
 	@ResponseBody
-	public String qnaAction(@RequestParam("q_boardSeq") String q_boardSeq,
+	public String qnaAction(@RequestParam("q_boardSeq") String q_boardSeq, @RequestParam("q_writer") String q_writer,
 			@RequestParam("q_category") String q_category, @RequestParam("q_title") String q_title,
 			@RequestParam("q_text") String q_text, @RequestParam("q_email") String q_email,
 			@RequestParam("q_tel") String q_tel, @RequestParam("q_uploadImg") String q_uploadImg) {
@@ -627,7 +641,7 @@ public class BoardController {
 			seq = 0; // 문의자가 게시글번호를 모를 때
 		}
 
-		qnaService.insertQna(new QnaVO(seq, q_category, q_title, q_text, q_email, q_tel, q_uploadImg));
+		qnaService.insertQna(new QnaVO(seq, q_writer, q_category, q_title, q_text, q_email, q_tel, q_uploadImg));
 
 		return "<script>alert('qna_complete'); location.href='/main'</script>";
 	}

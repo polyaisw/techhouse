@@ -280,10 +280,10 @@ scale(
 													<li class="off-li"><a href="/admin/admin_users"
 														class="text-white">회원조회</a></li>
 													<li class="off-li"><a type="submit"
-														href="/admin/board?userName=${ member.name }"
+														href="/admin/board/"
 														class="text-white">회원 게시글 목록</a></li>
 													<li class="off-li"><a
-														href="/admin/trade?userName=${ member.name }"
+														href="/admin/trade/"
 														class="text-white">회원 판매글 목록</a></li>
 													<li class="off-li"><a href="#" class="text-white">문의
 															내역</a></li>

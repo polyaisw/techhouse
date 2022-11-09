@@ -51,7 +51,6 @@ public class AdminController {
 		logger.info("관리자 페이지 이동");
 		
 		List<UserVO> list = userService.loadmember();
-		System.out.println(list);
 		model.addAttribute("userInfo", list);
 	}	
 
