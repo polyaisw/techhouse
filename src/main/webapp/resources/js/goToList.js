@@ -34,6 +34,9 @@ function goToList(value) {
 			case '사기피해신고':
 				location.href="/board/center/report";
 				break;
+			case 'Qna':
+				location.href="/리소스폴더/js폴더/goToList.js파일에서경로설정하기/"
+				break;
 			case '공지사항':
 				window.history.back();
 				break;

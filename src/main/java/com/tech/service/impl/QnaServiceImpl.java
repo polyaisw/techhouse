@@ -25,11 +25,13 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public void insertQna(QnaVO vo) {
+	public int insertQna(QnaVO vo) {
 
 		if (qMapper.insertQna(vo) == 1) {
+			return vo.getQ_seq();
 		} else {
 			logger.error("insertQna : " + failed_msg);
+			return 0;
 		}
 
 	}

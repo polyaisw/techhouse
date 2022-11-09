@@ -519,8 +519,6 @@ public class BoardController {
 		
 			//서버에서 저장 할 경로
 			String uploadFolder = (String) application.getAttribute("path");
-			
-			  
 			List<MultipartFile> list = files.getFiles("files");
 			List<String> i_list = new ArrayList<String>();
 			for(int i = 0; i<list.size(); i++) {
@@ -592,16 +590,27 @@ public class BoardController {
 	/* comment */
 	@RequestMapping("/insertCommentAction")
 	@ResponseBody
-	public String insertCommentAction(@RequestParam("c_writer") String c_writer, @RequestParam("c_text") String c_text,
-			@RequestParam("c_boardSeq") String c_boardSeq, @RequestParam("t_seq") @Nullable String t_seq) {
+	public String insertCommentAction(
+			@RequestParam("c_writer") String c_writer, 
+			@RequestParam("c_text") String c_text,
+			@RequestParam("c_boardSeq") String c_boardSeq, 
+			@RequestParam("t_seq") @Nullable String t_seq,
+			@RequestParam(value ="q_seq", required=false, defaultValue="") String q_seq) {
 		logger.info("댓글 쓰기 액션");
 		int seq = Integer.parseInt(c_boardSeq);
 		commentService.insertComment(new CommentVO(c_writer, c_text, seq));
 
+		System.out.println("q_seq : "+q_seq);
+		
+		/* qna에서 작성한 댓글이라면 */
+		
+		
 		if (t_seq != null) {
 			return "<script>alert('comment_complete'); location.href='/board/contentTradeForm?t_seq=" + c_boardSeq
 					+ "'</script>";
-		} else {
+		}else if(!q_seq.equals("")) {
+			return "<script>alert('comment_complete'); location.href='/board/contentQnaForm?q_seq="+c_boardSeq +"'</script>";
+		}else {
 			return "<script>alert('comment_complete'); location.href='/board/contentForm?b_seq=" + c_boardSeq
 					+ "'</script>";
 		}
@@ -630,21 +639,64 @@ public class BoardController {
 	public String qnaAction(@RequestParam("q_boardSeq") String q_boardSeq, @RequestParam("q_writer") String q_writer,
 			@RequestParam("q_category") String q_category, @RequestParam("q_title") String q_title,
 			@RequestParam("q_text") String q_text, @RequestParam("q_email") String q_email,
-			@RequestParam("q_tel") String q_tel, @RequestParam("q_uploadImg") String q_uploadImg) {
+			@RequestParam("q_tel") String q_tel, MultipartHttpServletRequest files,
+			HttpServletRequest request) {
 
 		logger.info("1:1 문의 쓰기 액션");
 		int seq;
 		try {
 			seq = Integer.parseInt(q_boardSeq);
 		} catch (NumberFormatException e) {
-			logger.error("qnaAction : q_boardSeq의 숫자입력이 제대로 되지 않았음");
+			logger.error("qnaAction : q_boardSeq의 숫자입력이 되지 않았음, default : 0");
 			seq = 0; // 문의자가 게시글번호를 모를 때
 		}
+		
+		ServletContext application = request.getServletContext();
+		
+		//서버에서 저장 할 경로
+		String uploadFolder = (String) application.getAttribute("path");
+		System.out.println("저장 경로 : "+uploadFolder);
+		
+		  
+		List<MultipartFile> list = files.getFiles("files");
+		List<String> i_list = new ArrayList<String>();
+		for(int i = 0; i<list.size(); i++) {
+			String fileRealName = list.get(i).getOriginalFilename();
+			long size = list.get(i).getSize();
+			
+			System.out.println("파일명 :" + fileRealName);
+			System.out.println("사이즈 : " + size);
+			
+			File saveFile = new File(uploadFolder + "\\" + fileRealName);
+			i_list.add(fileRealName);
+			try {
+				list.get(i).transferTo(saveFile);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-		qnaService.insertQna(new QnaVO(seq, q_writer, q_category, q_title, q_text, q_email, q_tel, q_uploadImg));
+		int result = qnaService.insertQna(new QnaVO(seq, q_writer, q_category, q_title, q_text, q_email, q_tel, i_list.get(0)));
+		
+		
+		
+		ImageVO imageVO = new ImageVO();	//다중 파일 db로 저장
+		for(int i=0; i<i_list.size(); i++) {
+		imageVO.setI_img(i_list.get(i));
+		imageVO.setI_boardSeq(result);
+		imageService.insertImage(imageVO);
+		}
+		
 
 		return "<script>alert('qna_complete'); location.href='/main'</script>";
 	}
+	
+	
+	
 	
 	@RequestMapping(value = "/upload_ok", method = RequestMethod.POST)
 	public String upload(@RequestParam("file") MultipartFile file) {

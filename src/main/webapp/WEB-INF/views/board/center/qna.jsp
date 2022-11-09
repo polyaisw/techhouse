@@ -68,7 +68,7 @@
 	<div class="container mt-5">
 	<div class="page-content border-bottom border-success">
 		<form action="/board/qnaAction" name="qnaForm"
-			onsubmit="return chkWrite()" method="post" class="was-validated">
+			onsubmit="return chkWrite()" enctype="multipart/form-data" method="post" class="was-validated">
 			<div class="row">
 				<div class="col">
 					<h2 class="h2 text-white">1:1 문의하기</h2>
@@ -155,7 +155,7 @@
 					<div class="mb-3">
 						<label for="formFileSm" class="form-label">파일 첨부하기 </label> <input
 							class="form-control form-control-sm" id="formFileSm"
-							name="q_uploadImg" type="file">
+							name="files" multiple="multiple" type="file">
 					</div>
 				</div>
 			</div>
