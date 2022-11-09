@@ -176,7 +176,7 @@
 										<c:forEach var="viewsList" items="${viewsList }">
 											<li class="d-flex justify-content-between mb-1"><a
 												href="/board/contentForm?b_seq=${viewsList.b_seq }"
-												style="max-width: 330px;" class="inline-block text-truncate">${viewsList.b_title}</a>
+												style="max-width: 210px;" class="inline-block text-truncate">${viewsList.b_title}</a>
 												<span><i class="fa-solid fa-eye text-white"></i>
 													${viewsList.b_views} </span></li>
 										</c:forEach>
@@ -192,7 +192,7 @@
 										<c:forEach var="recommedList" items="${recommedList }">
 											<li class="d-flex justify-content-between mb-1"><a
 												href="/board/contentForm?b_seq=${recommedList.b_seq }"
-												style="max-width: 330px;" class="inline-block text-truncate">${recommedList.b_title}</a>
+												style="max-width: 210px;" class="inline-block text-truncate">${recommedList.b_title}</a>
 												<span><i class="fa-solid fa-eye text-white"></i>
 													${recommedList.b_views} </span></li>
 										</c:forEach>

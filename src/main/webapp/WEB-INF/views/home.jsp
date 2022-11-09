@@ -418,19 +418,15 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<span class="badge rounded-pill text-bg-info d-inline mt-3">${tradeList.t_state }</span> --%>
 												<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
 													<img
-													src="/resources/images/trade/${tradeList.t_uploadImg }"
-													alt="">
+													src="/resources/images/user_upload/${tradeList.t_uploadImg }"
+													alt="" style="width: 160px; height: 160px;">
 												</a>
 
 												<h4 class="inline">
 													<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
-														${tradeList.t_title}<br> <span>${tradeList.t_price }원</span>
+														<span class=" d-inline-block text-truncate text-white" style="max-width:150px;">${tradeList.t_title}</span><br> <span>${tradeList.t_price }원</span>
 													</a>
 												</h4>
-												<ul>
-													<li><i class="fa-solid fa-eye me-1 text-white"></i>${tradeList.t_views }</li>
-													<li><span class="badge rounded-pill text-bg-light d-inline fw-bold">${tradeList.t_state }</span></li>
-												</ul>
 											</div>
 										</div>
 									</c:forEach>
@@ -578,7 +574,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
          <div class="apply-section text-center">
 											<a href="/board/apply/product"><img
 												style="max-width: 300px; max-height: 300px"
-												src="/resources/images/product/${productAppContent.prod_uploadImg }"
+												src="/resources/images/user_upload/${productAppContent.prod_uploadImg }"
 												class="mb-3 rounded" alt=""><br> 상품명 :
 												${productAppContent.prod_productName }</a>
 											<p class="intro" style="color:var(--bs-warning);">마감 시간 :

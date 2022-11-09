@@ -86,7 +86,7 @@ p {
 			<div class="content-main-section text-white">
 			</div>
 			<c:choose>
-				<c:when test="${boardContent.b_writer eq '관리자' }"><p class="mt-5">${boardContent.b_text}</p></c:when>
+				<c:when test="${boardContent.b_writer eq '관리자' }"><p class="">${boardContent.b_text}</p></c:when>
 				<c:otherwise>
 				<c:forEach var="imageList" items="${imageList }">
 				<p class="mb-3"><img src="/resources/images/user_upload/${imageList.i_img }"

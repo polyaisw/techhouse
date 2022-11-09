@@ -52,7 +52,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 						<div class="col">
 							<h1 class="h1 text-white">관리자용</h1>
 
-							<form method="post" action="/board/insertProductAction"
+							<form method="post" action="/board/insertProductAction" enctype="multipart/form-data"
 								class="was-validated">
 								<label for="prod_productName" class="form-label text-white">상품명</label>
 								<input type="text" placeholder="상품명을 입력하세요" class="form-control"
@@ -63,8 +63,8 @@ https://templatemo.com/tm-579-cyborg-gaming
 									placeholder="상품가격을 입력하세요" id="prod_price" name="prod_price">
 								<label for="prod_uploadImg" class="form-label text-white">업로드이미지</label>
 								<input type="file" class="form-control"
-									placeholder="상품이미지명 입력하세요" id="prod_uploadImg"
-									name="prod_uploadImg"> <input type="submit"
+									placeholder="상품이미지명 입력하세요" id="file"
+									name="file"> <input type="submit"
 									class="button-0 mt-3" value="상품등록하기">
 							</form>
 						</div>
@@ -271,7 +271,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 					<div class="row justify-content-center">
 						<div class="col-xl-6  p-0 my-5 text-center">
 							<img
-								src="/resources/images/product/${productContent.prod_uploadImg }"
+								src="/resources/images/user_upload/${productContent.prod_uploadImg }"
 								class="text-center  box-shadow img-fluid border rounded border-0"
 								style="max-width: '500px'; max-height: '500px';"
 								style="object-fit: fill;">

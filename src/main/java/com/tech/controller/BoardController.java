@@ -111,7 +111,6 @@ public class BoardController {
 		  Pagination pagination = new Pagination(); 
 		  pagination.pageInfo(page, range, listCnt);
 		  pagination.setCategory(category); 
-		  pagination.setListSize(10);
 		  model.addAttribute("pagination", pagination);
 		  
 		  model.addAttribute("list", boardService.getBoardLists(pagination));
@@ -428,6 +427,10 @@ public class BoardController {
 				List<String> i_list = new ArrayList<String>();
 				for(int i = 0; i<list.size(); i++) {
 					String fileRealName = list.get(i).getOriginalFilename();
+					System.out.println("파일 이름 : "+fileRealName);
+					if(fileRealName.equals("") || fileRealName == null) {
+						fileRealName = "thumb_default.png";
+					}
 					long size = list.get(i).getSize();
 					
 					System.out.println("파일명 :" + fileRealName);

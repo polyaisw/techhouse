@@ -83,7 +83,7 @@
 			<div class="row">
 				<div class="col">
 					<form action="insertBoardAction" name="insertBoardForm"
-						onsubmit="return chkWrite()" method="post" class="text-white">
+						onsubmit="return chkWrite()" enctype="multipart/form-data" method="post" class="text-white">
 						<input type="text" name="b_writer"
 									value="${member.name }" size="30" class="d-none">
 									
@@ -91,6 +91,7 @@
 						<div class="insert-main">
 								
 								<input type="text" class="d-none" name="b_category" value="공지사항">
+								<input type="file" class="d-none" name="files" value="">
 								<span class="badge badge-pill bg-warning fw-bold">공지사항</span>
 							
 							
