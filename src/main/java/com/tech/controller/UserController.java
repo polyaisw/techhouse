@@ -27,9 +27,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tech.common.Pagination;
 import com.tech.service.MemberService;
 import com.tech.service.interfaces.BoardService;
+import com.tech.service.interfaces.CommentService;
 import com.tech.service.interfaces.QnaService;
 import com.tech.service.interfaces.TradeService;
 import com.tech.service.interfaces.UserService;
+import com.tech.vo.CommentVO;
 import com.tech.vo.QnaVO;
 import com.tech.vo.UserVO;
 
@@ -48,6 +50,8 @@ public class UserController {
 	private BoardService boardService;
 	@Autowired
 	private QnaService qnaService;
+	@Autowired
+	private CommentService commentService;
 	
 	@Autowired
     private BCryptPasswordEncoder pwEncoder;
@@ -567,7 +571,7 @@ public class UserController {
 		return "/member/mypage_board";
 	}
 
-	/* 회원이 작성한 게시글 목록 */
+	/* 회원이 작성한 거래 게시글 목록 */
 	@RequestMapping(value = { "/trade" }, method = RequestMethod.GET)	
 		public String t_userSearchAction(Model model, 
 				@RequestParam(value ="userName", required=false, defaultValue="") String writer, HttpServletRequest request,
@@ -580,13 +584,13 @@ public class UserController {
 		int listCnt2 = tradeService.getBoardByUserName(writer).size();
 		System.out.println(listCnt2+"개");
 		/* 페이지네이션 세팅 */
-		Pagination pagination2 = new Pagination();
-		pagination2.setWriter(writer);
-		pagination2.pageInfo(page, range, listCnt2);
+		Pagination pagination = new Pagination();
+		pagination.setWriter(writer);
+		pagination.pageInfo(page, range, listCnt2);
 		/* 페이지 인디케이터 표시 */
-		model.addAttribute("pagination2", pagination2);
+		model.addAttribute("pagination2", pagination);
 		/* 출력 */
-		model.addAttribute("tradeList", tradeService.getBoardByUserName_P((pagination2)));
+		model.addAttribute("tradeList", tradeService.getBoardByUserName_P((pagination)));
 		
 		if(writer.equals("")) {	//요청이 안왔으면(다음페이지시)
 			model.addAttribute("writer",request.getAttribute("writer"));
@@ -600,16 +604,28 @@ public class UserController {
 		return "/member/mypage_trade";
 	}	
 	
-	/* 관리자 메인 페이지 이동 */
+	/* qna 목록 페이지 이동 */
 	@RequestMapping(value = "/mypage_qna", method = RequestMethod.GET)
 	public void qnaGET(Model model, @RequestParam(value ="userName", required=false, defaultValue="") String writer) throws Exception{
 		
-		logger.info("qna 관리 페이지 이동");
+		logger.info("qna 목록 페이지 이동");
 		
 		System.out.println(writer);
 		
 		List<QnaVO> list = qnaService.getQna_list(writer);
 		model.addAttribute("QnaNameList", list);
+	}	
+	
+	/* 댓글 목록 페이지 이동 */
+	@RequestMapping(value = "/mypage_comment", method = RequestMethod.GET)
+	public void commentGET(Model model, @RequestParam(value ="userName", required=false, defaultValue="") String writer) throws Exception{
+		
+		logger.info("댓글 목록 페이지 이동");
+		
+		System.out.println(writer);
+		
+		List<CommentVO> list = commentService.Comment_name(writer);
+		model.addAttribute("CommentList", list);
 	}
 
 }

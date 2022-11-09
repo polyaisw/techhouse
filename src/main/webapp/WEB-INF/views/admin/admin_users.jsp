@@ -37,6 +37,62 @@ input:focus {
 .black_f .black_t{
 	align:center;
 }
+/* #modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+	display:none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+#modal .modal-window {
+    background: rgba( 69, 139, 197, 0.70 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 400px;
+    height: 500px;
+    position: relative;
+    top: -100px;
+    padding: 10px;
+}
+#modal .title {
+    padding-left: 10px;
+    display: inline;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+    
+}
+#modal .title h2 {
+    display: inline;
+}
+#modal .close-area {
+    display: inline;
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+}
+
+#modal .content {
+    margin-top: 20px;
+    padding: 0px 10px;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+} */
 </style>
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -84,14 +140,15 @@ input:focus {
 										<td class=""><a
 											class="mypageModal user_id" >${ vo.id }</a></td>
 										<td class="">${ vo.name }</td>
-										<td class="td_in"><a href="#"
+										<td class="td_in"><a href="/admin/board?userName=${vo.name}" id="board" onclick="window.open(this.href, '_blank', 'width=1500, height=800, toolbars=no, scrollbars=yes'); return false;"
 											class="modal_boardList_admin" data-user-id="${vo.id}">${vo.boardCnt}</a></td>
-										<td class="td_in"><a href="#"
+										<td class="td_in"><a href="/admin/trade?userName=${vo.name}" id="trade" onclick="window.open(this.href, '_blank', 'width=1500, height=800, toolbars=no, scrollbars=yes'); return false;"
 											class="modal_boardList_admin" data-user-id="${vo.id}">${vo.tradeCnt}</a></td>
-										<td class="td_in"><a href="#"
+										<td class="td_in"><a href="/member/mypage_comment?userName=${vo.name}" id="comment" onclick="window.open(this.href, '_blank', 'width=1500, height=800, toolbars=no, scrollbars=yes'); return false;"
 											class="modal_reply_admin" data-user-id="${vo.id}">${vo.commentCnt}</a></td>
-										<td class="td_in"><a href="#"
-											class="modal_reply_admin" data-user-id="${vo.id}">${vo.blacklist}</a></td>
+										<td class="td_in">
+											<a class="modal_reply_admin" data-user-id="${vo.id}">${vo.blacklist}</a>
+										</td>
 										<c:if test="${ vo.blacklist == 1 }">
 											<td class="td_in">
 												<form id="black_f" method="post">
@@ -113,11 +170,37 @@ input:focus {
 							</tbody>
 						</table>
 					</div>
+<%-- 					<div id="modal" class="modal">
+						<div class="modal-window">
+							<div class="title">
+								<h2>모달</h2>
+							</div>
+							<div class="close-area">X</div>
+							<div class="content">
+								${vo.name}
+							</div>
+						</div>
+					</div> --%>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
+/* 		const modal = document.getElementById("modal")
+		const board = document.getElementById("board")
+		board.addEventListener("click", e => {
+			modal.style.display = "flex"
+		})
+		const closeBtn = modal.querySelector(".close-area")
+		closeBtn.addEventListener("click", e => {
+		    modal.style.display = "none"
+		})
+		modal.addEventListener("click", e => {
+		    const evTarget = e.target
+		    if(evTarget.classList.contains("modal")) {
+		        modal.style.display = "none"
+		    }
+		}) */
 		/* 블랙 해지 버튼 클릭 메서드 */
 		$(".black_f").click(function() {
 

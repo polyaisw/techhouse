@@ -9,4 +9,8 @@ public interface CommentService {
 	void insertComment(CommentVO vo);
 	void deleteComment(int seq);
 	List<CommentVO> getCommentListById(int seq);
+	
+	public List<CommentVO> CommentList() throws Exception;
+	
+	public List<CommentVO> Comment_name(String name) throws Exception;
 }

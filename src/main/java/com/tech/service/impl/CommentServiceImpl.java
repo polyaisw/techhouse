@@ -50,5 +50,19 @@ public class CommentServiceImpl implements CommentService {
 		return cMapper.getCommentListById(b_seq);	//보드 시퀀스
 		
 	}
+	
+	@Override
+	public List<CommentVO> CommentList() throws Exception{
+		
+		return cMapper.CommentList();
+		
+	}
+	
+	@Override
+	public List<CommentVO> Comment_name(String name) throws Exception{
+		
+		return cMapper.Comment_name(name);
+		
+	}
 
 }

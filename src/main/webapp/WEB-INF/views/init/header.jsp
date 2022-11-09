@@ -279,6 +279,9 @@ scale(
 													<li class="off-li"><a
 														href="/member/trade?userName=${ member.name }"
 														class="text-white">작성 판매글 목록</a></li>
+													<li class="off-li"><a
+														href="/member/mypage_comment?userName=${ member.name }"
+														class="text-white">작성 댓글 목록</a></li>
 													<li class="off-li"><a href="/member/mypage_qna?userName=${ member.name }" class="text-white">문의
 															내역</a></li>
 												</ul>
@@ -293,6 +296,9 @@ scale(
 													<li class="off-li"><a
 														href="/admin/trade/"
 														class="text-white">회원 판매글 목록</a></li>
+													<li class="off-li"><a
+														href="/admin/admin_comment/"
+														class="text-white">회원 댓글 목록</a></li>
 													<li class="off-li"><a href="/admin/admin_qna" class="text-white">문의
 															내역</a></li>
 												</ul>

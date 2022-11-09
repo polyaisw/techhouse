@@ -12,4 +12,8 @@ public interface CommentMapper {
 	int insertComment(CommentVO vo);
 	int deleteComment(int seq);
 	List<CommentVO> getCommentListById(int seq);
+	
+	public List<CommentVO> CommentList(); 
+	
+	public List<CommentVO> Comment_name(String name); 
 }
