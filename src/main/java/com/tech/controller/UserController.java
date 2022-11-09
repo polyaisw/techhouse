@@ -426,6 +426,7 @@ public class UserController {
 	@RequestMapping(value = { "/board" }, method = RequestMethod.GET)	
 		public String b_userSearchAction(Model model, 
 				@RequestParam(value ="userName", required=false, defaultValue="") String writer, 
+				HttpServletRequest request,
 				  @RequestParam(required = false, defaultValue = "1") int page,
 				  @RequestParam(required = false, defaultValue = "1") int range) throws
 				  Exception 
@@ -442,13 +443,23 @@ public class UserController {
 		/* 출력 */
 		model.addAttribute("boardList", boardService.getBoardByUserName_P((pagination)));
 			
+		
+		if(writer.equals("")) {	//요청이 안왔으면(다음페이지시)
+			model.addAttribute("writer",request.getAttribute("writer"));
+		}else {
+
+			writer = writer.trim();
+			request.setAttribute("wrtier", writer);	//검색한 결과값이 들어왔으면.. 저장(처음검색)
+			model.addAttribute("writer",writer);
+		}
+		
 		return "/member/mypage_board";
 	}
 
 	/* 회원이 작성한 게시글 목록 */
 	@RequestMapping(value = { "/trade" }, method = RequestMethod.GET)	
 		public String t_userSearchAction(Model model, 
-				@RequestParam(value ="userName", required=false, defaultValue="") String writer, 
+				@RequestParam(value ="userName", required=false, defaultValue="") String writer, HttpServletRequest request,
 				  @RequestParam(required = false, defaultValue = "1") int page,
 				  @RequestParam(required = false, defaultValue = "1") int range) throws
 				  Exception 
@@ -466,6 +477,14 @@ public class UserController {
 		/* 출력 */
 		model.addAttribute("tradeList", tradeService.getBoardByUserName_P((pagination2)));
 		
+		if(writer.equals("")) {	//요청이 안왔으면(다음페이지시)
+			model.addAttribute("writer",request.getAttribute("writer"));
+		}else {
+
+			writer = writer.trim();
+			request.setAttribute("wrtier", writer);	//검색한 결과값이 들어왔으면.. 저장(처음검색)
+			model.addAttribute("writer",writer);
+		}
 			
 		return "/member/mypage_trade";
 	}

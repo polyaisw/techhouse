@@ -2,6 +2,8 @@ package com.tech.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,7 @@ public class AdminController {
 	@RequestMapping(value = { "/board" }, method = RequestMethod.GET)	
 		public String b_userSearchAction(Model model, 
 				@RequestParam(value ="userName", required=false, defaultValue="") String writer, 
+				HttpServletRequest request,
 				  @RequestParam(required = false, defaultValue = "1") int page,
 				  @RequestParam(required = false, defaultValue = "1") int range) throws
 				  Exception 
@@ -73,6 +76,14 @@ public class AdminController {
 		/* 출력 */
 		model.addAttribute("boardList", boardService.getBoardByUserName_P((pagination)));
 			
+		if(writer.equals("")) {	//요청이 안왔으면(다음페이지시)
+			model.addAttribute("writer",request.getAttribute("writer"));
+		}else {
+			writer = writer.trim();
+			request.setAttribute("wrtier", writer);	//검색한 결과값이 들어왔으면.. 저장(처음검색)
+			model.addAttribute("writer",writer);
+		}
+		
 		return "/admin/admin_board";
 	}
 
@@ -80,6 +91,7 @@ public class AdminController {
 	@RequestMapping(value = { "/trade" }, method = RequestMethod.GET)	
 		public String t_userSearchAction(Model model, 
 				@RequestParam(value ="userName", required=false, defaultValue="") String writer, 
+				HttpServletRequest request,
 				  @RequestParam(required = false, defaultValue = "1") int page,
 				  @RequestParam(required = false, defaultValue = "1") int range) throws
 				  Exception 
@@ -97,6 +109,14 @@ public class AdminController {
 		/* 출력 */
 		model.addAttribute("tradeList", tradeService.getBoardByUserName_P((pagination2)));
 		
+		
+		if(writer.equals("")) {	//요청이 안왔으면(다음페이지시)
+			model.addAttribute("writer",request.getAttribute("writer"));
+		}else {
+			writer = writer.trim();
+			request.setAttribute("wrtier", writer);	//검색한 결과값이 들어왔으면.. 저장(처음검색)
+			model.addAttribute("writer",writer);
+		}
 			
 		return "/admin/admin_trade";
 	}
