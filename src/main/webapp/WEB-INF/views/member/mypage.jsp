@@ -207,7 +207,7 @@ label {
 					<div class="col-lg-12 my-form">
 						<div class="col-lg-12 my-form">
 						
-							<form id="user_edit" method="post">
+							<form id="user_edit" enctype="multipart/form-data" method="post">
 								<div class="form-group mx-5">
 									<span class = "text_in">아이디</span>
 									<input class="id_input inline-block w-100" type="text" name="id" value="${ member.id }" readonly>
@@ -241,7 +241,7 @@ label {
 									<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" readonly onclick="findAddr()" value="${ member.addr }">
 									<span class = "text_in">상세 주소</span>
 									<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소" value="${ member.addr2 }">
-									<span class="text-white">프로필 사진 : </span><input class="profil_input" name="proimg">
+									<span class="text-white">프로필 사진 : </span><input class="profil_input" type="file" name="file">
 								</div>
 								
 								

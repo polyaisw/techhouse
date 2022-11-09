@@ -246,7 +246,7 @@ label {
 
 				<div class="col-lg-12 login-form">
 					<div class="col-lg-12 login-form">
-						<form id="join_form" method="post">
+						<form id="join_form" enctype="multipart/form-data" method="post">
 		<div class="form-group mx-5">
 			<input class="id_input inline-block w-100" type="text" name="id" placeholder="아이디"><br>
 			<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
@@ -271,7 +271,7 @@ label {
 			<input type="text" class = "form-control w-25" id="post" name="post" maxlength="20" placeholder="우편번호" readonly onclick="findAddr()"><br>
 			<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" readonly onclick="findAddr()"><br>
 			<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소"><br>
-			<span class="text-white">프로필 사진 : </span><input class="profil_input" name="proimg"><br>
+			<span class="text-white">프로필 사진 : </span><input class="profil_input" type="file" name="file"><br>
 		</div>
 		
 		

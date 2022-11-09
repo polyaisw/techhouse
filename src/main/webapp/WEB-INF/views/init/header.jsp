@@ -249,7 +249,7 @@ scale(
 											data-bs-dismiss="offcanvas" aria-label="Close"></button>
 										<div class="offcanvas-body mx-2">
 											<div class="user-info-box">
-												<img src="/resources/images/member/user_default.png"
+												<img src="/resources/images/user_upload/${member.profileimg }"
 													class="img-fluid rounded-circle text-center d-block mx-auto mb-3"
 													style="width: 180px; height: 180px;">
 												<div

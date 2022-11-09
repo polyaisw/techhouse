@@ -1,7 +1,11 @@
 package com.tech.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tech.common.Pagination;
@@ -52,7 +57,56 @@ public class UserController {
 	
 	//회원가입
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joinPOST(UserVO vo) throws Exception{
+	public String joinPOST(UserVO vo, @RequestParam(value = "file", required=false) MultipartFile file,
+			HttpServletRequest request) throws Exception{
+		
+		
+		ServletContext application = request.getServletContext();
+		/* 이미지 업로드 */
+		String fileRealName = file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드!
+		long size = file.getSize(); // 파일 사이즈
+		
+		
+
+		System.out.println("파일명 : " + fileRealName);
+		System.out.println("용량크기(byte) : " + size);
+		
+			// 미 업로드시 기본값 설정 
+		  if (fileRealName == null || fileRealName.equals("")){
+				System.out.println("파일 미 업로드로 기본값으로 설정합니다 ");
+			  vo.setProfileimg("user_default.png");
+		} else {
+		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+		String uploadFolder = (String) application.getAttribute("path");
+		
+		UUID uuid = UUID.randomUUID();
+		System.out.println(uuid.toString());
+		String[] uuids = uuid.toString().split("-");
+
+		String uniqueName = uuids[0];
+		System.out.println("생성된 고유문자열" + uniqueName);
+		System.out.println("확장자명" + fileExtension);
+
+		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
+
+		File saveFile = new File(uploadFolder + "\\" + uniqueName + fileExtension); // 적용 후
+		System.out.println("업로드 파일 전체 경로 : "+saveFile);
+		try {
+			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 파일명 저장 
+		vo.setProfileimg(uniqueName + fileExtension);
+		
+		/* 이미지 업로드 끝 */
+		}
+		
+		
+		
 		
 		String rawPw = "";
 		String encodePw = "";
@@ -327,7 +381,62 @@ public class UserController {
 	
 	//회원수정
 	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
-	public String mypagePOST(UserVO vo, HttpServletRequest request) throws Exception{
+	public String mypagePOST(UserVO vo, @RequestParam(value = "file", required=false) MultipartFile file,
+			HttpServletRequest request ) throws Exception{
+		
+		ServletContext application = request.getServletContext();
+		/* 이미지 업로드 */
+		String fileRealName = file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드!
+		long size = file.getSize(); // 파일 사이즈
+		
+		
+
+		System.out.println("파일명 : " + fileRealName);
+		System.out.println("용량크기(byte) : " + size);
+		
+			// 미 업로드시 기본값 설정 
+		  if (fileRealName == null || fileRealName.equals("")){
+				System.out.println("파일 미 업로드로 기본값으로 설정합니다 ");
+			  vo.setProfileimg("user_default.png");
+		} else {
+		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+		String uploadFolder = (String) application.getAttribute("path");
+		
+		UUID uuid = UUID.randomUUID();
+		System.out.println(uuid.toString());
+		String[] uuids = uuid.toString().split("-");
+
+		String uniqueName = uuids[0];
+		System.out.println("생성된 고유문자열" + uniqueName);
+		System.out.println("확장자명" + fileExtension);
+
+		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
+
+		File saveFile = new File(uploadFolder + "\\" + uniqueName + fileExtension); // 적용 후
+		System.out.println("업로드 파일 전체 경로 : "+saveFile);
+		try {
+			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 파일명 저장 
+		vo.setProfileimg(uniqueName + fileExtension);
+		
+		/* 이미지 업로드 끝 */
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		HttpSession session = request.getSession();
 		
