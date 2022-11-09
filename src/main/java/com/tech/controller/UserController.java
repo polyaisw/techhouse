@@ -137,9 +137,6 @@ public class UserController {
 		
 		String rename = vo2.getName();
 		
-		System.out.println("리네임 : "+ rename);
-		System.out.println("작성 이름 : "+membername);
-		
 		if(!rename.equals(membername)) {
 		
 			String chkName = "^[a-z가-힣]{1}(?=.*[a-z가-힣])[a-z0-9가-힣]{2,10}$";

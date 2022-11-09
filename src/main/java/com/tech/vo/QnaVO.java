@@ -4,6 +4,7 @@ package com.tech.vo;
 public class QnaVO{
 	private int q_seq;
 	private int q_boardSeq;
+	private String q_writer;
 	private String q_category;
 	private String q_title;
 	private String q_text;
@@ -14,10 +15,11 @@ public class QnaVO{
 	private String q_date;
 	
 	
-	public QnaVO(int q_boardSeq, String q_category, String q_title, String q_text, String q_email, String q_tel,
+	public QnaVO(int q_boardSeq,String q_writer , String q_category, String q_title, String q_text, String q_email, String q_tel,
 			String q_uploadImg) {
 		super();
 		this.q_boardSeq = q_boardSeq;
+		this.q_writer = q_writer;
 		this.q_category = q_category;
 		this.q_title = q_title;
 		this.q_text = q_text;
@@ -30,6 +32,20 @@ public class QnaVO{
 	
 	
 	
+	public String getQ_writer() {
+		return q_writer;
+	}
+
+
+
+
+	public void setQ_writer(String q_writer) {
+		this.q_writer = q_writer;
+	}
+
+
+
+
 	public int getQ_seq() {
 		return q_seq;
 	}
@@ -172,9 +188,9 @@ public class QnaVO{
 
 	@Override
 	public String toString() {
-		return "QnaVO [q_seq=" + q_seq + ", q_boardSeq=" + q_boardSeq + ", q_category=" + q_category + ", q_title="
-				+ q_title + ", q_text=" + q_text + ", q_email=" + q_email + ", q_tel=" + q_tel + ", q_uploadImg="
-				+ q_uploadImg + ", q_complete=" + q_complete + ", q_date=" + q_date + "]";
+		return "QnaVO [q_seq=" + q_seq + ", q_boardSeq=" + q_boardSeq + ", q_writer=" + q_writer + ", q_category="
+				+ q_category + ", q_title=" + q_title + ", q_text=" + q_text + ", q_email=" + q_email + ", q_tel="
+				+ q_tel + ", q_uploadImg=" + q_uploadImg + ", q_complete=" + q_complete + ", q_date=" + q_date + "]";
 	}
 
 

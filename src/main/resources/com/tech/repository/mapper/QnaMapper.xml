@@ -14,10 +14,8 @@
 	</select>
 	<insert id="insertQna" parameterType="Qna">
 		insert into
-		qna(q_boardSeq, q_category, q_title, q_text, q_email, q_tel,
-		q_uploadImg)
-		values(#{q_boardSeq},#{q_category}, #{q_title}, #{q_text}, #{q_email},
-		#{q_tel},#{q_uploadImg})
+		qna(q_boardSeq, q_writer, q_category, q_title, q_text, q_email, q_tel, q_uploadImg)
+		values(#{q_boardSeq}, #{q_writer}, #{q_category}, #{q_title}, #{q_text}, #{q_email}, #{q_tel},#{q_uploadImg})
 	</insert>
 
 	<update id="updateState" parameterType="Qna">

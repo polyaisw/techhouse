@@ -11,6 +11,9 @@
 	color: lightgreen;
 	font-weight: bold;
 }
+.td_in {
+	text-align: center;
+}
 
 .board-title {
 	margin-top: 15px;
@@ -72,15 +75,17 @@ input:focus {
 							<tbody>
 								<c:forEach var="vo" items="${ userInfo }">
 									<tr class="admin_board_content">
-										<td class="d-inline-block text-truncate"><a
+										<td class=""><a
 											class="mypageModal user_id" >${ vo.id }</a></td>
-										<td class="d-inline-block text-truncate">${ vo.name }</td>
-										<td class="d-inline-block text-truncate"><a href="#"
+										<td class="">${ vo.name }</td>
+										<td class="td_in"><a href="#"
 											class="modal_boardList_admin" data-user-id="${vo.id}">${vo.boardCnt}</a></td>
-										<td class="d-inline-block text-truncate"><a href="#"
+										<td class="td_in"><a href="#"
 											class="modal_boardList_admin" data-user-id="${vo.id}">${vo.tradeCnt}</a></td>
-										<td class="d-inline-block text-truncate"><a href="#"
+										<td class="td_in"><a href="#"
 											class="modal_reply_admin" data-user-id="${vo.id}">${vo.commentCnt}</a></td>
+										<td class="td_in"><a href="#"
+											class="modal_reply_admin" data-user-id="${vo.id}">${vo.blacklist}</a></td>
 								</c:forEach>
 							</tbody>
 						</table>
