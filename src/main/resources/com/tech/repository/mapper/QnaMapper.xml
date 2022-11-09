@@ -9,17 +9,21 @@
 		q_seq
 	</select>
 	<select id="getQnaById" parameterType="int" resultType="Qna">
-		select
-		* from qna where q_seq=#{value}
+		select * from qna where q_seq=#{value}
 	</select>
 	<insert id="insertQna" parameterType="Qna">
 		insert into
 		qna(q_boardSeq, q_writer, q_category, q_title, q_text, q_email, q_tel, q_uploadImg)
 		values(#{q_boardSeq}, #{q_writer}, #{q_category}, #{q_title}, #{q_text}, #{q_email}, #{q_tel},#{q_uploadImg})
+		
+			<selectKey resultType="String" keyProperty="q_seq"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 
 	<update id="updateState" parameterType="Qna">
-		update qna set q_complete= #{q_complete} where q_seq = #{q_seq}
+		update qna set q_text=#{q_text}, q_complete= #{q_complete} where q_seq = #{q_seq}
 	</update>
 	<delete id="deleteQna" parameterType="int">
 		delete from qna where

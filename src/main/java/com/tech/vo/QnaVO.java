@@ -53,8 +53,8 @@ public class QnaVO{
 
 
 
-	public void setQ_seq(int q_seq) {
-		this.q_seq = q_seq;
+	public void setQ_seq(String q_seq) {
+		this.q_seq = Integer.parseInt(q_seq);
 	}
 
 
