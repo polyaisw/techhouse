@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +24,16 @@
 								class="fa-solid fa-user-tag"></i><span class="intro ps-1">사기
 									피해 신고</span>
 						</a></li>
-						<li class="m-2"><a href="/board/center/qna"> <i
+						<c:if test="${ member != null }">
+						<li class="m-2 qna"><a href="/board/center/qna"> <i
 								class="fa-solid fa-circle-question"></i><span class="intro ps-1">1:1문의</span>
 						</a></li>
+						</c:if>
+						<c:if test="${ member == null }">
+						<li class="m-2 qna"><a href="javascript:alert('로그인해주세요')"> <i
+								class="fa-solid fa-circle-question"></i><span class="intro ps-1">1:1문의</span>
+						</a></li>
+						</c:if>
 
 
 					</ul>

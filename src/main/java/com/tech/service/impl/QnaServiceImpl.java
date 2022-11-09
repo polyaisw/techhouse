@@ -38,15 +38,18 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public QnaVO getQnaById(int q_seq) {
-		for (QnaVO arg : qMapper.getQnaList()) {
-			if (q_seq == arg.getQ_seq())
-				return qMapper.getQnaById(q_seq);
-			else {
-				logger.error("getQnaById : " + notFound_board_msg);
-				return null; // null이 리턴되면 모달메시지띄우기
-			}
-		}
-		return null;
+		System.out.println(q_seq);
+//		for (QnaVO arg : qMapper.getQnaList()) {
+//			System.out.println(arg);
+//			if (q_seq == arg.getQ_seq()) {
+//				System.out.println("여긴가?");
+//				return qMapper.getQnaById(q_seq);}
+//			else {
+//				logger.error("getQnaById : " + notFound_board_msg);
+//				return null; // null이 리턴되면 모달메시지띄우기
+//			}
+//		}
+		return qMapper.getQnaById(q_seq);
 
 	}
 
@@ -75,6 +78,20 @@ public class QnaServiceImpl implements QnaService {
 
 		qMapper.updateState(vo);
 
+	}
+	
+	@Override
+	public List<QnaVO> getQna_name_list() throws Exception{
+		
+		return qMapper.getQna_name_list();
+		
+	}
+	
+	@Override
+	public List<QnaVO> getQna_list(String q_writer) throws Exception{
+		
+		return qMapper.getQna_list(q_writer);
+		
 	}
 
 }

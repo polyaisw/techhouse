@@ -11,4 +11,8 @@ public interface QnaService {
 	List<QnaVO> getQnaList();
 	void deleteQna(int q_seq);
 	void updateState(QnaVO vo);
+	
+	public List<QnaVO> getQna_name_list() throws Exception;
+	
+	public List<QnaVO> getQna_list(String q_writer) throws Exception;
 }

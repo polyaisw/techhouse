@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tech.repository.mapper.QnaMapper">
-
+	<resultMap type="com.tech.vo.QnaVO" id="QnaList">
+		<id property="q_writer" column="q_writer"/>
+		<result property="q_seq" column="q_seq"/>
+		<result property="q_boardSeq" column="q_boardSeq"/>
+		<result property="q_category" column="q_category"/>
+		<result property="q_title" column="q_title"/>
+		<result property="q_text" column="q_text"/>
+		<result property="q_email" column="q_email"/>
+		<result property="q_tel" column="q_tel"/>
+		<result property="q_uploadImg" column="q_uploadImg"/>
+		<result property="q_complete" column="q_complete"/>
+		<result property="q_date" column="q_date"/>
+	</resultMap>
 
 	<select id="getQnaList" resultType="Qna">
 		select * from qna order
 		by
 		q_seq
 	</select>
+	
 	<select id="getQnaById" parameterType="int" resultType="Qna">
-		select * from qna where q_seq=#{value}
+		select * from qna where q_seq=#{q_seq}
 	</select>
+	
+	<select id="getQna_list" resultMap="QnaList">
+		SELECT * FROM qna WHERE q_writer = #{q_writer}
+	</select>
+	
+	<select id="getQna_name_list" resultMap="QnaList">
+		SELECT * FROM qna
+	</select>
+	
 	<insert id="insertQna" parameterType="Qna">
 		insert into
 		qna(q_boardSeq, q_writer, q_category, q_title, q_text, q_email, q_tel, q_uploadImg)
@@ -25,6 +47,7 @@
 	<update id="updateState" parameterType="Qna">
 		update qna set q_text=#{q_text}, q_complete= #{q_complete} where q_seq = #{q_seq}
 	</update>
+	
 	<delete id="deleteQna" parameterType="int">
 		delete from qna where
 		q_seq = #{value}

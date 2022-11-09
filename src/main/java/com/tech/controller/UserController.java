@@ -2,6 +2,7 @@ package com.tech.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -26,8 +27,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tech.common.Pagination;
 import com.tech.service.MemberService;
 import com.tech.service.interfaces.BoardService;
+import com.tech.service.interfaces.QnaService;
 import com.tech.service.interfaces.TradeService;
 import com.tech.service.interfaces.UserService;
+import com.tech.vo.QnaVO;
 import com.tech.vo.UserVO;
 
 
@@ -43,6 +46,8 @@ public class UserController {
 	private TradeService tradeService;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private QnaService qnaService;
 	
 	@Autowired
     private BCryptPasswordEncoder pwEncoder;
@@ -593,6 +598,18 @@ public class UserController {
 		}
 			
 		return "/member/mypage_trade";
+	}	
+	
+	/* 관리자 메인 페이지 이동 */
+	@RequestMapping(value = "/mypage_qna", method = RequestMethod.GET)
+	public void qnaGET(Model model, @RequestParam(value ="userName", required=false, defaultValue="") String writer) throws Exception{
+		
+		logger.info("qna 관리 페이지 이동");
+		
+		System.out.println(writer);
+		
+		List<QnaVO> list = qnaService.getQna_list(writer);
+		model.addAttribute("QnaNameList", list);
 	}
 
 }

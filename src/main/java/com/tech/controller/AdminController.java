@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tech.common.Pagination;
 import com.tech.service.interfaces.BoardService;
+import com.tech.service.interfaces.QnaService;
 import com.tech.service.interfaces.TradeService;
 import com.tech.service.interfaces.UserService;
 import com.tech.vo.BVO;
+import com.tech.vo.QnaVO;
 import com.tech.vo.UserVO;
 
 @Controller
@@ -35,6 +37,8 @@ public class AdminController {
 	private TradeService tradeService;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private QnaService qnaService;
 	
 	/* 관리자 메인 페이지 이동 */
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -48,11 +52,21 @@ public class AdminController {
 	@RequestMapping(value = "/admin_users", method = RequestMethod.GET)
 	public void usersGET(Model model) throws Exception{
 		
-		logger.info("관리자 페이지 이동");
+		logger.info("유저 관리 페이지 이동");
 		
 		List<UserVO> list = userService.loadmember();
 		model.addAttribute("userInfo", list);
 	}	
+	
+	/* 관리자 메인 페이지 이동 */
+	@RequestMapping(value = "/admin_qna", method = RequestMethod.GET)
+	public void qnaGET(Model model) throws Exception{
+		
+		logger.info("qna 관리 페이지 이동");
+		
+		List<QnaVO> list = qnaService.getQna_name_list();
+		model.addAttribute("QnaList", list);
+	}
 
 	/* 회원이 작성한 게시글 목록 */
 	@RequestMapping(value = { "/board" }, method = RequestMethod.GET)	

@@ -86,6 +86,7 @@ input:focus {
 											class="modal_reply_admin" data-user-id="${vo.id}">${vo.commentCnt}</a></td>
 										<td class="td_in"><a href="#"
 											class="modal_reply_admin" data-user-id="${vo.id}">${vo.blacklist}</a></td>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>

@@ -297,17 +297,8 @@ public class BoardController {
 
 	/* center */
 	@GetMapping("/center/qna")
-	public String qna(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String qna(Model model) throws IOException {
 		logger.info("1:1 문의 진입");
-
-		HttpSession session = request.getSession();
-		UserVO vo = (UserVO)session.getAttribute("member");
-		PrintWriter script = response.getWriter();
-		response.setContentType("text/html; charset=euc-kr");
-		if(vo == null) {
-            script.println("<script>alert('로그인 에러''로그인을 해주세요.'); location.href='/'</script>");
-		}
-        script.flush();
 		return "/board/center/qna";
 	}
 

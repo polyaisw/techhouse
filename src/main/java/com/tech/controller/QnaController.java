@@ -31,7 +31,6 @@ public class QnaController {
 	@Autowired
 	private ImageService imageService;
 	
-	QnaVO qnaVO;
 	
 	
 	
@@ -43,8 +42,7 @@ public class QnaController {
 		int seq = Integer.parseInt(q_seq);
 		
 		/* 게시글가져오기 */
-		qnaVO = qnaService.getQnaById(seq);
-		System.out.println(qnaVO.toString());
+		QnaVO qnaVO = qnaService.getQnaById(seq);
 		/* 공백처리 */
 		qnaVO.setQ_text(qnaVO.getQ_text().replace("\r\n", "<br>"));
 		
@@ -72,7 +70,7 @@ public class QnaController {
 
 		int seq = Integer.parseInt(q_seq);
 		logger.info("게시글 수정 진입");
-		qnaVO = qnaService.getQnaById(seq);
+		QnaVO qnaVO = qnaService.getQnaById(seq);
 		
 
 		List<ImageVO> imageList = imageService.getImageListById(seq);
