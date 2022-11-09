@@ -1,8 +1,11 @@
 package com.tech.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tech.service.interfaces.ApplyService;
 import com.tech.service.interfaces.ProductService;
@@ -120,21 +124,67 @@ public class ApplyController {
 	@RequestMapping("/insertProductAction")
 	@ResponseBody
 	public String insertProductAction(@RequestParam("prod_productName") String prod_productName,
-			@RequestParam("prod_price") String prod_price, @RequestParam("prod_uploadImg") String prod_uploadImg) {
+			@RequestParam("prod_price") String prod_price,
+			MultipartFile file, HttpServletRequest request	) {
 		logger.info("상품 등록 액션");
-		if(prod_uploadImg==null || prod_uploadImg.equals("")) {
-			prod_uploadImg = "product_default.png";
-		}
-		productService.insertProduct(new ProductVO(prod_productName, prod_price, prod_uploadImg));
+		
 
+		ProductVO productVO = new ProductVO();
+		
+		ServletContext application = request.getServletContext();
+		/* 이미지 업로드 */
+		String fileRealName = file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드!
+		long size = file.getSize(); // 파일 사이즈
+		
+		
+
+		System.out.println("파일명 : " + fileRealName);
+		System.out.println("용량크기(byte) : " + size);
+		
+			// 미 업로드시 기본값 설정 
+		  if (fileRealName == null || fileRealName.equals("")){
+				System.out.println("파일 미 업로드로 기본값으로 설정합니다 ");
+			  productVO.setProd_uploadImg("product_default.png");
+		} else {
+		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+		String uploadFolder = (String) application.getAttribute("path");
+		
+		UUID uuid = UUID.randomUUID();
+		System.out.println(uuid.toString());
+		String[] uuids = uuid.toString().split("-");
+
+		String uniqueName = uuids[0];
+		System.out.println("생성된 고유문자열" + uniqueName);
+		System.out.println("확장자명" + fileExtension);
+
+		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
+
+		File saveFile = new File(uploadFolder + "\\" + uniqueName + fileExtension); // 적용 후
+		System.out.println("업로드 파일 전체 경로 : "+saveFile);
+		try {
+			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		productVO.setProd_uploadImg(uniqueName + fileExtension);
+		/* 이미지 업로드 끝 */
+		}
+
+			productVO.setProd_productName(prod_productName);
+			productVO.setProd_price(prod_price);
+			productService.insertProduct(productVO);
 		return "<script>alert('product_comlete'); location.href='/board/apply/product'</script>";
 	}
 
 	@RequestMapping("/updateProductAction")
 	@ResponseBody
-	public String updateProductAction(@RequestParam("prod_seq") String prod_seq,
-			@RequestParam("prod_productName") String prod_productName, @RequestParam("prod_price") String prod_price,
-			@RequestParam("prod_uploadImg") String prod_uploadImg,
+	public String updateProductAction(MultipartFile file, HttpServletRequest request,
+			@RequestParam("prod_seq") String prod_seq,
+			@RequestParam("prod_productName") String prod_productName, 
+			@RequestParam("prod_price") String prod_price,
 			@RequestParam("prod_selectedId") String prod_selectedId,
 			@RequestParam("prod_selectedName") String prod_selectedName,
 			@RequestParam("prod_selectedTel") String prod_selectedTel) {
@@ -142,10 +192,51 @@ public class ApplyController {
 		logger.info("상품 수정 액션");
 		int seq = Integer.parseInt(prod_seq);
 
+		
+		
+		
+		ServletContext application = request.getServletContext();
 		productVO = productService.getProductById(seq);
+		/* 이미지 업로드 */
+		String fileRealName = file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드!
+		long size = file.getSize(); // 파일 사이즈
+		
+		
+
+		System.out.println("파일명 : " + fileRealName);
+		System.out.println("용량크기(byte) : " + size);
+		
+			// 미 업로드시 기본값 설정 
+		  if (fileRealName == null || fileRealName.equals("")){
+				System.out.println("파일 미 업로드로 기본값으로 설정합니다 ");
+			  productVO.setProd_uploadImg("product_default.png");
+		} else {
+		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+		String uploadFolder = (String) application.getAttribute("path");
+		
+		UUID uuid = UUID.randomUUID();
+		System.out.println(uuid.toString());
+		String[] uuids = uuid.toString().split("-");
+
+		String uniqueName = uuids[0];
+		System.out.println("생성된 고유문자열" + uniqueName);
+		System.out.println("확장자명" + fileExtension);
+
+		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
+
+		File saveFile = new File(uploadFolder + "\\" + uniqueName + fileExtension); // 적용 후
+		System.out.println("업로드 파일 전체 경로 : "+saveFile);
+		try {
+			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		productVO.setProd_uploadImg(uniqueName + fileExtension);
+		}
 		productVO.setProd_productName(prod_productName);
 		productVO.setProd_price(prod_price);
-		productVO.setProd_uploadImg(prod_uploadImg);
 		productVO.setProd_selectedId(prod_selectedId);
 		productVO.setProd_selectedName(prod_selectedName);
 		productVO.setProd_selectedTel(prod_selectedTel);

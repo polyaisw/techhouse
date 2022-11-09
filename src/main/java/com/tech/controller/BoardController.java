@@ -111,7 +111,6 @@ public class BoardController {
 		  Pagination pagination = new Pagination(); 
 		  pagination.pageInfo(page, range, listCnt);
 		  pagination.setCategory(category); 
-		  pagination.setListSize(10);
 		  model.addAttribute("pagination", pagination);
 		  
 		  model.addAttribute("list", boardService.getBoardLists(pagination));
@@ -428,6 +427,13 @@ public class BoardController {
 				List<String> i_list = new ArrayList<String>();
 				for(int i = 0; i<list.size(); i++) {
 					String fileRealName = list.get(i).getOriginalFilename();
+					System.out.println("파일 이름 : "+fileRealName);
+					if(fileRealName.equals("") || fileRealName == null) {
+						String fileRealName_ = "thumb_default.png";
+						boardVO.setB_uploadImg(fileRealName_);
+					}else {
+						
+					
 					long size = list.get(i).getSize();
 					
 					System.out.println("파일명 :" + fileRealName);
@@ -444,9 +450,11 @@ public class BoardController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+				
 
 				boardVO.setB_uploadImg(i_list.get(0));	//썸네일용	저장
+					}
+				}
 				int result = boardService.createBoard(boardVO);	//result는 새로생성된 boardSeq값임..
 				
 				
@@ -471,8 +479,8 @@ public class BoardController {
 					return "<script>alert('insert_board_complete'); location.href='/board/contentReportForm?b_seq="
 							+ result + "'</script>";
 				} else {
-					return "<script>alert('insert_board_complete'); location.href='/board/contentForm?b_seq=" + result
-							+ "'</script>";
+					return "<script>alert('insert_board_complete'); location.replace('/board/contentForm?b_seq=" + result
+							+ "');</script>";
 				}
 			}
 		}

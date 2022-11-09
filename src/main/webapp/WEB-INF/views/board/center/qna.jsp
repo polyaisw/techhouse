@@ -65,7 +65,7 @@
 	<jsp:include page="../../init/header.jsp"></jsp:include>
 	<jsp:include page="../../init/nav.jsp"></jsp:include>
 
-	<div class="container mt-5">
+	<div class="container mt-5" style="width:1280px;">
 	<div class="page-content border-bottom border-success">
 		<form action="/board/qnaAction" name="qnaForm"
 			onsubmit="return chkWrite()" enctype="multipart/form-data" method="post" class="was-validated">
@@ -79,21 +79,17 @@
 				class="row  text-white justify-content-between w-75 mx-auto mt-5">
 				<div class="col-lg-6">
 					<div class="mb-5">
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="mb-5">
-						<label for="q_boardSeq" class="form-label">닉네임</label> <input
-							type="text" class="form-control w-75" name="q_writer"
-							id="q_writer" value="${ member.name }">
+						<label for="q_boardSeq" class="form-label">문의할 게시글 번호</label> <input
+							type="text" class="form-control w-75" name="q_boardSeq"
+							id="q_boardSeq" placeholder="번호를 입력해주세요">
 
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<div class="mb-5">
-						<label for="q_boardSeq" class="form-label">문의할 게시글 번호</label> <input
-							type="text" class="form-control w-75" name="q_boardSeq"
-							id="q_boardSeq" placeholder="번호를 입력해주세요">
+					<div class="mb-5 mx-0">
+						<label for="q_boardSeq" class="form-label">닉네임</label> <input
+							type="text" class="form-control" name="q_writer"
+							id="q_writer" value="${ member.name }">
 
 					</div>
 				</div>

@@ -81,14 +81,14 @@ function fn_next(page, range, rangeSize,writer) {
 				<div class="page-content">
 					<div class="col-lg-12 board-title">${ member.name }님의 판매 게시글 목록입니다.</div>
 					<!-- 거래게시글{s}-->
-					<table class="w-100 border">
-						<thead class="border">
+					<table class="table table-dark table-hover rounded">
+						<thead class="">
 							<tr>
-								<th>번호</th>
-								<th>이미지</th>
-								<th>제목</th>
-								<th>가격</th>
-								<th>조회수</th>
+								<th class="text_in">번호</th>
+								<!-- <th class="text_in">이미지</th> -->
+								<th class="text_in">제목</th>
+								<th class="text_in">가격</th>
+								<th class="text_in" width="65px">조회수</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -96,9 +96,9 @@ function fn_next(page, range, rangeSize,writer) {
 
 								<tr>
 									<td>${ tradeList.t_seq }</td>
-									<td><a
+									<%-- <td><a
 										href="/board/contentTradeForm?t_seq=${ tradeList.t_seq }">
-											${ tradeList.t_uploadImg }</a></td>
+											${ tradeList.t_uploadImg }</a></td> --%>
 									<td><a
 										href="/board/contentTradeForm?t_seq=${ tradeList.t_seq }">${ tradeList.t_title }</a></td>
 									<td>${ tradeList.t_price }</td>

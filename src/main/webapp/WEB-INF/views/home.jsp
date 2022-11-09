@@ -102,6 +102,8 @@ background-color:rgb(31,33,34);
 -webkit-box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0px 9px 0px 6px rgba(0,0,0,0.1), 0px 12px 0px 8px rgba(0,0,0,0.1), 0px 15px 0px 10px rgba(0,0,0,0.1), 0px 18px 0px 12px rgba(0,0,0,0.1), 0px 21px 0px 14px rgba(0,0,0,0.1), 0px 24px 0px 16px rgba(0,0,0,0.1), 0px 27px 0px 18px rgba(0,0,0,0.1), 0px 30px 0px 20px rgba(0,0,0,0.1), 5px 5px 15px 5px rgba(255,255,255,0); 
 box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0px 9px 0px 6px rgba(0,0,0,0.1), 0px 12px 0px 8px rgba(0,0,0,0.1), 0px 15px 0px 10px rgba(0,0,0,0.1), 0px 18px 0px 12px rgba(0,0,0,0.1), 0px 21px 0px 14px rgba(0,0,0,0.1), 0px 24px 0px 16px rgba(0,0,0,0.1), 0px 27px 0px 18px rgba(0,0,0,0.1), 0px 30px 0px 20px rgba(0,0,0,0.1), 5px 5px 15px 5px rgba(255,255,255,0);
 }
+
+li > a
 </style>
 </head>
 <jsp:include page="init/header.jsp"></jsp:include>
@@ -183,7 +185,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<li
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${issueList.b_seq }"
-													class="h5 d-inline-block text-truncate"
+													class="mb-2 d-inline-block text-truncate"
 													style="max-width: 580px;"> ${issueList.b_title }</a> <span
 													class="badge badge-pill">${issueList.b_recommed }</span>
 												</li>
@@ -205,7 +207,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<li
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${trendList.b_seq }"
-													class="h5 d-inline-block text-truncate"
+													class="mb-2 d-inline-block text-truncate"
 													style="max-width: 350px;"> ${trendList.b_title }</a> <span
 													class="badge badge-pill">${trendList.b_recommed }</span>
 												</li>
@@ -226,7 +228,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<li
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${gameInfoList.b_seq }"
-													class="h5 d-inline-block text-truncate"
+													class="mb-2 d-inline-block text-truncate"
 													style="max-width: 350px;"> ${gameInfoList.b_title }</a> <span
 													class="badge badge-pill">${gameInfoList.b_recommed }</span>
 												</li>
@@ -247,7 +249,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<li
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${hotDealList.b_seq }"
-													class="h5 d-inline-block text-truncate"
+													class="mb-2 d-inline-block text-truncate"
 													style="max-width: 350px;"> ${hotDealList.b_title }</a> <span
 													class="badge badge-pill">${hotDealList.b_recommed }</span>
 												</li>
@@ -277,7 +279,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<li
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${freeList.b_seq }"
-													class="h5 d-inline-block text-truncate"
+													class="mb-2 d-inline-block text-truncate"
 													style="max-width: 350px;"> ${freeList.b_title }</a> <span
 													class="badge badge-pill">${freeList.b_recommed }</span>
 												</li>
@@ -298,7 +300,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<li
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${mySettingList.b_seq }"
-													class="h5 d-inline-block text-truncate"
+													class="mb-2 d-inline-block text-truncate"
 													style="max-width: 350px;"> ${mySettingList.b_title }</a> <span
 													class="badge badge-pill">${mySettingList.b_recommed }</span>
 												</li>
@@ -317,7 +319,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<li
 													class="list-group-item d-flex justify-content-between align-items-center mb-0">
 													<a href="/board/contentForm?b_seq=${hobbyList.b_seq }"
-													class="h5 d-inline-block text-truncate"
+													class="mb-2 d-inline-block text-truncate"
 													style="max-width: 350px;"> ${hobbyList.b_title }</a> <span
 													class="badge badge-pill">${hobbyList.b_recommed }</span>
 												</li>
@@ -364,8 +366,8 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 										<a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }"><img
 											src="/resources/images/user_upload/${mySettingListBest.b_uploadImg }"
 											alt="" style="width: 250px; height: 250px;"></a>
-										<div class="hover-effect mt-1">
-											<h5><a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }">${mySettingListBest.b_title }</a></h5>
+										<div class="hover-effect mt-3">
+											<h5 class="fs-6"><a href="/board/contentForm?b_seq=${mySettingListBest.b_seq }">${mySettingListBest.b_title }</a></h5>
 										</div>
 									</div>
 									<h4>${mySettingListBest.b_writer }<br> <span>${mySettingListBest.b_date }</span>
@@ -418,19 +420,15 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
 												<span class="badge rounded-pill text-bg-info d-inline mt-3">${tradeList.t_state }</span> --%>
 												<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
 													<img
-													src="/resources/images/trade/${tradeList.t_uploadImg }"
-													alt="">
+													src="/resources/images/user_upload/${tradeList.t_uploadImg }"
+													alt="" style="width: 160px; height: 160px;">
 												</a>
 
 												<h4 class="inline">
 													<a href="/board/contentTradeForm?t_seq=${tradeList.t_seq }">
-														${tradeList.t_title}<br> <span>${tradeList.t_price }원</span>
+														<span class=" d-inline-block text-truncate text-white" style="max-width:150px;">${tradeList.t_title}</span><br> <span>${tradeList.t_price }원</span>
 													</a>
 												</h4>
-												<ul>
-													<li><i class="fa-solid fa-eye me-1 text-white"></i>${tradeList.t_views }</li>
-													<li><span class="badge rounded-pill text-bg-light d-inline fw-bold">${tradeList.t_state }</span></li>
-												</ul>
 											</div>
 										</div>
 									</c:forEach>
@@ -578,7 +576,7 @@ box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 0p
          <div class="apply-section text-center">
 											<a href="/board/apply/product"><img
 												style="max-width: 300px; max-height: 300px"
-												src="/resources/images/product/${productAppContent.prod_uploadImg }"
+												src="/resources/images/user_upload/${productAppContent.prod_uploadImg }"
 												class="mb-3 rounded" alt=""><br> 상품명 :
 												${productAppContent.prod_productName }</a>
 											<p class="intro" style="color:var(--bs-warning);">마감 시간 :

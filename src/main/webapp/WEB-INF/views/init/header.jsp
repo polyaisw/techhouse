@@ -52,7 +52,7 @@
 	position: fixed;
 	background-color: #1f2122;
 	top: 0px;
-	border-bottom: 1px solid var(- -bs-success);
+	border-bottom: 1px solid var(--bs-success);
 }
 
 .header-area .main-nav .nav li a {
@@ -67,7 +67,7 @@
 }
 
 a:hover {
-	color: var(- -bs-teal);
+	color: var(--bs-teal);
 	transition: all .5s;
 }
 
@@ -76,13 +76,13 @@ a:hover {
 }
 
 .most-popular {
-	border-bottom: 1px solid var(- -bs-success);
+	border-bottom: 1px solid var(--bs-success);
 }
 
 .header-title {
 	color: #FFFFFF;
 	background: inherit;
-	text-shadow: 0 0 10px #FFFFFF;
+	text-shadow: 0 0 15px #FFFFFF;
 }
 
 .logo:hover {
@@ -108,43 +108,29 @@ a:hover {
 }
 
 #back2Top:hover>i {
-	color: var(- -bs-success);
+	color: var(--bs-success);
 	transition: all .5s;
 }
 
-@
--webkit-keyframes pulsate-bck { 0% {
+@-webkit-keyframes pulsate-bck { 
+0% {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 }
 
-50
-%
+50%
 {
--webkit-transform
-:
-scale(
-0.95
-);
-transform
-:
-scale(
-0.95
-);
+	-webkit-transform:
+	scale(0.95);
+	transform:
+	scale(0.95);
 }
-100
-%
+
+
+100%
 {
--webkit-transform
-:
-scale(
-1
-);
-transform
-:
-scale(
-1
-);
+	-webkit-transform:scale(1);
+	transform:scale(1);
 }
 }
 @
@@ -152,8 +138,7 @@ keyframes pulsate-bck { 0% {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 }
-50
-%
+50%
 {
 -webkit-transform
 :
@@ -166,19 +151,12 @@ scale(
 0.95
 );
 }
-100
-%
+100%
 {
--webkit-transform
-:
-scale(
-1
-);
-transform
-:
-scale(
-1
-);
+-webkit-transform:
+scale(1);
+transform:
+scale(1);
 }
 }
 </style>

@@ -182,7 +182,7 @@ function fn_next(page, range, rangeSize, searchKeyword, b_category, getUrl) {
 									<div class="thumb">
 										<a href="/board/contentForm?b_seq=${gameInfoListBest.b_seq }"><img
 											src="/resources/images/user_upload/${gameInfoListBest.b_uploadImg }"
-											alt="" style="max-width: 300px; max-height: 300px;"></a>
+											alt="" style="width:100%; height:200px;"></a>
 										<div class="hover-effect mt-1">
 											<h5><a href="/board/contentForm?b_seq=${gameInfoListBest.b_seq }">${gameInfoListBest.b_title }</a></h5>
 										</div>
@@ -324,11 +324,11 @@ function fn_next(page, range, rangeSize, searchKeyword, b_category, getUrl) {
 					<div class="col ">
 						<c:if test="${member != null}">
 							<c:if test="${member.rank eq '관리자' }">
-								<a href="/board/insertBoardForm" class="button-3 mt-5">공지사항
+								<a href="/board/insertBoardForm" class="button-4 mt-5">공지사항
 									작성하기</a>
 							</c:if>
 							<c:if test="${member.rank ne '관리자'}">
-								<a href="/board/insertBoardForm" class="button-3  mt-5">글작성하기</a>
+								<a href="/board/insertBoardForm" class="button-4  mt-5">글작성하기</a>
 							</c:if>
 						</c:if>
 					</div>

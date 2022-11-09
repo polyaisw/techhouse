@@ -39,7 +39,7 @@
 			<div class="col">
 				<h2 class="h2 text-white">상품수정 페이지 관리자</h2>
 
-				<form method="post" action="/board/updateProductAction">
+				<form method="post" enctype="multipart/form-data" action="/board/updateProductAction">
 						<input type="text" value="${productContent.prod_seq }" name="prod_seq" class="d-none was-validated" >
 				
 						<label for="prod_productName" class="form-label text-white">수정 하실 상품명</label>
@@ -52,8 +52,8 @@
 						id="prod_price" name="prod_price" value="${productContent.prod_price }" required> 
 						<div class="invalid-feedback">상품가격을 반드시 입력해주세요</div>
 						
-						<label for="prod_uploadImg" class="form-label text-white">수정 하실 업로드 이미지</label>
-						<input type="file" id="prod_uploadImg" name="prod_uploadImg" class="form-control mb-3" value="${productContent.prod_uploadImg }">
+						<label for="file" class="form-label text-white">수정 하실 업로드 이미지</label>
+						<input type="file" id="file" name="file" class="form-control mb-3" value="${productContent.prod_uploadImg }">
 						
 						<label for="prod_selectedId" class="form-label text-white">당첨된 유저 아이디</label>
 						<input type="text" id="prod_selectedId" name="prod_selectedId" class="form-control mb-3" value="${ productContent.prod_selectedId }" >
