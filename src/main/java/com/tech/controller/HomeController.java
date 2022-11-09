@@ -2,6 +2,7 @@ package com.tech.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,35 +46,24 @@ public class HomeController {
 	@RequestMapping(value = { "/main", "/" }, method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 
-		List<BVO> issueList = boardService.getBestBoardListByCate("핫이슈"); // 추천수 순 10개
-		model.addAttribute("issueList", issueList);
-
-		List<BVO> trendList = boardService.getBestBoardListByCate("IT/트렌드"); // 추천수 순 10개
-		model.addAttribute("trendList", trendList);
-
-		List<BVO> tradeList = tradeService.getBestBoardListByCate("거래게시판"); // 조회수 순 8개
-		model.addAttribute("tradeList", tradeList);
-
+		ServletContext application = request.getServletContext();
+		application.setAttribute("path", request.getServletContext().getRealPath("resources/images/user_upload"));
 		
 		
+		/* 최신글 */
+		model.addAttribute("issueList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("핫이슈","b_seq",5)));
+		model.addAttribute("trendList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("IT/트렌드","b_seq",5)));
+		model.addAttribute("hotDealList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("꿀딜/장터","b_seq",5)));
+		model.addAttribute("gameInfoList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("게임출시정보","b_seq",5)));
+		model.addAttribute("freeList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("자유게시판","b_seq",13)));
+		model.addAttribute("mySettingList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("인증게시판","b_seq",5)));
+		model.addAttribute("mySettingListBest",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("인증게시판","b_recommed",3)));
+		model.addAttribute("hobbyList",boardService.getBoardListByCategoryKeywordNumber(new BoardVO("취미공유","b_seq",5)));
+		model.addAttribute("tradeList",tradeService.getBestBoardListByCate("거래게시판"));
 		
-		/*	//게시글 많은 순으로 유저정보 4개 
-		 * List<UserVO> userList = userService.~
-		 * model.addAttribute("userList",userList);
-		 */
-
-		List<BVO> hotDealList = boardService.getHotDealBoardList();
-		model.addAttribute("hotDealList", hotDealList);
-
-		/*
-		 * ServletContext application = request.getServletContext();
-		 * application.getAttribute("productAppContent");
-		 */
-
 		return "home";
 
 	}
-	
 	
 
 

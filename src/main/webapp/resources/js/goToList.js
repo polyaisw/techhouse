@@ -34,6 +34,9 @@ function goToList(value) {
 			case '사기피해신고':
 				location.href="/board/center/report";
 				break;
+			case '공지사항':
+				window.history.back();
+				break;
 			}
 		}
 		

@@ -122,7 +122,7 @@ public class Pagination implements BVO{
 		this.page = page;
 		this.range = range;
 		this.listCnt = listCnt;
-		this.pageCnt = (int) Math.ceil(listCnt / listSize);
+		this.pageCnt = (int) Math.ceil(listCnt / listSize)+1;
 		this.startPage = (range - 1) * rangeSize + 1;
 		this.endPage = range * rangeSize;
 		this.startList = (page - 1) * listSize;

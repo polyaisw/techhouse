@@ -33,26 +33,35 @@
 
 <!-- pagination -->
 <script type="text/javascript">
-	function fn_prev(page, range, rangeSize) {
+	function fn_prev(page, range, rangeSize, searchKeyword, b_category, getUrl) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 		var url = "${getPageRange}";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&searchKeyword=" + searchKeyword;
+		url = url + "&b_category=" + b_category;
+		url = url + "&url=" + getUrl;
 		location.href = url;
 	}
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+	function fn_pagination(page, range, rangeSize, searchKeyword, b_category, getUrl) {
 		var url = "${getPageRange}";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&searchKeyword=" + searchKeyword;
+		url = url + "&b_category=" + b_category;
+		url = url + "&url=" + getUrl;
 		location.href = url;
 	}
-	function fn_next(page, range, rangeSize) {
+	function fn_next(page, range, rangeSize, searchKeyword, b_category, getUrl) {
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
 		var url = "${getPageRange}";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&searchKeyword=" + searchKeyword;
+		url = url + "&b_category=" + b_category;
+		url = url + "&url=" + getUrl;
 		location.href = url;
 	}
 </script>
@@ -65,11 +74,23 @@
 .info-box {
 	border-color:var(--bs-cyan)!important;
 }
+.heading-section .board {
+	color:var(--bs-success);
+}
+.most-popular {
+	border-bottom: 1px solid var(--bs-warning)!important;
+}
+
 .active>.page-link, .page-link.active {
-    z-index: 3;
-    color: white;
-    background-color: var(--bs-warning);
-    border-color: inherit;
+	background-color : var(--bs-orange)
+}
+a:hover {
+    color: var(--bs-warning)!important;
+    
+}
+.header-area .main-nav .nav li:hover>a {
+	color : white!important;
+}
 </style>
 </head>
 <body>
@@ -100,80 +121,44 @@
 						<h2><c:out value="${category }"/></h2>
 						<div class="notice text-white mt-5" style="">
 							<ul>
+								<c:forEach var="noticeList" items="${noticeList }">
 								<li class="d-flex justify-content-between align-items-center ">
 									<div class="title-unit">
 										<span class="badge" style="font-size: 15px;">공지 <a
-											href="#" class="d-inline-block text-truncate px-2"
-											style="max-width: 600px;">공지사항 제목 </a></span>
+											href="/board/contentReportForm?b_seq=${noticeList.b_seq }" class="d-inline-block text-truncate px-2"
+											style="max-width: 600px;">${noticeList.b_title } </a></span>
 									</div>
 									<div class="normal-unit">
-										<span class="pe-3"> 관리자 </span> <span><i
-											class="fa-solid fa-eye text-white"></i> 202 </span>
+										<span class="pe-3"> ${noticeList.b_writer } </span> <span><i
+											class="fa-solid fa-eye text-white"></i> ${noticeList.b_views } </span>
 									</div>
 								</li>
 								<hr class="hr inline-block my-1">
-								<li class="d-flex justify-content-between align-items-center  ">
-									<div class="title-unit">
-										<span class="badge" style="font-size: 15px;">공지 <a
-											href="#" class="d-inline-block text-truncate px-2"
-											style="max-width: 600px;">공지사항 제목 </a></span>
-									</div>
-									<div class="normal-unit">
-										<span class="pe-3"> 관리자 </span> <span><i
-											class="fa-solid fa-eye text-white"></i> 202 </span>
-									</div>
-								</li>
-								<hr class="hr inline-block my-1">
-								<li class="d-flex justify-content-between align-items-center  ">
-									<div class="title-unit">
-										<span class="badge" style="font-size: 15px;">공지 <a
-											href="#" class="d-inline-block text-truncate px-2"
-											style="max-width: 600px;">공지사항 제목  </a></span>
-									</div>
-									<div class="normal-unit">
-										<span class="pe-3"> 관리자 </span> <span><i
-											class="fa-solid fa-eye text-white"></i> 202 </span>
-									</div>
-								</li>
-								<hr class="hr inline-block my-1">
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<div class="col md-3 text-center">
+				<div class="col-md-3 ps-2 text-center" style="margin-top:60px;">
 					<c:if test="${member eq null }">
-						<div class="most-popular user text-white">
 							<a href="/member/login"
-								class="loginBtn p-2 border rounded border-info d-block mb-2"><i
-								class="fa-solid fa-star-and-crescent"
-								style="color: var(--bs-cyan)"></i><span class=""> Log In
+								class="loginBtn p-2   btn btn-warning  d-block mb-2">
+								<span class="text-dark"> 로그인 하기
 							</span></a>
-							<a href="/member/join" class="me-3 signup">
-								<span style="color: var(--bs-cyan)">sign up</span>
-							</a>
-							<a href="#">
-								<span>find account</span>
-							</a>
-						</div>
+							
 					</c:if>
 					<c:if test="${member ne null }">
-						<div class="most-popular user text-white">
+						<div class="most-popular user text-white pb-2 mt-0">
 							<h4>infomation</h4>
-							<i
-								class="fa-solid fa-star-and-crescent"
-								style="color: var(--bs-cyan)"></i>
 							<div class="info-box  rounded my-2 d-block" style="border-color: var(--bs-cyan);">
-								<h6 class="mt-4"><em>${member.name }</em> 님 환영합니다.</h6>
+								<h6 class="text-warning">${member.rank}</h6>
+								<h6 class="mt-4"><em>${member.name }</em>님 <br>환영합니다.</h6>
 								<div class="info-box-main mt-4" style="color:#666666;">
 									<div class="d-flex justify-content-between mx-2">
 										<h6 class="" >point : </h6>
 										<span class="">${member.point}</span>
 									</div>
-									<div class="d-flex justify-content-between mx-2">
-										<h6 class="" >rank : </h6>
-										<span class="">${member.rank}</span>
-									</div>
-									<div class="d-flex justify-content-between mx-2 mb-4">
+									<div class="d-flex justify-content-between mx-2 mb-0">
 										<h6 class="" >ticket : </h6>
 										<span class="">${member.ticket}</span>
 									</div>
@@ -182,29 +167,20 @@
 
 							</div>
 						</div>
-						<div class="btn-box d-flex align-items-center justify-content-center mt-2">
-							
-						<button class="button-0-border me-2">출석체크</button>
-						<a href="/member/logout" class="button-0">로그아웃</a>
-						</div>
 					</c:if>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-9">
-				</div>
-				<div class="col-md-3"></div>
-
-			</div>
 			<hr class="hr">
 
-			<div class="most-popular border-warning border">
+			<div class="most-popular  border-bottom border-success">
 				<div class="row">
 					<div class="col ">
-						<table class="table table-dark table-hover rounded">
+					<div class="table-responsive">
+						<table class="table table-dark table-hover-bottom rounded">
 							<thead class="">
 								<tr>
-									<th width="800px;">제목</th>
+									<th>추천</th>
+									<th>제목</th>
 									<th>작성자</th>
 									<th>조회수</th>
 									<th>게시날짜</th>
@@ -214,18 +190,18 @@
 								<c:forEach var="boardList" items='${list}'>
 
 									<tr>
-										
-										<td><a
+										<td><span class="d-inline-block" style="min-width:50px">${ boardList.b_recommed }</span></td>
+										<td ><a
 											href="/board/contentReportForm?b_seq=${ boardList.b_seq }"
-											class="d-inline-block text-truncate"
-											style="max-width: 550px;"> ${ boardList.b_title }</a></td>
-										<td>${ boardList.b_writer }</td>
-										<td>${ boardList.b_views }</td>
-										<td>${ boardList.b_date }</td>
+											class="d-inline-block w-auto" style="min-width:200px"
+											> ${ boardList.b_title }</a></td>
+										<td><span class="d-inline-block" style="min-width:67px">${ boardList.b_writer }</span></td>
+										<td><span class="d-inline-block" style="min-width:67px">${ boardList.b_views }</span></td>
+										<td><span class="d-inline-block" style="min-width:100px">${ boardList.b_date }</span></td>
 									</tr>
 								</c:forEach>
 							</tbody>
-						</table>
+						</table></div>
 					</div>
 
 				</div>
@@ -250,18 +226,18 @@
 							<ul class="pagination d-flex justify-content-center">
 								<c:if test="${pagination.prev}">
 									<li class="page-item"><a class="page-link" href="#"
-										onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+										onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}','${keyword }','${b_category }','${url }')">Previous</a></li>
 								</c:if>
 								<c:forEach begin="${pagination.startPage}"
 									end="${pagination.endPage}" var="idx">
 									<li
 										class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> "><a
 										class="page-link" href="#"
-										onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+										onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}','${keyword }','${b_category }','${url }')">
 											${idx} </a></li>
 								</c:forEach>
 								<c:if test="${pagination.next}">
-									<li class="page-item"><a class="page-link" href="#"onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
+									<li class="page-item"><a class="page-link" href="#"onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}','${keyword }','${b_category }','${url }')">Next</a></li>
 								</c:if>
 							</ul>
 						</div>
@@ -272,7 +248,7 @@
 					<div class="col ">
 						<c:if test="${member != null}">
 							<c:if test="${member.rank eq '관리자' }">
-								<a href="/board/insertBoardForm" class="button-1 mt-5">공지사항
+								<a href="/board/insertNoticeBoardForm" class="button-1 mt-5">공지사항
 									작성하기</a>
 							</c:if>
 							<c:if test="${member.rank ne '관리자'}">

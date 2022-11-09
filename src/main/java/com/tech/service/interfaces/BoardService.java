@@ -22,7 +22,7 @@ public interface BoardService {
 	List<BVO> getBoardLists(BVO vo); 			//페이지네이션용  카테고리의  게시판 출력할때 사용
 
 	/* search */
-	List<BVO> getBoardByTitleText(BVO vo); 		// 제목 + 내용으로 검색결과
+	List<BVO> getBoardByTitleText(BVO vo); 		//카테고리의 제목 + 내용으로 검색결과
 	List<BVO> getBoardListsBySearch(BVO vo);	//페이지네이션용  카테고리내의 검색결과
 	
 

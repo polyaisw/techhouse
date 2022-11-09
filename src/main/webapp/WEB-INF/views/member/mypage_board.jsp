@@ -7,26 +7,29 @@
 <head>
 <title>TECH HOUSE - 마이 페이지</title>
 <script type="text/javascript">
-	function fn_prev(page, range, rangeSize) {
+	function fn_prev(page, range, rangeSize,writer) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 		var url = "${getPageRange}";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&userName=" + writer;
 		location.href = url;
 	}
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+	function fn_pagination(page, range, rangeSize, writer) {
 		var url = "${getPageRange}";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&userName=" + writer;
 		location.href = url;
 	}
-	function fn_next(page, range, rangeSize) {
+	function fn_next(page, range, rangeSize,writer) {
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
 		var url = "${getPageRange}";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&userName=" + writer;
 		location.href = url;
 	}
 </script>
@@ -110,7 +113,7 @@
 							<c:if test="${pagination.prev}">
 								<li class="page-item">
 									<a class="page-link" href="#"
-									onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+									onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}','${writer }')">Previous</a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pagination.startPage}"
@@ -118,13 +121,13 @@
 								<li
 									class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 									<a class="page-link" href="#"
-									onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+									onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}','${writer }')">
 										${idx} </a>
 								</li>
 							</c:forEach>
 							<c:if test="${pagination.next}">
 								<li class="page-item"><a class="page-link" href="#"
-									onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
+									onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}','${writer}')">Next</a></li>
 							</c:if>
 						</ul>
 					</div>

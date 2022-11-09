@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/resources/css/search.css">
 <style>
 .container {
-	
+	width:1280px;
 }
 
 .icon {
@@ -127,7 +127,6 @@ box-shadow: rgb(38, 57, 77) 0px 40px 50px -30px!important;
 				</div>
 			</div>
 			</div>
-			<div class="container">
 				<div class="row info-start">
 					<div class="col">
 						<p class="text-center fs-1 text-white" style="margin: 80px 0px;">테크하우스가
@@ -149,11 +148,9 @@ box-shadow: rgb(38, 57, 77) 0px 40px 50px -30px!important;
 							style="height: 350px; width: 350px; float: right;">
 					</div>
 				</div>
-			</div>
 
 			<hr class="hr-14">
 
-			<div class="container">
 				<div class="row featurette info-section  ">
 					<div class="col-xl-7 col-md-6 order-md-2 ">
 					<div class="live-stream">
@@ -169,11 +166,9 @@ box-shadow: rgb(38, 57, 77) 0px 40px 50px -30px!important;
 							style="height: 350px; width: 350px;">
 					</div>
 				</div>
-			</div>
 
 			<hr class="hr-14">
 
-			<div class="container">
 				<div class="row featurette info-section ">
 					<div class="col-xl-7">
 					<div class="live-stream">
@@ -188,7 +183,6 @@ box-shadow: rgb(38, 57, 77) 0px 40px 50px -30px!important;
 							style="height: 350px; width: 350px; float: right;">
 					</div>
 				</div>
-			</div>
 
 			<hr class="hr-14">
 			<div class="caution container">

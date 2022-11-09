@@ -78,7 +78,7 @@ textarea, input {
 	<jsp:include page="../init/nav.jsp"></jsp:include>
 	<div class="container text-white">
 		<form action="/board/updateTradeBoardAction"
-			name="updateTradeBoardForm" onsubmit="return chkWrite()"
+			name="updateTradeBoardForm" enctype="multipart/form-data" onsubmit="return chkWrite()"
 			method="post">
 			<input type="text" name="t_seq" class="d-none"
 				value="${ updateTradeContent.t_seq }"> <input type="text"
@@ -93,12 +93,12 @@ textarea, input {
 						<span class="badge mb-1"
 							style="line-height: 1.5; background-color: #3cb398;">거래게시판</span>
 						<img
-							src="/resources/images/trade/${ updateTradeContent.t_uploadImg }"
-							width="500px" height="400px" class="rounded">
+							src="/resources/images/user_upload/${ updateTradeContent.t_uploadImg }"
+							width="350px" height="350px" class="rounded">
 						<div class="mb-3">
 							<label for="formFileSm" class="form-label"></label> <input
-								class="form-control form-control-sm" id="formFileSm" type="file"
-								name="t_uploadImg">
+								class="form-control form-control-sm" multiple="multiple" id="formFileSm" type="file"
+								name="files">
 						</div>
 					</div>
 					<div class="col-lg-7 d-flex flex-column">
@@ -129,13 +129,10 @@ textarea, input {
 						<hr>
 						<div class="d-flex flex-row justify-content-between">
 							<div class="d-flex flex-row ">
-								<p class="pe-2">
-									<i class="fa-solid fa-eye me-1" style="color: #666666;"></i>${ updateTradeContent.t_views }</p>
-								<p class="pe-2">
-									<i class="fa-regular fa-comment me-1" style="color: #666666;"></i>11
-								</p>
-								<!-- 댓글수 -->
-								<p class="pe-2">${ updateTradeContent.t_date }</p>
+								<p class="pe-2" style="color: #666666;">
+									<i class="fa-solid fa-eye me-1" ></i>${ updateTradeContent.t_views }</p>
+								
+								<p class="pe-2" style="color: #666666;">${ updateTradeContent.t_date }</p>
 							</div>
 							<div class="user-info">
 								<i class="fa-solid fa-medal text-danger me-2"></i> <span>${updateTradeContent.t_writer }</span>

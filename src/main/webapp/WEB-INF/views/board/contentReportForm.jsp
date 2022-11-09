@@ -73,7 +73,22 @@ p {
 					onclick="goToList('${boardContent.b_category}')">
 			</div>
 			<div class="content-main-section text-white">
-				<p>${boardContent.b_text}</p>
+				<c:choose>
+					<c:when test="${boardContent.b_writer eq '관리자' }">
+						<p class="mt-5">${boardContent.b_text}</p>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="imageList" items="${imageList }">
+							<p class="mb-3">
+								<img src="/resources/images/user_upload/${imageList.i_img }"
+									alt="" class="rounded"
+									style="max-width: 500px; max-height: 1500px;">
+							</p>
+
+						</c:forEach>
+						<p class="mt-5">${boardContent.b_text}</p>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="content-main button-box">
 				<form action="/board/updateForm" method="post"
@@ -86,7 +101,9 @@ p {
 							<a href="/board/deleteBoardAction?b_seq=${ boardContent.b_seq}"
 							class="button-1-border">삭제하기</a></td>
 					</c:if>
-					
+					<input type="button" class="button-1-border" value="목록"
+						onclick="goToList('${boardContent.b_category}')">
+
 				</form>
 			</div>
 

@@ -17,7 +17,7 @@
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver"></property>
 		<property name="jdbcUrl"
-			value="jdbc:mysql://localhost:3306/techhouse?serverTimezone=Asia/Seoul"></property>
+			value="jdbc:mysql://localhost:3306/techhouse?allowMultiQueries=true&amp;serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="root"></property>
 	</bean>
@@ -45,15 +45,18 @@
 				<value>classpath:com/tech/repository/mapper/ApplyMapper.xml</value>	
 				<value>classpath:com/tech/repository/mapper/QnaMapper.xml</value>
 				<value>classpath:com/tech/repository/mapper/CommentMapper.xml</value>
+				<value>classpath:com/tech/repository/mapper/ImageMapper.xml</value>
 				
 			</list>
 		</property>
 		<!-- 여기까지 -->
-
-
-
-
 	</bean>
+	<!-- 파일업로드 api -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="50000000" />	<!-- 제한용량 50mb -->
+		<property name="defaultEncoding" value="utf-8" />	
+	</bean>
+	<!-- 여기까지 -->
 	<mybatis-spring:scan
 		base-package="com.tech.repository.mapper" />
 	<context:component-scan

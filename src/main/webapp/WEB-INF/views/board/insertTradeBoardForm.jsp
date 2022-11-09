@@ -77,7 +77,7 @@
 	<h2>글쓰기</h2>
 	<div class="container text-white">
 		<form action="insertTradeBoardAction" name="insertTradeBoardForm"
-			onsubmit="return chkWrite()" method="post">
+			onsubmit="return chkWrite()" enctype="multipart/form-data" method="post">
 			<input type="text" class="d-none" value="거래게시판" name="t_category">
 			<div class="page-content">
 				<div class="row">
@@ -85,11 +85,11 @@
 						<span class="badge mb-1"
 							style="line-height: 1.5; background-color: #3cb398;">거래게시판</span>
 
-						<img src="/resources/images/trade/trade_default.png" width="400px" height="450px" style="background-color:var(--bs-secondary)" class="rounded">
+						<img src="/resources/images/trade/trade_default.png" width="350px" height="350px" style="background-color:var(--bs-secondary)" class="rounded">
 						<div class="mb-3">
 							<label for="formFileSm" class="form-label"></label> <input
-								class="form-control form-control-sm" id="formFileSm" type="file"
-								name="t_uploadImg">
+								class="form-control form-control-sm" id="formFileSm" multiple="multiple" type="file"
+								name="files">
 						</div>
 					</div>
 					<div class="col-lg-7 d-flex flex-column">
